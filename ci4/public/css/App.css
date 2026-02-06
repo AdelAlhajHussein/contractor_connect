@@ -20,7 +20,9 @@ p{
     color:white;
     font-weight: 100;
     font-size: 0.7em;
+    background-color: transparent;
 }
+
 
 button{
     border: 1px solid black;
@@ -131,20 +133,20 @@ header{
 
     border-radius: 7px;    
     padding: 1em;
-
-    background-color: rgb(121, 168, 225);
+    background-color: rgba(121, 168, 225, 0.123);
+    
     box-shadow: 4px 4px rgb(216, 216, 216);
 }
 
 .category-link:hover{
+    color: black;
     font-weight: 550;
     box-shadow: 4px 4px rgb(170, 170, 170);
+    background-color: rgb(121, 168, 225);
 }
 
 
-p{
-    background-color: transparent;
-}
+
 
 .username{
     background-color: transparent;

@@ -4,10 +4,6 @@
 -->
 
 <nav class="nav-categories">
-    <div class="nav-category">
-        <img class="category-img" alt="image"/>
-        <a class="category-link" href="<?= base_url('/') ?>">ASSEMBLE</a>
-    </div>
 
     <div class="nav-category">
         <img class="category-img" alt="image"/>
