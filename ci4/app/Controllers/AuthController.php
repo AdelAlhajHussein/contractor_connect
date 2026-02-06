@@ -28,7 +28,7 @@ class AuthController extends BaseController
             ->first();
 
         if (!$user) {
-            return redirect()->to('/login')->with('error', 'Invalid credentials.');
+            return redirect()->to('/login')->with('error', 'User not found.');
         }
 
         if ((int) $user['is_active'] !== 1) {
@@ -36,7 +36,7 @@ class AuthController extends BaseController
         }
 
         if (!password_verify($password, $user['password_hash'])) {
-            return redirect()->to('/login')->with('error', 'Invalid credentials.');
+            return redirect()->to('/login')->with('error', 'Password incorrect.');
         }
 
         session()->regenerate(true);
