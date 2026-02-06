@@ -7,6 +7,8 @@
 <body>
 
     <!-- header -->
+     <?= view('components/header') ?>
+     <?= $this->renderSection('content') ?>
 
     <!-- nav-bar -->
 
