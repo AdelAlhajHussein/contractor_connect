@@ -9,4 +9,5 @@
     <li><a href="<?= site_url('admin/ratings') ?>">Ratings & Reviews</a></li>
     <li><a href="<?= site_url('admin/categories') ?>">Categories</a></li>
     <li><a href="<?= site_url('admin/payments') ?>">Payments & Subscriptions</a></li>
+    <li><a href="<?= site_url('admin/reports') ?>">Admin Reports</a></li>
 </ul>
