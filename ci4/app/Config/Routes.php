@@ -28,3 +28,5 @@ $routes->get('admin/projects', 'Admin\ProjectsController::index');
 $routes->get('admin/bids', 'Admin\BidsController::index');
 
 $routes->get('admin/ratings', 'Admin\RatingsController::index');
+
+$routes->get('admin/categories', 'Admin\CategoriesController::index');
