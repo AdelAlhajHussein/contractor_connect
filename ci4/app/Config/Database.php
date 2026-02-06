@@ -26,11 +26,11 @@ class Database extends Config
      */
     public array $default = [
         'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
-        'DBDriver'     => 'MySQLi',
+        'hostname' => 'localhost',
+        'username' => 'cclogin_ccdbuser',
+        'password' => 'qRqkicMnjfT}',
+        'database' => 'cclogin_ccdb',
+        'DBDriver' => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,
         'DBDebug'      => true,
