@@ -23,4 +23,5 @@ $routes->get('admin/contractors', 'Admin\ContractorsController::index', ['filter
 
 $routes->get('admin/homeowners', 'Admin\HomeownersController::index');
 
+$routes->get('admin/projects', 'Admin\ProjectsController::index');
 
