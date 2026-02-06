@@ -11,10 +11,11 @@ class UsersController extends BaseController
     {
         $userModel = new UserModel();
 
-        $users = $userModel
-            ->orderBy('id', 'DESC')
-            ->findAll(50);
+        $data['users'] = $userModel
+            ->select('id, username, first_name, last_name, email, role_id, is_active, created_at')
+            ->findAll();
 
-        return view('admin/users/index', ['users' => $users]);
+        return view('admin/users/index', $data);
     }
+
 }
