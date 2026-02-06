@@ -1,0 +1,48 @@
+CRITICAL - 2026-02-06 02:13:48 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "components/nar-bar.php"
+[Method: GET, Route: /]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('components/nar-bar.php')
+ 2 SYSTEMPATH/Common.php(1199): CodeIgniter\View\View->render('components/nar-bar', [], true)
+ 3 APPPATH/Views/pages/home.php(8): view('components/nar-bar')
+ 4 SYSTEMPATH/View/View.php(226): include('/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Views/pages/home.php')
+ 5 SYSTEMPATH/View/View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 6 SYSTEMPATH/Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 7 APPPATH/Controllers/Home.php(10): view('pages/home')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Home->index()
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-06 02:14:01 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "components/nar-bar.php"
+[Method: GET, Route: /]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('components/nar-bar.php')
+ 2 SYSTEMPATH/Common.php(1199): CodeIgniter\View\View->render('components/nar-bar', [], true)
+ 3 APPPATH/Views/pages/home.php(8): view('components/nar-bar')
+ 4 SYSTEMPATH/View/View.php(226): include('/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Views/pages/home.php')
+ 5 SYSTEMPATH/View/View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 6 SYSTEMPATH/Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 7 APPPATH/Controllers/Home.php(10): view('pages/home')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Home->index()
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-06 02:14:51 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "components/nar-bar.php"
+[Method: GET, Route: /]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('components/nar-bar.php')
+ 2 SYSTEMPATH/Common.php(1199): CodeIgniter\View\View->render('components/nar-bar', [], true)
+ 3 APPPATH/Views/pages/home.php(8): view('components/nar-bar')
+ 4 SYSTEMPATH/View/View.php(226): include('/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Views/pages/home.php')
+ 5 SYSTEMPATH/View/View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 6 SYSTEMPATH/Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 7 APPPATH/Controllers/Home.php(10): view('pages/home')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Home->index()
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

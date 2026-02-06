@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="<?= base_url('css/App.css') ?>">
 </head>
 <body>
 
