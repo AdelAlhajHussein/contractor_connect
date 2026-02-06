@@ -6,4 +6,5 @@
     <li><a href="<?= site_url('admin/homeowners') ?>">Homeowners</a></li>
     <li><a href="<?= site_url('admin/projects') ?>">Projects</a></li>
     <li><a href="<?= site_url('admin/bids') ?>">Bids</a></li>
+    <li><a href="<?= site_url('admin/ratings') ?>">Ratings & Reviews</a></li>
 </ul>

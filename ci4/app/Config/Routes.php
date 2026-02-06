@@ -26,3 +26,5 @@ $routes->get('admin/homeowners', 'Admin\HomeownersController::index');
 $routes->get('admin/projects', 'Admin\ProjectsController::index');
 
 $routes->get('admin/bids', 'Admin\BidsController::index');
+
+$routes->get('admin/ratings', 'Admin\RatingsController::index');
