@@ -14,3 +14,6 @@ $routes->get('logout', 'AuthController::logout');
 
 $routes->get('admin/users', 'Admin\UsersController::index', ['filter' => 'auth']);
 
+$routes->get('admin', 'Admin\DashboardController::index');
+$routes->get('admin/dashboard', 'Admin\DashboardController::index');
+
