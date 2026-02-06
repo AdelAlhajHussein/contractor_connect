@@ -12,13 +12,14 @@ A digital marketplace for home improvement jobs.
 
 ## Installation/Setup: 
 ### 1. Clone the repository
-    `git clone https://github.com/AdelAlhajHussein/contractor_connect.git`
+    "git clone https://github.com/AdelAlhajHussein/contractor_connect.git"
 ### 2. Install dependencies
     bash
     composer install
 ### 3. Run the App
+    Navigate to ci4 directory and run
     bash
-    "php -S localhost:8000"
+    "php spark serve --port 8000"
 
     Then open in browser
     "http://localhost:8000"

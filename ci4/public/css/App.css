@@ -1,19 +1,30 @@
+/* ------- General ------ */
+
 *{
     background-color: whitesmoke;
     font-family: Arial, Helvetica, sans-serif;
 
 }
 
-html{
-    border: 2px solid red;
+a{
+    text-decoration: none;
+}
+
+
+/* ------- Header ------ */
+header{
+
+    padding: 1em 2em;
 }
 
 .main-title{
     font-size: 2em;
+    margin: 0px;
 }
 
 .main-sub-title{
-    font-size: 1em;
+    font-size: 0.75em;
+    margin-top: 0px;
 }
 
 .main-title, .main-sub-title{
@@ -21,15 +32,21 @@ html{
     color: rgb(75, 75, 75);
 }
 
+
+/* ------- Nav Bar ------ */
 .nav-bar{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+    padding: 0 2em;
+    background-color: rgb(42, 42, 42);
+    padding: 1em;
     
 }
-
 .nav-link{
-    color: rgb(67, 113, 193, 0.8);
+    color: rgba(168, 195, 241, 0.905);
     text-decoration: none;
     margin-right: 1rem;
+    background-color: rgb(42, 42, 42);
+    
 }
 
 .nav-link:hover{
@@ -37,3 +54,23 @@ html{
     font-weight: 500;
 
 }
+
+/* ------- User Details ------ */
+
+.user-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    /* border: 1px solid blue;*/
+    text-align: end;
+}
+
+button{
+    border: 1px solid black;
+    border-radius: 7px;
+    margin: 0 0.7em;
+    padding: 0.5em;
+}
+
+
