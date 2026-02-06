@@ -8,6 +8,26 @@
 
 a{
     text-decoration: none;
+    background-color: transparent;
+    color: rgba(172, 207, 247, 0.83);
+    font-weight: 100;
+}
+a:hover{
+    color: rgb(172, 207, 247);
+}
+
+p{
+    color:white;
+    font-weight: 100;
+    font-size: 0.7em;
+}
+
+button{
+    border: 1px solid black;
+    border-radius: 7px;
+    margin: 0 0.7em;
+    padding: 0.5em;
+
 }
 
 
@@ -15,6 +35,17 @@ a{
 header{
 
     padding: 1em 2em;
+    background-color: rgb(75, 82, 89);
+    box-shadow: 5px 3em rgb(172, 207, 247);
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-header{
+    background-color: transparent;
+}
+.right-header{
+    background-color: transparent;
 }
 
 .main-title{
@@ -25,11 +56,13 @@ header{
 .main-sub-title{
     font-size: 0.75em;
     margin-top: 0px;
+
 }
 
 .main-title, .main-sub-title{
     font-weight: 200;
-    color: rgb(75, 75, 75);
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 
@@ -37,21 +70,20 @@ header{
 .nav-bar{
     /*border: 1px solid black;*/
     padding: 0 2em;
-    background-color: rgb(42, 42, 42);
+    background-color: transparent;
     padding: 1em;
     
 }
 .nav-link{
-    color: rgba(168, 195, 241, 0.905);
+    color: rgba(75, 82, 89, 0.876);
     text-decoration: none;
     margin-right: 1rem;
-    background-color: rgb(42, 42, 42);
     
 }
 
 .nav-link:hover{
-    color: rgba(67, 113, 193);
-    font-weight: 500;
+    color: rgba(75, 82, 89);
+    font-weight: 575;
 
 }
 
@@ -59,18 +91,67 @@ header{
 
 .user-details{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: end;
-    align-items: center;
-    /* border: 1px solid blue;*/
+    align-items: end;
+   
     text-align: end;
-}
-
-button{
-    border: 1px solid black;
-    border-radius: 7px;
-    margin: 0 0.7em;
-    padding: 0.5em;
+    background-color: transparent;
 }
 
 
+
+
+
+.category-img{
+    min-height: 8em;
+    min-width: 8em;
+    border-radius: 8px;
+    
+    border: 1px solid rgb(238, 238, 238);
+}
+
+
+.nav-categories{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4em;
+    
+}
+.nav-category{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.category-link{
+    color: black;
+
+    border-radius: 7px;    
+    padding: 1em;
+
+    background-color: rgb(121, 168, 225);
+    box-shadow: 4px 4px rgb(216, 216, 216);
+}
+
+.category-link:hover{
+    font-weight: 550;
+    box-shadow: 4px 4px rgb(170, 170, 170);
+}
+
+
+p{
+    background-color: transparent;
+}
+
+.username{
+    background-color: transparent;
+}
+
+.sign-in-btn{
+    color: red;
+    background-color: white;
+    border: 2px solid 
+}
