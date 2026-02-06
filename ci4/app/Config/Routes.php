@@ -11,3 +11,6 @@ $routes->get('admin/users', 'Admin\UsersController::index');
 $routes->get('login', 'AuthController::loginForm');
 $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
+
+$routes->get('admin/users', 'Admin\UsersController::index', ['filter' => 'auth']);
+
