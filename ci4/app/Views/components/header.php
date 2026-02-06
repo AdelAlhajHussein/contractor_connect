@@ -14,4 +14,3 @@
  <!-- Nav Bar -->
 <?= view('components/nav-bar') ?>
 
- <?= view('components/nav-categories') ?>
