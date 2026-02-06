@@ -5,7 +5,7 @@ A digital marketplace for home improvement jobs.
 ## Tech Stack
 - Linux
 - Apache
-- MySql
+- MySQL/MariaDB managed via CI4 Migrations
 - Language: PHP 8.4
 
 ## Getting Started
@@ -34,5 +34,6 @@ A digital marketplace for home improvement jobs.
 
 ## Progress:
 - [X] Initial project file setup
-- [] 
+- [X] Create initial file layout
+- [] Set up account creation and authentication
 - []
