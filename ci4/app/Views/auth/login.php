@@ -7,6 +7,9 @@
 <body>
 
 <h1>Login</h1>
+<?php if (session()->getFlashdata('error')): ?>
+    <p style="color:red;"><?= esc(session()->getFlashdata('error')) ?></p>
+<?php endif; ?>
 
 <form method="post" action="<?= site_url('login') ?>">
     <?= csrf_field() ?>
