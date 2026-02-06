@@ -30,3 +30,5 @@ $routes->get('admin/bids', 'Admin\BidsController::index');
 $routes->get('admin/ratings', 'Admin\RatingsController::index');
 
 $routes->get('admin/categories', 'Admin\CategoriesController::index');
+
+$routes->get('admin/payments', 'Admin\PaymentsController::index');
