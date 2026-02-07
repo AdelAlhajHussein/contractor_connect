@@ -36,6 +36,7 @@
         <th>Status</th>
         <th>Created</th>
         <th>Actions</th>
+        <th>Change Role</th>
     </tr>
     </thead>
     <tbody>
@@ -58,6 +59,18 @@
                            onclick="return confirm('Activate this user?')">Activate</a>
                     <?php endif; ?>
                 </td>
+                <td>
+                    <form method="post" action="<?= site_url('admin/users/role/' . $u['id']) ?>">
+                        <?= csrf_field() ?>
+                        <select name="role_id">
+                            <option value="1" <?= ((int)$u['role_id'] === 1) ? 'selected' : '' ?>>Admin</option>
+                            <option value="2" <?= ((int)$u['role_id'] === 2) ? 'selected' : '' ?>>Homeowner</option>
+                            <option value="3" <?= ((int)$u['role_id'] === 3) ? 'selected' : '' ?>>Contractor</option>
+                        </select>
+                        <button type="submit" onclick="return confirm('Change this user role?')">Update</button>
+                    </form>
+                </td>
+
 
             </tr>
         <?php endforeach; ?>

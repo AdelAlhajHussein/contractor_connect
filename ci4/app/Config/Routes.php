@@ -20,6 +20,8 @@ $routes->get(
     ['filter' => 'auth']
 );
 
+$routes->post('admin/users/role/(:num)', 'Admin\UsersController::updateRole/$1', ['filter' => 'auth']);
+
 
 
 $routes->get('admin', 'Admin\DashboardController::index');

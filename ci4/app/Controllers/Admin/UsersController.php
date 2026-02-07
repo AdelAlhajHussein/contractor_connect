@@ -57,6 +57,30 @@ class UsersController extends BaseController
         return redirect()->to(site_url('admin/users'));
     }
 
+    public function updateRole($id)
+    {
+        $userModel = new UserModel();
+
+        $newRoleId = (int) ($this->request->getPost('role_id') ?? 0);
+
+        // Allow only valid roles: 1 Admin, 2 Homeowner, 3 Contractor
+        if (!in_array($newRoleId, [1, 2, 3], true)) {
+            return redirect()->to(site_url('admin/users'));
+        }
+
+        // Make sure user exists
+        $user = $userModel->select('id, role_id')->find($id);
+        if (!$user) {
+            return redirect()->to(site_url('admin/users'));
+        }
+
+        // Update role
+        $userModel->update($id, ['role_id' => $newRoleId]);
+
+        return redirect()->to(site_url('admin/users'));
+    }
+
+
 
 
 }
