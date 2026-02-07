@@ -14,6 +14,14 @@ $routes->get('logout', 'AuthController::logout');
 
 $routes->get('admin/users', 'Admin\UsersController::index', ['filter' => 'auth']);
 
+$routes->get(
+    'admin/users/toggle/(:num)',
+    'Admin\UsersController::toggle/$1',
+    ['filter' => 'auth']
+);
+
+
+
 $routes->get('admin', 'Admin\DashboardController::index');
 $routes->get('admin/dashboard', 'Admin\DashboardController::index');
 
