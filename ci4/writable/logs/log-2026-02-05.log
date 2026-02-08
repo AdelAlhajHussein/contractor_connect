@@ -1,0 +1,623 @@
+ERROR - 2026-02-05 00:08:47 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:08:47 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:08:51 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:08:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:11:34 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:11:34 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:14:17 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:14:17 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:14:20 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:14:20 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:14:25 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:14:25 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:14:27 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:14:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:15:33 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:15:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:15:37 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:15:37 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:17:29 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:17:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:17:32 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:17:32 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:18:58 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:18:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-02-05 00:22:34 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ccdbuser'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#6 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#9 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /home/cclogin/ci4/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /home/cclogin/ci4/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/cclogin/ci4/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/cclogin/ci4/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/cclogin/ci4/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/cclogin/ci4/system/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+#5 /home/cclogin/ci4/app/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+#6 /home/cclogin/ci4/system/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+#7 /home/cclogin/ci4/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#8 /home/cclogin/ci4/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/cclogin/ci4/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 /home/cclogin/ci4/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/cclogin/public_html/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-02-05 00:22:34 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: admin/users]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/Admin/UsersController.php(16): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Admin\UsersController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-02-05 01:42:32 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "auth/login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1199): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/AuthController.php(9): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\AuthController->loginForm()
+ 5 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
