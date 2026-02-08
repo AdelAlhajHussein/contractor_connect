@@ -10,7 +10,7 @@
 
         <a class="nav-link" href="<?= base_url('/') ?>">Home</a>
 
-        <a class="nav-link" href="<?= base_url('/about') ?>">About</a>
+        <a class="nav-link" href="<?= base_url('about') ?>">About</a>
 
         <?php if (session()->get('logged_in')): ?>
 
