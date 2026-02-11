@@ -1,12 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Login</title>
-</head>
-<body>
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('content') ?>
 
 <h1>Login</h1>
+
 <?php if (session()->getFlashdata('error')): ?>
     <p style="color:red;"><?= esc(session()->getFlashdata('error')) ?></p>
 <?php endif; ?>
@@ -29,5 +25,4 @@
     </div>
 </form>
 
-</body>
-</html>
+<?= $this->endSection() ?>

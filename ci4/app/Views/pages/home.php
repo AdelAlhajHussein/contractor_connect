@@ -6,6 +6,6 @@
 
 <?= $this->section('content') ?>
 
-    <?= view('components/nav-categories') ?>
+
 
 <?= $this->endSection() ?>
