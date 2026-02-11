@@ -10,9 +10,16 @@ class ContractorProfileModel extends Model
     protected $primaryKey = 'contractor_id';
     protected $returnType = 'array';
     protected $allowedFields = [
-        'contractor_id', 'address', 'city', 'province', 'postal_code',
-        'created_at', 'updated_at'
+        'contractor_id',
+        'address',
+        'city',
+        'province',
+        'postal_code',
+        'approval_status',
+        'created_at',
+        'updated_at'
     ];
+
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

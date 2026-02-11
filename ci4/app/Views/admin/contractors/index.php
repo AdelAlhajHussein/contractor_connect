@@ -30,6 +30,8 @@
         <th>Status</th>
         <th>Created</th>
         <th>Actions</th>
+        <th>Approval</th>
+        <th>Approve/Reject</th>
     </tr>
     </thead>
     <tbody>
@@ -54,6 +56,16 @@
                            onclick="return confirm('Activate this contractor?')">Activate</a>
                     <?php endif; ?>
                 </td>
+                <td><?= esc($c['approval_status'] ?? 'pending') ?></td>
+                <td>
+                    <a href="<?= site_url('admin/contractors/approve/' . $c['id']) ?>"
+                       onclick="return confirm('Approve this contractor?')">Approve</a>
+                    |
+                    <a href="<?= site_url('admin/contractors/reject/' . $c['id']) ?>"
+                       onclick="return confirm('Reject this contractor?')">Reject</a>
+                </td>
+
+
 
             </tr>
         <?php endforeach; ?>

@@ -17,7 +17,8 @@ class ContractorsController extends BaseController
 
         $builder = $userModel
             ->select('users.id, users.username, users.first_name, users.last_name, users.email, users.phone, users.is_active, users.created_at,
-                  contractor_profiles.address, contractor_profiles.city, contractor_profiles.province, contractor_profiles.postal_code')
+                  contractor_profiles.address, contractor_profiles.city, contractor_profiles.province, contractor_profiles.postal_code, contractor_profiles.approval_status
+')
             ->join('contractor_profiles', 'contractor_profiles.contractor_id = users.id', 'left')
             ->where('users.role_id', 2); // Contractors (based on your DB)
 
@@ -56,6 +57,44 @@ class ContractorsController extends BaseController
 
         return redirect()->to(site_url('admin/contractors'));
     }
+
+    public function approve($id)
+    {
+        $profileModel = new \App\Models\ContractorProfileModel();
+
+        $profile = $profileModel->find($id);
+
+        if (!$profile) {
+            $profileModel->insert([
+                'contractor_id' => $id,
+                'approval_status' => 'approved'
+            ]);
+        } else {
+            $profileModel->update($id, ['approval_status' => 'approved']);
+        }
+
+        return redirect()->to(site_url('admin/contractors'));
+    }
+
+    public function reject($id)
+    {
+        $profileModel = new \App\Models\ContractorProfileModel();
+
+        $profile = $profileModel->find($id);
+
+        if (!$profile) {
+            $profileModel->insert([
+                'contractor_id' => $id,
+                'approval_status' => 'rejected'
+            ]);
+        } else {
+            $profileModel->update($id, ['approval_status' => 'rejected']);
+        }
+
+        return redirect()->to(site_url('admin/contractors'));
+    }
+
+
 
 
 
