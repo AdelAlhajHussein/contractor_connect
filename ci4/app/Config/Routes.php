@@ -30,6 +30,8 @@ $routes->get('admin/dashboard', 'Admin\DashboardController::index');
 
 
 $routes->get('admin/contractors', 'Admin\ContractorsController::index', ['filter' => 'auth']);
+$routes->get('admin/contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1', ['filter' => 'auth']);
+
 
 $routes->get('admin/homeowners', 'Admin\HomeownersController::index');
 
