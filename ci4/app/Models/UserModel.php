@@ -28,4 +28,9 @@ class UserModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    protected $validationRules = [
+        'email' => 'required|is_unique[users.email]',
+        'username' => 'required|is_unique[users.username]'
+    ];
 }

@@ -8,6 +8,12 @@ A digital marketplace for home improvement jobs.
 - MySQL/MariaDB managed via CI4 Migrations
 - Language: PHP 8.4
 
+## Testing
+This project uses PHPUnit for quality assurance testing.
+- To run PHPUnit
+    bash
+    vendor/bin/phpunit
+
 ## Getting Started
 
 ## Installation/Setup: 
