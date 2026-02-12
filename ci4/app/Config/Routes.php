@@ -36,6 +36,8 @@ $routes->get('admin/contractors/reject/(:num)', 'Admin\ContractorsController::re
 
 
 $routes->get('admin/homeowners', 'Admin\HomeownersController::index');
+$routes->get('admin/homeowners/toggle/(:num)', 'Admin\HomeownersController::toggle/$1', ['filter' => 'auth']);
+
 
 $routes->get('admin/projects', 'Admin\ProjectsController::index');
 
