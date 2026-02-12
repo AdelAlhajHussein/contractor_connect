@@ -32,6 +32,7 @@
         <th>Budget</th>
         <th>Deadline</th>
         <th>Created</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -47,6 +48,19 @@
                 <td><?= esc($p['budget_min']) ?> - <?= esc($p['budget_max']) ?></td>
                 <td><?= esc($p['deadline_date'] ?? '') ?></td>
                 <td><?= esc($p['created_at']) ?></td>
+                <td>
+                    <a href="<?= site_url('admin/projects/view/' . $p['id']) ?>">View</a>
+
+                    <?php if ($p['status'] !== 'cancelled' && $p['status'] !== 'completed'): ?>
+                        | <a href="<?= site_url('admin/projects/cancel/' . $p['id']) ?>"
+                             onclick="return confirm('Cancel this project?')">Cancel</a>
+                    <?php endif; ?>
+
+                    <?php if ($p['status'] === 'bidding_open'): ?>
+                        | <a href="<?= site_url('admin/projects/close-bidding/' . $p['id']) ?>"
+                             onclick="return confirm('Force close bidding for this project?')">Close Bidding</a>
+                    <?php endif; ?>
+                </td>
             </tr>
         <?php endforeach; ?>
     <?php else : ?>

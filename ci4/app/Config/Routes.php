@@ -41,9 +41,16 @@ $routes->get('admin/homeowners/toggle/(:num)', 'Admin\HomeownersController::togg
 
 $routes->get('admin/projects', 'Admin\ProjectsController::index');
 $routes->get('admin/projects', 'Admin\ProjectsController::index', ['filter' => 'auth']);
+$routes->get('admin/projects/view/(:num)', 'Admin\ProjectsController::view/$1', ['filter' => 'auth']);
+$routes->get('admin/projects/cancel/(:num)', 'Admin\ProjectsController::cancel/$1', ['filter' => 'auth']);
+$routes->get('admin/projects/close-bidding/(:num)', 'Admin\ProjectsController::closeBidding/$1', ['filter' => 'auth']);
 
 
 $routes->get('admin/bids', 'Admin\BidsController::index');
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+    $routes->get('bids', 'BidsController::index');
+});
+
 
 $routes->get('admin/ratings', 'Admin\RatingsController::index');
 
