@@ -40,6 +40,8 @@ $routes->get('admin/homeowners/toggle/(:num)', 'Admin\HomeownersController::togg
 
 
 $routes->get('admin/projects', 'Admin\ProjectsController::index');
+$routes->get('admin/projects', 'Admin\ProjectsController::index', ['filter' => 'auth']);
+
 
 $routes->get('admin/bids', 'Admin\BidsController::index');
 
