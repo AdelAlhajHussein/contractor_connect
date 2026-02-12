@@ -5,6 +5,7 @@ use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use App\Models\UserModel;
 use Faker\Factory as FakerFactory;
+
 class UserModelTest extends CIUnitTestCase
 {
     use DatabaseTestTrait;
@@ -38,6 +39,32 @@ class UserModelTest extends CIUnitTestCase
         // Verify data exists in db
         $this->seeInDatabase('users', ['email' => $data['email']]);
     }
+    public function testCannotInsertUserWithDuplicateEmail()
+    {
+        $model = new UserModel();
+        $fakeEmail = $this->faker->unique()->email;
+
+        // 1. Setup: Insert the first user successfully
+        $model->insert([
+            'username'   => $this->faker->userName,
+            'email'      => $fakeEmail,
+            'role_id'    => 1,
+            'first_name' => $this->faker->firstName,
+        ]);
+
+        // Insert a second user with the same email
+        $data = [
+            'username'   => $this->faker->userName,
+            'email'      => $fakeEmail,
+            'role_id'    => 1,
+            'first_name' => $this->faker->firstName,
+        ];
+
+        $result = $model->insert($data);
+
+        // Verify insert returns false for duplicate email
+        $this->assertFalse($result, 'The model should not allow duplicate emails.');
+    }
     public function testSoftDeleteWorks()
     {
         $model = new UserModel();
@@ -70,5 +97,25 @@ class UserModelTest extends CIUnitTestCase
             'id'         => $id,
             'deleted_at' => null
         ]);
+    }
+    public function testCanFindUserByEmail()
+    {
+        $model = new UserModel();
+        $fakeEmail = $this->faker->unique()->email;
+
+        // Create user
+        $model->insert([
+            'username'   => $this->faker->userName,
+            'email'      => $fakeEmail,
+            'first_name' => $this->faker->firstName,
+            'role_id'    => 1,
+        ]);
+
+        // Attempt to find by email
+        $user = $model->where('email', $fakeEmail)->first();
+
+        // Verify array exists and email matches
+        $this->assertIsArray($user);
+        $this->assertEquals($fakeEmail, $user['email']);
     }
 }
