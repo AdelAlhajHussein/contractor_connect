@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dacbee4c-7ffc-4bec-9dc8-6b645ffce822" name="Changes" comment="add about page info and layout">
+      <change afterPath="$PROJECT_DIR$/ci4/app/Controllers/Homeowner/Dashboard.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ci4/app/Views/homeowner/dashboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Config/Routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Config/Routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Views/pages/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Views/pages/home.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,12 +30,12 @@
     &quot;assignee&quot;: &quot;shifaKarnelia&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/AdelAlhajHussein/contractor_connect.git",
-    "accountId": "e2847f75-0852-4921-a5dc-6419baaf8e17"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AdelAlhajHussein/contractor_connect.git&quot;,
+    &quot;accountId&quot;: &quot;e2847f75-0852-4921-a5dc-6419baaf8e17&quot;
   }
-}]]></component>
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/bin/php">
     <include_path>
       <path value="$PROJECT_DIR$/ci4/vendor/symfony/string" />
@@ -48,7 +52,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "documentation/update-readme",
+    "git-widget-placeholder": "feature/homeowner-dashboard",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
