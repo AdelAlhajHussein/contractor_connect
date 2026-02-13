@@ -47,12 +47,18 @@ $routes->get('admin/projects/close-bidding/(:num)', 'Admin\ProjectsController::c
 
 
 $routes->get('admin/bids', 'Admin\BidsController::index');
-$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
-    $routes->get('bids', 'BidsController::index');
-});
+$routes->get('admin/bids', 'Admin\BidsController::index', ['filter' => 'auth']);
+$routes->get('admin/bids/view/(:num)', 'Admin\BidsController::view/$1', ['filter' => 'auth']);
+$routes->get('admin/bids/withdraw/(:num)', 'Admin\BidsController::withdraw/$1', ['filter' => 'auth']);
+
 
 
 $routes->get('admin/ratings', 'Admin\RatingsController::index');
+$routes->get('admin/ratings', 'Admin\RatingsController::index', ['filter' => 'auth']);
+$routes->get('admin/ratings/view/(:num)', 'Admin\RatingsController::view/$1', ['filter' => 'auth']);
+$routes->get('admin/ratings/remove/(:num)', 'Admin\RatingsController::remove/$1', ['filter' => 'auth']);
+$routes->get('admin/ratings/suspicious', 'Admin\RatingsController::suspicious', ['filter' => 'auth']);
+
 
 $routes->get('admin/categories', 'Admin\CategoriesController::index');
 

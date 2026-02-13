@@ -32,6 +32,7 @@
         <th>Bid Amount</th>
         <th>Total Cost</th>
         <th>Created</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -47,6 +48,9 @@
                 <td><?= esc($b['bid_amount']) ?></td>
                 <td><?= esc($b['total_cost']) ?></td>
                 <td><?= esc($b['created_at']) ?></td>
+                <td>
+                    <a href="<?= site_url('admin/bids/view/' . $b['id']) ?>">View</a>
+                </td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>
