@@ -1,0 +1,5 @@
+Database schema export (structure only)
+
+- File: cclogin_ccdb.sql
+- Contains: tables/columns/keys/indexes
+- Does NOT include real data (no INSERT statements)
