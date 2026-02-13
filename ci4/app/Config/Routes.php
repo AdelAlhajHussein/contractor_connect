@@ -73,3 +73,4 @@ $routes->get('admin/categories/toggle/(:num)', 'Admin\CategoriesController::togg
 $routes->get('admin/payments', 'Admin\PaymentsController::index');
 
 $routes->get('admin/reports', 'Admin\ReportsController::index');
+$routes->get('admin/reports', 'Admin\ReportsController::index', ['filter' => 'auth']);
