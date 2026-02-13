@@ -61,6 +61,14 @@ $routes->get('admin/ratings/suspicious', 'Admin\RatingsController::suspicious', 
 
 
 $routes->get('admin/categories', 'Admin\CategoriesController::index');
+$routes->get('admin/categories', 'Admin\CategoriesController::index', ['filter' => 'auth']);
+$routes->get('admin/categories/create', 'Admin\CategoriesController::create', ['filter' => 'auth']);
+$routes->post('admin/categories/store', 'Admin\CategoriesController::store', ['filter' => 'auth']);
+$routes->get('admin/categories/edit/(:num)', 'Admin\CategoriesController::edit/$1', ['filter' => 'auth']);
+$routes->post('admin/categories/update/(:num)', 'Admin\CategoriesController::update/$1', ['filter' => 'auth']);
+$routes->get('admin/categories/delete/(:num)', 'Admin\CategoriesController::delete/$1', ['filter' => 'auth']);
+$routes->get('admin/categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1', ['filter' => 'auth']);
+
 
 $routes->get('admin/payments', 'Admin\PaymentsController::index');
 
