@@ -8,6 +8,12 @@ A digital marketplace for home improvement jobs.
 - MySQL/MariaDB managed via CI4 Migrations
 - Language: PHP 8.4
 
+## Testing
+This project uses PHPUnit for quality assurance testing.
+- To run PHPUnit
+    bash
+    vendor/bin/phpunit
+
 ## Getting Started
 
 ## Installation/Setup: 
@@ -24,6 +30,37 @@ A digital marketplace for home improvement jobs.
     Then open in browser
     "http://localhost:8000"
 
+### 4. Update code
+    - To pull latest version of the code
+    bash
+    "git pull origin main"
+
+    - Switch to local branch
+    bash
+    "git checkout -b <branch-name>"
+
+    - Add file change to staging
+    "git add <filename>"
+    
+    - Or stage all files with changes
+    Navigate to root directory
+    bash
+    "git add ."
+    
+    - Push changes on branch
+    bash
+    "git push origin <branch-name>
+
+    - Branch naming convention
+    Begin with type ( feature / bugfix )
+    Lowercase lettering with hyphens
+    ex: "feature/add-login-form"
+    ex: "bugfix/fix-login-error"
+
+    - Merge with main
+    Navigate to github and create a pull request
+    Resolve any conflicts and merge with main branch
+
 
 ## The Team: 
 **Member 1** Adel Alhaj Hussein - Back-end
@@ -35,5 +72,23 @@ A digital marketplace for home improvement jobs.
 ## Progress:
 - [X] Initial project file setup
 - [X] Create initial file layout
-- [] Set up account creation and authentication
-- []
+- [] Account creation and authentication
+    - [X] Back-end functions and routing
+    - [X] Front-end html
+    - [] Front-end styling
+- [] User login
+    - [X] Back-end functions and routing
+    - [X] Front-end html
+    - [] Front-end styling
+- [] Admin Dashboard
+  - [X] Back-end functions and routing
+  - [] Front-end html
+  - [] Front-end styling
+- [] Homeowner Dashboard
+  - [] Back-end functions and routing
+  - [] Front-end html
+  - [] Front-end styling
+- [] Contractor Dashboard
+    - [] Back-end functions and routing
+    - [] Front-end html
+    - [] Front-end styling
