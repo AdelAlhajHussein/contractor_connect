@@ -6,20 +6,24 @@ use App\Controllers\BaseController;
 
 class BidsController extends BaseController
 {
-    public function index()
+    public function index($projectId)
     {
-        $userId = (int) session('user_id');
+        $userId = (int) session()->get('user_id');
 
-        $builder = db_connect()->table('bids b')
-            ->select('b.id AS bid_id, p.id AS project_id, p.title, b.bid_amount, b.status, u.first_name, u.last_name')
+        $db = \Config\Database::connect();
+
+        $bids = $db->table('bids b')
+            ->select('b.project_id, p.title, b.bid_amount, b.id AS bid_id, u.username AS contractor_name, b.status')
             ->join('projects p', 'p.id = b.project_id')
             ->join('users u', 'u.id = b.contractor_id')
             ->where('p.home_owner_id', $userId)
-            ->orderBy('b.id', 'DESC');
+            ->where('b.project_id', (int) $projectId)
+            ->orderBy('b.created_at', 'DESC')
+            ->get()
+            ->getResultArray();
 
-        return view('homeowner/bids/index', [
-            'bids' => $builder->get()->getResultArray(),
-        ]);
+        return view('homeowner/bids/index', ['bids' => $bids]);
     }
+
 
 }
