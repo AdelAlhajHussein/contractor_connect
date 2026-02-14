@@ -47,5 +47,41 @@ class ProjectsController extends BaseController
         ]);
     }
 
+    public function new()
+    {
+        $categories = db_connect()->table('categories')
+            ->select('id, name')
+            ->orderBy('name', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        return view('homeowner/projects/new', [
+            'categories' => $categories,
+        ]);
+    }
+
+
+    public function create()
+    {
+        $userId = (int) session()->get('user_id');
+
+        $projectModel = new \App\Models\ProjectModel();
+
+        $projectModel->insert([
+            'home_owner_id' => $userId,
+            'category_id'   => (int) $this->request->getPost('category_id'),
+            'title'         => $this->request->getPost('title'),
+            'description'   => $this->request->getPost('description'),
+            'budget_min'    => $this->request->getPost('budget_min'),
+            'budget_max'    => $this->request->getPost('budget_max'),
+            'status'        => 'bidding_open',
+            'created_at'    => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->to('/index.php/homeowner/projects');
+    }
+
+
+
 
 }
