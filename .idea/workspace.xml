@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dacbee4c-7ffc-4bec-9dc8-6b645ffce822" name="Changes" comment="login page - (header error solve)">
+    <list default="true" id="dacbee4c-7ffc-4bec-9dc8-6b645ffce822" name="Changes" comment="style add to admin/users/index.php and admin/contractor/index.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ci4/app/Views/admin/contractors/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Views/admin/contractors/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ci4/app/Views/admin/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Views/admin/users/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Views/admin/homeowners/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Views/admin/homeowners/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,12 +26,12 @@
     &quot;assignee&quot;: &quot;shifaKarnelia&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/AdelAlhajHussein/contractor_connect.git&quot;,
-    &quot;accountId&quot;: &quot;1413cb93-03dc-4008-b31c-e219603298e9&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AdelAlhajHussein/contractor_connect.git",
+    "accountId": "f4cddf96-04f2-474d-8c4f-955f62bfd368"
   }
-}</component>
+}]]></component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe">
     <include_path>
       <path value="$PROJECT_DIR$/ci4/vendor/composer" />
@@ -51,7 +50,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "sana-frontend",
+    "git-widget-placeholder": "#15 on sana-frontend",
     "last_opened_file_path": "C:/contractorconnect/contractor_connect",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -89,7 +88,7 @@
       <workItem from="1770918147666" duration="13268000" />
       <workItem from="1771002533330" duration="2370000" />
       <workItem from="1771015311455" duration="87000" />
-      <workItem from="1771104113659" duration="1736000" />
+      <workItem from="1771104113659" duration="3104000" />
     </task>
     <task id="LOCAL-00001" summary="change made in navbar layout">
       <option name="closed" value="true" />
@@ -115,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770781755800</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="style add to admin/users/index.php and admin/contractor/index.php">
+      <option name="closed" value="true" />
+      <created>1771109394001</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1771109394001</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +132,7 @@
     <MESSAGE value="change made in navbar layout" />
     <MESSAGE value="add about page info and layout" />
     <MESSAGE value="login page - (header error solve)" />
-    <option name="LAST_COMMIT_MESSAGE" value="login page - (header error solve)" />
+    <MESSAGE value="style add to admin/users/index.php and admin/contractor/index.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="style add to admin/users/index.php and admin/contractor/index.php" />
   </component>
 </project>
