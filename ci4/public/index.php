@@ -1,5 +1,7 @@
 <?php
 
+echo __DIR__ . '/../ci4/app/Config/Paths.php';
+exit;
 use CodeIgniter\Boot;
 use Config\Paths;
 
@@ -51,9 +53,12 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
 require __DIR__ . '/../app/Config/Paths.php';
 // ^^^ Change this line if you move your application folder
 
-$paths = new Paths();
+//$paths = new Paths();
 
 // LOAD THE FRAMEWORK BOOTSTRAP FILE
-require $paths->systemDirectory . '/Boot.php';
+//require $paths->systemDirectory . '/Boot.php';
 
-exit(Boot::bootWeb($paths));
+//exit(Boot::bootWeb($paths));
+$paths = new Config\Paths();
+require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'Boot.php';
+exit(CodeIgniter\Boot::bootWeb($paths));

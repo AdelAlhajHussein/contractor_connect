@@ -3,6 +3,8 @@
 use CodeIgniter\Boot;
 use Config\Paths;
 
+
+
 /*
  *---------------------------------------------------------------
  * CHECK PHP VERSION
@@ -48,7 +50,9 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
 
 // LOAD OUR PATHS CONFIG FILE
 // This is the line that might need to be changed, depending on your folder structure.
+//require __DIR__ . '/../ci4/app/Config/Paths.php';
 require __DIR__ . '/../ci4/app/Config/Paths.php';
+
 // ^^^ Change this line if you move your application folder
 
 $paths = new Paths();

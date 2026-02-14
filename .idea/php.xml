@@ -12,6 +12,9 @@
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
+      <path value="$PROJECT_DIR$/ci4/vendor/composer" />
+      <path value="$PROJECT_DIR$/ci4/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/ci4/vendor/laminas/laminas-escaper" />
       <path value="$PROJECT_DIR$/ci4/vendor/symfony/string" />
     </include_path>
   </component>
