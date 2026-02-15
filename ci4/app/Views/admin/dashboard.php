@@ -97,39 +97,50 @@
 
 <script>
 
+    let currentTarget = 'users';
     function loadTable(target) {
+        currentTarget = target; // update global variable
+
         const resultDiv = document.getElementById('table-content');
         const form = document.getElementById('ajax-filter-form');
 
-        // Verify form is loaded
-        let params = "";
-        if (form) {
-            const formData = new FormData(form);
-            params = "?" + new URLSearchParams(formData).toString();
-        }
+        // Process form
+        const formData = new FormData(form);
+        const params = new URLSearchParams(formData).toString();
 
-        fetch(`<?= site_url('admin/dashboard/get_table/') ?>${target}?${params}`)
+        // Prepare url
+        const url = `<?= site_url('admin/dashboard/get_table/') ?>${target}?${params}`;
+
+        resultDiv.innerHTML = "<p>Loading...</p>";
+
+        fetch(url)
             .then(response => {
-                if (!response.ok) throw new Error('Route not found');
+                if (!response.ok) throw new Error('Network response 500 or 404');
                 return response.text();
             })
-            .then(html => { resultDiv.innerHTML = html; })
-            .catch(err => { resultDiv.innerHTML = `<p>Error: ${err.message}</p>`; });
+            .then(html => {
+                resultDiv.innerHTML = html;
+            })
+            .catch(err => {
+                resultDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+                console.error('Fetch Error:', err);
+            });
     }
 
-    // Handle view selection clicks
+    // Handle category/nav clicks
     document.querySelectorAll('.ajax-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            loadTable(this.getAttribute('data-target'));
+            const target = this.getAttribute('data-target');
+            loadTable(target);
         });
     });
 
     // Handle filter form submit
     document.getElementById('ajax-filter-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        // Default to users table on load
-        loadTable('users');
+        // Filter to the target use type
+        loadTable(currentTarget);
     });
 </script>
 <?= $this->endSection() ?>

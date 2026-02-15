@@ -28,60 +28,6 @@ class DashboardController extends BaseController
 
         switch ($type) {
 
-            // All users
-            case 'users':
-                $model = new \App\Models\UserModel();
-                $users = $model->findAll();
-
-                $data['headers'] = ['ID', 'Username', 'Name', 'Email', 'Role', 'Status', 'Created', 'Actions'];
-                foreach ($users as $user) {
-                    $data['rows'][] = [
-                        'id'         => $user['id'],
-                        'username'   => esc($user['username']),
-                        'name'       => $user['first_name'] . ' ' . $user['last_name'],
-                        'email'      => esc($user['email']),
-                        'role_id'    => $user['role_id'],
-                        'is_active'  => $user['is_active'],
-                        'created_at' => $user['created_at'],
-                        'actions'    => []
-                    ];
-                }
-                break;
-
-            // Contractors
-            case 'contractors':
-
-                $userModel = new \App\Models\UserModel();
-
-                $contractors = $userModel->where('role_id', 3)->findAll();
-
-                $data['headers'] = ['ID', 'Username', 'Email', 'Status'];
-
-                if (!empty($contractors)) {
-                    foreach ($contractors as $c) {
-                        $data['rows'][] = [
-                            'id'        => $c['id'],
-                            'username'  => esc($c['username']),
-                            'email'     => esc($c['email']),
-                            'status'    => ($c['is_active'] == 1) ? 'Active' : 'Inactive'
-                        ];
-                    }
-                } else {
-                    $data['rows'] = [];
-                }
-                break;
-
-            // Admin Reports
-            case 'reports':
-                // Summary info
-                $userModel = new \App\Models\UserModel();
-                $data['headers'] = ['Report Metric', 'Value'];
-                $data['rows'] = [
-                    ['Total Users', $userModel->countAll()],
-                    ['Active Users', $userModel->where('is_active', 1)->countAll()],
-                ];
-                break;
-
             // Task categories
             case 'categories':
                 $categoryModel = new \App\Models\CategoryModel();
@@ -112,10 +58,77 @@ class DashboardController extends BaseController
                     ];
                 }
                 break;
+
+            // All users
+            case 'users':
+                $model = new \App\Models\UserModel();
+                $users = $model->findAll();
+
+                $data['headers'] = ['ID', 'Username', 'Name', 'Email', 'Role', 'Status', 'Created', 'Actions'];
+                foreach ($users as $user) {
+                    $data['rows'][] = [
+                        'id'         => $user['id'],
+                        'username'   => esc($user['username']),
+                        'name'       => $user['first_name'] . ' ' . $user['last_name'],
+                        'email'      => esc($user['email']),
+                        'role_id'    => $user['role_id'],
+                        'is_active'  => $user['is_active'],
+                        'created_at' => $user['created_at'],
+                        'actions'    => []
+                    ];
+                }
+                break;
+
+            // Contractors
+            case 'contractors':
+
+                $userModel = new \App\Models\UserModel();
+                $userModel->where('role_id', 3);
+
+                $q = $this->request->getGet('q');
+                if (!empty($q)) {
+                    $userModel->groupStart()
+                        ->like('username', $q)
+                        ->orLike('email', $q)
+                        ->groupEnd();
+                }
+
+                $status = $this->request->getGet('status');
+                if ($status !== '' && $status !== null) {
+                    $userModel->where('is_active', $status);
+                }
+
+                $results = $userModel->findAll();
+
+                $data['type'] = 'contractors';
+                $data['headers'] = ['ID', 'Username', 'Email', 'Status', 'Actions'];
+                $data['rows'] = [];
+
+
+                foreach ($results as $result) {
+                    $data['rows'][] = [
+                        'id'        => $result['id'],
+                        'username'  => esc($result['username']),
+                        'email'     => esc($result['email']),
+                        'is_active' => $result['is_active'],
+                    ];
+                }
+                break;
+
+            // Admin Reports
+            case 'reports':
+                // Summary info
+                $userModel = new \App\Models\UserModel();
+                $data['headers'] = ['Report Metric', 'Value'];
+                $data['rows'] = [
+                    ['Total Users', $userModel->countAll()],
+                    ['Active Users', $userModel->where('is_active', 1)->countAll()],
+                ];
+                break;
+
+
         }
 
         return view('components/dashboard-table', $data);
     }
-
-
 }
