@@ -1,3 +1,10 @@
+<?= $this->extend('layouts/dashboard'); ?>
+
+<?= $this->section('page_css') ?>
+    <link rel="stylesheet" href="<?= base_url('css/homeowner-dashboard.css') ?>">
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
 <h1>Homeowner Dashboard</h1>
 
 
@@ -15,3 +22,5 @@
     <li><a href="<?= site_url('homeowner/profile') ?>">Account Settings</a></li>
 </ul>
 
+
+<?= $this->endSection() ?>

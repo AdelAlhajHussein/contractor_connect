@@ -1,4 +1,11 @@
-<<link rel="stylesheet" href="<?= base_url('css/admin-dashboard.css') ?>">
+<?= $this->extend('layouts/dashboard') ?>
+
+<?= $this->section('page_css') ?>
+    <link rel="stylesheet" href="<?= base_url('css/admin-dashboard.css') ?>">
+<?= $this->endSection() ?>
+
+
+<?= $this->section('content') ?>
 
 <div class="dashboard-container">
 
@@ -47,3 +54,5 @@
     </div>
 
 </div>
+
+<?= $this->endSection() ?>
