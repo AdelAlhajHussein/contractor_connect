@@ -1,0 +1,79 @@
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f7fb;
+}
+
+
+/* Main container */
+.form-container{
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background:white;
+    border-radius:12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+
+/* Page title */
+.form-title{
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+
+/* Back link */
+.form-back{
+    display:inline-block;
+    margin-bottom:20px;
+    color:#6a5acd;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+
+.form-back:hover{
+    text-decoration:underline;
+}
+
+
+/* Form group */
+.form-group{
+    margin-bottom:20px;
+}
+
+
+/* Label */
+.form-group label{
+    font-weight:bold;
+    display:block;
+    margin-bottom:6px;
+}
+
+
+/* Input */
+.form-group input{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+
+/* Button */
+.form-btn{
+    padding:10px 20px;
+    border:none;
+    border-radius:6px;
+    background:#6a5acd;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+.form-btn:hover{
+    background:#5a4abd;
+}

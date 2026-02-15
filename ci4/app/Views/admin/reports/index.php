@@ -1,75 +1,136 @@
-<h1>Admin Reports</h1>
+<link rel="stylesheet" href="<?= base_url('css/admin-reports.css') ?>">
 
-<h2>Users</h2>
-<p><b>Total Users:</b> <?= esc($totalUsers) ?></p>
+<div class="reports-container">
 
-<table border="1" cellpadding="8" cellspacing="0" width="500">
-    <thead>
-    <tr>
-        <th>Role</th>
-        <th>Total</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($usersByRole as $row): ?>
+    <h1 class="reports-title">Admin Reports</h1>
+
+
+    <h2 class="report-section-title">Users</h2>
+
+    <p class="report-summary">
+        <b>Total Users:</b> <?= esc($totalUsers) ?>
+    </p>
+
+
+    <table class="report-table">
+
+        <thead>
+
         <tr>
-            <td>
-                <?php
-                $role = (int)($row['role_id'] ?? 0);
-                echo match ($role) {
-                    1 => 'Admin',
-                    2 => 'Homeowner',
-                    3 => 'Contractor',
-                    default => 'Unknown',
-                };
-                ?>
-            </td>
-            <td><?= esc($row['total']) ?></td>
+            <th>Role</th>
+            <th>Total</th>
         </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
 
-<hr>
+        </thead>
 
-<h2>Projects</h2>
-<p><b>Total Projects:</b> <?= esc($totalProjects) ?></p>
+        <tbody>
 
-<table border="1" cellpadding="8" cellspacing="0" width="500">
-    <thead>
-    <tr>
-        <th>Status</th>
-        <th>Total</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($projectsByStatus as $row): ?>
+        <?php foreach ($usersByRole as $row): ?>
+
+            <tr>
+
+                <td>
+
+                    <?php
+                    $role = (int)($row['role_id'] ?? 0);
+                    echo match ($role) {
+                        1 => 'Admin',
+                        2 => 'Homeowner',
+                        3 => 'Contractor',
+                        default => 'Unknown',
+                    };
+                    ?>
+
+                </td>
+
+                <td><?= esc($row['total']) ?></td>
+
+            </tr>
+
+        <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+
+    <hr class="report-divider">
+
+
+    <h2 class="report-section-title">Projects</h2>
+
+    <p class="report-summary">
+        <b>Total Projects:</b> <?= esc($totalProjects) ?>
+    </p>
+
+
+    <table class="report-table">
+
+        <thead>
+
         <tr>
-            <td><?= esc($row['status'] ?? 'N/A') ?></td>
-            <td><?= esc($row['total']) ?></td>
+            <th>Status</th>
+            <th>Total</th>
         </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
 
-<hr>
+        </thead>
 
-<h2>Bids</h2>
-<p><b>Total Bids:</b> <?= esc($totalBids) ?></p>
+        <tbody>
 
-<table border="1" cellpadding="8" cellspacing="0" width="500">
-    <thead>
-    <tr>
-        <th>Status</th>
-        <th>Total</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($bidsByStatus as $row): ?>
+        <?php foreach ($projectsByStatus as $row): ?>
+
+            <tr>
+
+                <td><?= esc($row['status'] ?? 'N/A') ?></td>
+
+                <td><?= esc($row['total']) ?></td>
+
+            </tr>
+
+        <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+
+    <hr class="report-divider">
+
+
+    <h2 class="report-section-title">Bids</h2>
+
+    <p class="report-summary">
+        <b>Total Bids:</b> <?= esc($totalBids) ?>
+    </p>
+
+
+    <table class="report-table">
+
+        <thead>
+
         <tr>
-            <td><?= esc($row['status'] ?? 'N/A') ?></td>
-            <td><?= esc($row['total']) ?></td>
+            <th>Status</th>
+            <th>Total</th>
         </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+
+        </thead>
+
+        <tbody>
+
+        <?php foreach ($bidsByStatus as $row): ?>
+
+            <tr>
+
+                <td><?= esc($row['status'] ?? 'N/A') ?></td>
+
+                <td><?= esc($row['total']) ?></td>
+
+            </tr>
+
+        <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+</div>

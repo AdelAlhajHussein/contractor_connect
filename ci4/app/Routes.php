@@ -12,6 +12,7 @@ $routes->get('login', 'AuthController::loginForm');
 $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
 
+// Admin Routes
 $routes->get('admin/users', 'Admin\UsersController::index', ['filter' => 'auth']);
 
 $routes->get(
@@ -44,3 +45,10 @@ $routes->get('admin/categories', 'Admin\CategoriesController::index');
 $routes->get('admin/payments', 'Admin\PaymentsController::index');
 
 $routes->get('admin/reports', 'Admin\ReportsController::index');
+
+// Homeowners
+// (Admin view of homeowners)
+$routes->get('admin/homeowners', 'Admin\HomeownersController::index');
+
+// The Homeowner viewing their own dashboard
+$routes->get('homeowner/dashboard', 'Homeowner\Dashboard::index');
