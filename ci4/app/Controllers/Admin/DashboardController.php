@@ -19,16 +19,15 @@ class DashboardController extends BaseController
     // Get table data for X user type
     public function get_table($type)
     {
-
         $data = [
             'headers' => [],
             'rows' => [],
             'type' => $type,
         ];
 
+        // Category/Nav Types
         switch ($type) {
-
-            // Task categories
+            // Categories
             case 'categories':
                 $categoryModel = new \App\Models\CategoryModel();
 
@@ -59,7 +58,7 @@ class DashboardController extends BaseController
                 }
                 break;
 
-            // All users
+            // Users
             case 'users':
                 $model = new \App\Models\UserModel();
                 $users = $model->findAll();
@@ -117,16 +116,27 @@ class DashboardController extends BaseController
 
             // Admin Reports
             case 'reports':
-                // Summary info
+                // Models
                 $userModel = new \App\Models\UserModel();
-                $data['headers'] = ['Report Metric', 'Value'];
+                $projectModel = new \App\Models\ProjectModel();
+                $bidModel = new \App\Models\BidModel();
+
+                $data['type'] = 'reports';
+                $data['headers'] = ['Category', 'Metric', 'Count/Value', 'Status'];
                 $data['rows'] = [
-                    ['Total Users', $userModel->countAll()],
-                    ['Active Users', $userModel->where('is_active', 1)->countAll()],
+                    // User metrics
+                    ['cat' => 'Users', 'metric' => 'Total Registered', 'val' => $userModel->countAll(), 'stat' => 'Global'],
+                    ['cat' => 'Users', 'metric' => 'Contractors', 'val' => $userModel->where('role_id', 3)->countAll(), 'stat' => 'Active'],
+
+                    // Project metrics
+                    ['cat' => 'Projects', 'metric' => 'Total Projects', 'val' => $projectModel->countAll(), 'stat' => 'All Time'],
+                    ['cat' => 'Projects', 'metric' => 'Completed', 'val' => $projectModel->where('status', 'completed')->countAll(), 'stat' => 'Finalized'],
+
+                    // Bid metrics
+                    ['cat' => 'Bids', 'metric' => 'Total Bids Submitted', 'val' => $bidModel->countAll(), 'stat' => 'Pending/Accepted'],
+                    ['cat' => 'Bids', 'metric' => 'Total Volume ($)', 'val' => '$' . number_format($bidModel->selectSum('total_cost')->get()->getRow()->total_cost, 2), 'stat' => 'Revenue']
                 ];
                 break;
-
-
         }
 
         return view('components/dashboard-table', $data);

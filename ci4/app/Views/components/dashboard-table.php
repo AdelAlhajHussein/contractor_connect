@@ -72,7 +72,28 @@
                                     <a class="action-link" href="<?= site_url('admin/contractors/view/'.$row['id']) ?>">View Profile</a>
                                 </div>
                             </td>
-                        <?php endif; ?> </tr>
+
+                        <?php elseif ($type === 'reports'): ?>
+                            <td><?= esc($row['cat']) ?></td>
+
+                            <td><?= esc($row['metric']) ?></td>
+
+                            <td><span class="update-btn"><?= esc($row['val']) ?></span></td>
+
+                            <td>
+                                <span>
+                                    <?= esc($row['stat']) ?>
+                                </span>
+                            </td>
+
+
+
+
+
+
+
+                        <?php endif; ?>
+                    </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
