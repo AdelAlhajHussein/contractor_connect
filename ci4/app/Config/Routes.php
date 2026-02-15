@@ -81,3 +81,4 @@ $routes->get('admin/reports', 'Admin\ReportsController::index');
 $routes->get('admin/reports', 'Admin\ReportsController::index', ['filter' => 'auth']);
 
 $routes->get('homeowner/dashboard', 'Homeowner\Dashboard::index');
+$routes->get('contractor/dashboard', 'Contractor\Dashboard::index');
