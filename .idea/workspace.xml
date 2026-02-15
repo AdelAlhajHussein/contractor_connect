@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dacbee4c-7ffc-4bec-9dc8-6b645ffce822" name="Changes" comment="admin dashboard css added">
+    <list default="true" id="dacbee4c-7ffc-4bec-9dc8-6b645ffce822" name="Changes" comment="login page - (header error solve)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Views/admin/contractors/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Views/admin/contractors/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Views/admin/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Views/admin/users/index.php" afterDir="false" />
+    <list default="true" id="dacbee4c-7ffc-4bec-9dc8-6b645ffce822" name="Changes" comment="add about page info and layout">
+      <change afterPath="$PROJECT_DIR$/ci4/app/Controllers/Homeowner/Dashboard.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ci4/app/Views/homeowner/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Config/Routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Config/Routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci4/app/Views/pages/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/ci4/app/Views/pages/home.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +37,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/AdelAlhajHussein/contractor_connect.git&quot;,
-    &quot;accountId&quot;: &quot;1413cb93-03dc-4008-b31c-e219603298e9&quot;
+    &quot;accountId&quot;: &quot;e2847f75-0852-4921-a5dc-6419baaf8e17&quot;
   }
 }</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe">
@@ -36,6 +45,9 @@
       <path value="$PROJECT_DIR$/ci4/vendor/composer" />
       <path value="$PROJECT_DIR$/ci4/vendor/psr/log" />
       <path value="$PROJECT_DIR$/ci4/vendor/laminas/laminas-escaper" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/bin/php">
+    <include_path>
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/string" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -46,18 +58,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;sana-shifa-frontend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "sana-frontend",
+    "last_opened_file_path": "C:/contractorconnect/contractor_connect",
+    "git-widget-placeholder": "feature/homeowner-dashboard",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/ci4/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
@@ -67,8 +81,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-PS-242.21829.154" />
-        <option value="bundled-php-predefined-a98d8de5180a-4d9f4c849d09-com.jetbrains.php.sharedIndexes-PS-242.21829.154" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.24807.17" />
+        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.24807.17" />
       </set>
     </attachedChunks>
   </component>
@@ -85,8 +99,10 @@
       <workItem from="1770769990861" duration="1246000" />
       <workItem from="1770918147666" duration="13268000" />
       <workItem from="1771002533330" duration="2370000" />
-      <workItem from="1771015311455" duration="1084000" />
-      <workItem from="1771198200638" duration="153000" />
+      <workItem from="1771015311455" duration="87000" />
+      <workItem from="1771104113659" duration="1736000" />
+      <workItem from="1770769990861" duration="830000" />
+      <workItem from="1771006588547" duration="1427000" />
     </task>
     <task id="LOCAL-00001" summary="change made in navbar layout">
       <option name="closed" value="true" />
@@ -112,15 +128,7 @@
       <option name="project" value="LOCAL" />
       <updated>1770781755800</updated>
     </task>
-    <task id="LOCAL-00004" summary="admin dashboard css added">
-      <option name="closed" value="true" />
-      <created>1771015853661</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1771015853661</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,7 +138,6 @@
     <MESSAGE value="change made in navbar layout" />
     <MESSAGE value="add about page info and layout" />
     <MESSAGE value="login page - (header error solve)" />
-    <MESSAGE value="admin dashboard css added" />
-    <option name="LAST_COMMIT_MESSAGE" value="admin dashboard css added" />
+    <option name="LAST_COMMIT_MESSAGE" value="login page - (header error solve)" />
   </component>
 </project>

@@ -1,23 +1,24 @@
 /* ------- General ------ */
 
-*{
-    background-color: whitesmoke;
-    font-family: Arial, Helvetica, sans-serif;
-
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-color: whitesmoke;
 }
 
 a{
     text-decoration: none;
-    background-color: transparent;
+    background-color: transparent !important;
     color: rgba(172, 207, 247, 0.83);
     font-weight: 100;
+
 }
 a:hover{
     color: rgb(172, 207, 247);
 }
 
 p{
-    color:white;
+   /* color:white;*/
     font-weight: 100;
     font-size: 0.7em;
     background-color: transparent;
@@ -31,129 +32,108 @@ button{
     padding: 0.5em;
 
 }
+/* Navbar  */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: rgba(172, 207, 247, 0.83);
+}
 
 
-/* ------- Header ------ */
-header{
+.navbar a,
+.navbar span,
+.navbar div,
+.navbar h1,
+.navbar h2 {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
 
-    padding: 1em 2em;
-    background-color: rgb(75, 82, 89);
-    box-shadow: 5px 3em rgb(172, 207, 247);
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2f3b46;   
+    transition: all 0.3s ease;
+    background-color:transparent;
+
+}
+
+.logo:hover {
+    color: #000000;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+.nav-right {
     display: flex;
-    justify-content: space-between;
-}
-
-.left-header{
-    background-color: transparent;
-}
-.right-header{
-    background-color: transparent;
-}
-
-.main-title{
-    font-size: 2em;
-    margin: 0px;
-}
-
-.main-sub-title{
-    font-size: 0.75em;
-    margin-top: 0px;
+    align-items: center;
+    gap: 20px;
 
 }
 
-.main-title, .main-sub-title{
-    font-weight: 200;
-    color: rgb(255, 255, 255);
-    background-color: rgba(0, 0, 0, 0);
+
+.nav-link {
+    color: #2f3b46;  
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 
-/* ------- Nav Bar ------ */
-.nav-bar{
-    /*border: 1px solid black;*/
-    padding: 0 2em;
-    background-color: transparent;
-    padding: 1em;
-    
-}
-.nav-link{
-    color: rgba(75, 82, 89, 0.876);
-    text-decoration: none;
-    margin-right: 1rem;
-    
+.nav-link:hover {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.nav-link:hover{
-    color: rgba(75, 82, 89);
-    font-weight: 575;
-
+.username {
+    color: #1b2a38;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-/* ------- User Details ------ */
-
-.user-details{
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: end;
-   
-    text-align: end;
-    background-color: transparent;
+.username:hover {
+    font-size: 18px;
 }
 
 
+.logout-btn {
+    color: #b00020;
+}
 
-
-
-.category-img{
-    min-height: 8em;
-    min-width: 8em;
-    border-radius: 8px;
-    
-    border: 1px solid rgb(238, 238, 238);
+.logout-btn:hover {
+    color: #ff0000;
+    font-size: 18px;
 }
 
 
-.nav-categories{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 4em;
-    
-}
-.nav-category{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+.register-btn {
+    background-color: #2f3b46;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 
 }
 
-.category-link{
-    color: black;
-
-    border-radius: 7px;    
-    padding: 1em;
-    background-color: rgba(121, 168, 225, 0.123);
-    
-    box-shadow: 4px 4px rgb(216, 216, 216);
+.register-btn:hover {
+    background-color: #000;
+    font-size: 17px;
 }
 
-.category-link:hover{
-    color: black;
-    font-weight: 550;
-    box-shadow: 4px 4px rgb(170, 170, 170);
-    background-color: rgb(121, 168, 225);
+/*--- box effect ----*/
+
+.box-effect {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
 }
 
-
-
-
-.username{
-    background-color: transparent;
-}
-
-.sign-in-btn{
-    color: red;
-    background-color: white;
-    border: 2px solid 
-}

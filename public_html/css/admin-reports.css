@@ -1,0 +1,67 @@
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f7fb;
+}
+
+
+/* Main container */
+.reports-container{
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+
+/* Main heading */
+.reports-title{
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+
+/* Section headings */
+.report-section-title{
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+
+/* Summary text */
+.report-summary{
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+
+/* Table styling */
+.report-table{
+    border-collapse: collapse;
+    width: 500px;
+    background:white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+
+.report-table th{
+    background:#e9edf2;
+    padding:12px;
+    text-align:left;
+}
+
+
+.report-table td{
+    padding:12px;
+    border-top:1px solid #ddd;
+}
+
+
+.report-table tr:hover{
+    background:#f5f8fc;
+}
+
+
+.report-divider{
+    margin: 40px 0;
+}
