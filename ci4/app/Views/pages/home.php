@@ -11,6 +11,9 @@
         <li>
             <a href="<?= site_url('homeowner/dashboard') ?>">Homeowner Dashboard</a>
         </li>
+        <li>
+            <a href="<?= site_url('contractor/dashboard') ?>">Contractor Dashboard</a>
+        </li>
     </ul>
 
 <?= $this->endSection() ?>
