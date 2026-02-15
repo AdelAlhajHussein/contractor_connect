@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('css/admin-index.css') ?>">
-<link rel="stylesheet" href="<?= base_url('css/admin-users.css') ?>">
+
 
 <div class="users-container">
 
