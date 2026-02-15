@@ -12,43 +12,12 @@
         <?= $title ?? 'Dashboard' ?>
     </div>
 
-    <!-- Search Form -->
-    <form id="ajax-filter-form" method="get" action="<?= site_url('admin/users') ?>" class="filter-form">
-
-        <input
-                type="text"
-                name="q"
-                placeholder="Search username, name, or email..."
-                value="<?= esc($_GET['q'] ?? '') ?>"
-        >
-
-        <select name="role_id">
-            <option value="">All Roles</option>
-            <option value="1" <?= (($_GET['role_id'] ?? '') === '1') ? 'selected' : '' ?>>Admin</option>
-            <option value="2" <?= (($_GET['role_id'] ?? '') === '2') ? 'selected' : '' ?>>Homeowner</option>
-            <option value="3" <?= (($_GET['role_id'] ?? '') === '3') ? 'selected' : '' ?>>Contractor</option>
-        </select>
-
-        <select name="status">
-            <option value="">All Status</option>
-            <option value="1" <?= (($_GET['status'] ?? '') === '1') ? 'selected' : '' ?>>Active</option>
-            <option value="0" <?= (($_GET['status'] ?? '') === '0') ? 'selected' : '' ?>>Inactive</option>
-        </select>
-
-        <button type="submit">Filter</button>
-
-        <a href="<?= site_url('admin/users') ?>" class="reset-link">Reset</a>
-
-    </form>
-    <div class="table-categories">
-
-    </div>
-
+<!-- Data View Categories -->
     <div class="dashboard-grid">
         <!-- Default to user data on load -->
         <div class="dashboard-item">
             <img src="<?= base_url('img/categories.png') ?>" alt="Categories logo">
-            <a href="<?= site_url('admin/categories') ?>">Categories</a>
+            <!--a href="<?= site_url('admin/categories') ?>">Categories</a-->
             <a href="#" class="ajax-link" data-target="categories">Categories</a>
         </div>
 
@@ -89,6 +58,35 @@
             <a href="<?= site_url('admin/ratings') ?>">Ratings & Reviews</a>
         </div>
     </div>
+
+    <!-- Search Form -->
+    <form id="ajax-filter-form" method="get" action="<?= site_url('admin/users') ?>" class="filter-form">
+
+        <input
+                type="text"
+                name="q"
+                placeholder="Search username, name, or email..."
+                value="<?= esc($_GET['q'] ?? '') ?>"
+        >
+
+        <select name="role_id">
+            <option value="">All Roles</option>
+            <option value="1" <?= (($_GET['role_id'] ?? '') === '1') ? 'selected' : '' ?>>Admin</option>
+            <option value="2" <?= (($_GET['role_id'] ?? '') === '2') ? 'selected' : '' ?>>Homeowner</option>
+            <option value="3" <?= (($_GET['role_id'] ?? '') === '3') ? 'selected' : '' ?>>Contractor</option>
+        </select>
+
+        <select name="status">
+            <option value="">All Status</option>
+            <option value="1" <?= (($_GET['status'] ?? '') === '1') ? 'selected' : '' ?>>Active</option>
+            <option value="0" <?= (($_GET['status'] ?? '') === '0') ? 'selected' : '' ?>>Inactive</option>
+        </select>
+
+        <button type="submit">Filter</button>
+
+        <a href="<?= site_url('admin/users') ?>" class="reset-link">Reset</a>
+
+    </form>
 
     <!-- Table gets loaded in here -->
     <div id="table-content">
