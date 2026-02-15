@@ -5,22 +5,27 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<h1>Homeowner Dashboard</h1>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-title">
+        Homeowner Dashboard
+    </div>
 
 
-<ul>
-    <li><a href="<?= site_url('homeowner/projects/create') ?>"><strong>+ Post a New Project</strong></a></li>
+    <ul>
+        <li><a href="<?= site_url('homeowner/projects/create') ?>"><strong>+ Post a New Project</strong></a></li>
 
-    <li><a href="<?= site_url('homeowner/projects') ?>">My Projects (Track Progress)</a></li>
-    <li><a href="<?= site_url('homeowner/bids') ?>">View Bids Received</a></li>
+        <li><a href="<?= site_url('homeowner/projects') ?>">My Projects (Track Progress)</a></li>
+        <li><a href="<?= site_url('homeowner/bids') ?>">View Bids Received</a></li>
 
-    <li><a href="<?= site_url('homeowner/search-contractors') ?>">Browse Contractors</a></li>
+        <li><a href="<?= site_url('homeowner/search-contractors') ?>">Browse Contractors</a></li>
 
-    <li><a href="<?= site_url('homeowner/payments') ?>">Payment History</a></li>
-    <li><a href="<?= site_url('homeowner/reviews') ?>">My Reviews</a></li>
+        <li><a href="<?= site_url('homeowner/payments') ?>">Payment History</a></li>
+        <li><a href="<?= site_url('homeowner/reviews') ?>">My Reviews</a></li>
 
-    <li><a href="<?= site_url('homeowner/profile') ?>">Account Settings</a></li>
-</ul>
-
+        <li><a href="<?= site_url('homeowner/profile') ?>">Account Settings</a></li>
+    </ul>
+</div>
 
 <?= $this->endSection() ?>
