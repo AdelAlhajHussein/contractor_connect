@@ -78,6 +78,50 @@ class DashboardController extends BaseController
                 }
                 break;
 
+            // Homeowners
+            case 'homeowners':
+                $userModel = new \App\Models\UserModel();
+
+                // Join with profiles to get city, province, and phone info
+                $userModel->select('users.*, home_owner_profiles.city, home_owner_profiles.province, users.phone')
+                    ->join('home_owner_profiles', 'home_owner_profiles.home_owner_id = users.id', 'left')
+                    ->where('role_id', 2);
+
+                // Apply AJAX filters
+                $q = $this->request->getGet('q');
+                $status = $this->request->getGet('status');
+
+                if ($q) {
+                    $userModel->groupStart()
+                        ->like('username', $q)
+                        ->orLike('first_name', $q)
+                        ->orLike('last_name', $q)
+                        ->orLike('email', $q)
+                        ->orLike('city', $q)
+                        ->groupEnd();
+                }
+
+                if ($status !== '' && $status !== null) {
+                    $userModel->where('is_active', $status);
+                }
+
+                $homeowners = $userModel->findAll();
+
+                $data['type'] = 'homeowners';
+                $data['headers'] = ['ID', 'Username', 'Name', 'Email', 'City', 'Status', 'Actions'];
+                foreach ($homeowners as $homeowner) {
+                    $data['rows'][] = [
+                        'id'         => $homeowner['id'],
+                        'username'   => esc($homeowner['username']),
+                        'name'       => esc(trim($homeowner['first_name'] . ' ' . $homeowner['last_name'])),
+                        'email'      => esc($homeowner['email']),
+                        'city'       => esc($homeowner['city'] ?? 'N/A'),
+                        'is_active'  => $homeowner['is_active'],
+                        'created_at' => $homeowner['created_at'],
+                    ];
+                }
+                break;
+
             // Contractors
             case 'contractors':
 
@@ -97,14 +141,14 @@ class DashboardController extends BaseController
                     $userModel->where('is_active', $status);
                 }
 
-                $results = $userModel->findAll();
+                $homeowners = $userModel->findAll();
 
                 $data['type'] = 'contractors';
                 $data['headers'] = ['ID', 'Username', 'Email', 'Status', 'Actions'];
                 $data['rows'] = [];
 
 
-                foreach ($results as $result) {
+                foreach ($homeowners as $result) {
                     $data['rows'][] = [
                         'id'        => $result['id'],
                         'username'  => esc($result['username']),
@@ -137,6 +181,46 @@ class DashboardController extends BaseController
                     ['cat' => 'Bids', 'metric' => 'Total Volume ($)', 'val' => '$' . number_format($bidModel->selectSum('total_cost')->get()->getRow()->total_cost, 2), 'stat' => 'Revenue']
                 ];
                 break;
+
+            // Projects
+            case 'projects':
+                $projectModel = new \App\Models\ProjectModel();
+
+                // Join with Homeowner and Categories
+                $projectModel->select('projects.*, users.first_name, users.last_name, categories.name as category_name')
+                    ->join('users', 'users.id = projects.home_owner_id', 'left')
+                    ->join('categories', 'categories.id = projects.category_id', 'left');
+
+                $q = $this->request->getGet('q');
+                $status = $this->request->getGet('status');
+
+                if ($q) {
+                    $projectModel->like('projects.title', $q);
+                }
+
+                if (!empty($status)) {
+                    $projectModel->where('projects.status', $status);
+                }
+
+                $projects = $projectModel->findAll();
+
+                $data['type'] = 'projects';
+                $data['headers'] = ['ID', 'Title', 'Homeowner', 'Status', 'Budget', 'Deadline', 'Actions'];
+                foreach ($projects as $project) {
+                    $data['rows'][] = [
+                        'id'        => $project['id'],
+                        'title'     => esc($project['title']),
+                        'homeowner' => esc(trim($project['first_name'] . ' ' . $project['last_name'])),
+                        'status'    => $project['status'],
+                        'budget'    => $project['budget_min'] . ' - ' . $project['budget_max'],
+                        'deadline'  => $project['deadline_date'],
+                        'actions'   => ''
+                    ];
+                }
+                break;
+
+
+
         }
 
         return view('components/dashboard-table', $data);

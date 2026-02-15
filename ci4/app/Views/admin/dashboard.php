@@ -25,30 +25,31 @@
             <img src="<?= base_url('img/user_logo.png') ?>" alt="user logo">
             <a href="#" class="ajax-link" data-target="users">Users</a>
         </div>
+
+        <div class="dashboard-item">
+            <img src="<?= base_url('img/homeowner.png') ?>" alt="homeowner logo">
+            <a href="#" class="ajax-link" data-target="homeowners">Homeowners</a>
+        </div>
         <div class="dashboard-item">
             <img src="<?= base_url('img/contractor.png') ?>" alt="contractors logo">
             <a href="#" class="ajax-link" data-target="contractors">Contractors</a>
         </div>
+
         <div class="dashboard-item">
             <img src="<?= base_url('img/report.png') ?>" alt="report logo">
             <a href="#" class="ajax-link" data-target="reports">Admin Reports</a>
         </div>
-
 
         <div class="dashboard-item">
             <img src="<?= base_url('img/payment.png') ?>" alt="payment logo">
             <a href="<?= site_url('admin/payments') ?>">Payments & Subscriptions</a>
         </div>
 
-
-        <div class="dashboard-item">
-            <img src="<?= base_url('img/homeowner.png') ?>" alt="homeowner logo">
-            <a href="<?= site_url('admin/homeowners') ?>">Homeowners</a>
-        </div>
         <div class="dashboard-item">
             <img src="<?= base_url('img/project.png') ?>" alt="Project logo">
-            <a href="<?= site_url('admin/projects') ?>">Projects</a>
+            <a href="#" class="ajax-link" data-target="projects">Projects</a>
         </div>
+
         <div class="dashboard-item">
             <img src="<?= base_url('img/bid.png') ?>" alt="bid logo">
             <a href="<?= site_url('admin/bids') ?>">Bids</a>
