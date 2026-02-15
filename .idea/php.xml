@@ -10,12 +10,81 @@
     <option name="highlightLevel" value="WARNING" />
     <option name="transferred" value="true" />
   </component>
+  <component name="PhpCSFixer">
+    <phpcsfixer_settings>
+      <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/ci4/vendor/bin/php-cs-fixer" />
+    </phpcsfixer_settings>
+  </component>
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/ci4/vendor/composer" />
       <path value="$PROJECT_DIR$/ci4/vendor/psr/log" />
       <path value="$PROJECT_DIR$/ci4/vendor/laminas/laminas-escaper" />
       <path value="$PROJECT_DIR$/ci4/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/polyfill-php84" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/ci4/vendor/friendsofphp/php-cs-fixer" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/ci4/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/ci4/vendor/nexusphp/cs-config" />
+      <path value="$PROJECT_DIR$/ci4/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/ci4/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/ci4/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/ci4/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/ci4/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/ci4/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/ci4/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/ci4/vendor/react/child-process" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/ci4/vendor/mikey179/vfsstream" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/ci4/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/ci4/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/ci4/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/ci4/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/ci4/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/ci4/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/ci4/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/ci4/vendor/codeigniter/coding-standard" />
+      <path value="$PROJECT_DIR$/ci4/vendor/kint-php/kint" />
+      <path value="$PROJECT_DIR$/ci4/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/ci4/vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/ci4/vendor/clue/ndjson-react" />
+      <path value="$PROJECT_DIR$/ci4/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/ci4/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/ci4/vendor/symfony/options-resolver" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

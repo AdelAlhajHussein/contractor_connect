@@ -1,7 +1,5 @@
 <?php
 
-echo __DIR__ . '/../ci4/app/Config/Paths.php';
-exit;
 use CodeIgniter\Boot;
 use Config\Paths;
 
