@@ -91,7 +91,7 @@ class AuthController extends BaseController
         ]);
 
         if ((int) $user['role_id'] === 1) {
-            return redirect()->to('/admin/users');
+            return redirect()->to('/admin/dashboard');
         }
 
         if ((int) $user['role_id'] === 2) {

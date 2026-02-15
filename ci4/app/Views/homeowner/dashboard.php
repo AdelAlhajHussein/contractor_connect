@@ -38,10 +38,7 @@
 
         <li><a href="<?= site_url('homeowner/profile') ?>">Account Settings</a></li>
     </ul>
-
 </div>
-
-<?= $this->endSection() ?>
 
 <script>
     // Ajax link to generate content
@@ -57,5 +54,6 @@
                 });
         });
     });
-
 </script>
+
+<?= $this->endSection() ?>
