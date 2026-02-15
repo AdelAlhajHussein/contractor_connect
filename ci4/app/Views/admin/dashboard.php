@@ -52,7 +52,7 @@
 
         <div class="dashboard-item">
             <img src="<?= base_url('img/bid.png') ?>" alt="bid logo">
-            <a href="<?= site_url('admin/bids') ?>">Bids</a>
+            <a href="#" class="ajax-link" data-target="bids">Bids</a>
         </div>
         <div class="dashboard-item">
             <img src="<?= base_url('img/rate.png') ?>" alt="Ratings & Reviews logo">

@@ -219,6 +219,45 @@ class DashboardController extends BaseController
                 }
                 break;
 
+            // Bids
+            case 'bids':
+                $bidModel = new \App\Models\BidModel();
+
+                // Join Projects and Users tables
+                $bidModel->select('bids.*, projects.title as project_title, users.email as contractor_email')
+                    ->join('projects', 'projects.id = bids.project_id', 'left')
+                    ->join('users', 'users.id = bids.contractor_id', 'left');
+
+                $q = $this->request->getGet('q');
+                $status = $this->request->getGet('status');
+
+                if ($q) {
+                    $bidModel->groupStart()
+                        ->like('projects.title', $q)
+                        ->orLike('users.email', $q)
+                        ->groupEnd();
+                }
+
+                if (!empty($status)) {
+                    $bidModel->where('bids.status', $status);
+                }
+
+                $results = $bidModel->findAll();
+
+                $data['type'] = 'bids';
+                $data['headers'] = ['ID', 'Project', 'Contractor', 'Status', 'Bid Amount', 'Total Cost', 'Actions'];
+                foreach ($results as $b) {
+                    $data['rows'][] = [
+                        'id'               => $b['id'],
+                        'project_title'    => esc($b['project_title'] ?? 'N/A'),
+                        'contractor_email' => esc($b['contractor_email'] ?? 'N/A'),
+                        'status'           => $b['status'],
+                        'bid_amount'       => $b['bid_amount'],
+                        'total_cost'       => $b['total_cost'],
+                    ];
+                }
+                break;
+
 
 
         }

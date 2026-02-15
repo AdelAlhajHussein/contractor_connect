@@ -108,6 +108,7 @@
                                 </a>
                             </td>
 
+                        <!-- Projects -->
                         <?php elseif ($type === 'projects'): ?>
                             <td><?= $row['id'] ?></td>
                             <td><?= $row['title'] ?></td>
@@ -134,6 +135,29 @@
                                 <?php endif; ?>
                             </div>
                         </td>
+
+                        <!-- Bids -->
+                        <?php elseif ($type === 'bids'): ?>
+                            <td><?= $row['id'] ?></td>
+                            <td><?= $row['project_title'] ?></td>
+                            <td><?= $row['contractor_email'] ?></td>
+                            <td>
+                                <span class="status-pill status-<?= $row['status'] ?>">
+                                    <?= esc(ucfirst($row['status'])) ?>
+                                </span>
+                            </td>
+                            <td>$<?= number_format($row['bid_amount'], 2) ?></td>
+                            <td>$<?= number_format($row['total_cost'], 2) ?></td>
+                            <td>
+                                <a class="action-link" href="<?= site_url('admin/bids/view/' . $row['id']) ?>">View</a>
+                                <?php if (!in_array($row['status'], ['accepted', 'rejected', 'withdrawn'])): ?>
+                                    | <a class="action-link" href="<?= site_url('admin/bids/withdraw/' . $row['id']) ?>"
+                                         onclick="return confirm('Withdraw this bid?')">Withdraw</a>
+                                <?php endif; ?>
+                            </td>
+
+
+
 
 
 
