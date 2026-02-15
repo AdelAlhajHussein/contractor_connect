@@ -19,19 +19,19 @@
             <a href="#" class="ajax-link" data-target="users">Users</a>
         </div>
         <div class="dashboard-item">
-            <img src="<?= base_url('img/contractor.png') ?>" alt="Contractors logo">
-            <a href="<?= site_url('admin/contractors') ?>">Contractors</a>
+            <img src="<?= base_url('img/contractor.png') ?>" alt="contractors logo">
+            <a href="#" class="ajax-link" data-target="contractors">Contractors</a>
         </div>
         <div class="dashboard-item">
-            <img src="<?= base_url('img/report.png') ?>" alt="">
-            <a href="<?= site_url('admin/reports') ?>">Admin Reports</a>
+            <img src="<?= base_url('img/report.png') ?>" alt="report logo">
+            <a href="#" class="ajax-link" data-target="reports">Admin Reports</a>
         </div>
 
     </div>
     <div id="table-content">
         <p>Select a view</p>
     </div>
-
+<!--
     <div class="dashboard-item">
         <img src="<?= base_url('img/contractor.png') ?>" alt="Contractors logo">
         <a href="/index.php/admin/contractors">Contractors</a>
@@ -64,7 +64,7 @@
         <img src="<?= base_url('img/report.png') ?>" alt="">
         <a href="<?= site_url('admin/reports') ?>">Admin Reports</a>
     </div>
-
+-->
 </div>
 
 <script>

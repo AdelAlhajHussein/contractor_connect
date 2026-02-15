@@ -21,10 +21,12 @@ class DashboardController extends BaseController
     {
         $data = [
             'headers' => [],
-            'rows'    => []
+            'rows' => []
         ];
 
         switch ($type) {
+
+            // Users Tables
             case 'users':
                 $model = new \App\Models\UserModel();
                 $users = $model->findAll();
@@ -41,10 +43,36 @@ class DashboardController extends BaseController
                 }
                 break;
 
-                //TODO: more cases
+            // Contractor Tables
+            case 'contractors':
+
+                $userModel = new \App\Models\UserModel();
+
+                $contractors = $userModel->where('role_id', 3)->findAll();
+
+                $data['headers'] = ['ID', 'Username', 'Email', 'Status'];
+                foreach ($contractors as $contractor) {
+                    $data['rows'][] = [
+                        $contractor['id'],
+                        esc($contractor['username']),
+                        esc($contractor['email']),
+                        ($contractor['is_active'] == 1) ? 'Active' : 'Inactive'
+                    ];
+                }
+                break;
+
+            // Admin Reports
+            case 'reports':
+                // Summary info
+                $userModel = new \App\Models\UserModel();
+                $data['headers'] = ['Report Metric', 'Value'];
+                $data['rows'] = [
+                    ['Total Users', $userModel->countAll()],
+                    ['Active Users', $userModel->where('is_active', 1)->countAll()],
+                ];
+                break;
         }
-        // This returns ONLY the table HTML from your component
+
         return view('components/dashboard-table', $data);
     }
-
 }
