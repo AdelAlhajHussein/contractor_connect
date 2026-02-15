@@ -26,6 +26,9 @@ This project uses PHPUnit for quality assurance testing.
     Navigate to ci4 directory and run
     bash
     "php spark serve --port 8000"
+    
+    Cpanel requires css in /public_html/css, but ci4 expects it in /ci4/public/css
+    "php spark serve --public ../public_html --port 8000"
 
     Then open in browser
     "http://localhost:8000"
