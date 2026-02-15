@@ -82,3 +82,6 @@ $routes->get('admin/reports', 'Admin\ReportsController::index', ['filter' => 'au
 
 $routes->get('homeowner/dashboard', 'Homeowner\Dashboard::index');
 $routes->get('contractor/dashboard', 'Contractor\Dashboard::index');
+$routes->get('admin/dashboard', 'Admin\DashboardController::index');
+
+$routes->get('admin/dashboard/get_table/(:any)', 'Admin\DashboardController::get_table/$1');
