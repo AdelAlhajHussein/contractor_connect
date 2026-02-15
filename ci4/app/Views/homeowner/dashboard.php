@@ -26,6 +26,17 @@
 
         <li><a href="<?= site_url('homeowner/profile') ?>">Account Settings</a></li>
     </ul>
+
+    <!-- Dashboard data table -->
+    <?= $this->section('content') ?>
+    <h2>My Projects</h2>
+
+    <?= view('components/data_table', [
+        'headers' => ['Project Name', 'Date Posted', 'Status', 'Actions'],
+        'rows'    => $project_rows
+    ]) ?>
+
+
 </div>
 
 <?= $this->endSection() ?>

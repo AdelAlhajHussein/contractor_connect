@@ -10,4 +10,6 @@ class Dashboard extends BaseController
     {
         return view('homeowner/dashboard');
     }
+
+
 }
