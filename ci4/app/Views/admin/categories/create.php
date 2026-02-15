@@ -1,16 +1,34 @@
-<h1>Add Category</h1>
+<link rel="stylesheet" href="<?= base_url('css/admin-form.css') ?>">
 
-<p>
-    <a href="<?= site_url('admin/categories') ?>">← Back to Categories</a>
-</p>
+<div class="form-container">
 
-<form method="post" action="<?= site_url('admin/categories/store') ?>">
-    <?= csrf_field() ?>
+    <h1 class="form-title">Add Category</h1>
 
-    <p>
-        <label>Name</label><br>
-        <input type="text" name="name" required>
-    </p>
+    <a class="form-back"
+       href="<?= site_url('admin/categories') ?>">
+        ← Back to Categories
+    </a>
 
-    <button type="submit">Create</button>
-</form>
+    <form method="post"
+          action="<?= site_url('admin/categories/store') ?>">
+
+        <?= csrf_field() ?>
+
+        <div class="form-group">
+
+            <label>Name</label>
+
+            <input type="text"
+                   name="name"
+                   required>
+
+        </div>
+
+        <button class="form-btn"
+                type="submit">
+            Create
+        </button>
+
+    </form>
+
+</div>

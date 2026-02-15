@@ -1,51 +1,120 @@
-<h1>Suspicious Rating Activity</h1>
+<link rel="stylesheet" href="<?= base_url('css/admin-reports.css') ?>">
 
-<p>
-    <a href="<?= site_url('admin/ratings') ?>">← Back to Ratings</a>
-</p>
+<div class="reports-container">
 
-<h2>Same Homeowner Rated Same Contractor Multiple Times</h2>
-<table border="1" cellpadding="8" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>Contractor</th>
-        <th>Homeowner</th>
-        <th>Count</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php if (empty($repeatPairs)): ?>
-        <tr><td colspan="3">No suspicious repeat pairs found.</td></tr>
-    <?php else: ?>
-        <?php foreach ($repeatPairs as $row): ?>
+    <h1 class="reports-title">Suspicious Rating Activity</h1>
+
+    <p>
+        <a class="action-link"
+           href="<?= site_url('admin/ratings') ?>">
+            ← Back to Ratings
+        </a>
+    </p>
+
+
+    <h2 class="report-section-title">
+        Same Homeowner Rated Same Contractor Multiple Times
+    </h2>
+
+    <table class="report-table" style="width:100%;">
+
+        <thead>
+
+        <tr>
+            <th>Contractor</th>
+            <th>Homeowner</th>
+            <th>Count</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <?php if (empty($repeatPairs)): ?>
+
             <tr>
-                <td><?= esc($row['contractor_email'] ?? $row['contractor_id']) ?></td>
-                <td><?= esc($row['homeowner_email'] ?? $row['home_owner_id']) ?></td>
-                <td><?= esc($row['rating_count']) ?></td>
+                <td colspan="3">
+                    No suspicious repeat pairs found.
+                </td>
             </tr>
-        <?php endforeach; ?>
-    <?php endif; ?>
-    </tbody>
-</table>
 
-<h2>Contractors With Rating Burst (Last 7 Days)</h2>
-<table border="1" cellpadding="8" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>Contractor</th>
-        <th>Ratings in last 7 days</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php if (empty($recentBurst)): ?>
-        <tr><td colspan="2">No bursts found.</td></tr>
-    <?php else: ?>
-        <?php foreach ($recentBurst as $row): ?>
+        <?php else: ?>
+
+            <?php foreach ($repeatPairs as $row): ?>
+
+                <tr>
+
+                    <td>
+                        <?= esc($row['contractor_email'] ?? $row['contractor_id']) ?>
+                    </td>
+
+                    <td>
+                        <?= esc($row['homeowner_email'] ?? $row['home_owner_id']) ?>
+                    </td>
+
+                    <td>
+                        <?= esc($row['rating_count']) ?>
+                    </td>
+
+                </tr>
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
+
+        </tbody>
+
+    </table>
+
+
+
+    <h2 class="report-section-title">
+        Contractors With Rating Burst (Last 7 Days)
+    </h2>
+
+    <table class="report-table" style="width:100%;">
+
+        <thead>
+
+        <tr>
+            <th>Contractor</th>
+            <th>Ratings in last 7 days</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <?php if (empty($recentBurst)): ?>
+
             <tr>
-                <td><?= esc($row['contractor_email'] ?? $row['contractor_id']) ?></td>
-                <td><?= esc($row['last_7_days']) ?></td>
+                <td colspan="2">
+                    No bursts found.
+                </td>
             </tr>
-        <?php endforeach; ?>
-    <?php endif; ?>
-    </tbody>
-</table>
+
+        <?php else: ?>
+
+            <?php foreach ($recentBurst as $row): ?>
+
+                <tr>
+
+                    <td>
+                        <?= esc($row['contractor_email'] ?? $row['contractor_id']) ?>
+                    </td>
+
+                    <td>
+                        <?= esc($row['last_7_days']) ?>
+                    </td>
+
+                </tr>
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
+
+        </tbody>
+
+    </table>
+
+</div>
