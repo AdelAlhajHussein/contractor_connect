@@ -1,4 +1,10 @@
-<link rel="stylesheet" href="<?= base_url('css/admin-index.css') ?>">
+<?= $this->extend('layouts/dashboard') ?>
+
+<?= $this->section('page_css') ?>
+    <link rel="stylesheet" href="<?= base_url('css/admin-index.css') ?>">
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
 
 <div class="users-container">
 
@@ -48,11 +54,9 @@
             <th>Actions</th>
             <th>Change Role</th>
         </tr>
-        </thead>
+    </thead>
 
-        <tbody>
-
-        <?php foreach ($users as $u): ?>
+    <tbody>
 
 <h1>Users</h1>
 
@@ -177,14 +181,11 @@
                         <button type="submit" onclick="return confirm('Change this user role?')">Update</button>
                     </form>
                 </td>
-
-
             </tr>
-
-        <?php endforeach; ?>
-
+            <?php endforeach; ?>
+        <?php endif; ?>
         </tbody>
-
     </table>
-
 </div>
+
+<?= $this->endSection() ?>
