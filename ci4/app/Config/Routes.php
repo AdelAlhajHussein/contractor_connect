@@ -85,3 +85,4 @@ $routes->get('contractor/dashboard', 'Contractor\Dashboard::index');
 $routes->get('admin/dashboard', 'Admin\DashboardController::index');
 
 $routes->get('admin/dashboard/get_table/(:any)', 'Admin\DashboardController::get_table/$1');
+$routes->get('admin/reports/get_report/(:any)', 'Admin\ReportsController::get_report/$1');

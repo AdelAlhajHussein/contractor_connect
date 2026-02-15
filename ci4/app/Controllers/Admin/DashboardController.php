@@ -19,31 +19,36 @@ class DashboardController extends BaseController
     // Get table data for X user type
     public function get_table($type)
     {
+
         $data = [
             'headers' => [],
-            'rows' => []
+            'rows' => [],
+            'type' => $type,
         ];
 
         switch ($type) {
 
-            // Users Tables
+            // All users
             case 'users':
                 $model = new \App\Models\UserModel();
                 $users = $model->findAll();
 
-                $data['headers'] = ['ID', 'Username', 'Email', 'Role ID', 'Status'];
+                $data['headers'] = ['ID', 'Username', 'Name', 'Email', 'Role', 'Status', 'Created', 'Actions'];
                 foreach ($users as $user) {
                     $data['rows'][] = [
-                        $user['id'],
-                        esc($user['username']),
-                        esc($user['email']),
-                        $user['role_id'],
-                        $user['is_active'] ? 'Active' : 'Inactive'
+                        'id'         => $user['id'],
+                        'username'   => esc($user['username']),
+                        'name'       => $user['first_name'] . ' ' . $user['last_name'],
+                        'email'      => esc($user['email']),
+                        'role_id'    => $user['role_id'],
+                        'is_active'  => $user['is_active'],
+                        'created_at' => $user['created_at'],
+                        'actions'    => []
                     ];
                 }
                 break;
 
-            // Contractor Tables
+            // Contractors
             case 'contractors':
 
                 $userModel = new \App\Models\UserModel();
@@ -51,13 +56,18 @@ class DashboardController extends BaseController
                 $contractors = $userModel->where('role_id', 3)->findAll();
 
                 $data['headers'] = ['ID', 'Username', 'Email', 'Status'];
-                foreach ($contractors as $contractor) {
-                    $data['rows'][] = [
-                        $contractor['id'],
-                        esc($contractor['username']),
-                        esc($contractor['email']),
-                        ($contractor['is_active'] == 1) ? 'Active' : 'Inactive'
-                    ];
+
+                if (!empty($contractors)) {
+                    foreach ($contractors as $c) {
+                        $data['rows'][] = [
+                            'id'        => $c['id'],
+                            'username'  => esc($c['username']),
+                            'email'     => esc($c['email']),
+                            'status'    => ($c['is_active'] == 1) ? 'Active' : 'Inactive'
+                        ];
+                    }
+                } else {
+                    $data['rows'] = [];
                 }
                 break;
 
@@ -71,8 +81,41 @@ class DashboardController extends BaseController
                     ['Active Users', $userModel->where('is_active', 1)->countAll()],
                 ];
                 break;
+
+            // Task categories
+            case 'categories':
+                $categoryModel = new \App\Models\CategoryModel();
+
+                // Use Ajax filters if search used
+                $search = $this->request->getGet('q');
+                $visibility = $this->request->getGet('visibility');
+
+                if ($search) {
+                    $categoryModel->like('name', $search);
+                }
+
+                // Filter out inactive
+                if ($visibility !== '' && $visibility !== null) {
+                    $categoryModel->where('is_visible', $visibility);
+                }
+
+                $categories = $categoryModel->findAll();
+
+                // Prepare data
+                $data['type'] = 'categories';
+                $data['headers'] = ['ID', 'Name', 'Visible', 'Actions'];
+                foreach ($categories as $c) {
+                    $data['rows'][] = [
+                        'id'         => $c['id'],
+                        'name'       => esc($c['name']),
+                        'is_visible' => $c['is_visible'],
+                    ];
+                }
+                break;
         }
 
         return view('components/dashboard-table', $data);
     }
+
+
 }
