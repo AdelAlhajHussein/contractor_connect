@@ -1,49 +1,99 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h1>Create an account</h1>
+<link rel="stylesheet" href="<?= base_url('css/auth.css') ?>">
 
-<section class='registration-section'>
-    <h2 class="sub-title">Create a new account</h2>
+<div class="auth-container">
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <p style="color:red;"><?= esc(session()->getFlashdata('error')) ?></p>
-    <?php endif; ?>
+    <div class="auth-card">
 
-    <form method="post" action="<?= site_url('register') ?>">
-        <?= csrf_field() ?>
+        <!-- Left side form -->
+        <div class="auth-form">
 
-        <div>
-            <label>Username</label><br>
-            <input type="text" name="username"  value="<?= old('username') ?>" required>
+            <h1 class="auth-title">Create an account</h1>
+
+            <section class="registration-section">
+
+                <?php if (session()->getFlashdata('error')): ?>
+                    <div class="auth-error">
+                        <?= esc(session()->getFlashdata('error')) ?>
+                    </div>
+                <?php endif; ?>
+
+                <form method="post" action="<?= site_url('register') ?>">
+
+                    <?= csrf_field() ?>
+
+                    <div class="auth-group">
+                        <label>Username</label>
+                        <input type="text"
+                               name="username"
+                               value="<?= old('username') ?>"
+                               required>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Password</label>
+                        <input type="password"
+                               name="password"
+                               required>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Confirm Password</label>
+                        <input type="password"
+                               name="confirm_password"
+                               required>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>I am a:</label>
+
+                        <select name="role_id"
+                                required
+                                class="auth-group input">
+
+                            <option value="">-- Select Role --</option>
+
+                            <option value="2"
+                                <?= old('role_id') == '2' ? 'selected' : '' ?>>
+                                Homeowner
+                            </option>
+
+                            <option value="3"
+                                <?= old('role_id') == '3' ? 'selected' : '' ?>>
+                                Contractor
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button class="auth-btn" type="submit">
+                        Create Account
+                    </button>
+
+                </form>
+
+                <div class="auth-footer">
+                    Already have an account?
+                    <a href="<?= site_url('login') ?>">Login here</a>
+                </div>
+
+            </section>
+
         </div>
 
-        <div>
-            <label>Password</label><br>
-            <input type="password" name="password" required>
+
+        <!-- Right side image -->
+        <div class="auth-image">
+
+            <img src="<?= base_url('img/auth-image.png') ?>" alt="Register Image">
+
         </div>
 
-        <div>
-            <label>Confirm Password</label><br>
-            <input type="password" name="confirm_password" required>
-        </div>
+    </div>
 
-        <div>
-            <label>I am a:</label><br>
-            <select name="role_id" required>
-                <option value="">-- Select Role --</option>
-                <option value="2" <?= old('role_id') == '2' ? 'selected' : '' ?>>Homeowner</option>
-                <option value="3" <?= old('role_id') == '3' ? 'selected' : '' ?>>Contractor</option>
-            </select>
-        </div>
-        <div>
-            <button type="submit">Create Account</button>
-        </div>
-    </form>
+</div>
 
-    <p>
-        Already have an account? <a href="<?= site_url('login') ?>">Login here</a>
-    </p>
-
-</section>
 <?= $this->endSection() ?>

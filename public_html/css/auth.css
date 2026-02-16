@@ -1,0 +1,113 @@
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f7fb;
+}
+
+.auth-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:80vh;
+}
+
+
+.auth-card{
+    display:flex;
+    width:900px;
+    background:white;
+    border-radius:12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    overflow:hidden;
+}
+
+
+/* Left form side */
+.auth-form{
+    width:50%;
+    padding:40px;
+}
+
+
+.auth-title{
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+
+.auth-error{
+    color:red;
+    margin-bottom:10px;
+}
+
+
+/* Form groups */
+.auth-group{
+    margin-bottom:15px;
+}
+
+
+.auth-group label{
+    font-weight:bold;
+}
+
+
+.auth-group input{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    margin-top:5px;
+}
+
+
+/* Button */
+.auth-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#6a5acd;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+
+.auth-btn:hover{
+    background:#5a4abd;
+}
+
+
+
+.auth-image{
+    width:50%;
+    background:#eef2f7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.auth-image img{
+    width:80%;
+    max-width:300px;
+}
+/* Auth footer link */
+.auth-footer{
+    margin-top:15px;
+    text-align:center;
+    font-size:14px;
+}
+
+
+.auth-footer a{
+    color:#6a5acd;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+
+.auth-footer a:hover{
+    text-decoration:underline;
+}
