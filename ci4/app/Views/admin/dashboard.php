@@ -60,7 +60,6 @@
 
     <!-- Search Form -->
     <form id="ajax-filter-form" method="get" action="<?= site_url('admin/users') ?>" class="filter-form">
-
         <input
                 type="text"
                 name="q"
@@ -68,6 +67,7 @@
                 value="<?= esc($_GET['q'] ?? '') ?>"
         >
 
+        <?php /*
         <select name="role_id">
             <option value="">All Roles</option>
             <option value="1" <?= (($_GET['role_id'] ?? '') === '1') ? 'selected' : '' ?>>Admin</option>
@@ -80,25 +80,23 @@
             <option value="1" <?= (($_GET['status'] ?? '') === '1') ? 'selected' : '' ?>>Active</option>
             <option value="0" <?= (($_GET['status'] ?? '') === '0') ? 'selected' : '' ?>>Inactive</option>
         </select>
+        */?>
 
         <button type="submit">Filter</button>
-
-        <a href="<?= site_url('admin/users') ?>" class="reset-link">Reset</a>
-
+        <a href="#" id="ajax-reset" class="reset-link">Reset</a>
     </form>
 
-    <!-- Table gets loaded in here -->
     <div id="table-content">
-        <p>Select a view</p>
+        <p>Loading initial data...</p>
     </div>
 
 </div>
 
 <script>
+    let activeTab = 'users';
 
-    let currentTarget = 'users';
     function loadTable(target) {
-        currentTarget = target; // update global variable
+        activeTab = target;
 
         const resultDiv = document.getElementById('table-content');
         const form = document.getElementById('ajax-filter-form');
@@ -126,21 +124,36 @@
             });
     }
 
-    // Handle category/nav clicks
+    // Category navigation
     document.querySelectorAll('.ajax-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const target = this.getAttribute('data-target');
+
+            // Clear search when switching tabs (optional, but cleaner)
+            document.getElementById('ajax-filter-form').reset();
+
             loadTable(target);
         });
     });
 
-    // Handle filter form submit
     document.getElementById('ajax-filter-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        // Filter to the target use type
-        loadTable(currentTarget);
+
+        // Send to AJAX loader
+        loadTable(activeTab);
     });
+
+    // Reset search field
+    document.getElementById('ajax-reset').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('ajax-filter-form').reset();
+        loadTable(activeTab);
+    });
+
+    // Default to users on load
+    window.addEventListener('DOMContentLoaded', () => loadTable('users'));
+
 </script>
 <?= $this->endSection() ?>
 

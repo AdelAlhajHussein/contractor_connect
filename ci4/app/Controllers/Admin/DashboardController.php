@@ -61,9 +61,27 @@ class DashboardController extends BaseController
             // Users
             case 'users':
                 $model = new \App\Models\UserModel();
+
+
+                // Capture the 'q' parameter sent by AJAX
+                $q = $this->request->getGet('q');
+
+                // Apply search filters if 'q' is not empty
+                if (!empty($q)) {
+                    $model->groupStart()
+                        ->like('username', $q)
+                        ->orLike('email', $q)
+                        ->orLike('first_name', $q)
+                        ->orLike('last_name', $q)
+                        ->groupEnd();
+                }
+
+                // Run filter query
                 $users = $model->findAll();
 
                 $data['headers'] = ['ID', 'Username', 'Name', 'Email', 'Role', 'Status', 'Created', 'Actions'];
+                $data['rows'] = [];
+
                 foreach ($users as $user) {
                     $data['rows'][] = [
                         'id'         => $user['id'],
@@ -124,36 +142,41 @@ class DashboardController extends BaseController
 
             // Contractors
             case 'contractors':
-
                 $userModel = new \App\Models\UserModel();
-                $userModel->where('role_id', 3);
 
                 $q = $this->request->getGet('q');
-                if (!empty($q)) {
-                    $userModel->groupStart()
-                        ->like('username', $q)
-                        ->orLike('email', $q)
-                        ->groupEnd();
-                }
-
                 $status = $this->request->getGet('status');
+
+                // Filter contractors
+                $userModel->where('role_id', 3);
+
+                // Filter by status
                 if ($status !== '' && $status !== null) {
                     $userModel->where('is_active', $status);
                 }
 
-                $homeowners = $userModel->findAll();
+                if (!empty($q)) {
+                    $userModel->groupStart()
+                        ->like('username', $q)
+                        ->orLike('email', $q)
+                        ->orLike('first_name', $q)
+                        ->orLike('last_name', $q)
+                        ->groupEnd();
+                }
+
+                $contractors = $userModel->findAll();
 
                 $data['type'] = 'contractors';
                 $data['headers'] = ['ID', 'Username', 'Email', 'Status', 'Actions'];
                 $data['rows'] = [];
 
 
-                foreach ($homeowners as $result) {
+                foreach ($contractors as $contractor) {
                     $data['rows'][] = [
-                        'id'        => $result['id'],
-                        'username'  => esc($result['username']),
-                        'email'     => esc($result['email']),
-                        'is_active' => $result['is_active'],
+                        'id'        => $contractor['id'],
+                        'username'  => esc($contractor['username']),
+                        'email'     => esc($contractor['email']),
+                        'is_active' => $contractor['is_active'],
                     ];
                 }
                 break;
