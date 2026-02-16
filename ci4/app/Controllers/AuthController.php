@@ -7,15 +7,20 @@ use App\Models\UserModel;
 class AuthController extends BaseController
 {
 
+    public function registerForm()
+    {
+        return view('auth/register');
+    }
+
     // Create an account
     public function register()
     {
         // Input validation
         $rules = [
-            'username' => 'required|min_length[3]|is_unique[users.username]',
+            'username' => 'required|min_length[3]|max_length[30]|is_unique[users.username]',
             'password' => 'required|min_length[8]',
-            'confirm_password' => 'matches[password]',
-            'role_id'  => 'required|in_list[2,3]', // homeowners / contractors
+            'confirm_password' => 'required|matches[password]',
+            'role_id' => 'required|in_list[2,3]',
         ];
 
         // Check input validation
@@ -27,20 +32,25 @@ class AuthController extends BaseController
         try{
             $userModel = new UserModel();
 
+            // Map data
             $data = [
-                'username'      => $this->request->getPost('username'),
-                'password_hash' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'role_id'       => $this->request->getPost('role_id'),
-                'is_active'     => 1,
+                'username' => trim((string)$this->request->getPost('username')),
+                'password_hash' => password_hash((string)$this->request->getPost('password'), PASSWORD_DEFAULT),
+                'role_id' => (int)$this->request->getPost('role_id'),
+                'is_active' => 1,
+                'email'=> $this->request->getPost('username') . '@test.local',
+                'first_name' => 'New',
+                'last_name' => 'User',
+                'created_at' => date('Y-m-d H:i:s'),
             ];
 
             // Handle failed save / catch model level errors
             if (!$userModel->insert($data)) {
-                return redirect()->back()->withInput()->with('error', 'Database failed to save account.');
+                return redirect()->back()->withInput()->with('error', 'Save failed: ' . implode(', ', $userModel->errors()));
             }
             // Proceed to save
             return redirect()->to('/login')->with('success', 'Account created. Please login.');
-        }
+            }
         // Catch database failure
         catch(\Exception $e){
             log_message('error', 'Registration error: ' . $e->getMessage());
@@ -69,41 +79,36 @@ class AuthController extends BaseController
             ->where('deleted_at', null)
             ->first();
 
-        if (!$user) {
-            return redirect()->to('/login')->with('error', 'User not found.');
+        if (!$user || !password_verify($password, $user['password_hash'])) {
+            return redirect()->to('/login')->with('error', 'Invalid username or password.');
         }
 
         if ((int) $user['is_active'] !== 1) {
             return redirect()->to('/login')->with('error', 'Account is inactive.');
         }
 
-        if (!password_verify($password, $user['password_hash'])) {
-            return redirect()->to('/login')->with('error', 'Password incorrect.');
-        }
 
         session()->regenerate(true);
-
         session()->set([
-            'user_id'   => (int) $user['id'],
+            'user_id'   => (int)$user['id'],
             'username'  => $user['username'],
-            'role_id'   => (int) $user['role_id'],
+            'role_id'   => (int)$user['role_id'],
             'logged_in' => true
         ]);
 
-        if ((int) $user['role_id'] === 1) {
-            return redirect()->to('/admin/dashboard');
-        }
-
-        if ((int) $user['role_id'] === 2) {
-            return redirect()->to('/homeowner/dashboard');
-        }
-
-        if ((int) $user['role_id'] === 3) {
-            return redirect()->to('/contractor/dashboard');
-        }
-
-        return redirect()->to('/');
+        return $this->redirectByRole((int)$user['role_id']);
     }
+
+    private function redirectByRole(int $roleId)
+    {
+        switch ($roleId) {
+            case 1: return redirect()->to('/admin/dashboard');
+            case 2: return redirect()->to('/homeowner/dashboard');
+            case 3: return redirect()->to('/contractor/dashboard');
+            default: return redirect()->to('/');
+        }
+    }
+
 
     public function logout()
     {

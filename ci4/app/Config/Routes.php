@@ -87,3 +87,5 @@ $routes->get('admin/dashboard', 'Admin\DashboardController::index');
 $routes->get('admin/dashboard/get_table/(:any)', 'Admin\DashboardController::get_table/$1');
 $routes->get('admin/reports/get_report/(:any)', 'Admin\ReportsController::get_report/$1');
 $routes->get('get_table/(:segment)', 'DashboardController::get_table/$1');
+$routes->get('register', 'AuthController::registerForm');
+$routes->post('register', 'AuthController::register');

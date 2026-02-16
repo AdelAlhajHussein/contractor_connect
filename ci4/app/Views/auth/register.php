@@ -40,10 +40,11 @@
             <button type="submit">Create Account</button>
         </div>
     </form>
-
     <p>
         Already have an account? <a href="<?= site_url('login') ?>">Login here</a>
     </p>
+
+
 
 </section>
 <?= $this->endSection() ?>
