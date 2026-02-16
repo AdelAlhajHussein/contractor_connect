@@ -258,6 +258,43 @@ class DashboardController extends BaseController
                 }
                 break;
 
+            // Bids
+            case 'ratings':
+                $ratingModel = new \App\Models\ContractorRatingModel();
+
+                // Join Projects and Users tables
+                $ratingModel->select('contractor_ratings.*, projects.title as project_title, 
+                         ho.username as homeowner_name, co.username as contractor_name')
+                    ->join('projects', 'projects.id = contractor_ratings.project_id', 'left')
+                    ->join('users as ho', 'ho.id = contractor_ratings.home_owner_id', 'left')
+                    ->join('users as co', 'co.id = contractor_ratings.contractor_id', 'left');
+
+                $q = $this->request->getGet('q');
+                if ($q) {
+                    $ratingModel->groupStart()
+                        ->like('projects.title', $q)
+                        ->orLike('co.username', $q)
+                        ->groupEnd();
+                }
+
+                $results = $ratingModel->findAll();
+
+                $data['type'] = 'ratings';
+                $data['headers'] = ['ID', 'Project', 'Homeowner', 'Contractor', 'Avg Score', 'Created', 'Actions'];
+                foreach ($results as $r) {
+                    // Calculate average
+                    $avg = ($r['quality'] + $r['timeliness'] + $r['communication'] + $r['pricing']) / 4;
+
+                    $data['rows'][] = [
+                        'id'         => $r['id'],
+                        'project'    => esc($r['project_title'] ?? 'N/A'),
+                        'from'       => esc($r['homeowner_name']),
+                        'contractor' => esc($r['contractor_name']),
+                        'score'      => number_format($avg, 1) . ' / 5',
+                        'created_at' => $r['created_at'],
+                    ];
+                }
+                break;
 
 
         }

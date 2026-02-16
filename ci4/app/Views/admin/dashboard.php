@@ -20,12 +20,10 @@
             <!--a href="<?= site_url('admin/categories') ?>">Categories</a-->
             <a href="#" class="ajax-link" data-target="categories">Categories</a>
         </div>
-
         <div class="dashboard-item">
             <img src="<?= base_url('img/user_logo.png') ?>" alt="user logo">
             <a href="#" class="ajax-link" data-target="users">Users</a>
         </div>
-
         <div class="dashboard-item">
             <img src="<?= base_url('img/homeowner.png') ?>" alt="homeowner logo">
             <a href="#" class="ajax-link" data-target="homeowners">Homeowners</a>
@@ -34,29 +32,29 @@
             <img src="<?= base_url('img/contractor.png') ?>" alt="contractors logo">
             <a href="#" class="ajax-link" data-target="contractors">Contractors</a>
         </div>
-
         <div class="dashboard-item">
             <img src="<?= base_url('img/report.png') ?>" alt="report logo">
             <a href="#" class="ajax-link" data-target="reports">Admin Reports</a>
         </div>
-
-        <div class="dashboard-item">
-            <img src="<?= base_url('img/payment.png') ?>" alt="payment logo">
-            <a href="<?= site_url('admin/payments') ?>">Payments & Subscriptions</a>
-        </div>
-
         <div class="dashboard-item">
             <img src="<?= base_url('img/project.png') ?>" alt="Project logo">
             <a href="#" class="ajax-link" data-target="projects">Projects</a>
         </div>
-
         <div class="dashboard-item">
             <img src="<?= base_url('img/bid.png') ?>" alt="bid logo">
             <a href="#" class="ajax-link" data-target="bids">Bids</a>
         </div>
         <div class="dashboard-item">
             <img src="<?= base_url('img/rate.png') ?>" alt="Ratings & Reviews logo">
-            <a href="<?= site_url('admin/ratings') ?>">Ratings & Reviews</a>
+            <a href="#" class="ajax-link" data-target="ratings">Ratings & Reviews</a>
+        </div>
+        <div class="dashboard-item">
+            <img src="<?= base_url('img/suspicious.png') ?>" alt="Suspicious activity">
+            <a href="#" class="ajax-link" data-target="suspicious_ratings">Suspicious Activity Report</a>
+        </div>
+        <div class="dashboard-item">
+            <img src="<?= base_url('img/payment.png') ?>" alt="payment logo">
+            <a href="<?= site_url('admin/payments') ?>">Payments & Subscriptions</a>
         </div>
     </div>
 
