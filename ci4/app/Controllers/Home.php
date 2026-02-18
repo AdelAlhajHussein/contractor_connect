@@ -17,8 +17,8 @@ class Home extends BaseController
 
     public function about()
     {
-        return "about is working";
-        #return view('pages/about');
+        # return "about is working";
+        return view('pages/about');
     }
 
 }
