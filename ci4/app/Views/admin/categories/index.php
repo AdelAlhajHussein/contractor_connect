@@ -1,5 +1,11 @@
-<link rel="stylesheet" href="<?= base_url('css/admin-index.css') ?>">
 
+<?= $this->extend('layouts/main') ?>
+
+<?= $this->section('page_css') ?>
+<link rel="stylesheet" href="<?= base_url('css/admin-index.css') ?>">
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
 <div class="users-container">
 
     <h1 class="users-title">Categories</h1>
@@ -122,3 +128,4 @@
     </table>
 
 </div>
+<?= $this->endSection() ?>
