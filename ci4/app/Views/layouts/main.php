@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title><?= $title ?? 'Contractor_Connect' ?></title>
     <link rel="stylesheet" href="<?= base_url('css/App.css?v=5') ?>">
+    <?= $this->renderSection('page_css') ?>
 </head>
 <body>
 
