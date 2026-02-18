@@ -1,5 +1,10 @@
-<link rel="stylesheet" href="<?= base_url('css/admin-form.css') ?>">
+<?= $this->extend('layouts/main') ?>
 
+<?= $this->section('page_css') ?>
+<link rel="stylesheet" href="<?= base_url('css/admin-form.css') ?>">
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
 <div class="form-container">
 
     <h1 class="form-title">Edit Category</h1>
@@ -41,3 +46,4 @@
     <?php endif; ?>
 
 </div>
+<?= $this->endSection() ?>

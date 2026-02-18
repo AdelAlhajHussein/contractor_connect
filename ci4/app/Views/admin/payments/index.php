@@ -1,5 +1,5 @@
-
-
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('page_css') ?>
 <style>
 
     body{
@@ -43,8 +43,9 @@
     }
 
 </style>
+<?= $this->endSection() ?>
 
-
+<?= $this->section('content') ?>
 
 <div class="payment-container">
 
@@ -65,4 +66,6 @@
     </div>
 
 </div>
+<?= $this->endSection() ?>
+
 
