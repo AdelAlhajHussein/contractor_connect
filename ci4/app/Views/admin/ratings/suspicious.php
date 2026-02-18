@@ -1,4 +1,11 @@
-<link rel="stylesheet" href="<?= base_url('css/admin-reports.css') ?>">
+<?= $this->extend('layouts/main') ?>
+
+<?= $this->section('page_css') ?>
+    <link rel="stylesheet" href="<?= base_url('css/admin-reports.css') ?>">
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+
 
 <div class="reports-container">
 
@@ -118,3 +125,4 @@
     </table>
 
 </div>
+<?= $this->endSection() ?>
