@@ -20,7 +20,7 @@
             </p>
         </div>
         <div class="service-media">
-            <img src="<?= base_url('img/assemble.jpg') ?>" alt="Assemble service">
+            <img src="<?= base_url('img/assemble.png') ?>" alt="Assemble service">
         </div>
     </section>
 
@@ -34,7 +34,7 @@
             </p>
         </div>
         <div class="service-media">
-            <img src="<?= base_url('img/clean.jpg') ?>" alt="Cleaning service">
+            <img src="<?= base_url('img/clean.png') ?>" alt="Cleaning service">
         </div>
     </section>
 
@@ -48,7 +48,7 @@
             </p>
         </div>
         <div class="service-media">
-            <img src="<?= base_url('img/maintain.jpg') ?>" alt="Maintenance service">
+            <img src="<?= base_url('img/maintain.png') ?>" alt="Maintenance service">
         </div>
     </section>
 
@@ -62,7 +62,7 @@
             </p>
         </div>
         <div class="service-media">
-            <img src="<?= base_url('img/renovate.jpg') ?>" alt="Renovation service">
+            <img src="<?= base_url('img/renovate.png') ?>" alt="Renovation service">
         </div>
     </section>
 
@@ -76,7 +76,7 @@
             </p>
         </div>
         <div class="service-media">
-            <img src="<?= base_url('img/repair.jpg') ?>" alt="Repair service">
+            <img src="<?= base_url('img/repair.png') ?>" alt="Repair service">
         </div>
     </section>
 
@@ -90,7 +90,7 @@
             </p>
         </div>
         <div class="service-media">
-            <img src="<?= base_url('img/paint.jpg') ?>" alt="Painting service">
+            <img src="<?= base_url('img/paint.png') ?>" alt="Painting service">
         </div>
     </section>
 
