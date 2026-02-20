@@ -57,11 +57,10 @@ class UserAuthTest extends CIUnitTestCase
     /**
      * Scenario: Password is incorrect
      * Expect:
-     * - Authentication to fail
-     * - User is redirected to the login page
-     * - User is stays on / is directed to dashboard
+     * - Authentication fails
+     * - The request redirected to the user login page
+     * -
      */
-
     public function testLoginFailsWithWrongPassword()
     {
         $email = 'existing@example.com';
@@ -88,4 +87,28 @@ class UserAuthTest extends CIUnitTestCase
         // An error message is displayed to the user
         $result->assertSessionHas('error');
     }
+
+    /**
+     * Scenario: User tries to login with an invalid email
+     * Expect:
+     * - Authentication fails
+     * - The request redirected to the user login page
+     * - An error message is displayed to the user
+     */
+    public function testLoginFailsWithWrongEmail()
+    {
+        // Simulate login with invalid email
+        $result = $this->post('login', [
+            'login_email' => 'email_not_in_database@example.com',
+            'password'    => 'random_password'
+        ]);
+
+        //// Verification
+        // Request redirected to the login page
+        $result->assertRedirectTo('login');
+
+        // Error message displayed
+        $result->assertSessionHas('error');
+    }
+
 }
