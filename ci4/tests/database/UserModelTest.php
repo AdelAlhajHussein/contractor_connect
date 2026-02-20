@@ -6,8 +6,7 @@ use CodeIgniter\Test\DatabaseTestTrait;
 use App\Models\UserModel;
 use Faker\Factory as FakerFactory;
 
-class UserModelTest extends CIUnitTestCase
-{
+class UserModelTest extends CIUnitTestCase {
     use DatabaseTestTrait;
 
     protected $refresh = true;
@@ -22,7 +21,7 @@ class UserModelTest extends CIUnitTestCase
     // ----------------
     // Scenarios
     // ----------------
-    // Expect to Pass
+    // Expect to pass
     /**
      * Scenario: Successfully insert a new user
      * Expect:
@@ -119,7 +118,7 @@ class UserModelTest extends CIUnitTestCase
         $this->assertEquals($fakeEmail, $user['email']);
     }
 
-    // Expect to Fail
+    // Expect to fail
     /**
      * Scenario: Attempt to insert a user with an email that already exists
      * Expect:

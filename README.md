@@ -63,6 +63,11 @@ This project uses PHPUnit for quality assurance testing.
     Navigate to github and create a pull request
     Resolve any conflicts and merge with main branch
 
+## Run Tests
+  - Navigate to root directory and run
+  bash
+  vendor/bin/phpunit
+
 
 ## The Team: 
 **Member 1** Adel Alhaj Hussein - Back-end
