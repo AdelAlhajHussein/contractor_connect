@@ -1,6 +1,5 @@
-# Project Name: Contractor Conenct
+# Project Name: Contractor Connect
 A digital marketplace for home improvement jobs. 
- 
 
 ## Tech Stack
 - Linux

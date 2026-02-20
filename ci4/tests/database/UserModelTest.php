@@ -12,13 +12,24 @@ class UserModelTest extends CIUnitTestCase
 
     protected $refresh = true;
     protected $namespace = 'App';
-    protected $faker;
+    protected $faker; //
 
     protected function setUp(): void{
         parent::setUp();
         $this->faker = FakerFactory::create();
     }
-    public function testCanInsertUser()
+
+    // ----------------
+    // Scenarios
+    // ----------------
+    // Expect to Pass
+    /**
+     * Scenario: Successfully insert a new user
+     * Expect:
+     * - The model returns a numeric ID
+     * - The user data can be verified in the db
+     */
+    public function testInsertUser()
     {
         $model = new UserModel();
         $data = [
@@ -39,32 +50,14 @@ class UserModelTest extends CIUnitTestCase
         // Verify data exists in db
         $this->seeInDatabase('users', ['email' => $data['email']]);
     }
-    public function testCannotInsertUserWithDuplicateEmail()
-    {
-        $model = new UserModel();
-        $fakeEmail = $this->faker->unique()->email;
 
-        // 1. Setup: Insert the first user successfully
-        $model->insert([
-            'username'   => $this->faker->userName,
-            'email'      => $fakeEmail,
-            'role_id'    => 1,
-            'first_name' => $this->faker->firstName,
-        ]);
-
-        // Insert a second user with the same email
-        $data = [
-            'username'   => $this->faker->userName,
-            'email'      => $fakeEmail,
-            'role_id'    => 1,
-            'first_name' => $this->faker->firstName,
-        ];
-
-        $result = $model->insert($data);
-
-        // Verify insert returns false for duplicate email
-        $this->assertFalse($result, 'The model should not allow duplicate emails.');
-    }
+    /**
+     * Scenario: Use soft delete on a user account
+     * Expect:
+     * - find() returns null for the ID
+     * - The record still exists in the database
+     * - The deleted_at column is not null
+     */
     public function testSoftDeleteWorks()
     {
         $model = new UserModel();
@@ -98,13 +91,20 @@ class UserModelTest extends CIUnitTestCase
             'deleted_at' => null
         ]);
     }
-    public function testCanFindUserByEmail()
+
+    /**
+     * Scenario: Successfully find a user by email
+     * Expect:
+     * - The query returns an array of user data
+     * - The email returned matches the queried email
+     */
+    public function testFindUserByEmail()
     {
         $model = new UserModel();
         $fakeEmail = $this->faker->unique()->email;
 
         // Create user
-        $model->insert([
+        $model -> insert([
             'username'   => $this->faker->userName,
             'email'      => $fakeEmail,
             'first_name' => $this->faker->firstName,
@@ -117,5 +117,123 @@ class UserModelTest extends CIUnitTestCase
         // Verify array exists and email matches
         $this->assertIsArray($user);
         $this->assertEquals($fakeEmail, $user['email']);
+    }
+
+    // Expect to Fail
+    /**
+     * Scenario: Attempt to insert a user with an email that already exists
+     * Expect:
+     * - Model validation fails
+     * - insert() returns false
+     */
+    public function testCannotCreateUserWithExistingEmail()
+    {
+        $model = new UserModel();
+        $fakeEmail = $this->faker->unique()->email;
+
+        // 1. Insert the first user successfully
+        $model->insert([
+            'username'   => $this->faker->userName,
+            'email'      => $fakeEmail,
+            'role_id'    => 1,
+            'first_name' => $this->faker->firstName,
+        ]);
+
+        // 2. Attempt to insert a second user with the same email
+        $data = [
+            'username'   => $this->faker->userName,
+            'email'      => $fakeEmail,
+            'role_id'    => 1,
+            'first_name' => $this->faker->firstName,
+        ];
+
+        $result = $model->insert($data);
+
+        // Verify insert returns false for duplicate email
+        $this->assertFalse($result, 'The model should not allow duplicate emails.');
+    }
+
+    /**
+     * Scenario: Password is too short
+     * Expect:
+     * - Model validation fails
+     * - insert() returns false
+     * - The model returns an error message for password_hash
+     */
+    public function testPasswordTooShort(){
+        $model = new UserModel();
+
+        $data = [
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->email,
+            'password_hash' => 'pwd',
+            'role_id'       => 1
+        ];
+
+    $result = $model ->insert($data);
+
+    ////Verification
+    // Password entry failed
+    $this->assertFalse($result);
+
+    // Error message displayed to the user
+    $this->assertArrayHasKey('password_hash', $model->errors());
+
+    }
+
+    /**
+     * Scenario: Password contains invalid characters
+     * Expect:
+     * - Model validation fails
+     * - insert() returns false
+     * - The model returns an error message for password_hash
+     */
+    public function testPasswordFailsWithInvalidCharacters(){
+        $model = new UserModel();
+
+        $data = [
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->email,
+            'password_hash' => 'invalid_pa$$word',
+            'role_id'       => 1
+        ];
+
+        $result = $model ->insert($data);
+
+        ////Verification
+        // Password entry failed
+        $this->assertFalse($result);
+
+        // Error message displayed to the user
+        $this->assertArrayHasKey('password_hash', $model->errors());
+
+    }
+
+    /**
+     * Scenario: Password contains spaces
+     * Expect:
+     * - Model validation fails
+     * - insert() returns false
+     * - The model returns an error message for password_hash
+     */
+    public function testPasswordFailsWithSpaces(){
+        $model = new UserModel();
+
+        $data = [
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->email,
+            'password_hash' => 'invalid password',
+            'role_id'       => 1
+        ];
+
+        $result = $model ->insert($data);
+
+        ////Verification
+        // Password entry failed
+        $this->assertFalse($result);
+
+        // Error message displayed to the user
+        $this->assertArrayHasKey('password_hash', $model->errors());
+
     }
 }
