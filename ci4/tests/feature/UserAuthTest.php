@@ -64,19 +64,23 @@ class UserAuthTest extends CIUnitTestCase
         $email = 'existing@example.com';
         $userModel = new UserModel();
         $userModel->insert([
-            'email'    => $email,
-            'password' => password_hash('correct_pass',PASSWORD_DEFAULT),
-            'role_id'  => 1,
+            'username'      => 'unique_name',
+            'email'         => $email,
+            'password_hash' => password_hash('correct_pass',PASSWORD_DEFAULT),
+            'role_id'       => 1,
         ]);
 
         // Simulate login with incorrect password
         $result = $this->post('login', [
             'login_email' => $email,
-            'password'    => 'wrong_pass_123',
+            'password'   => 'wrong_password',
         ]);
 
         //// Verification
         // Redirect to login
+        $result->assertRedirectTo('login');
+
+        // Redirect found
         $result->assertStatus(302);
 
         // isLoggedIn is still false
@@ -87,7 +91,7 @@ class UserAuthTest extends CIUnitTestCase
     }
 
     /**
-     * Scenario: User tries to login with an invalid email
+     * Scenario: Login with invalid email
      * Expect:
      * - Authentication fails
      * - The request redirected to the user login page
@@ -110,7 +114,7 @@ class UserAuthTest extends CIUnitTestCase
     }
 
     /**
-     * Scenario: Someone goes directly to the Admin panel URL
+     * Scenario: Accessing admin URL without authentication
      * Expect:
      * - The Auth filter detects that there isn't a session
      * - The request redirected to the user login page

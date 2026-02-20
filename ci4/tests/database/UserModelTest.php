@@ -118,4 +118,32 @@ class UserModelTest extends CIUnitTestCase
         $this->assertIsArray($user);
         $this->assertEquals($fakeEmail, $user['email']);
     }
+
+    /**
+     * Scenario: Password is too short
+     * Expect:
+     * - Model validation fails
+     * - insert() returns false
+     * - Error message exists for the password field
+     */
+    public function testPasswordTooShort(){
+        $model = new UserModel();
+
+        $data = [
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->email,
+            'password_hash' => 'pass',
+            'role_id'       => 1
+        ];
+
+    $result = $model ->insert($data);
+
+    ////Verification
+    // Password entry failed
+    $this->assertFalse($result);
+
+    // Error message displayed to the user
+    $this->assertArrayHasKey('password_hash', $model->errors());
+
+    }
 }
