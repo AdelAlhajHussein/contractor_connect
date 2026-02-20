@@ -51,6 +51,7 @@ class ProjectModelTest extends CIUnitTestCase {
     }
 
 
+
     // Expect to fail
     /**
      * Scenario: Project created without title
@@ -75,4 +76,19 @@ class ProjectModelTest extends CIUnitTestCase {
         $this->assertArrayHasKey('title', $model->errors());
     }
 
+
+    public function testDeadlineHasNotBeenMissed(){
+        $model = new ProjectModel();
+
+        $data = [
+            'title'         => 'Expired project',
+            'deadline_date' => '2000-01-01',
+        ];
+
+        $result = $model->insert($data);
+
+        ////Verification
+        $this -> assertFalse($result);
+        $this -> assertArrayNotHasKey('deadline_date', $model->errors());
+    }
 }
