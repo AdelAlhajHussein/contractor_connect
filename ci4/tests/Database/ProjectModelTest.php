@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Database;
+namespace Database;
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;

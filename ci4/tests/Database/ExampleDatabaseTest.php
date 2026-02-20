@@ -38,7 +38,7 @@ final class ExampleDatabaseTest extends CIUnitTestCase
         // The model should no longer find it
         $this->assertNull($model->find($object->id));
 
-        // ... but it should still be in the database
+        // ... but it should still be in the Database
         $result = $model->builder()->where('id', $object->id)->get()->getResult();
 
         $this->assertCount(1, $result);
