@@ -10,9 +10,7 @@ use App\Models\UserModel;
 class UserAuthTest extends CIUnitTestCase
 {
     use FeatureTestTrait, DatabaseTestTrait;
-
     protected $refresh = true;
-
     protected $namespace = 'App';
 
     /**
@@ -110,5 +108,20 @@ class UserAuthTest extends CIUnitTestCase
         // Error message displayed
         $result->assertSessionHas('error');
     }
+
+    /**
+     * Scenario: Someone goes directly to the Admin panel URL
+     * Expect:
+     * - The Auth filter detects that there isn't a session
+     * - The request redirected to the user login page
+     */
+    public function testGuestCannotAccessAdmin()
+    {
+        $result = $this->get('admin/settings');
+
+        //// Verification
+        $result->assertRedirectTo('login');
+    }
+
 
 }
