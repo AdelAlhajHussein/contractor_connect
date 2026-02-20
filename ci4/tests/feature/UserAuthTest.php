@@ -36,13 +36,13 @@ class UserAuthTest extends CIUnitTestCase
             'is_active'  => 1
         ]);
 
-        // Simulate login
+        // Simulate successful login
         $result = $this->post('login', [
             'login_email' => $email,
             'password'    => $plainPassword
         ]);
 
-        // ------ Verification -------
+        ////Verification
         // HTTP response is a 302 redirect
         $result->assertStatus(302);
 
@@ -54,4 +54,38 @@ class UserAuthTest extends CIUnitTestCase
         $result->assertSessionHas('user_email', $email);
     }
 
+    /**
+     * Scenario: Password is incorrect
+     * Expect:
+     * - Authentication to fail
+     * - User is redirected to the login page
+     * - User is stays on / is directed to dashboard
+     */
+
+    public function testLoginFailsWithWrongPassword()
+    {
+        $email = 'existing@example.com';
+        $userModel = new UserModel();
+        $userModel->insert([
+            'email'    => $email,
+            'password' => password_hash('correct_pass',PASSWORD_DEFAULT),
+            'role_id'  => 1,
+        ]);
+
+        // Simulate login with incorrect password
+        $result = $this->post('login', [
+            'login_email' => $email,
+            'password'    => 'wrong_pass_123',
+        ]);
+
+        //// Verification
+        // Redirect to login
+        $result->assertStatus(302);
+
+        // isLoggedIn is still false
+        $result->assertSessionMissing('isLoggedIn');
+
+        // An error message is displayed to the user
+        $result->assertSessionHas('error');
+    }
 }
