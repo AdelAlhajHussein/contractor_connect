@@ -52,5 +52,27 @@ class ProjectModelTest extends CIUnitTestCase {
 
 
     // Expect to fail
+    /**
+     * Scenario: Project created without title
+     * Expect:
+     * - Model validation fails
+     * - insert() returns false
+     * - Error message exists for the title field
+     */
+    public function testInsertFailsWithoutTitle()
+    {
+        $model = new ProjectModel();
+        $data = [
+            'home_owner_id' => 1,
+            'budget_min'   => 1000,
+            // 'title' => 'not included'
+        ];
+
+        $result = $model->insert($data);
+
+        //// Verification
+        $this->assertFalse($result);
+        $this->assertArrayHasKey('title', $model->errors());
+    }
 
 }
