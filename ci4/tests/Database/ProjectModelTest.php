@@ -20,8 +20,7 @@ class ProjectModelTest extends CIUnitTestCase {
 
     /**
      * // TODO: verify if budget can be 0
-     * Tests
-     * - project created with created date / timestamps
+     *
      *
      */
 

@@ -26,7 +26,6 @@ class UserModelTest extends CIUnitTestCase {
     // ----------------
     // Scenarios
     // ----------------
-    // Expect to pass
     /**
      * Scenario: Successfully insert a new user
      * Expect:
