@@ -41,13 +41,14 @@ class ProjectModel extends Model
 
         // Load from config file
         $config = config('Project');
-        $status = implode(',', $config['status']);
+
+        $status = implode(',', $config->status );
 
         $this->validationRules = [
             'title'      => 'required|min_length[3]|max_length[255]',
-            'budget_min' => 'required|min_length[3]|max_length[255]',
-            'budget_max' => 'required|min_length[3]|max_length[255]',
-            'status'     => 'required|in_list[0,1]',
+            'budget_min'    => 'required|numeric',
+            'budget_max'    => 'required|numeric',
+            'status'     => "required|in_list[$status]",
             'deadline_date' => 'valid_date',
         ];
     }

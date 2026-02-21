@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/ericlaudrum/Projects/contractor_connect/ci4/phpunit.xml.dist" tests="28" assertions="10" errors="22" failures="0" skipped="0" time="0.750262">
+    <testsuite name="App" tests="28" assertions="10" errors="22" failures="0" skipped="0" time="0.750262">
+      <testsuite name="ExampleDatabaseTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ExampleDatabaseTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.096648">
+        <testcase name="testModelFindAll" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ExampleDatabaseTest.php" line="17" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" assertions="1" time="0.089926"/>
+        <testcase name="testSoftDeleteLeavesRow" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ExampleDatabaseTest.php" line="28" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" assertions="2" time="0.006722"/>
+      </testsuite>
+      <testsuite name="Database\ProjectModelTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" tests="12" assertions="0" errors="12" failures="0" skipped="0" time="0.065511">
+        <testcase name="testSuccessfullyCreateProject" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="38" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.046456">
+          <error type="ErrorException">Database\ProjectModelTest::testSuccessfullyCreateProject
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:40</error>
+        </testcase>
+        <testcase name="testSuccessfullyCreateProjectWithoutEndDate" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="67" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.002133">
+          <error type="ErrorException">Database\ProjectModelTest::testSuccessfullyCreateProjectWithoutEndDate
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:69</error>
+        </testcase>
+        <testcase name="testTitleExceedsCharacterLimit" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="95" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001866">
+          <error type="ErrorException">Database\ProjectModelTest::testTitleExceedsCharacterLimit
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:96</error>
+        </testcase>
+        <testcase name="testInsertFailsWithoutTitle" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="122" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001971">
+          <error type="ErrorException">Database\ProjectModelTest::testInsertFailsWithoutTitle
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:124</error>
+        </testcase>
+        <testcase name="testDeadlineHasNotExpired" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="144" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.002103">
+          <error type="ErrorException">Database\ProjectModelTest::testDeadlineHasNotExpired
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:145</error>
+        </testcase>
+        <testcase name="testBudgetMinCannotExceedMax" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="165" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001982">
+          <error type="ErrorException">Database\ProjectModelTest::testBudgetMinCannotExceedMax
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:167</error>
+        </testcase>
+        <testcase name="testBudgetCannotBeNegative" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="184" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001593">
+          <error type="ErrorException">Database\ProjectModelTest::testBudgetCannotBeNegative
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:185</error>
+        </testcase>
+        <testcase name="testBudgetIsNotText" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="200" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001504">
+          <error type="ErrorException">Database\ProjectModelTest::testBudgetIsNotText
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:201</error>
+        </testcase>
+        <testcase name="testCannotCreateProjectWithoutValidUserId" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="216" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001583">
+          <error type="ErrorException">Database\ProjectModelTest::testCannotCreateProjectWithoutValidUserId
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:217</error>
+        </testcase>
+        <testcase name="testStatusDefaultsToOpen" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="236" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001530">
+          <error type="ErrorException">Database\ProjectModelTest::testStatusDefaultsToOpen
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:238</error>
+        </testcase>
+        <testcase name="testProjectIsCreatedWithTimestamps" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="257" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001351">
+          <error type="ErrorException">Database\ProjectModelTest::testProjectIsCreatedWithTimestamps
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:258</error>
+        </testcase>
+        <testcase name="testProjectStatusValueIsValid" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="279" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="0" time="0.001439">
+          <error type="ErrorException">Database\ProjectModelTest::testProjectStatusValueIsValid
+ErrorException: Undefined property: Config\Project::$status
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/ProjectModel.php:45
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:280</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Database\UserModelTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" tests="7" assertions="0" errors="7" failures="0" skipped="0" time="0.088924">
+        <testcase name="testInsertUser" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="35" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="0" time="0.027350">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Database\UserModelTest::testInsertUser
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php:48</error>
+        </testcase>
+        <testcase name="testSoftDeleteWorks" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="64" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="0" time="0.004769">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Database\UserModelTest::testSoftDeleteWorks
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php:77</error>
+        </testcase>
+        <testcase name="testFindUserByEmail" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="104" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="0" time="0.004753">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Database\UserModelTest::testFindUserByEmail
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php:110</error>
+        </testcase>
+        <testcase name="testCannotCreateUserWithExistingEmail" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="132" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="0" time="0.003962">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Database\UserModelTest::testCannotCreateUserWithExistingEmail
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php:138</error>
+        </testcase>
+        <testcase name="testPasswordTooShort" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="166" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="0" time="0.003305">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Database\UserModelTest::testPasswordTooShort
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php:176</error>
+        </testcase>
+        <testcase name="testPasswordFailsWithInvalidCharacters" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="194" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="0" time="0.041252">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Database\UserModelTest::testPasswordFailsWithInvalidCharacters
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php:204</error>
+        </testcase>
+        <testcase name="testPasswordFailsWithSpaces" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="222" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="0" time="0.003534">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Database\UserModelTest::testPasswordFailsWithSpaces
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php:232</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Feature\UserAuthTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" tests="4" assertions="3" errors="3" failures="0" skipped="0" time="0.493932">
+        <testcase name="testLoginSuccessRedirectsToDashboard" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="23" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="0" time="0.228520">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Feature\UserAuthTest::testLoginSuccessRedirectsToDashboard
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php:29</error>
+        </testcase>
+        <testcase name="testLoginFailsWithWrongPassword" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="62" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="0" time="0.227812">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Feature\UserAuthTest::testLoginFailsWithWrongPassword
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: users
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Rules.php:175
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/StrictRules/Rules.php:187
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:336
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Validation/Validation.php:201
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:1543
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/BaseModel.php:807
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Model.php:797
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php:66</error>
+        </testcase>
+        <testcase name="testLoginFailsWithWrongEmail" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="100" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="3" time="0.032275"/>
+        <testcase name="testGuestCannotAccessAdmin" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="122" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="0" time="0.005324">
+          <error type="CodeIgniter\Exceptions\PageNotFoundException">Feature\UserAuthTest::testGuestCannotAccessAdmin
+CodeIgniter\Exceptions\PageNotFoundException: Can't find a route for 'GET: admin/settings'.
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/CodeIgniter.php:983
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/CodeIgniter.php:360
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/FeatureTestTrait.php:228
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/FeatureTestTrait.php:248
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php:124</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="ExampleSessionTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Session/ExampleSessionTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.002581">
+        <testcase name="testSessionSimple" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Session/ExampleSessionTest.php" line="10" class="ExampleSessionTest" classname="ExampleSessionTest" assertions="1" time="0.002581"/>
+      </testsuite>
+      <testsuite name="HealthTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Unit/HealthTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.002665">
+        <testcase name="testIsDefinedAppPath" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Unit/HealthTest.php" line="12" class="HealthTest" classname="HealthTest" assertions="1" time="0.000821"/>
+        <testcase name="testBaseUrlHasBeenSet" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Unit/HealthTest.php" line="17" class="HealthTest" classname="HealthTest" assertions="2" time="0.001844"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

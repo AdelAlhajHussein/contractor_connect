@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Feature;
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
