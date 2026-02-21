@@ -96,7 +96,6 @@ class ProjectModelTest extends CIUnitTestCase {
     }
 
 
-
     /**
      * Scenario: Project title exceeds the 255 character limit
     * Expect:
@@ -202,6 +201,42 @@ class ProjectModelTest extends CIUnitTestCase {
 
         $this ->assertFalse($model->insert($data));
         $this -> assertArrayHasKey('budget_min', $model->errors());
+    }
+
+    /**
+     * Scenario: Text is entered as a budget
+     * Expect: Validation fails
+     *
+     */
+    public function testBudgetIsNotText(){
+        $model = new ProjectModel();
+        $data = [
+            'title' => 'Project',
+            'budget_min' => 'expensive',
+            ];
+
+        $this ->assertFalse($model->insert($data));
+        $this -> assertArrayHasKey('budget_min', $model->errors());
+    }
+
+    /**
+     * Scenario: Project created with invalid user id
+     * Expect: Validation fails
+     *
+     */
+    public function testCannotCreateProjectWithoutValidUserId(){
+        $model = new ProjectModel();
+
+        $data = [
+            'home_owner_id'=> 99999,
+            'title'        => 'Invalid UserId',
+            'budget_min'   => 1000,
+            'status'       => 'open',
+        ];
+
+        $result = $model->insert($data);
+
+        $this->assertFalse($result);
     }
 
 
