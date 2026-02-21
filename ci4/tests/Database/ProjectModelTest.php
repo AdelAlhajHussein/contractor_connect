@@ -20,20 +20,11 @@ class ProjectModelTest extends CIUnitTestCase {
 
     /**
      * // TODO: verify if budget can be 0
-     * - Pass:
-     * - create a project with valid info
-     * - create a project without a set end date
-     * - budget is numerical value
-     * - budget is positive
-     * - project status is a valid input
-     * Fail:
-     * - no project title
-     * - deadline date has expired
-     * - min and max budgets are inverted
-     * - budget is negative
-     * - title exceeds the character limit (255)
+     * Tests
+     * - project created with created date / timestamps
      *
      */
+
 
     // ----------------
     // Scenarios
@@ -94,7 +85,6 @@ class ProjectModelTest extends CIUnitTestCase {
         $this->assertIsNumeric($projectId);
         $this->seeInDatabase('projects', ['title' => $data['title']]);
     }
-
 
     /**
      * Scenario: Project title exceeds the 255 character limit
@@ -238,6 +228,29 @@ class ProjectModelTest extends CIUnitTestCase {
 
         $this->assertFalse($result);
     }
+
+    /**
+     * Scenario: Project status initialized as open
+     * Expect: Project status matches 'open' in the DB
+     *
+     */
+    public function testStatusDefaultsToOpen()
+    {
+        $model = new ProjectModel();
+        $data = [
+            'home_owner_id' => 1,
+            'title'         => 'Open Project',
+            'budget_min'    => 1000,
+        ];
+
+        $projectId = $model->insert($data);
+
+        $savedProject = $model->find($projectId);
+
+        $this->assertEquals('open',$savedProject['status']);
+    }
+
+
 
 
     /**
