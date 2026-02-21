@@ -18,10 +18,26 @@ class ProjectModelTest extends CIUnitTestCase {
         $this->faker = FakerFactory::create();
     }
 
+    /**
+     * // TODO: verify if budget can be 0
+     * - Pass:
+     * - create a project with valid info
+     * - create a project without a set end date
+     * - budget is numerical value
+     * - budget is positive
+     * - project status is a valid input
+     * Fail:
+     * - no project title
+     * - deadline date has expired
+     * - min and max budgets are inverted
+     * - budget is negative
+     * - title exceeds the character limit (255)
+     *
+     */
+
     // ----------------
     // Scenarios
     // ----------------
-    // Expect to pass
     /**
      * Scenario: Successfully create a project
      * Expect:
@@ -30,6 +46,35 @@ class ProjectModelTest extends CIUnitTestCase {
      * - The title in the DB matches the input
      */
     public function testSuccessfullyCreateProject()
+    {
+        $model = new ProjectModel();
+        $data = [
+            'home_owner_id' => 1,
+            'category_id'   => 1,
+            'title'         => $this->faker->sentence(3),
+            'description'   => $this->faker->paragraph,
+            'address'       => $this->faker->address,
+            'budget_min'    => 1000,
+            'budget_max'    => 5000,
+            'status'        => 'open',
+        ];
+
+        $projectId = $model->insert($data);
+
+        //// Verification
+        $this->assertIsNumeric($projectId);
+        $this->seeInDatabase('projects', ['title' => $data['title']]);
+    }
+
+    /**
+     * Scenario: Successfully create a project without an end date
+     * Expect:
+     * - Project record is inserted into DB
+     * - Function returns a numeric ID
+     * - The title in the DB matches the input
+     * - the end date value is null
+     */
+    public function testSuccessfullyCreateProjectWithoutEndDate()
     {
         $model = new ProjectModel();
         $data = [
@@ -52,7 +97,33 @@ class ProjectModelTest extends CIUnitTestCase {
 
 
 
-    // Expect to fail
+    /**
+     * Scenario: Project title exceeds the 255 character limit
+    * Expect:
+    * - Model validation fails
+    * - Insert returns false
+    * - Error message for title
+    */
+    public function testTitleExceedsCharacterLimit(){
+        $model = new ProjectModel();
+
+        $title = $this->faker->realText(260);
+
+        $data =[
+            'home_owner_id' => 1,
+            'title'         => $title,
+            'budget_min'    => 1000,
+            'budget_max'    => 5000,
+            'status'        => 'open',
+        ];
+
+        $result = $model->insert($data);
+
+        ////Verification
+        $this->assertFalse($result, "The title exceeds the 255 character limit");
+        $this->assertArrayHasKey('title', $model->errors());
+    }
+
     /**
      * Scenario: Project created without title
      * Expect:
@@ -76,8 +147,13 @@ class ProjectModelTest extends CIUnitTestCase {
         $this->assertArrayHasKey('title', $model->errors());
     }
 
-
-    public function testDeadlineHasNotBeenMissed(){
+    /**
+     * Scenario: Deadline is expired
+     * Expect:
+     * - Model validation fails
+     * - insert() returns false
+     */
+    public function testDeadlineHasNotExpired(){
         $model = new ProjectModel();
 
         $data = [
@@ -89,6 +165,47 @@ class ProjectModelTest extends CIUnitTestCase {
 
         ////Verification
         $this -> assertFalse($result);
-        $this -> assertArrayNotHasKey('deadline_date', $model->errors());
+        $this -> assertArrayHasKey('deadline_date', $model->errors());
+    }
+
+    /**
+     * Scenario: Budget min is greater than max
+     * Expect:
+     * - Model validation fails
+     * - The insert returns false
+     */
+    public function testBudgetMinCannotExceedMax()
+    {
+        $model = new ProjectModel();
+        $data = [
+            'title'      => 'Invalid Budget',
+            'budget_min' => 5000,
+            'budget_max' => 1000,
+        ];
+
+        $result = $model->insert($data);
+
+        //// Verification
+        $this->assertFalse($result, 'The model should reject a min budget that exceeds the max budget');
+    }
+
+    /**
+     * Scenario: Project status is not one of the valid options
+     * Expect:
+     * - Model validation fails
+     * - Insert returns false
+     * - Error message is created re- status
+     */
+    public function testProjectStatusValueIsValid(){
+        $model = new ProjectModel();
+        $data = [
+            'title'  => 'Invalid Status',
+            'status' => 'hacker-level-status', // Not in ['open', 'in-progress', 'closed']
+        ];
+
+        $result = $model->insert($data);
+
+        $this->assertFalse($result);
+        $this->assertArrayHasKey('status', $model->errors());
     }
 }

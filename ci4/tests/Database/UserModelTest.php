@@ -17,7 +17,12 @@ class UserModelTest extends CIUnitTestCase {
         parent::setUp();
         $this->faker = FakerFactory::create();
     }
-
+    /**
+     * Tests
+     * - Insert user into db successfully
+     * - soft delete works
+     * - find user works
+     */
     // ----------------
     // Scenarios
     // ----------------
