@@ -190,6 +190,22 @@ class ProjectModelTest extends CIUnitTestCase {
     }
 
     /**
+     * Scenario: Budget is negative
+     * Expect: Validation fails
+     */
+    public function testBudgetCannotBeNegative(){
+        $model = new ProjectModel();
+        $data = [
+            'title'      => 'Invalid Budget',
+            'budget_min' => -1000,
+        ];
+
+        $this ->assertFalse($model->insert($data));
+        $this -> assertArrayHasKey('budget_min', $model->errors());
+    }
+
+
+    /**
      * Scenario: Project status is not one of the valid options
      * Expect:
      * - Model validation fails
