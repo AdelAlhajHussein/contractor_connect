@@ -116,7 +116,7 @@ class UserAuthTest extends CIUnitTestCase
     /**
      * Scenario: Accessing admin URL without authentication
      * Expect:
-     * - The Auth filter detects that there isn't a session
+     * - The Auth filter detects that there isn't a Session
      * - The request redirected to the user login page
      */
     public function testGuestCannotAccessAdmin()

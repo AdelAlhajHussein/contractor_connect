@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Database;
+namespace Database;
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
@@ -17,11 +17,15 @@ class UserModelTest extends CIUnitTestCase {
         parent::setUp();
         $this->faker = FakerFactory::create();
     }
-
+    /**
+     * Tests
+     * - Insert user into db successfully
+     * - soft delete works
+     * - find user works
+     */
     // ----------------
     // Scenarios
     // ----------------
-    // Expect to pass
     /**
      * Scenario: Successfully insert a new user
      * Expect:
@@ -54,7 +58,7 @@ class UserModelTest extends CIUnitTestCase {
      * Scenario: Use soft delete on a user account
      * Expect:
      * - find() returns null for the ID
-     * - The record still exists in the database
+     * - The record still exists in the Database
      * - The deleted_at column is not null
      */
     public function testSoftDeleteWorks()
@@ -78,7 +82,7 @@ class UserModelTest extends CIUnitTestCase {
         // Verify record has been deleted
         $this->assertNull($model->find($id));
 
-        // Verify user is still in the database (Not a hard delete)
+        // Verify user is still in the Database (Not a hard delete)
         $this->seeInDatabase('users', [
             'id'    => $id,
             'email' => $email
