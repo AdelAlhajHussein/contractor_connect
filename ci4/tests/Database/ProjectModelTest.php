@@ -250,8 +250,25 @@ class ProjectModelTest extends CIUnitTestCase {
         $this->assertEquals('open',$savedProject['status']);
     }
 
+    /**
+     *  Scenario: Project is created with a timestamp
+     *  Expect: Timestamp is added to created_at in DB
+     *
+     */
+    public function testProjectIsCreatedWithTimestamps(){
+        $model = new ProjectModel();
+        $data = [
+            'home_owner_id' => 1,
+            'title' => 'Project with a Timestamp',
+            'budget_min' => 1000,
+        ];
 
+        $projectId = $model->insert($data);
+        $project   = $model->find($projectId);
 
+        $this->assertNotNull($project['created_at']);
+        $this->assertNotNull($project['updated_at']);
+    }
 
     /**
      * Scenario: Project status is not one of the valid options
