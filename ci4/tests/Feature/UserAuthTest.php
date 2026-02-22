@@ -6,12 +6,19 @@ use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
 use App\Models\UserModel;
+use Faker\Factory as FakerFactory;
 
-class UserAuthTest extends CIUnitTestCase
-{
+class UserAuthTest extends CIUnitTestCase {
     use FeatureTestTrait, DatabaseTestTrait;
+
     protected $refresh = true;
     protected $namespace = 'App';
+    protected $faker;
+
+    protected function setUp(): void{
+        parent::setUp();
+        $this->faker = FakerFactory::create();
+    }
 
     /**
      * Scenario: Successful user login
@@ -23,21 +30,23 @@ class UserAuthTest extends CIUnitTestCase
     public function testLoginSuccessRedirectsToDashboard()
     {
         $email = 'user@email.com';
-        $plainPassword = 'Password123';
+        $password = 'Password123';
 
         $userModel = new UserModel();
         $userModel->insert([
-            'username'   => 'contractor_bob',
-            'email'      => $email,
-            'password'   => password_hash($plainPassword, PASSWORD_DEFAULT),
-            'role_id'    => 1,
-            'is_active'  => 1
+            'username' => 'contractor_bob',
+            'email' => $email,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'password_hash' => $password,
+            'role_id' => 1,
+            'is_active' => 1
         ]);
 
         // Simulate successful login
         $result = $this->post('login', [
             'login_email' => $email,
-            'password'    => $plainPassword
+            'password'    => $password,
         ]);
 
         ////Verification

@@ -99,10 +99,13 @@ class ProjectModelTest extends CIUnitTestCase {
 
         $data =[
             'home_owner_id' => 1,
-            'title'         => $title,
-            'budget_min'    => 1000,
-            'budget_max'    => 5000,
-            'status'        => 'open',
+            'title' => $title,
+            'category_id' => 1,
+            'budget_min' => 1000,
+            'budget_max' => 5000,
+            'address' => $this->faker->address,
+            'status' => 'open',
+
         ];
 
         $result = $model->insert($data);
@@ -126,6 +129,8 @@ class ProjectModelTest extends CIUnitTestCase {
             'home_owner_id' => 1,
             'budget_min'   => 1000,
             // 'title' => 'not included'
+            'category_id'   => 1,
+            'address' => $this->faker->address,
         ];
 
         $result = $model->insert($data);
@@ -145,8 +150,11 @@ class ProjectModelTest extends CIUnitTestCase {
         $model = new ProjectModel();
 
         $data = [
-            'title'         => 'Expired project',
+            'title' => 'Expired project',
             'deadline_date' => '2000-01-01',
+            'category_id'   => 1,
+            'address' => $this->faker->address,
+            'home_owner_id' => 1,
         ];
 
         $result = $model->insert($data);
@@ -166,9 +174,12 @@ class ProjectModelTest extends CIUnitTestCase {
     {
         $model = new ProjectModel();
         $data = [
-            'title'      => 'Invalid Budget',
+            'title'  => 'Invalid Budget',
+            'category_id'   => 1,
             'budget_min' => 5000,
             'budget_max' => 1000,
+            'address' => $this->faker->address,
+            'home_owner_id' => 1,
         ];
 
         $result = $model->insert($data);
@@ -185,7 +196,10 @@ class ProjectModelTest extends CIUnitTestCase {
         $model = new ProjectModel();
         $data = [
             'title'      => 'Invalid Budget',
+            'category_id'   => 1,
+            'address' => $this->faker->address,
             'budget_min' => -1000,
+            'home_owner_id' => 1,
         ];
 
         $this ->assertFalse($model->insert($data));
@@ -202,6 +216,9 @@ class ProjectModelTest extends CIUnitTestCase {
         $data = [
             'title' => 'Project',
             'budget_min' => 'expensive',
+            'category_id'   => 1,
+            'address' => $this->faker->address,
+            'home_owner_id' => 1,
             ];
 
         $this ->assertFalse($model->insert($data));
@@ -218,7 +235,9 @@ class ProjectModelTest extends CIUnitTestCase {
 
         $data = [
             'home_owner_id'=> 99999,
-            'title'        => 'Invalid UserId',
+            'title'  => 'Invalid UserId',
+            'category_id'   => 1,
+            'address' => $this->faker->address,
             'budget_min'   => 1000,
             'status'       => 'open',
         ];
@@ -238,7 +257,9 @@ class ProjectModelTest extends CIUnitTestCase {
         $model = new ProjectModel();
         $data = [
             'home_owner_id' => 1,
-            'title'         => 'Open Project',
+            'title'   => 'Open Project',
+            'category_id'   => 1,
+            'address'  => $this->faker->address,
             'budget_min'    => 1000,
         ];
 
@@ -259,7 +280,9 @@ class ProjectModelTest extends CIUnitTestCase {
         $data = [
             'home_owner_id' => 1,
             'title' => 'Project with a Timestamp',
+            'category_id'   => 1,
             'budget_min' => 1000,
+            'address' => $this->faker->address,
         ];
 
         $projectId = $model->insert($data);
@@ -280,7 +303,10 @@ class ProjectModelTest extends CIUnitTestCase {
         $model = new ProjectModel();
         $data = [
             'title'  => 'Invalid Status',
-            'status' => 'hacker-level-status', // Not in ['open', 'in-progress', 'closed']
+            'category_id'   => 1,
+            'home_owner_id' => 1,
+            'status' => 'not-an-available-status',
+            'address' => $this->faker->address,
         ];
 
         $result = $model->insert($data);

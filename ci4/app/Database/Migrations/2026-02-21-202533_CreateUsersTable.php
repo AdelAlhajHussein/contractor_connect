@@ -10,12 +10,11 @@ class CreateUsersTable extends Migration
     {
         //
         $this->forge->addField([
-            'user_id' => [
+            'id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
                 'auto_increment' => true,
-
             ],
             'username' => [
                 'type' => 'VARCHAR',
@@ -26,14 +25,13 @@ class CreateUsersTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => false,
-
             ],
-            'firstname' => [
+            'first_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => false,
             ],
-            'lastname' => [
+            'last_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => false,
@@ -54,7 +52,6 @@ class CreateUsersTable extends Migration
                 'default' => '1', // default active
             ],
 
-
             // timestamps
             'created_at' => ['type' => 'DATETIME', 'null' => true],
             'updated_at' => ['type' => 'DATETIME', 'null' => true],
@@ -62,15 +59,14 @@ class CreateUsersTable extends Migration
         ]);
 
         // Primary key
-        $this->forge->addKey('user_id', true);
+        $this->forge->addKey('id', true);
 
         // Build table
         $this->forge->createTable('users');
 
     }
 
-    public function down()
-    {
+    public function down(){
         // Undo migration
         $this->forge->dropTable('users');
     }

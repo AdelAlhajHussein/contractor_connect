@@ -10,31 +10,31 @@ Health
  [x] Base url has been set
 
 Project Model (Database\ProjectModel)
- [ ] Successfully create project
- [ ] Successfully create project without end date
+ [x] Successfully create project
+ [x] Successfully create project without end date
  [ ] Title exceeds character limit
- [ ] Insert fails without title
+ [x] Insert fails without title
  [ ] Deadline has not expired
- [ ] Budget min cannot exceed max
- [ ] Budget cannot be negative
- [ ] Budget is not text
+ [x] Budget min cannot exceed max
+ [x] Budget cannot be negative
+ [x] Budget is not text
  [ ] Cannot create project without valid user id
  [ ] Status defaults to open
  [ ] Project is created with timestamps
- [ ] Project status value is valid
+ [x] Project status value is valid
 
 User Auth (Feature\UserAuth)
  [ ] Login success redirects to dashboard
- [ ] Login fails with wrong password
+ [x] Login fails with wrong password
  [x] Login fails with wrong email
  [ ] Guest cannot access admin
 
 User Model (Database\UserModel)
  [ ] Insert user
  [ ] Soft delete works
- [ ] Find user by email
- [ ] Cannot create user with existing email
- [ ] Password too short
- [ ] Password fails with invalid characters
+ [x] Find user by email
+ [x] Cannot create user with existing email
+ [x] Password too short
+ [x] Password fails with invalid characters
  [ ] Password fails with spaces
 

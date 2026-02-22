@@ -40,6 +40,7 @@ class UserModelTest extends CIUnitTestCase {
             'email'      => $this->faker->email,
             'first_name' => $this->faker->firstName,
             'last_name'  => $this->faker->lastName,
+            'password_hash' => password_hash($this->faker->password, PASSWORD_DEFAULT),
             'role_id'    => 1,
             'is_active'  => 1
         ];
@@ -48,7 +49,7 @@ class UserModelTest extends CIUnitTestCase {
         $userId = $model->insert($data);
 
         // Verify ID is a number
-        $this->assertIsNumeric($userId);
+        $this->assertIsNumeric($userId, 'Insert failed: ' . json_encode($model->errors()));
 
         // Verify data exists in db
         $this->seeInDatabase('users', ['email' => $data['email']]);
@@ -72,15 +73,21 @@ class UserModelTest extends CIUnitTestCase {
             'email'      => $email,
             'role_id'    => 1,
             'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'password_hash' => password_hash($this->faker->password, PASSWORD_DEFAULT),
         ];
 
         $id = $model->insert($data);
+
+        if( $id === false){
+            var_dump($model->errors());
+        }
 
         // Delete user
         $model->delete($id);
 
         // Verify record has been deleted
-        $this->assertNull($model->find($id));
+        $this->assertEmpty($model->find($id));
 
         // Verify user is still in the Database (Not a hard delete)
         $this->seeInDatabase('users', [
@@ -111,6 +118,8 @@ class UserModelTest extends CIUnitTestCase {
             'username'   => $this->faker->userName,
             'email'      => $fakeEmail,
             'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'password_hash' => password_hash($this->faker->password, PASSWORD_DEFAULT),
             'role_id'    => 1,
         ]);
 
@@ -122,7 +131,7 @@ class UserModelTest extends CIUnitTestCase {
         $this->assertEquals($fakeEmail, $user['email']);
     }
 
-    // Expect to fail
+
     /**
      * Scenario: Attempt to insert a user with an email that already exists
      * Expect:
@@ -140,6 +149,8 @@ class UserModelTest extends CIUnitTestCase {
             'email'      => $fakeEmail,
             'role_id'    => 1,
             'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'password_hash' => password_hash($this->faker->password, PASSWORD_DEFAULT),
         ]);
 
         // 2. Attempt to insert a second user with the same email
@@ -148,6 +159,8 @@ class UserModelTest extends CIUnitTestCase {
             'email'      => $fakeEmail,
             'role_id'    => 1,
             'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'password_hash' => password_hash($this->faker->password, PASSWORD_DEFAULT),
         ];
 
         $result = $model->insert($data);
@@ -169,6 +182,8 @@ class UserModelTest extends CIUnitTestCase {
         $data = [
             'username'      => $this->faker->userName,
             'email'         => $this->faker->email,
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
             'password_hash' => 'pwd',
             'role_id'       => 1
         ];
@@ -197,7 +212,9 @@ class UserModelTest extends CIUnitTestCase {
         $data = [
             'username'      => $this->faker->userName,
             'email'         => $this->faker->email,
-            'password_hash' => 'invalid_pa$$word',
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'password_hash' => 'p@$$word',
             'role_id'       => 1
         ];
 
@@ -225,6 +242,8 @@ class UserModelTest extends CIUnitTestCase {
         $data = [
             'username'      => $this->faker->userName,
             'email'         => $this->faker->email,
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
             'password_hash' => 'invalid password',
             'role_id'       => 1
         ];

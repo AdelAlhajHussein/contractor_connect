@@ -63,7 +63,7 @@ ini_set('display_errors', '1');
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
 
 // Ensure the current directory is pointing to the front controller's directory
-chdir(FCPATH);
+//chdir(FCPATH);
 
 /*
  *---------------------------------------------------------------
@@ -74,6 +74,17 @@ chdir(FCPATH);
  * and fires up an environment-specific bootstrapping.
  */
 
+chdir(__DIR__);
+
+require __DIR__ . '/app/Config/Paths.php';
+$paths = new Paths();
+
+require $paths->systemDirectory . '/Boot.php';
+
+exit(Boot::bootSpark($paths));
+
+
+/*
 // LOAD OUR PATHS CONFIG FILE
 // This is the line that might need to be changed, depending on your folder structure.
 require FCPATH . '../app/Config/Paths.php';
@@ -85,3 +96,4 @@ $paths = new Paths();
 require $paths->systemDirectory . '/Boot.php';
 
 exit(Boot::bootSpark($paths));
+*/
