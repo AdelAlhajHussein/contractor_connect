@@ -72,12 +72,12 @@
             <li class="defect">Title exceeds character limit</li>
             <li class="success">Insert fails without title</li>
             <li class="defect">Deadline has not expired</li>
-            <li class="success">Budget min cannot exceed max</li>
+            <li class="defect">Budget min cannot exceed max</li>
             <li class="success">Budget cannot be negative</li>
             <li class="success">Budget is not text</li>
-            <li class="defect">Cannot create project without valid user id</li>
+            <li class="success">Cannot create project without valid user id</li>
             <li class="defect">Status defaults to open</li>
-            <li class="defect">Project is created with timestamps</li>
+            <li class="success">Project is created with timestamps</li>
             <li class="success">Project status value is valid</li>
         </ul>
         <h2>User Auth (Feature\UserAuth)</h2>
@@ -89,13 +89,10 @@
         </ul>
         <h2>User Model (Database\UserModel)</h2>
         <ul>
-            <li class="defect">Insert user</li>
-            <li class="defect">Soft delete works</li>
+            <li class="success">Insert user</li>
+            <li class="success">Soft delete works</li>
             <li class="success">Find user by email</li>
             <li class="success">Cannot create user with existing email</li>
-            <li class="success">Password too short</li>
-            <li class="success">Password fails with invalid characters</li>
-            <li class="defect">Password fails with spaces</li>
         </ul>
     </body>
 </html>

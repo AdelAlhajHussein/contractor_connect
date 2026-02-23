@@ -1,6 +1,7 @@
 <?php
 namespace Database;
 
+use App\Models\UserModel;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use App\Models\ProjectModel;
@@ -13,21 +14,43 @@ class ProjectModelTest extends CIUnitTestCase {
     protected $namespace = 'App';
     protected $faker;
 
+    // --------
+    // Set Up
     protected function setUp(): void {
         parent::setUp();
         $this->faker = FakerFactory::create();
     }
 
-    /**
-     * // TODO: verify if budget can be 0
-     *
-     *
-     */
+
+    // --------------------------------------
+    // Helper to create user data for testing
+    private function createTestUser():int{
+        $userModel = new userModel();
+
+        return $userModel->insert([
+            'username' => $this->faker->userName,
+            'email'     => $this->faker->unique()->email,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'password_hash' => password_hash('ContractorConnect', PASSWORD_DEFAULT),
+            'role_id' => 1
+        ]);
+    }
+    private function createTestCategory():int{
+
+        $db = \Config\Database::connect();
+        $db->table('categories')->insert([
+            "name"=>"General Services"
+        ]);
+
+        // Return Category ID
+        return $db->insertID();
+    }
 
 
-    // ----------------
+    // -----------
     // Scenarios
-    // ----------------
+    // -----------
     /**
      * Scenario: Successfully create a project
      * Expect:
@@ -38,8 +61,10 @@ class ProjectModelTest extends CIUnitTestCase {
     public function testSuccessfullyCreateProject()
     {
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
-            'home_owner_id' => 1,
+            'home_owner_id' => $userId,
             'category_id'   => 1,
             'title'         => $this->faker->sentence(3),
             'description'   => $this->faker->paragraph,
@@ -67,8 +92,10 @@ class ProjectModelTest extends CIUnitTestCase {
     public function testSuccessfullyCreateProjectWithoutEndDate()
     {
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
-            'home_owner_id' => 1,
+            'home_owner_id' => $userId,
             'category_id'   => 1,
             'title'         => $this->faker->sentence(3),
             'description'   => $this->faker->paragraph,
@@ -96,9 +123,10 @@ class ProjectModelTest extends CIUnitTestCase {
         $model = new ProjectModel();
 
         $title = $this->faker->realText(260);
+        $userId = $this->createTestUser();
 
-        $data =[
-            'home_owner_id' => 1,
+        $data = [
+            'home_owner_id' => $userId,
             'title' => $title,
             'category_id' => 1,
             'budget_min' => 1000,
@@ -125,12 +153,15 @@ class ProjectModelTest extends CIUnitTestCase {
     public function testInsertFailsWithoutTitle()
     {
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
-            'home_owner_id' => 1,
+            'home_owner_id' => $userId,
             'budget_min'   => 1000,
             // 'title' => 'not included'
             'category_id'   => 1,
             'address' => $this->faker->address,
+            'status' => 'open',
         ];
 
         $result = $model->insert($data);
@@ -149,12 +180,16 @@ class ProjectModelTest extends CIUnitTestCase {
     public function testDeadlineHasNotExpired(){
         $model = new ProjectModel();
 
+        $userId = $this->createTestUser();
+
         $data = [
+            'home_owner_id' => $userId,
             'title' => 'Expired project',
             'deadline_date' => '2000-01-01',
             'category_id'   => 1,
+            'budget_min'   => 1000,
             'address' => $this->faker->address,
-            'home_owner_id' => 1,
+            'status' => 'open',
         ];
 
         $result = $model->insert($data);
@@ -173,13 +208,16 @@ class ProjectModelTest extends CIUnitTestCase {
     public function testBudgetMinCannotExceedMax()
     {
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
+            'home_owner_id' => $userId,
             'title'  => 'Invalid Budget',
             'category_id'   => 1,
             'budget_min' => 5000,
             'budget_max' => 1000,
             'address' => $this->faker->address,
-            'home_owner_id' => 1,
+            'status' => 'open',
         ];
 
         $result = $model->insert($data);
@@ -194,12 +232,15 @@ class ProjectModelTest extends CIUnitTestCase {
      */
     public function testBudgetCannotBeNegative(){
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
+            'home_owner_id' => $userId,
             'title'      => 'Invalid Budget',
             'category_id'   => 1,
             'address' => $this->faker->address,
             'budget_min' => -1000,
-            'home_owner_id' => 1,
+            'status' => 'open',
         ];
 
         $this ->assertFalse($model->insert($data));
@@ -213,12 +254,15 @@ class ProjectModelTest extends CIUnitTestCase {
      */
     public function testBudgetIsNotText(){
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
+            'home_owner_id' => $userId,
             'title' => 'Project',
             'budget_min' => 'expensive',
             'category_id'   => 1,
             'address' => $this->faker->address,
-            'home_owner_id' => 1,
+            'status' => 'open',
             ];
 
         $this ->assertFalse($model->insert($data));
@@ -234,7 +278,7 @@ class ProjectModelTest extends CIUnitTestCase {
         $model = new ProjectModel();
 
         $data = [
-            'home_owner_id'=> 99999,
+            'home_owner_id'=> 9999999999999,
             'title'  => 'Invalid UserId',
             'category_id'   => 1,
             'address' => $this->faker->address,
@@ -255,12 +299,16 @@ class ProjectModelTest extends CIUnitTestCase {
     public function testStatusDefaultsToOpen()
     {
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+        $categoryId = $this->createTestCategory();
+
         $data = [
-            'home_owner_id' => 1,
+            'home_owner_id' => $userId,
             'title'   => 'Open Project',
-            'category_id'   => 1,
+            'category_id'   => $categoryId,
             'address'  => $this->faker->address,
             'budget_min'    => 1000,
+            // 'status' => 'open', Status not passed to function
         ];
 
         $projectId = $model->insert($data);
@@ -277,12 +325,15 @@ class ProjectModelTest extends CIUnitTestCase {
      */
     public function testProjectIsCreatedWithTimestamps(){
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
-            'home_owner_id' => 1,
+            'home_owner_id' => $userId,
             'title' => 'Project with a Timestamp',
             'category_id'   => 1,
             'budget_min' => 1000,
             'address' => $this->faker->address,
+            'status' => 'open',
         ];
 
         $projectId = $model->insert($data);
@@ -301,10 +352,12 @@ class ProjectModelTest extends CIUnitTestCase {
      */
     public function testProjectStatusValueIsValid(){
         $model = new ProjectModel();
+        $userId = $this->createTestUser();
+
         $data = [
+            'home_owner_id' => $userId,
             'title'  => 'Invalid Status',
             'category_id'   => 1,
-            'home_owner_id' => 1,
             'status' => 'not-an-available-status',
             'address' => $this->faker->address,
         ];
@@ -315,3 +368,4 @@ class ProjectModelTest extends CIUnitTestCase {
         $this->assertArrayHasKey('status', $model->errors());
     }
 }
+

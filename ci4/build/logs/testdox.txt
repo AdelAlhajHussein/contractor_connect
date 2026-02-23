@@ -15,12 +15,12 @@ Project Model (Database\ProjectModel)
  [ ] Title exceeds character limit
  [x] Insert fails without title
  [ ] Deadline has not expired
- [x] Budget min cannot exceed max
+ [ ] Budget min cannot exceed max
  [x] Budget cannot be negative
  [x] Budget is not text
- [ ] Cannot create project without valid user id
+ [x] Cannot create project without valid user id
  [ ] Status defaults to open
- [ ] Project is created with timestamps
+ [x] Project is created with timestamps
  [x] Project status value is valid
 
 User Auth (Feature\UserAuth)
@@ -30,11 +30,8 @@ User Auth (Feature\UserAuth)
  [ ] Guest cannot access admin
 
 User Model (Database\UserModel)
- [ ] Insert user
- [ ] Soft delete works
+ [x] Insert user
+ [x] Soft delete works
  [x] Find user by email
  [x] Cannot create user with existing email
- [x] Password too short
- [x] Password fails with invalid characters
- [ ] Password fails with spaces
 

@@ -36,9 +36,9 @@ class UserAuthTest extends CIUnitTestCase {
         $userModel->insert([
             'username' => 'contractor_bob',
             'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
-            'password_hash' => $password,
             'role_id' => 1,
             'is_active' => 1
         ]);

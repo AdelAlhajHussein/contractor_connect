@@ -36,14 +36,14 @@ class ProjectModel extends Model
 
 
     protected $validationRules = [
-
-        'home_owner_id' => 'required|is_natural_no_zero',
-        'category_id' => 'required|is_natural_no_zero',
+        'home_owner_id' => 'required|is_not_unique[users.id]',
+        'category_id' => 'required|is_not_unique[categories.id]',
         'title' => 'required|min_length[3]|max_length[255]',
         'address' => 'required|min_length[3]|max_length[255]',
         'budget_min' => 'permit_empty|numeric|greater_than_equal_to[0]',
-        'budget_max' => 'permit_empty|numeric|greater_than_equal_to[0]',
-        'status' => 'required|in_list[open, closed, in_progress, completed, cancelled]',
+        'budget_max' => 'permit_empty|numeric|greater_than_equal_to[budget_min]',
+        'status' => 'permit_empty|in_list[open,in_progress,completed,closed,cancelled]',
+        'deadline_date' => 'permit_empty|valid_date',
     ];
     /*
     public function __construct(){
