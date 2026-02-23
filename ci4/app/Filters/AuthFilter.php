@@ -18,4 +18,8 @@ class AuthFilter implements FilterInterface
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
     }
+
+    public array $aliases = [
+        'auth' => \App\Filters\AuthFilter::class,
+    ];
 }

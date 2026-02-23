@@ -9,6 +9,7 @@ class UserModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $returnType = 'array';
+    protected $useSoftDeletes = true;
 
     protected $allowedFields = [
         'username',
@@ -31,6 +32,9 @@ class UserModel extends Model
 
     protected $validationRules = [
         'email' => 'required|is_unique[users.email]',
-        'username' => 'required|is_unique[users.username]'
+        'username' => 'required|is_unique[users.username]',
+        'password_hash' => 'required|min_length[8]',
+        'first_name' => 'required|min_length[3]|max_length[20]',
+        'last_name' => 'required|min_length[3]|max_length[20]',
     ];
 }

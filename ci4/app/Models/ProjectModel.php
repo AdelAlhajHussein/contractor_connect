@@ -35,20 +35,22 @@ class ProjectModel extends Model
     protected $updatedField  = 'updated_at';
 
 
-    protected $validationRules = [];
+    protected $validationRules = [
+        'home_owner_id' => 'required|is_not_unique[users.id]',
+        'category_id' => 'required|is_not_unique[categories.id]',
+        'title' => 'required|min_length[3]|max_length[255]',
+        'address' => 'required|min_length[3]|max_length[255]',
+        'budget_min' => 'required|numeric|greater_than_equal_to[0]',
+        'budget_max' => 'permit_empty|numeric|greater_than_equal_to_diff[budget_min]',
+        'status' => 'permit_empty|in_list[open,in_progress,completed,closed,cancelled]',
+        'deadline_date' => 'permit_empty|valid_date',
+    ];
+
     public function __construct(){
+
         parent::__construct();
 
-        // Load from config file
-        $config = config('Project');
-        $status = implode(',', $config['status']);
-
-        $this->validationRules = [
-            'title'      => 'required|min_length[3]|max_length[255]',
-            'budget_min' => 'required|min_length[3]|max_length[255]',
-            'budget_max' => 'required|min_length[3]|max_length[255]',
-            'status'     => 'required|in_list[0,1]',
-            'deadline_date' => 'valid_date',
-        ];
+        $this->validationRules['deadline_date'] .= '|greater_than[' . date('Y-m-d') . ']';
     }
+
 }

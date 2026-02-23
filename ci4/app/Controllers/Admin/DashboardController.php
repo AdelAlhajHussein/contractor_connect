@@ -75,4 +75,8 @@ class DashboardController extends BaseController
 
         return view('components/dashboard-table', $data);
     }
+
+    public function settings() {
+        return "Admin settings page";
+    }
 }

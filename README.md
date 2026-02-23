@@ -9,7 +9,8 @@ A digital marketplace for home improvement jobs.
 
 ## Testing
 This project uses PHPUnit for quality assurance testing.
-- To run PHPUnit
+- Set CI_ENVIRONMENT to Testing in .env
+- To run PHPUnit, navigate to /ci4
     bash
     vendor/bin/phpunit
 
