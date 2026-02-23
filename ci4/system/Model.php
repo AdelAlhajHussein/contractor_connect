@@ -797,18 +797,6 @@ class Model extends BaseModel
         return parent::insert($row, $returnID);
     }
 
-    /**
-     * Ensures that only the fields that are allowed to be inserted are in
-     * the data array.
-     *
-     * @used-by insert() to protect against mass assignment vulnerabilities.
-     * @used-by insertBatch() to protect against mass assignment vulnerabilities.
-     *
-     * @param         array     $row Row data
-     * @phpstan-param row_array $row
-     *
-     * @throws DataException
-     */
     protected function doProtectFieldsForInsert(array $row): array
     {
         if (! $this->protectFields) {

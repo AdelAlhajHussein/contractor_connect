@@ -32,48 +32,48 @@ $routes->group('admin', ['filter' => 'auth'], function( $routes){
 
 
     // Users
-    $routes->get('users', 'Admin\UsersController::index', ['filter' => 'auth']);
-    $routes->get('users/toggle/(:num)', 'Admin\UsersController::toggle/$1', ['filter' => 'auth']);
-    $routes->post('users/role/(:num)', 'Admin\UsersController::updateRole/$1', ['filter' => 'auth']);
+    $routes->get('users', 'Admin\UsersController::index');
+    $routes->get('users/toggle/(:num)', 'Admin\UsersController::toggle/$1');
+    $routes->post('users/role/(:num)', 'Admin\UsersController::updateRole/$1');
 
     // Contractors
-    $routes->get('admin/contractors', 'Admin\ContractorsController::index', ['filter' => 'auth']);
-    $routes->get('admin/contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1', ['filter' => 'auth']);
-    $routes->get('admin/contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1', ['filter' => 'auth']);
-    $routes->get('admin/contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1', ['filter' => 'auth']);
+    $routes->get('admin/contractors', 'Admin\ContractorsController::index');
+    $routes->get('admin/contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1');
+    $routes->get('admin/contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1');
+    $routes->get('admin/contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1');
 
 
     // Homeowners
     $routes->get('homeowners', 'Admin\HomeownersController::index');
-    $routes->get('homeowners/toggle/(:num)', 'Admin\HomeownersController::toggle/$1', ['filter' => 'auth']);
+    $routes->get('homeowners/toggle/(:num)', 'Admin\HomeownersController::toggle/$1');
 
 
     // Projects
     $routes->get('projects', 'Admin\ProjectsController::index');
-    $routes->get('projects/view/(:num)', 'Admin\ProjectsController::view/$1', ['filter' => 'auth']);
-    $routes->get('projects/cancel/(:num)', 'Admin\ProjectsController::cancel/$1', ['filter' => 'auth']);
-    $routes->get('projects/close-bidding/(:num)', 'Admin\ProjectsController::closeBidding/$1', ['filter' => 'auth']);
+    $routes->get('projects/view/(:num)', 'Admin\ProjectsController::view/$1');
+    $routes->get('projects/cancel/(:num)', 'Admin\ProjectsController::cancel/$1');
+    $routes->get('projects/close-bidding/(:num)', 'Admin\ProjectsController::closeBidding/$1');
 
 
     // Bids
     $routes->get('bids', 'Admin\BidsController::index');
-    $routes->get('bids/view/(:num)', 'Admin\BidsController::view/$1', ['filter' => 'auth']);
-    $routes->get('bids/withdraw/(:num)', 'Admin\BidsController::withdraw/$1', ['filter' => 'auth']);
+    $routes->get('bids/view/(:num)', 'Admin\BidsController::view/$1');
+    $routes->get('bids/withdraw/(:num)', 'Admin\BidsController::withdraw/$1');
 
     // Ratings
     $routes->get('ratings', 'Admin\RatingsController::index');
-    $routes->get('ratings/view/(:num)', 'Admin\RatingsController::view/$1', ['filter' => 'auth']);
-    $routes->get('ratings/remove/(:num)', 'Admin\RatingsController::remove/$1', ['filter' => 'auth']);
-    $routes->get('ratings/suspicious', 'Admin\RatingsController::suspicious', ['filter' => 'auth']);
+    $routes->get('ratings/view/(:num)', 'Admin\RatingsController::view/$1');
+    $routes->get('ratings/remove/(:num)', 'Admin\RatingsController::remove/$1');
+    $routes->get('ratings/suspicious', 'Admin\RatingsController::suspicious');
 
     // Categories
     $routes->get('admin/categories', 'Admin\CategoriesController::index');
-    $routes->get('admin/categories/create', 'Admin\CategoriesController::create', ['filter' => 'auth']);
-    $routes->post('admin/categories/store', 'Admin\CategoriesController::store', ['filter' => 'auth']);
-    $routes->get('admin/categories/edit/(:num)', 'Admin\CategoriesController::edit/$1', ['filter' => 'auth']);
-    $routes->post('admin/categories/update/(:num)', 'Admin\CategoriesController::update/$1', ['filter' => 'auth']);
-    $routes->get('admin/categories/delete/(:num)', 'Admin\CategoriesController::delete/$1', ['filter' => 'auth']);
-    $routes->get('admin/categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1', ['filter' => 'auth']);
+    $routes->get('admin/categories/create', 'Admin\CategoriesController::create');
+    $routes->post('admin/categories/store', 'Admin\CategoriesController::store');
+    $routes->get('admin/categories/edit/(:num)', 'Admin\CategoriesController::edit/$1');
+    $routes->post('admin/categories/update/(:num)', 'Admin\CategoriesController::update/$1');
+    $routes->get('admin/categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
+    $routes->get('admin/categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1');
 
     // Reports
     $routes->get('admin/reports', 'Admin\ReportsController::index');

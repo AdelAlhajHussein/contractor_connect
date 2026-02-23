@@ -12,22 +12,22 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [ ] Title exceeds character limit
+ [x] Title exceeds character limit
  [x] Insert fails without title
- [ ] Deadline has not expired
- [ ] Budget min cannot exceed max
+ [x] Deadline has not expired
+ [x] Budget min cannot exceed max
  [x] Budget cannot be negative
  [x] Budget is not text
  [x] Cannot create project without valid user id
- [ ] Status defaults to open
+ [x] Status defaults to open
  [x] Project is created with timestamps
  [x] Project status value is valid
 
 User Auth (Feature\UserAuth)
  [ ] Login success redirects to dashboard
  [x] Login fails with wrong password
- [x] Login fails with wrong email
- [ ] Guest cannot access admin
+ [x] Login fails with wrong username
+ [x] Guest cannot access admin
 
 User Model (Database\UserModel)
  [x] Insert user
