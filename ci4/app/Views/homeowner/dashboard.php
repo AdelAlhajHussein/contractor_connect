@@ -1,59 +1,53 @@
-<?= $this->extend('layouts/dashboard'); ?>
+<?= $this->extend('layouts/main') ?>
 
 <?= $this->section('page_css') ?>
-    <link rel="stylesheet" href="<?= base_url('css/homeowner-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= base_url('css/admin-dashboard.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-<div class="dashboard-container">
-
-    <div class="dashboard-title">
-        Homeowner Dashboard
-    </div>
+<h1>Dashboard</h1>
 
 
-    <!-- Homeowner data table -->
-    <div id="table-content">
-        <?= view('components/dashboard-table', [
-            'headers' => $headers ?? ['Title', 'Budget', 'Deadline', 'Status', 'Actions'], // default headers
-            'rows'    => $project_rows ?? []
-        ]) ?>
-    </div>
+<hr>
 
+<!-- Top nav buttons -->
+<div style="margin-bottom: 15px;">
+    <a href="<?= site_url('homeowner/projects') ?>">Projects</a> |
+    <a href="<?= site_url('homeowner/bids') ?>">Bids</a> |
+    <a href="<?= site_url('homeowner/browse') ?>">Browse</a> |
+    <a href="<?= site_url('homeowner/profile') ?>">Profile</a>
 
-    <ul>
-        <li>
-            <a href="<?= site_url('homeowner/projects/create') ?>"><strong>+ Post a New Project</strong></a></li>
-        <li>
-            <a href="<?= site_url('homeowner/projects') ?>" class="ajax-link" data-target="projects">My Projects (Track Progress)</a></li>
-        <li>
-            <a href="<?= site_url('homeowner/bids') ?>">View Bids Received</a>
-        </li>
-
-        <li><a href="<?= site_url('homeowner/search-contractors') ?>">Browse Contractors</a></li>
-
-        <li><a href="<?= site_url('homeowner/payments') ?>">Payment History</a></li>
-        <li><a href="<?= site_url('homeowner/reviews') ?>">My Reviews</a></li>
-
-        <li><a href="<?= site_url('homeowner/profile') ?>">Account Settings</a></li>
-    </ul>
 </div>
 
-<script>
-    // Ajax link to generate content
-    document.querySelectorAll('.ajax-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = this.getAttribute('data-target');
+<hr>
 
-            fetch(`<?= site_url('homeowner/dashboard/get_table/') ?>${target}`)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('table-content').innerHTML = html;
-                });
-        });
-    });
-</script>
+<h2>Profile</h2>
 
+<p>
+    <a href="<?= site_url('Homeowner/profile/edit') ?>">Edit Profile</a>
+</p>
+
+<table border="1" cellpadding="8" cellspacing="0" width="100%">
+    <tr>
+        <th width="200">Username</th>
+        <td><?= esc($user['username'] ?? '') ?></td>
+    </tr>
+    <tr>
+        <th>First Name</th>
+        <td><?= esc($profile['first_name'] ?? '') ?></td>
+    </tr>
+    <tr>
+        <th>Last Name</th>
+        <td><?= esc($profile['last_name'] ?? '') ?></td>
+    </tr>
+    <tr>
+        <th>Address</th>
+        <td><?= esc($profile['address'] ?? '') ?></td>
+    </tr>
+    <tr>
+        <th>Payment Info</th>
+        <td><?= esc($profile['payment_info'] ?? '') ?></td>
+    </tr>
+</table>
 <?= $this->endSection() ?>
