@@ -25,7 +25,7 @@
         </div>
 
         <div class="dashboard-item">
-            <img src="<?= base_url('img/bid.png') ?>" alt="bid logo">
+            <img src="<?= base_url('img/browse.png') ?>" alt="browse logo">
             <a href="<?= site_url('homeowner/browse') ?>">Browse</a>
         </div>
         <div class="dashboard-item">
