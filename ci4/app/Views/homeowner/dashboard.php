@@ -6,48 +6,34 @@
 
 <?= $this->section('content') ?>
 
-<h1>Dashboard</h1>
+    <div class="dashboard-container">
 
+        <div class="dashboard-title">
+             Dashboard
+        </div>
 
-<hr>
+        <div class="dashboard-grid">
 
-<!-- Top nav buttons -->
-<div style="margin-bottom: 15px;">
-    <a href="<?= site_url('homeowner/projects') ?>">Projects</a> |
-    <a href="<?= site_url('homeowner/bids') ?>">Bids</a> |
-    <a href="<?= site_url('homeowner/browse') ?>">Browse</a> |
-    <a href="<?= site_url('homeowner/profile') ?>">Profile</a>
+            <div class="dashboard-item">
+                <img src="<?= base_url('img/project.png') ?>" alt="Project logo">
+                <a href="<?= site_url('homeowner/projects') ?>">Projects</a>
+            </div>
 
-</div>
+        <div class="dashboard-item">
+            <img src="<?= base_url('img/bid.png') ?>" alt="bid logo">
+            <a href="<?= site_url('homeowner/bids') ?>">Bids</a>
+        </div>
 
-<hr>
+        <div class="dashboard-item">
+            <img src="<?= base_url('img/bid.png') ?>" alt="bid logo">
+            <a href="<?= site_url('homeowner/browse') ?>">Browse</a>
+        </div>
+        <div class="dashboard-item">
+            <img src="<?= base_url('img/user_logo.png') ?>" alt="user logo">
+            <a href="<?= site_url('homeowner/profile') ?>">Profile</a>
+        </div>
 
-<h2>Profile</h2>
+         </div>
+    </div>
 
-<p>
-    <a href="<?= site_url('Homeowner/profile/edit') ?>">Edit Profile</a>
-</p>
-
-<table border="1" cellpadding="8" cellspacing="0" width="100%">
-    <tr>
-        <th width="200">Username</th>
-        <td><?= esc($user['username'] ?? '') ?></td>
-    </tr>
-    <tr>
-        <th>First Name</th>
-        <td><?= esc($profile['first_name'] ?? '') ?></td>
-    </tr>
-    <tr>
-        <th>Last Name</th>
-        <td><?= esc($profile['last_name'] ?? '') ?></td>
-    </tr>
-    <tr>
-        <th>Address</th>
-        <td><?= esc($profile['address'] ?? '') ?></td>
-    </tr>
-    <tr>
-        <th>Payment Info</th>
-        <td><?= esc($profile['payment_info'] ?? '') ?></td>
-    </tr>
-</table>
 <?= $this->endSection() ?>
