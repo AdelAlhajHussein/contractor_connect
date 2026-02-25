@@ -10,7 +10,7 @@
     <div class="dashboard-container">
 
         <div class="dashboard-title">
-            Homeowner Dashboard
+            Contractor Dashboard
         </div>
 
         <div class="dashboard-grid">
