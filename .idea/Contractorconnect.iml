@@ -2,6 +2,9 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/ci4/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/ci4/app/Config" isTestSource="false" packagePrefix="Config\" />
+      <sourceFolder url="file://$MODULE_DIR$/ci4/system" isTestSource="false" packagePrefix="CodeIgniter\" />
       <sourceFolder url="file://$MODULE_DIR$/ci4/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/ci4/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/ci4/vendor/laminas/laminas-escaper" />
