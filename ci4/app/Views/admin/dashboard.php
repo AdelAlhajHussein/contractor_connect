@@ -16,7 +16,7 @@
             <img src="<?= base_url('img/user_logo.png') ?>" alt="user logo">
             <a href="<?= site_url('admin/users') ?>">Users</a>
         </div>
-
+<!-- remove this //just for presentation
         <div class="dashboard-item">
             <img src="<?= base_url('img/contractor.png') ?>" alt="Contractors logo">
             <a href="<?= site_url('admin/contractors') ?>">Contractors</a>
@@ -26,6 +26,21 @@
             <img src="<?= base_url('img/homeowner.png') ?>" alt="homeowner logo">
             <a href="<?= site_url('admin/homeowners') ?>">Homeowners</a>
         </div>
+
+-->
+        <div class="dashboard-item">
+
+            <img src="<?= base_url('img/homeowner.png') ?>" alt="homeowner logo">
+            <a href="<?= site_url('admin/contractors') ?>">Homeowners </a>
+
+        </div>
+
+        <div class="dashboard-item">
+            <img src="<?= base_url('img/contractor.png') ?>" alt="Contractors logo">
+            <a href="<?= site_url('admin/homeowners') ?>">Contractors</a>
+
+        </div>
+<!-- remove this line above for fixing the problem-->
 
         <div class="dashboard-item">
             <img src="<?= base_url('img/project.png') ?>" alt="Project logo">

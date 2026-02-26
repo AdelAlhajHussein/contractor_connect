@@ -11,7 +11,9 @@
 
     <h1 class="reports-title">Admin Reports</h1>
 
-
+    <a href="<?= site_url('admin/dashboard') ?>" class="btn btn-outline-danger">
+        ← Back to Dashboard
+    </a>
     <h2 class="report-section-title">Users</h2>
 
     <p class="report-summary">

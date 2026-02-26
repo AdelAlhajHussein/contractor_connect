@@ -8,8 +8,12 @@
 <?= $this->section('content') ?>
 <div class="users-container">
 
+   <!--
+    just for presentation comment
     <h1 class="users-title">Contractors</h1>
 
+    -->
+    <h1 class="users-title">Homeowners</h1>
     <form method="get"
           action="<?= site_url('admin/contractors') ?>"
           class="filter-form">
@@ -44,6 +48,9 @@
             Reset
         </a>
 
+        <a href="<?= site_url('admin/dashboard') ?>" class="btn btn-outline-danger">
+            ← Back to Dashboard
+        </a>
     </form>
 
 
