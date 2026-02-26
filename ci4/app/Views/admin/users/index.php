@@ -36,6 +36,9 @@
 
         <a href="<?= site_url('admin/users') ?>" class="reset-link">Reset</a>
 
+        <a href="<?= site_url('admin/dashboard') ?>" class="btn btn-outline-danger">
+            ← Back to Dashboard
+        </a>
     </form>
 
 

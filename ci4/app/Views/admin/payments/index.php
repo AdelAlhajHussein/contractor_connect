@@ -63,6 +63,11 @@
         <br>
         <strong>Coming Soon</strong>
 
+
+        <a href="<?= site_url('admin/dashboard') ?>" class="btn btn-outline-danger">
+            ← Back to Dashboard
+        </a>
+
     </div>
 
 </div>
