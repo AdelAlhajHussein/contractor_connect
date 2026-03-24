@@ -1,62 +1,63 @@
 /* ------- General ------ */
 
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  background-color: whitesmoke;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: whitesmoke;
 }
-
-a{
+main {
+    padding-top: 10px;
+}
+a {
     text-decoration: none;
     background-color: transparent;
     color: rgba(172, 207, 247, 0.83);
-    font-weight: 100;
+    font-weight: 400;
 }
-a:hover{
+
+a:hover {
     color: rgb(172, 207, 247);
 }
 
-p{
-   /* color:white;*/
-    font-weight: 100;
-    font-size: 0.7em;
+p {
+    font-weight: 400;
+    font-size: 1rem;
     background-color: transparent;
+    margin-bottom: 0;
 }
 
-
-button{
+button {
     border: 1px solid black;
     border-radius: 7px;
     margin: 0 0.7em;
     padding: 0.5em;
-
-}
-/* Navbar  */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background-color: rgba(172, 207, 247, 0.83);
 }
 
+/* ------- Navbar ------- */
 
-.navbar a,
-.navbar span,
-.navbar div,
-.navbar h1,
-.navbar h2 {
-  background-color: transparent !important;
-  box-shadow: none !important;
+.custom-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(172, 207, 247, 0.83);
+}
+
+.custom-navbar a,
+.custom-navbar span,
+.custom-navbar div,
+.custom-navbar h1,
+.custom-navbar h2 {
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
 
 .logo {
     font-size: 22px;
     font-weight: bold;
-    color: #2f3b46;   
+    color: #2f3b46;
     transition: all 0.3s ease;
-    background-color:transparent;
-
+    background-color: transparent;
 }
 
 .logo:hover {
@@ -65,22 +66,19 @@ button{
     font-weight: 600;
 }
 
-
 .nav-right {
     display: flex;
     align-items: center;
     gap: 20px;
-
+    flex-wrap: wrap;
 }
 
-
 .nav-link {
-    color: #2f3b46;  
+    color: #2f3b46;
     font-size: 16px;
     font-weight: 500;
     transition: all 0.3s ease;
 }
-
 
 .nav-link:hover {
     color: #000000;
@@ -99,7 +97,6 @@ button{
     font-size: 18px;
 }
 
-
 .logout-btn {
     color: #b00020;
 }
@@ -109,22 +106,21 @@ button{
     font-size: 18px;
 }
 
-
 .register-btn {
     background-color: #2f3b46;
-    color: white;
+    color: white !important;
     padding: 6px 12px;
     border-radius: 5px;
     transition: all 0.3s ease;
-
 }
 
 .register-btn:hover {
     background-color: #000;
+    color: white !important;
     font-size: 17px;
 }
 
-/*--- box effect ----*/
+/* ------- Box Effect ------- */
 
 .box-effect {
     background-color: #ffffff;
@@ -135,4 +131,134 @@ button{
     box-shadow: 0 4px 15px rgba(0,0,0,0.12);
     transition: all 0.3s ease;
 }
+/* ------- Footer ------- */
 
+.site-footer {
+    background: linear-gradient(90deg, #1c2331, #111827) !important;
+    color: #ffffff !important;
+    width: 100%;
+    display: block;
+}
+
+.site-footer .container,
+.site-footer .row,
+.site-footer .col-lg-7,
+.site-footer .col-lg-5,
+.site-footer .col-md-6 {
+    background: transparent !important;
+}
+
+.site-footer h3,
+.site-footer h5,
+.site-footer p,
+.site-footer a {
+    background: transparent !important;
+}
+
+.cta-box {
+    background: #ffffff !important;
+    color: #111827 !important;
+    padding: 32px;
+    border-radius: 18px;
+    max-width: 560px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cta-box h3 {
+    color: #111827 !important;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.cta-box p {
+    color: #4b5563 !important;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+.cta-btn {
+    background-color: #0d6efd;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+
+    /* remove all weird effects */
+    transition: none;
+    transform: none;
+}
+
+.cta-btn:hover {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+.cta-btn:hover {
+    background-color: #0d6efd !important;
+    color: #ffffff !important;
+    transform: none;
+}
+
+.follow-title {
+    color: #ffffff !important;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.social-links a {
+    color: #ffffff !important;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.social-links a:hover {
+    color: #8ec5ff !important;
+}
+
+.footer-line {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    margin-top: 25px;
+    margin-bottom: 18px;
+}
+
+.footer-bottom p {
+    color: #ffffff !important;
+    font-size: 0.95rem;
+}
+
+/* ------- Responsive ------- */
+
+@media (max-width: 768px) {
+    .custom-navbar {
+        padding: 15px 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-right {
+        gap: 12px;
+    }
+
+    .nav-link {
+        font-size: 15px;
+    }
+
+    .cta-box {
+        max-width: 100%;
+        padding: 24px;
+    }
+
+    .cta-box h3 {
+        font-size: 1.6rem;
+    }
+
+    .social-links {
+        align-items: flex-start !important;
+    }
+}
