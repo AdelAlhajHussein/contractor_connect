@@ -14,9 +14,27 @@
 
             <?php if (session()->get('logged_in')): ?>
 
+                <?php
+                $roleId = (int) session()->get('role_id');
+
+                if ($roleId === 1) {
+                    $dashboardUrl = site_url('admin/dashboard');
+                } elseif ($roleId === 2) {
+                    $dashboardUrl = site_url('homeowner/dashboard');
+                } elseif ($roleId === 3) {
+                    $dashboardUrl = site_url('contractor/dashboard');
+                } else {
+                    $dashboardUrl = site_url('/');
+                }
+                ?>
+
                 <span class="username">
-                    Welcome, <?= esc(session()->get('username')) ?>
-                </span>
+        Welcome, <?= esc(session()->get('username')) ?>
+    </span>
+
+                <a class="nav-link " href="<?= $dashboardUrl ?>">
+                    Dashboard
+                </a>
 
                 <a class="nav-link logout-btn" href="<?= base_url('/logout') ?>">
                     Logout
