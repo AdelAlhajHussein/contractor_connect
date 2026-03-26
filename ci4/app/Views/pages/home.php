@@ -94,13 +94,7 @@
         </div>
     </section>
 
-    <!-- CTA -->
-    <div class="cta-box">
-        <h3>Start your dream project today</h3>
-        <p>Create an account to post your request, get bids, and hire verified contractors in minutes.</p>
-        <a class="cta-btn" href="<?= site_url('register') ?>">Create Account</a>
-        <!-- if your route is different, change signup to your real route -->
-    </div>
+
 
 </div>
 
