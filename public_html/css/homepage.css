@@ -79,10 +79,6 @@
     transition: transform 0.25s ease;
 }
 
-/* image hover effect */
-.service-media img:hover {
-    transform: translateY(-6px);
-}
 
 /* overlap effect */
 .service-block.right .service-media {
