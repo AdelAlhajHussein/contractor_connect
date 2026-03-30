@@ -94,7 +94,7 @@ class RatingsController extends BaseController
     {
         $db = db_connect();
 
-        // 1) Same homeowner rating same contractor multiple times
+        // 1) Same Homeowner rating same contractor multiple times
         $repeatPairs = $db->table('contractor_ratings cr')
             ->select('cr.contractor_id, c.email AS contractor_email, cr.home_owner_id, h.email AS homeowner_email, COUNT(*) AS rating_count')
             ->join('users c', 'c.id = cr.contractor_id', 'left')
