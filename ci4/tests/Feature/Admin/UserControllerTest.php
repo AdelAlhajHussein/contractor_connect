@@ -157,5 +157,29 @@ class UserControllerTest extends CIUnitTestCase{
     }
 
     // Update Role Tests
+    public function testUpdateRoleFailsWithInvalidRoleId(){
+
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->post('admin/users/updateRole/1', ['role_id' => 999]);
+
+        // Verify redirect on invalid role
+        $result->assertStatus(302);
+        $result->assertRedirectTo(site_url('admin/users'));
+    }
+
+    public function testUpdateRoleRedirectsIfUserNotFound(){
+
+        // Attempt to add an invalid user with a valid role
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->post('admin/users/updateRole/999', ['role_id' => 2]);
+
+        // Verify site redirects if
+        $result->assertStatus(302);
+        $result->assertRedirectTo(site_url('admin/users'));
+    }
+
+
+
+
 
 }
