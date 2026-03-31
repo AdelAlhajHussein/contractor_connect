@@ -24,10 +24,20 @@ Project Model (Database\ProjectModel)
  [x] Project status value is valid
 
 User Auth (Feature\UserAuth)
- [ ] Login success redirects to dashboard
+ [x] Login success redirects to dashboard
  [x] Login fails with wrong password
  [x] Login fails with wrong username
  [x] Guest cannot access admin
+
+User Controller (Tests\Feature\Admin\UserController)
+ [x] Index loads successfully for admin
+ [x] Index filters search and role
+ [ ] Index filters by status
+ [x] Toggle redirects if user not found
+ [x] Toggle change user status
+ [x] Update role fails with invalid role id
+ [x] Update role redirects if user not found
+ [x] Update role changes user role
 
 User Model (Database\UserModel)
  [x] Insert user

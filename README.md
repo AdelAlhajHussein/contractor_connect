@@ -65,7 +65,7 @@ This project uses PHPUnit for quality assurance testing.
     Resolve any conflicts and merge with main branch
 
 ## Run Tests
-  - Navigate to root directory and run
+  - Navigate to root directory (ci4) and run
   bash
   vendor/bin/phpunit
 
@@ -100,3 +100,5 @@ This project uses PHPUnit for quality assurance testing.
     - [] Back-end functions and routing
     - [] Front-end html
     - [] Front-end styling
+- Unit Testing
+  - []

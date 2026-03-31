@@ -38,6 +38,8 @@ class UserAuthTest extends CIUnitTestCase {
         $db->table('users')->insert([
             'username' => $username,
             'email' => 'admin@test.com',
+            'first_name' => 'Admin',
+            'last_name' => 'User',
             'password_hash' => password_hash($password, PASSWORD_DEFAULT),
             'role_id' => 1,
             'is_active' => 1,

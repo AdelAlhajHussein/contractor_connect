@@ -82,10 +82,21 @@
         </ul>
         <h2>User Auth (Feature\UserAuth)</h2>
         <ul>
-            <li class="defect">Login success redirects to dashboard</li>
+            <li class="success">Login success redirects to dashboard</li>
             <li class="success">Login fails with wrong password</li>
             <li class="success">Login fails with wrong username</li>
             <li class="success">Guest cannot access admin</li>
+        </ul>
+        <h2>User Controller (Tests\Feature\Admin\UserController)</h2>
+        <ul>
+            <li class="success">Index loads successfully for admin</li>
+            <li class="success">Index filters search and role</li>
+            <li class="defect">Index filters by status</li>
+            <li class="success">Toggle redirects if user not found</li>
+            <li class="success">Toggle change user status</li>
+            <li class="success">Update role fails with invalid role id</li>
+            <li class="success">Update role redirects if user not found</li>
+            <li class="success">Update role changes user role</li>
         </ul>
         <h2>User Model (Database\UserModel)</h2>
         <ul>
