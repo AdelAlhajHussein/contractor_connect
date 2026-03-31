@@ -12,7 +12,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [ ] Title exceeds character limit
+ [x] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
@@ -28,6 +28,9 @@ User Auth (Feature\UserAuth)
  [x] Login fails with wrong password
  [x] Login fails with wrong username
  [x] Guest cannot access admin
+
+User Controller (Tests\Feature\Admin\UserController)
+ [x] Index loads successfully for admin
 
 User Model (Database\UserModel)
  [x] Insert user
