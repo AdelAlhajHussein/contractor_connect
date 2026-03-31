@@ -12,7 +12,7 @@ class UserControllerTest extends CIUnitTestCase{
     protected $refresh = true;
     protected $namespace = 'App';
 
-    // Tests
+    // Index Tests
     public function testIndexLoadsSuccessfullyForAdmin(){
 
         // Create an admin account to test:
@@ -79,7 +79,6 @@ class UserControllerTest extends CIUnitTestCase{
         $db = \Config\Database::connect();
 
         // Create an active and inactive account to test
-
         $db->table('users')->insertBatch([
             [
                 'username' => 'user_one',
@@ -111,4 +110,52 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertDontSee('active_user');
 
     }
+
+    // Toggle Tests
+    public function testToggleRedirectsIfUserNotFound(){
+
+        // Attempt to toggle to non-existent id
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->get('/admin/users/toggle/9999999');
+
+        // Assertions
+        $result->assertStatus(302);
+        $result->assertRedirectTo(site_url('admin/users'));
+    }
+
+    public function testToggleChangeUserStatus(){
+    $db = \Config\Database::connect();
+
+    // Create an account to test changing active status
+    $db->table('users')->insert([
+        'username' => 'toggle_user',
+        'email' => 'toggle_user@example.com',
+        'password_hash' => password_hash('toggle_user', PASSWORD_DEFAULT),
+        'role_id' => 2,
+        'is_active' => 1,
+        'first_name' => 'Toggle',
+        'last_name' => 'User',
+    ]);
+
+    $userId = $db->insertID();
+
+    // Attempt to toggle status
+    $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+        ->get('/admin/users/toggle/'.$userId);
+
+    // Assertions
+    $result->assertRedirectTo(site_url(
+        'admin/users'
+    ));
+
+    // Verify status changed to 0
+    $this->seeInDatabase('users', [
+        'id' => $userId,
+        'is_active' => 0,
+    ]);
+
+    }
+
+    // Update Role Tests
+
 }

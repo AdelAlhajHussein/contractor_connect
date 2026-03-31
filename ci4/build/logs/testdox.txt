@@ -33,6 +33,8 @@ User Controller (Tests\Feature\Admin\UserController)
  [x] Index loads successfully for admin
  [x] Index filters search and role
  [ ] Index filters by status
+ [x] Toggle redirects if user not found
+ [x] Toggle change user status
 
 User Model (Database\UserModel)
  [x] Insert user
