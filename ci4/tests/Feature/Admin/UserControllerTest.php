@@ -12,7 +12,7 @@ class UserControllerTest extends CIUnitTestCase{
     protected $refresh = true;
     protected $namespace = 'App';
 
-    // Index Tests
+    // ----- Index Tests -----
     public function testIndexLoadsSuccessfullyForAdmin(){
 
         // Create an admin account to test:
@@ -39,7 +39,6 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertStatus(200);
         $result->assertSee('admin_user');
     }
-
     public function testIndexFiltersSearchAndRole(){
         $db = \Config\Database::connect();
 
@@ -74,14 +73,13 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertSee('homeowner_user');
         $result->assertDontSee('admin_user');
     }
-
     public function testIndexFiltersByStatus(){
         $db = \Config\Database::connect();
 
         // Create an active and inactive account to test
         $db->table('users')->insertBatch([
             [
-                'username' => 'user_one',
+                'username' => 'active_user',
                 'email' => 'user_one@example.com',
                 'password_hash' => password_hash('Admin123', PASSWORD_DEFAULT),
                 'role_id' => 2,
@@ -90,7 +88,7 @@ class UserControllerTest extends CIUnitTestCase{
                 'last_name' => 'User',
             ],
             [
-                'username' => 'user_two',
+                'username' => 'inactive_user',
                 'email' => 'user_two@example.com',
                 'password_hash' => password_hash('user_two', PASSWORD_DEFAULT),
                 'role_id' => 2,
@@ -111,7 +109,8 @@ class UserControllerTest extends CIUnitTestCase{
 
     }
 
-    // Toggle Tests
+
+    // ----- Toggle Tests -----
     public function testToggleRedirectsIfUserNotFound(){
 
         // Attempt to toggle to non-existent id
@@ -122,7 +121,6 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertStatus(302);
         $result->assertRedirectTo(site_url('admin/users'));
     }
-
     public function testToggleChangeUserStatus(){
     $db = \Config\Database::connect();
 
@@ -156,30 +154,52 @@ class UserControllerTest extends CIUnitTestCase{
 
     }
 
-    // Update Role Tests
+
+    // ----- Update Role Tests -----
     public function testUpdateRoleFailsWithInvalidRoleId(){
 
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->post('admin/users/updateRole/1', ['role_id' => 999]);
+            ->post('admin/users/role/1', ['role_id' => 99]);
 
         // Verify redirect on invalid role
         $result->assertStatus(302);
         $result->assertRedirectTo(site_url('admin/users'));
     }
-
     public function testUpdateRoleRedirectsIfUserNotFound(){
 
         // Attempt to add an invalid user with a valid role
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->post('admin/users/updateRole/999', ['role_id' => 2]);
+            ->post('admin/users/role/999', ['role_id' => 2]);
 
-        // Verify site redirects if
+        // Verify site redirects if role is not valid
         $result->assertStatus(302);
         $result->assertRedirectTo(site_url('admin/users'));
     }
+    public function testUpdateRoleChangesUserRole(){
+        $db = \Config\Database::connect();
 
+        // Create Homeowner to test conversion to Contractor
+        $db->table('users')->insert([
+            'username' => 'change_user_role',
+            'email' => 'change_user_role@example.com',
+            'password_hash' => password_hash('change_user_role', PASSWORD_DEFAULT),
+            'role_id' => 2,
+            'is_active' => 1,
+            'first_name' => 'Change',
+            'last_name' => 'User',
 
+        ]);
+        $userId = $db->insertID();
 
+        // Update from Homeowner to Contractor
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->post('admin/users/role/'.$userId, ['role_id' => 3]);
 
+        $result->assertRedirectTo(site_url('admin/users'));
+        $this->seeInDatabase('users', [
+            'id' => $userId,
+            'role_id' => 3,
+        ]);
+    }
 
 }
