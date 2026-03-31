@@ -75,8 +75,40 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertDontSee('admin_user');
     }
 
+    public function testIndexFiltersByStatus(){
+        $db = \Config\Database::connect();
 
+        // Create an active and inactive account to test
 
+        $db->table('users')->insertBatch([
+            [
+                'username' => 'user_one',
+                'email' => 'user_one@example.com',
+                'password_hash' => password_hash('Admin123', PASSWORD_DEFAULT),
+                'role_id' => 2,
+                'is_active' => 1,
+                'first_name' => 'Active',
+                'last_name' => 'User',
+            ],
+            [
+                'username' => 'user_two',
+                'email' => 'user_two@example.com',
+                'password_hash' => password_hash('user_two', PASSWORD_DEFAULT),
+                'role_id' => 2,
+                'is_active' => 0,
+                'first_name' => 'Inactive',
+                'last_name' => 'User',
+            ]
+        ]);
 
+        // Filter inactive accounts
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->get('/admin/users?status=0');
 
+        // Assertions
+        $result->assertStatus(200);
+        $result->assertSee('inactive_user');
+        $result->assertDontSee('active_user');
+
+    }
 }
