@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1774985179">
-  <project timestamp="1774985179" name="Clover Coverage">
+<coverage generated="1774986891">
+  <project timestamp="1774986891" name="Clover Coverage">
     <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Common.php">
       <metrics loc="16" ncloc="3" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
@@ -297,21 +297,21 @@
       <metrics loc="82" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="21" coveredelements="0"/>
     </file>
     <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Config/Events.php">
-      <line num="26" type="stmt" count="6"/>
-      <line num="27" type="stmt" count="5"/>
+      <line num="26" type="stmt" count="7"/>
+      <line num="27" type="stmt" count="6"/>
       <line num="28" type="stmt" count="0"/>
       <line num="29" type="stmt" count="0"/>
       <line num="32" type="stmt" count="0"/>
       <line num="33" type="stmt" count="0"/>
       <line num="36" type="stmt" count="0"/>
-      <line num="45" type="stmt" count="5"/>
+      <line num="45" type="stmt" count="6"/>
       <line num="46" type="stmt" count="0"/>
       <line num="47" type="stmt" count="0"/>
       <line num="49" type="stmt" count="0"/>
       <line num="50" type="stmt" count="0"/>
       <line num="51" type="stmt" count="0"/>
       <line num="52" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="6"/>
+      <line num="55" type="stmt" count="7"/>
       <metrics loc="56" ncloc="33" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="4" elements="15" coveredelements="4"/>
     </file>
     <package name="App\Controllers\Admin">
@@ -761,27 +761,27 @@
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Controllers/Admin/UsersController.php">
         <class name="App\Controllers\Admin\UsersController" namespace="App\Controllers\Admin">
-          <metrics complexity="12" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="10" elements="37" coveredelements="10"/>
+          <metrics complexity="12" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="17" elements="37" coveredelements="17"/>
         </class>
-        <line num="10" type="method" name="index" visibility="public" complexity="6" crap="9.16" count="1"/>
-        <line num="12" type="stmt" count="1"/>
-        <line num="14" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <line num="18" type="stmt" count="1"/>
-        <line num="21" type="stmt" count="1"/>
-        <line num="22" type="stmt" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <line num="25" type="stmt" count="0"/>
-        <line num="26" type="stmt" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="0"/>
-        <line num="36" type="stmt" count="1"/>
+        <line num="10" type="method" name="index" visibility="public" complexity="6" crap="6.01" count="2"/>
+        <line num="12" type="stmt" count="2"/>
+        <line num="14" type="stmt" count="2"/>
+        <line num="15" type="stmt" count="2"/>
+        <line num="16" type="stmt" count="2"/>
+        <line num="18" type="stmt" count="2"/>
+        <line num="21" type="stmt" count="2"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="2"/>
         <line num="37" type="stmt" count="0"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="42" type="stmt" count="1"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="42" type="stmt" count="2"/>
         <line num="45" type="method" name="toggle" visibility="public" complexity="3" crap="12" count="0"/>
         <line num="47" type="stmt" count="0"/>
         <line num="49" type="stmt" count="0"/>
@@ -800,7 +800,7 @@
         <line num="74" type="stmt" count="0"/>
         <line num="78" type="stmt" count="0"/>
         <line num="80" type="stmt" count="0"/>
-        <metrics loc="87" ncloc="81" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="10" elements="37" coveredelements="10"/>
+        <metrics loc="87" ncloc="81" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="17" elements="37" coveredelements="17"/>
       </file>
     </package>
     <package name="App\Controllers">
@@ -881,8 +881,8 @@
         <class name="App\Controllers\BaseController" namespace="App\Controllers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="33" type="method" name="initController" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="40" type="stmt" count="4"/>
+        <line num="33" type="method" name="initController" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="40" type="stmt" count="5"/>
         <metrics loc="46" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Controllers/Home.php">
@@ -1370,11 +1370,11 @@
         <class name="App\Filters\AuthFilter" namespace="App\Filters">
           <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
         </class>
-        <line num="11" type="method" name="before" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="13" type="stmt" count="2"/>
+        <line num="11" type="method" name="before" visibility="public" complexity="2" crap="2" count="3"/>
+        <line num="13" type="stmt" count="3"/>
         <line num="14" type="stmt" count="1"/>
-        <line num="18" type="method" name="after" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="20" type="stmt" count="1"/>
+        <line num="18" type="method" name="after" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="20" type="stmt" count="2"/>
         <metrics loc="26" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </file>
     </package>
@@ -1454,9 +1454,9 @@
         <class name="App\Models\ProjectModel" namespace="App\Models">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
-        <line num="49" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
-        <line num="51" type="stmt" count="12"/>
-        <line num="53" type="stmt" count="12"/>
+        <line num="49" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="51" type="stmt" count="11"/>
+        <line num="53" type="stmt" count="11"/>
         <metrics loc="57" ncloc="57" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Models/UserModel.php">
@@ -1494,6 +1494,6 @@
       <line num="57" type="stmt" count="0"/>
       <metrics loc="57" ncloc="50" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="25" coveredelements="0"/>
     </file>
-    <metrics files="85" loc="6127" ncloc="3838" classes="33" methods="73" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="921" coveredstatements="166" elements="994" coveredelements="177"/>
+    <metrics files="85" loc="6127" ncloc="3838" classes="33" methods="73" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="921" coveredstatements="173" elements="994" coveredelements="184"/>
   </project>
 </coverage>

@@ -20,7 +20,7 @@ Project Model (Database\ProjectModel)
  [x] Budget is not text
  [x] Cannot create project without valid user id
  [x] Status defaults to open
- [x] Project is created with timestamps
+ [ ] Project is created with timestamps
  [x] Project status value is valid
 
 User Auth (Feature\UserAuth)
@@ -31,6 +31,7 @@ User Auth (Feature\UserAuth)
 
 User Controller (Tests\Feature\Admin\UserController)
  [x] Index loads successfully for admin
+ [x] Index filters search and role
 
 User Model (Database\UserModel)
  [x] Insert user

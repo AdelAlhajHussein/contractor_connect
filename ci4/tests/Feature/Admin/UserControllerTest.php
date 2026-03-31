@@ -12,9 +12,10 @@ class UserControllerTest extends CIUnitTestCase{
     protected $refresh = true;
     protected $namespace = 'App';
 
+    // Tests
     public function testIndexLoadsSuccessfullyForAdmin(){
 
-        // Create admin user for the db
+        // Create an admin account to test:
         $db = \Config\Database::connect();
         $db->table('users')->insert([
             'username' => 'admin_user',
@@ -38,5 +39,44 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertStatus(200);
         $result->assertSee('admin_user');
     }
+
+    public function testIndexFiltersSearchAndRole(){
+        $db = \Config\Database::connect();
+
+        // Create two users accounts to test
+        $db->table('users')->insertBatch([
+            [
+                'username' => 'admin_user',
+                'email' => 'user_one@example.com',
+                'password_hash' => password_hash('user_one', PASSWORD_DEFAULT),
+                'role_id' => 1,
+                'is_active' => 1,
+                'first_name' => 'User',
+                'last_name' => 'One',
+            ],
+            [
+                'username' => 'homeowner_user',
+                'email' => 'user_two@example.com',
+                'password_hash' => password_hash('user_two', PASSWORD_DEFAULT),
+                'role_id' => 2,
+                'is_active' => 1,
+                'first_name' => 'User',
+                'last_name' => 'Two',
+            ]
+        ]);
+
+        // Test Admin can search for user
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->get('/admin/users?q=homeowner&role_id=2');
+
+        // Assertions
+        $result->assertStatus(200);
+        $result->assertSee('homeowner_user');
+        $result->assertDontSee('admin_user');
+    }
+
+
+
+
 
 }
