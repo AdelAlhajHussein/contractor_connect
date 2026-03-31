@@ -23,6 +23,7 @@ class UserModelTest extends CIUnitTestCase {
      * - soft delete works
      * - find user works
      */
+
     // ----------------
     // Scenarios
     // ----------------
@@ -130,7 +131,6 @@ class UserModelTest extends CIUnitTestCase {
         $this->assertIsArray($user);
         $this->assertEquals($fakeEmail, $user['email']);
     }
-
 
     /**
      * Scenario: Attempt to insert a user with an email that already exists
