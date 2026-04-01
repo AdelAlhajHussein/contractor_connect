@@ -1,5 +1,5 @@
 Bids Controller (Tests\Feature\Admin\BidsController)
- [ ] Index loads bids with joins
+ [x] Index loads bids with joins
  [ ] View method calculates total
 
 Example Database
@@ -37,8 +37,8 @@ User Auth (Feature\UserAuth)
  [x] Guest cannot access admin
 
 User Controller (Tests\Feature\Admin\UserController)
- [x] Index loads successfully for admin
- [x] Index filters search and role
+ [ ] Index loads successfully for admin
+ [ ] Index filters search and role
  [ ] Index filters by status
  [x] Toggle redirects if user not found
  [x] Toggle change user status

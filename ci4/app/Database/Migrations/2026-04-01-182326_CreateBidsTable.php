@@ -21,12 +21,17 @@ class CreateBidsTable extends Migration
                 'constraint' => 11,
                 'unsigned'   => true,
             ],
-            'user_id' => [
+            'contractor_id' => [
                 'type'       => 'INT',
                 'constraint' => 11,
                 'unsigned'   => true,
             ],
-            'amount' => [
+            'bid_amount' => [
+                'type'       => 'DECIMAL',
+                'constraint' => '10,2',
+                'default'    => 0.00,
+            ],
+            'total_cost' => [
                 'type'       => 'DECIMAL',
                 'constraint' => '10,2',
                 'default'    => 0.00,

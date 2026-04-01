@@ -24,11 +24,11 @@ class BidsControllerTest extends CIUnitTestCase{
 
         // Homeowner
         $db->table('users')->insert([
-            'email'=>'owner@example.com',
-            'username'=>'homeowner1',
+            'email'=>'ownerIndexJoins@example.com',
+            'username'=>'ownerIndexJoins',
             'password_hash'=>'fake_hash',
-            'first_name' => 'Home',
-            'last_name' => 'Owner',
+            'first_name' => 'Homeowner',
+            'last_name' => 'Index Joins',
             'role_id' =>2,
             'is_active'=>1,
         ]);
@@ -54,6 +54,7 @@ class BidsControllerTest extends CIUnitTestCase{
             'home_owner_id'=> $ownerId,
             'category_id'=> $categoryId,
             'status'=>'open',
+            'address'=> '123 Test St.',
         ]);
 
         $projectId = $db->insertID();
@@ -63,7 +64,7 @@ class BidsControllerTest extends CIUnitTestCase{
             'project_id'=>$projectId,
             'contractor_id'=>$contractorId,
             'status'=>'submitted',
-            'amount'=> 500.00,
+            'total_cost'=> 500.00,
         ]);
 
         // Attempt
@@ -79,40 +80,55 @@ class BidsControllerTest extends CIUnitTestCase{
     public function testViewMethodCalculatesTotal(){
         $db = \Config\Database::connect();
 
+        // Create homeowner
         $db->table('users')->insert([
-            'email'=>'owner@example.com',
-            'username'=>'homeowner1',
+            'email'=>'ownerViewTotal@example.com',
+            'username'=>'ownerViewTotal',
             'password_hash'=>'fake_hash',
-            'first_name' => 'Home',
-            'last_name' => 'Owner',
+            'first_name' => 'Owner',
+            'last_name' => 'View Total',
             'role_id' =>2,
             'is_active'=>1,
-
         ]);
 
         $ownerId = $db->insertID();
+
+        // Create contractor
+        $db->table('users')->insert([
+            'email'=>'contractorViewTotal@example.com',
+            'username'=>'contractorViewTotal',
+            'password_hash'=>'fake_hash',
+            'first_name' => 'Contractor',
+            'last_name' => 'View Total',
+            'role_id' =>3,
+            'is_active'=>1,
+        ]);
         $contractorId = $db->insertID();
+
 
         $db->table('categories')->insert([
             'name' => 'General',
         ]);
+
         $categoryId = $db->insertID();
 
         $db->table('projects')->insert([
             'title'=>'Fix the roof',
             'description'=>'Description of the roof project',
             'home_owner_id' => $ownerId,
-            'category_id'=>1,
+            'category_id'=>$categoryId,
             'status'=>'open',
+            'address'=> '123 Test St.',
         ]);
-
         $projectId = $db->insertID();
+
 
         $db->table('bids')->insert([
             'project_id'=>$projectId,
             'contractor_id'=>$contractorId,
             'status'=>'submitted',
-            'amount'=> 500.00,
+            'bid_amount'=> 500.00,
+            'total_cost'=> 500.00,
         ]);
 
         $bidId = $db->insertID();
