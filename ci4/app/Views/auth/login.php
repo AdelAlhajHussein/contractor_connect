@@ -24,10 +24,10 @@
 
                 <div class="auth-group">
 
-                    <label>Username</label>
+                    <label>Email</label>
 
-                    <input type="text"
-                           name="username"
+                    <input type="email"
+                           name="email"
                            required>
 
                 </div>

@@ -25,8 +25,8 @@
         <?= csrf_field() ?>
 
         <div style="margin: 12px 0;">
-            <label for="username">Username</label><br>
-            <input id="username" name="username" type="text" value="<?= esc(old('username')) ?>" style="width:100%; padding:10px;">
+            <label for="email">Email</label><br>
+            <input type="email" name="email" id="email" class="form-control" value="<?= old('email') ?>" required>
         </div>
 
         <div style="margin: 12px 0;">
