@@ -166,6 +166,16 @@ class BidsControllerTest extends CIUnitTestCase{
         $result->assertStatus(200);
     }
 
+    public function testViewNotFoundRedirects(){
+        // Attempt to get bid with non-existent id
+        $result = $this->withSession(['logged_in' => true, 'role_id'=> 1])
+            ->get('/admin/bids/view/9999');
+
+        // Verify the failed get results in a redirect
+        $result->assertRedirectTo(site_url('admin/bids'));
+
+    }
+
 
 
 
