@@ -3,6 +3,9 @@ Bids Controller (Tests\Feature\Admin\BidsController)
  [ ] View method calculates total
  [x] Index filters work
  [x] View not found redirects
+ [x] Withdraw bid not found
+ [ ] Withdraw fails if already accepted
+ [x] Withdraw bid success
 
 Example Database
  [x] Model find all

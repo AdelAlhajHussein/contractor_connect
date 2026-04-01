@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1775072300">
-  <project timestamp="1775072300" name="Clover Coverage">
+<coverage generated="1775073986">
+  <project timestamp="1775073986" name="Clover Coverage">
     <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Common.php">
       <metrics loc="16" ncloc="3" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
@@ -51,11 +51,11 @@
         <class name="Config\Database" namespace="Config">
           <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
         </class>
-        <line num="193" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="34"/>
-        <line num="195" type="stmt" count="34"/>
-        <line num="200" type="stmt" count="34"/>
-        <line num="201" type="stmt" count="34"/>
-        <line num="202" type="stmt" count="34"/>
+        <line num="193" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="36"/>
+        <line num="195" type="stmt" count="36"/>
+        <line num="200" type="stmt" count="36"/>
+        <line num="201" type="stmt" count="36"/>
+        <line num="202" type="stmt" count="36"/>
         <metrics loc="206" ncloc="81" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Config/DocTypes.php">
@@ -297,27 +297,27 @@
       <metrics loc="82" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="21" coveredelements="0"/>
     </file>
     <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Config/Events.php">
-      <line num="26" type="stmt" count="17"/>
-      <line num="27" type="stmt" count="16"/>
+      <line num="26" type="stmt" count="19"/>
+      <line num="27" type="stmt" count="18"/>
       <line num="28" type="stmt" count="0"/>
       <line num="29" type="stmt" count="0"/>
       <line num="32" type="stmt" count="0"/>
       <line num="33" type="stmt" count="0"/>
       <line num="36" type="stmt" count="0"/>
-      <line num="45" type="stmt" count="16"/>
+      <line num="45" type="stmt" count="18"/>
       <line num="46" type="stmt" count="0"/>
       <line num="47" type="stmt" count="0"/>
       <line num="49" type="stmt" count="0"/>
       <line num="50" type="stmt" count="0"/>
       <line num="51" type="stmt" count="0"/>
       <line num="52" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="17"/>
+      <line num="55" type="stmt" count="19"/>
       <metrics loc="56" ncloc="33" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="4" elements="15" coveredelements="4"/>
     </file>
     <package name="App\Controllers\Admin">
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Controllers/Admin/BidsController.php">
         <class name="App\Controllers\Admin\BidsController" namespace="App\Controllers\Admin">
-          <metrics complexity="10" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="66" coveredstatements="34" elements="69" coveredelements="35"/>
+          <metrics complexity="10" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="66" coveredstatements="41" elements="69" coveredelements="42"/>
         </class>
         <line num="10" type="method" name="index" visibility="public" complexity="4" crap="4" count="2"/>
         <line num="12" type="stmt" count="2"/>
@@ -379,16 +379,16 @@
         <line num="91" type="stmt" count="0"/>
         <line num="92" type="stmt" count="0"/>
         <line num="94" type="stmt" count="0"/>
-        <line num="97" type="method" name="withdraw" visibility="public" complexity="3" crap="12" count="0"/>
-        <line num="99" type="stmt" count="0"/>
-        <line num="101" type="stmt" count="0"/>
-        <line num="102" type="stmt" count="0"/>
-        <line num="103" type="stmt" count="0"/>
-        <line num="107" type="stmt" count="0"/>
+        <line num="97" type="method" name="withdraw" visibility="public" complexity="3" crap="3.02" count="2"/>
+        <line num="99" type="stmt" count="2"/>
+        <line num="101" type="stmt" count="2"/>
+        <line num="102" type="stmt" count="2"/>
+        <line num="103" type="stmt" count="1"/>
+        <line num="107" type="stmt" count="1"/>
         <line num="108" type="stmt" count="0"/>
-        <line num="111" type="stmt" count="0"/>
-        <line num="113" type="stmt" count="0"/>
-        <metrics loc="118" ncloc="114" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="66" coveredstatements="34" elements="69" coveredelements="35"/>
+        <line num="111" type="stmt" count="1"/>
+        <line num="113" type="stmt" count="1"/>
+        <metrics loc="118" ncloc="114" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="66" coveredstatements="41" elements="69" coveredelements="42"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Controllers/Admin/CategoriesController.php">
         <class name="App\Controllers\Admin\CategoriesController" namespace="App\Controllers\Admin">
@@ -881,8 +881,8 @@
         <class name="App\Controllers\BaseController" namespace="App\Controllers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="33" type="method" name="initController" visibility="public" complexity="1" crap="1" count="15"/>
-        <line num="40" type="stmt" count="15"/>
+        <line num="33" type="method" name="initController" visibility="public" complexity="1" crap="1" count="17"/>
+        <line num="40" type="stmt" count="17"/>
         <metrics loc="46" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Controllers/Home.php">
@@ -1225,232 +1225,232 @@
         <class name="App\Database\Migrations\CreateUsersTable" namespace="App\Database\Migrations">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="51" coveredelements="51"/>
         </class>
-        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="32"/>
-        <line num="12" type="stmt" count="32"/>
-        <line num="13" type="stmt" count="32"/>
-        <line num="14" type="stmt" count="32"/>
-        <line num="15" type="stmt" count="32"/>
-        <line num="16" type="stmt" count="32"/>
-        <line num="17" type="stmt" count="32"/>
-        <line num="18" type="stmt" count="32"/>
-        <line num="19" type="stmt" count="32"/>
-        <line num="20" type="stmt" count="32"/>
-        <line num="21" type="stmt" count="32"/>
-        <line num="22" type="stmt" count="32"/>
-        <line num="23" type="stmt" count="32"/>
-        <line num="24" type="stmt" count="32"/>
-        <line num="25" type="stmt" count="32"/>
-        <line num="26" type="stmt" count="32"/>
-        <line num="27" type="stmt" count="32"/>
-        <line num="28" type="stmt" count="32"/>
-        <line num="29" type="stmt" count="32"/>
-        <line num="30" type="stmt" count="32"/>
-        <line num="31" type="stmt" count="32"/>
-        <line num="32" type="stmt" count="32"/>
-        <line num="33" type="stmt" count="32"/>
-        <line num="34" type="stmt" count="32"/>
-        <line num="35" type="stmt" count="32"/>
-        <line num="36" type="stmt" count="32"/>
-        <line num="37" type="stmt" count="32"/>
-        <line num="38" type="stmt" count="32"/>
-        <line num="39" type="stmt" count="32"/>
-        <line num="40" type="stmt" count="32"/>
-        <line num="41" type="stmt" count="32"/>
-        <line num="42" type="stmt" count="32"/>
-        <line num="43" type="stmt" count="32"/>
-        <line num="44" type="stmt" count="32"/>
-        <line num="45" type="stmt" count="32"/>
-        <line num="46" type="stmt" count="32"/>
-        <line num="47" type="stmt" count="32"/>
-        <line num="48" type="stmt" count="32"/>
-        <line num="49" type="stmt" count="32"/>
-        <line num="50" type="stmt" count="32"/>
-        <line num="51" type="stmt" count="32"/>
-        <line num="52" type="stmt" count="32"/>
-        <line num="53" type="stmt" count="32"/>
-        <line num="56" type="stmt" count="32"/>
-        <line num="57" type="stmt" count="32"/>
-        <line num="58" type="stmt" count="32"/>
-        <line num="59" type="stmt" count="32"/>
-        <line num="62" type="stmt" count="32"/>
-        <line num="65" type="stmt" count="32"/>
-        <line num="69" type="method" name="down" visibility="public" complexity="1" crap="1" count="31"/>
-        <line num="71" type="stmt" count="31"/>
+        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="34"/>
+        <line num="12" type="stmt" count="34"/>
+        <line num="13" type="stmt" count="34"/>
+        <line num="14" type="stmt" count="34"/>
+        <line num="15" type="stmt" count="34"/>
+        <line num="16" type="stmt" count="34"/>
+        <line num="17" type="stmt" count="34"/>
+        <line num="18" type="stmt" count="34"/>
+        <line num="19" type="stmt" count="34"/>
+        <line num="20" type="stmt" count="34"/>
+        <line num="21" type="stmt" count="34"/>
+        <line num="22" type="stmt" count="34"/>
+        <line num="23" type="stmt" count="34"/>
+        <line num="24" type="stmt" count="34"/>
+        <line num="25" type="stmt" count="34"/>
+        <line num="26" type="stmt" count="34"/>
+        <line num="27" type="stmt" count="34"/>
+        <line num="28" type="stmt" count="34"/>
+        <line num="29" type="stmt" count="34"/>
+        <line num="30" type="stmt" count="34"/>
+        <line num="31" type="stmt" count="34"/>
+        <line num="32" type="stmt" count="34"/>
+        <line num="33" type="stmt" count="34"/>
+        <line num="34" type="stmt" count="34"/>
+        <line num="35" type="stmt" count="34"/>
+        <line num="36" type="stmt" count="34"/>
+        <line num="37" type="stmt" count="34"/>
+        <line num="38" type="stmt" count="34"/>
+        <line num="39" type="stmt" count="34"/>
+        <line num="40" type="stmt" count="34"/>
+        <line num="41" type="stmt" count="34"/>
+        <line num="42" type="stmt" count="34"/>
+        <line num="43" type="stmt" count="34"/>
+        <line num="44" type="stmt" count="34"/>
+        <line num="45" type="stmt" count="34"/>
+        <line num="46" type="stmt" count="34"/>
+        <line num="47" type="stmt" count="34"/>
+        <line num="48" type="stmt" count="34"/>
+        <line num="49" type="stmt" count="34"/>
+        <line num="50" type="stmt" count="34"/>
+        <line num="51" type="stmt" count="34"/>
+        <line num="52" type="stmt" count="34"/>
+        <line num="53" type="stmt" count="34"/>
+        <line num="56" type="stmt" count="34"/>
+        <line num="57" type="stmt" count="34"/>
+        <line num="58" type="stmt" count="34"/>
+        <line num="59" type="stmt" count="34"/>
+        <line num="62" type="stmt" count="34"/>
+        <line num="65" type="stmt" count="34"/>
+        <line num="69" type="method" name="down" visibility="public" complexity="1" crap="1" count="33"/>
+        <line num="71" type="stmt" count="33"/>
         <metrics loc="74" ncloc="69" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="51" coveredelements="51"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Database/Migrations/2026-02-22-005654_CreateProjectsTable.php">
         <class name="App\Database\Migrations\CreateProjectsTable" namespace="App\Database\Migrations">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="57" coveredelements="57"/>
         </class>
-        <line num="8" type="method" name="up" visibility="public" complexity="1" crap="1" count="32"/>
-        <line num="10" type="stmt" count="32"/>
-        <line num="11" type="stmt" count="32"/>
-        <line num="12" type="stmt" count="32"/>
-        <line num="13" type="stmt" count="32"/>
-        <line num="14" type="stmt" count="32"/>
-        <line num="15" type="stmt" count="32"/>
-        <line num="16" type="stmt" count="32"/>
-        <line num="17" type="stmt" count="32"/>
-        <line num="18" type="stmt" count="32"/>
-        <line num="19" type="stmt" count="32"/>
-        <line num="20" type="stmt" count="32"/>
-        <line num="21" type="stmt" count="32"/>
-        <line num="22" type="stmt" count="32"/>
-        <line num="23" type="stmt" count="32"/>
-        <line num="24" type="stmt" count="32"/>
-        <line num="25" type="stmt" count="32"/>
-        <line num="26" type="stmt" count="32"/>
-        <line num="27" type="stmt" count="32"/>
-        <line num="28" type="stmt" count="32"/>
-        <line num="29" type="stmt" count="32"/>
-        <line num="30" type="stmt" count="32"/>
-        <line num="31" type="stmt" count="32"/>
-        <line num="32" type="stmt" count="32"/>
-        <line num="33" type="stmt" count="32"/>
-        <line num="34" type="stmt" count="32"/>
-        <line num="35" type="stmt" count="32"/>
-        <line num="36" type="stmt" count="32"/>
-        <line num="37" type="stmt" count="32"/>
-        <line num="38" type="stmt" count="32"/>
-        <line num="39" type="stmt" count="32"/>
-        <line num="40" type="stmt" count="32"/>
-        <line num="41" type="stmt" count="32"/>
-        <line num="42" type="stmt" count="32"/>
-        <line num="43" type="stmt" count="32"/>
-        <line num="44" type="stmt" count="32"/>
-        <line num="45" type="stmt" count="32"/>
-        <line num="46" type="stmt" count="32"/>
-        <line num="47" type="stmt" count="32"/>
-        <line num="48" type="stmt" count="32"/>
-        <line num="49" type="stmt" count="32"/>
-        <line num="50" type="stmt" count="32"/>
-        <line num="51" type="stmt" count="32"/>
-        <line num="52" type="stmt" count="32"/>
-        <line num="53" type="stmt" count="32"/>
-        <line num="54" type="stmt" count="32"/>
-        <line num="55" type="stmt" count="32"/>
-        <line num="56" type="stmt" count="32"/>
-        <line num="57" type="stmt" count="32"/>
-        <line num="58" type="stmt" count="32"/>
-        <line num="59" type="stmt" count="32"/>
-        <line num="60" type="stmt" count="32"/>
-        <line num="61" type="stmt" count="32"/>
-        <line num="62" type="stmt" count="32"/>
-        <line num="63" type="stmt" count="32"/>
-        <line num="66" type="method" name="down" visibility="public" complexity="1" crap="1" count="31"/>
-        <line num="67" type="stmt" count="31"/>
+        <line num="8" type="method" name="up" visibility="public" complexity="1" crap="1" count="34"/>
+        <line num="10" type="stmt" count="34"/>
+        <line num="11" type="stmt" count="34"/>
+        <line num="12" type="stmt" count="34"/>
+        <line num="13" type="stmt" count="34"/>
+        <line num="14" type="stmt" count="34"/>
+        <line num="15" type="stmt" count="34"/>
+        <line num="16" type="stmt" count="34"/>
+        <line num="17" type="stmt" count="34"/>
+        <line num="18" type="stmt" count="34"/>
+        <line num="19" type="stmt" count="34"/>
+        <line num="20" type="stmt" count="34"/>
+        <line num="21" type="stmt" count="34"/>
+        <line num="22" type="stmt" count="34"/>
+        <line num="23" type="stmt" count="34"/>
+        <line num="24" type="stmt" count="34"/>
+        <line num="25" type="stmt" count="34"/>
+        <line num="26" type="stmt" count="34"/>
+        <line num="27" type="stmt" count="34"/>
+        <line num="28" type="stmt" count="34"/>
+        <line num="29" type="stmt" count="34"/>
+        <line num="30" type="stmt" count="34"/>
+        <line num="31" type="stmt" count="34"/>
+        <line num="32" type="stmt" count="34"/>
+        <line num="33" type="stmt" count="34"/>
+        <line num="34" type="stmt" count="34"/>
+        <line num="35" type="stmt" count="34"/>
+        <line num="36" type="stmt" count="34"/>
+        <line num="37" type="stmt" count="34"/>
+        <line num="38" type="stmt" count="34"/>
+        <line num="39" type="stmt" count="34"/>
+        <line num="40" type="stmt" count="34"/>
+        <line num="41" type="stmt" count="34"/>
+        <line num="42" type="stmt" count="34"/>
+        <line num="43" type="stmt" count="34"/>
+        <line num="44" type="stmt" count="34"/>
+        <line num="45" type="stmt" count="34"/>
+        <line num="46" type="stmt" count="34"/>
+        <line num="47" type="stmt" count="34"/>
+        <line num="48" type="stmt" count="34"/>
+        <line num="49" type="stmt" count="34"/>
+        <line num="50" type="stmt" count="34"/>
+        <line num="51" type="stmt" count="34"/>
+        <line num="52" type="stmt" count="34"/>
+        <line num="53" type="stmt" count="34"/>
+        <line num="54" type="stmt" count="34"/>
+        <line num="55" type="stmt" count="34"/>
+        <line num="56" type="stmt" count="34"/>
+        <line num="57" type="stmt" count="34"/>
+        <line num="58" type="stmt" count="34"/>
+        <line num="59" type="stmt" count="34"/>
+        <line num="60" type="stmt" count="34"/>
+        <line num="61" type="stmt" count="34"/>
+        <line num="62" type="stmt" count="34"/>
+        <line num="63" type="stmt" count="34"/>
+        <line num="66" type="method" name="down" visibility="public" complexity="1" crap="1" count="33"/>
+        <line num="67" type="stmt" count="33"/>
         <metrics loc="69" ncloc="69" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="57" coveredelements="57"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Database/Migrations/2026-02-23-200547_CreateCategories.php">
         <class name="App\Database\Migrations\CreateCategories" namespace="App\Database\Migrations">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
         </class>
-        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="32"/>
-        <line num="12" type="stmt" count="32"/>
-        <line num="13" type="stmt" count="32"/>
-        <line num="14" type="stmt" count="32"/>
-        <line num="15" type="stmt" count="32"/>
-        <line num="16" type="stmt" count="32"/>
-        <line num="17" type="stmt" count="32"/>
-        <line num="18" type="stmt" count="32"/>
-        <line num="19" type="stmt" count="32"/>
-        <line num="20" type="stmt" count="32"/>
-        <line num="21" type="stmt" count="32"/>
-        <line num="23" type="stmt" count="32"/>
-        <line num="25" type="stmt" count="32"/>
-        <line num="27" type="stmt" count="32"/>
-        <line num="28" type="stmt" count="32"/>
-        <line num="31" type="method" name="down" visibility="public" complexity="1" crap="1" count="31"/>
-        <line num="33" type="stmt" count="31"/>
+        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="34"/>
+        <line num="12" type="stmt" count="34"/>
+        <line num="13" type="stmt" count="34"/>
+        <line num="14" type="stmt" count="34"/>
+        <line num="15" type="stmt" count="34"/>
+        <line num="16" type="stmt" count="34"/>
+        <line num="17" type="stmt" count="34"/>
+        <line num="18" type="stmt" count="34"/>
+        <line num="19" type="stmt" count="34"/>
+        <line num="20" type="stmt" count="34"/>
+        <line num="21" type="stmt" count="34"/>
+        <line num="23" type="stmt" count="34"/>
+        <line num="25" type="stmt" count="34"/>
+        <line num="27" type="stmt" count="34"/>
+        <line num="28" type="stmt" count="34"/>
+        <line num="31" type="method" name="down" visibility="public" complexity="1" crap="1" count="33"/>
+        <line num="33" type="stmt" count="33"/>
         <metrics loc="36" ncloc="35" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Database/Migrations/2026-04-01-182326_CreateBidsTable.php">
         <class name="App\Database\Migrations\CreateBidsTable" namespace="App\Database\Migrations">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="40" coveredelements="40"/>
         </class>
-        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="32"/>
-        <line num="12" type="stmt" count="32"/>
-        <line num="13" type="stmt" count="32"/>
-        <line num="14" type="stmt" count="32"/>
-        <line num="15" type="stmt" count="32"/>
-        <line num="16" type="stmt" count="32"/>
-        <line num="17" type="stmt" count="32"/>
-        <line num="18" type="stmt" count="32"/>
-        <line num="19" type="stmt" count="32"/>
-        <line num="20" type="stmt" count="32"/>
-        <line num="21" type="stmt" count="32"/>
-        <line num="22" type="stmt" count="32"/>
-        <line num="23" type="stmt" count="32"/>
-        <line num="24" type="stmt" count="32"/>
-        <line num="25" type="stmt" count="32"/>
-        <line num="26" type="stmt" count="32"/>
-        <line num="27" type="stmt" count="32"/>
-        <line num="28" type="stmt" count="32"/>
-        <line num="29" type="stmt" count="32"/>
-        <line num="30" type="stmt" count="32"/>
-        <line num="31" type="stmt" count="32"/>
-        <line num="32" type="stmt" count="32"/>
-        <line num="33" type="stmt" count="32"/>
-        <line num="34" type="stmt" count="32"/>
-        <line num="35" type="stmt" count="32"/>
-        <line num="36" type="stmt" count="32"/>
-        <line num="37" type="stmt" count="32"/>
-        <line num="38" type="stmt" count="32"/>
-        <line num="39" type="stmt" count="32"/>
-        <line num="40" type="stmt" count="32"/>
-        <line num="41" type="stmt" count="32"/>
-        <line num="42" type="stmt" count="32"/>
-        <line num="43" type="stmt" count="32"/>
-        <line num="44" type="stmt" count="32"/>
-        <line num="45" type="stmt" count="32"/>
-        <line num="46" type="stmt" count="32"/>
-        <line num="48" type="stmt" count="32"/>
-        <line num="49" type="stmt" count="32"/>
-        <line num="52" type="method" name="down" visibility="public" complexity="1" crap="1" count="31"/>
-        <line num="55" type="stmt" count="31"/>
+        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="34"/>
+        <line num="12" type="stmt" count="34"/>
+        <line num="13" type="stmt" count="34"/>
+        <line num="14" type="stmt" count="34"/>
+        <line num="15" type="stmt" count="34"/>
+        <line num="16" type="stmt" count="34"/>
+        <line num="17" type="stmt" count="34"/>
+        <line num="18" type="stmt" count="34"/>
+        <line num="19" type="stmt" count="34"/>
+        <line num="20" type="stmt" count="34"/>
+        <line num="21" type="stmt" count="34"/>
+        <line num="22" type="stmt" count="34"/>
+        <line num="23" type="stmt" count="34"/>
+        <line num="24" type="stmt" count="34"/>
+        <line num="25" type="stmt" count="34"/>
+        <line num="26" type="stmt" count="34"/>
+        <line num="27" type="stmt" count="34"/>
+        <line num="28" type="stmt" count="34"/>
+        <line num="29" type="stmt" count="34"/>
+        <line num="30" type="stmt" count="34"/>
+        <line num="31" type="stmt" count="34"/>
+        <line num="32" type="stmt" count="34"/>
+        <line num="33" type="stmt" count="34"/>
+        <line num="34" type="stmt" count="34"/>
+        <line num="35" type="stmt" count="34"/>
+        <line num="36" type="stmt" count="34"/>
+        <line num="37" type="stmt" count="34"/>
+        <line num="38" type="stmt" count="34"/>
+        <line num="39" type="stmt" count="34"/>
+        <line num="40" type="stmt" count="34"/>
+        <line num="41" type="stmt" count="34"/>
+        <line num="42" type="stmt" count="34"/>
+        <line num="43" type="stmt" count="34"/>
+        <line num="44" type="stmt" count="34"/>
+        <line num="45" type="stmt" count="34"/>
+        <line num="46" type="stmt" count="34"/>
+        <line num="48" type="stmt" count="34"/>
+        <line num="49" type="stmt" count="34"/>
+        <line num="52" type="method" name="down" visibility="public" complexity="1" crap="1" count="33"/>
+        <line num="55" type="stmt" count="33"/>
         <metrics loc="58" ncloc="56" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="40" coveredelements="40"/>
       </file>
       <file name="/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Database/Migrations/2026-04-01-184232_CreateBidTasksTable.php">
         <class name="App\Database\Migrations\CreateBidTasksTable" namespace="App\Database\Migrations">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="37" coveredelements="37"/>
         </class>
-        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="32"/>
-        <line num="12" type="stmt" count="32"/>
-        <line num="13" type="stmt" count="32"/>
-        <line num="14" type="stmt" count="32"/>
-        <line num="15" type="stmt" count="32"/>
-        <line num="16" type="stmt" count="32"/>
-        <line num="17" type="stmt" count="32"/>
-        <line num="18" type="stmt" count="32"/>
-        <line num="19" type="stmt" count="32"/>
-        <line num="20" type="stmt" count="32"/>
-        <line num="21" type="stmt" count="32"/>
-        <line num="22" type="stmt" count="32"/>
-        <line num="23" type="stmt" count="32"/>
-        <line num="24" type="stmt" count="32"/>
-        <line num="25" type="stmt" count="32"/>
-        <line num="26" type="stmt" count="32"/>
-        <line num="27" type="stmt" count="32"/>
-        <line num="28" type="stmt" count="32"/>
-        <line num="29" type="stmt" count="32"/>
-        <line num="30" type="stmt" count="32"/>
-        <line num="31" type="stmt" count="32"/>
-        <line num="32" type="stmt" count="32"/>
-        <line num="33" type="stmt" count="32"/>
-        <line num="34" type="stmt" count="32"/>
-        <line num="35" type="stmt" count="32"/>
-        <line num="36" type="stmt" count="32"/>
-        <line num="37" type="stmt" count="32"/>
-        <line num="38" type="stmt" count="32"/>
-        <line num="39" type="stmt" count="32"/>
-        <line num="40" type="stmt" count="32"/>
-        <line num="41" type="stmt" count="32"/>
-        <line num="42" type="stmt" count="32"/>
-        <line num="43" type="stmt" count="32"/>
-        <line num="45" type="stmt" count="32"/>
-        <line num="46" type="stmt" count="32"/>
-        <line num="49" type="method" name="down" visibility="public" complexity="1" crap="1" count="31"/>
-        <line num="52" type="stmt" count="31"/>
+        <line num="9" type="method" name="up" visibility="public" complexity="1" crap="1" count="34"/>
+        <line num="12" type="stmt" count="34"/>
+        <line num="13" type="stmt" count="34"/>
+        <line num="14" type="stmt" count="34"/>
+        <line num="15" type="stmt" count="34"/>
+        <line num="16" type="stmt" count="34"/>
+        <line num="17" type="stmt" count="34"/>
+        <line num="18" type="stmt" count="34"/>
+        <line num="19" type="stmt" count="34"/>
+        <line num="20" type="stmt" count="34"/>
+        <line num="21" type="stmt" count="34"/>
+        <line num="22" type="stmt" count="34"/>
+        <line num="23" type="stmt" count="34"/>
+        <line num="24" type="stmt" count="34"/>
+        <line num="25" type="stmt" count="34"/>
+        <line num="26" type="stmt" count="34"/>
+        <line num="27" type="stmt" count="34"/>
+        <line num="28" type="stmt" count="34"/>
+        <line num="29" type="stmt" count="34"/>
+        <line num="30" type="stmt" count="34"/>
+        <line num="31" type="stmt" count="34"/>
+        <line num="32" type="stmt" count="34"/>
+        <line num="33" type="stmt" count="34"/>
+        <line num="34" type="stmt" count="34"/>
+        <line num="35" type="stmt" count="34"/>
+        <line num="36" type="stmt" count="34"/>
+        <line num="37" type="stmt" count="34"/>
+        <line num="38" type="stmt" count="34"/>
+        <line num="39" type="stmt" count="34"/>
+        <line num="40" type="stmt" count="34"/>
+        <line num="41" type="stmt" count="34"/>
+        <line num="42" type="stmt" count="34"/>
+        <line num="43" type="stmt" count="34"/>
+        <line num="45" type="stmt" count="34"/>
+        <line num="46" type="stmt" count="34"/>
+        <line num="49" type="method" name="down" visibility="public" complexity="1" crap="1" count="33"/>
+        <line num="52" type="stmt" count="33"/>
         <metrics loc="55" ncloc="53" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="37" coveredelements="37"/>
       </file>
     </package>
@@ -1459,11 +1459,11 @@
         <class name="App\Filters\AuthFilter" namespace="App\Filters">
           <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
         </class>
-        <line num="11" type="method" name="before" visibility="public" complexity="2" crap="2" count="13"/>
-        <line num="13" type="stmt" count="13"/>
+        <line num="11" type="method" name="before" visibility="public" complexity="2" crap="2" count="15"/>
+        <line num="13" type="stmt" count="15"/>
         <line num="14" type="stmt" count="1"/>
-        <line num="18" type="method" name="after" visibility="public" complexity="1" crap="1" count="12"/>
-        <line num="20" type="stmt" count="12"/>
+        <line num="18" type="method" name="after" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="20" type="stmt" count="14"/>
         <metrics loc="26" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </file>
     </package>
@@ -1583,6 +1583,6 @@
       <line num="57" type="stmt" count="0"/>
       <metrics loc="57" ncloc="50" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="25" coveredelements="0"/>
     </file>
-    <metrics files="87" loc="6240" ncloc="3947" classes="35" methods="77" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="994" coveredstatements="324" elements="1071" coveredelements="344"/>
+    <metrics files="87" loc="6240" ncloc="3947" classes="35" methods="77" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="994" coveredstatements="331" elements="1071" coveredelements="351"/>
   </project>
 </coverage>
