@@ -16,7 +16,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [x] Title exceeds character limit
+ [ ] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
@@ -26,6 +26,9 @@ Project Model (Database\ProjectModel)
  [x] Status defaults to open
  [x] Project is created with timestamps
  [x] Project status value is valid
+
+Reports Controller (Tests\Feature\Admin\ReportsController)
+ [ ] Index returns success and correct data
 
 User Auth (Feature\UserAuth)
  [x] Login success redirects to dashboard
