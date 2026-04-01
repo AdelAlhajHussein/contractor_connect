@@ -8,6 +8,11 @@
     <div class="auth-card">
 
         <!-- Left side form -->
+        <?php if (session()->getFlashdata('success')): ?>
+            <div style="color: green; margin-bottom: 10px;">
+                <?= esc(session()->getFlashdata('success')) ?>
+            </div>
+        <?php endif; ?>
         <div class="auth-form">
 
             <div class="auth-title">Login</div>

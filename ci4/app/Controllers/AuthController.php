@@ -28,6 +28,7 @@ class AuthController extends BaseController
             $userModel = new UserModel();
 
             $data = [
+                'username'      => trim((string) $this->request->getPost('email')),
                 'email'         => trim((string) $this->request->getPost('email')),
                 'password_hash' => password_hash((string) $this->request->getPost('password'), PASSWORD_DEFAULT),
                 'role_id'       => (int) $this->request->getPost('role_id'),
@@ -41,7 +42,7 @@ class AuthController extends BaseController
             return redirect()->to('/login')->with('success', 'Account created. Please login.');
         } catch (\Throwable $e) {
             log_message('error', 'Registration error: ' . $e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Something went wrong.');
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
     }
 

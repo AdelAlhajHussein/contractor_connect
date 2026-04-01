@@ -4,16 +4,17 @@
 <div style="max-width: 520px; margin: 40px auto;">
     <h1>Create a new account</h1>
 
-    <?php $errors = session('errors') ?? []; ?>
-    <?php if (session('error')): ?>
-        <div style="padding:10px; margin: 12px 0; border:1px solid #f5c2c7; background:#f8d7da;">
-            <?= esc(session('error')) ?>
+    <?php $errors = session()->getFlashdata('errors') ?? []; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
+        <div style="...">
+            <?= esc(session()->getFlashdata('error')) ?>
         </div>
     <?php endif; ?>
 
     <?php if (!empty($errors)): ?>
-        <div style="padding:10px; margin: 12px 0; border:1px solid #f5c2c7; background:#f8d7da;">
-            <ul style="margin:0; padding-left: 18px;">
+        <div style="...">
+            <ul style="...">
                 <?php foreach ($errors as $e): ?>
                     <li><?= esc($e) ?></li>
                 <?php endforeach; ?>
