@@ -14,6 +14,8 @@ class BidsControllerTest extends CIUnitTestCase{
     protected $refresh = true;
     protected $namespace = 'App';
     protected $migrate = true;
+
+    // Tests
     public function testIndexLoadsBidsWithJoins(){
         $db = \Config\Database::connect();
 
@@ -76,7 +78,6 @@ class BidsControllerTest extends CIUnitTestCase{
         $result->assertStatus(200);
         $result->assertSee('Fix the roof');
     }
-
     public function testViewMethodCalculatesTotal(){
         $db = \Config\Database::connect();
 
@@ -158,4 +159,14 @@ class BidsControllerTest extends CIUnitTestCase{
         $result->assertStatus(200);
         $result->assertSee('60.00');
     }
+    public function testIndexFiltersWork(){
+        $result = $this->withSession(['logged_in' => true, 'role_id'=> 1])
+            ->get('/admin/bids?status=submitted&q=Roofing');
+
+        $result->assertStatus(200);
+    }
+
+
+
+
 }
