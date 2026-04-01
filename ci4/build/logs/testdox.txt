@@ -1,3 +1,7 @@
+Bids Controller (Tests\Feature\Admin\BidsController)
+ [ ] Index loads bids with joins
+ [ ] View method calculates total
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
