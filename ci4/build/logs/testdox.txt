@@ -18,6 +18,7 @@ Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Store category
  [ ] Edit view loads data
  [x] Update category
+ [x] Delete category
 
 Example Database
  [x] Model find all
@@ -31,7 +32,7 @@ Health
  [x] Base url has been set
 
 Project Model (Database\ProjectModel)
- [x] Successfully create project
+ [ ] Successfully create project
  [x] Successfully create project without end date
  [x] Title exceeds character limit
  [x] Insert fails without title

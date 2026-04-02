@@ -131,4 +131,25 @@ class CategoriesControllerTest extends CIUnitTestCase
         ]);
 
     }
+    public function testDeleteCategory(){
+        // Create category to delete
+        $this->db->table('categories')->insert([
+            'id'=>111,
+            'name'=>'Wood working',
+            'is_visible'=>1,
+        ]);
+
+        // Start the session
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Attempt to delete the category
+        $result = $this->withSession($session)
+            ->get('/admin/categories/delete/111'); // TODO: switch the route to a post request for better security / practice
+
+        $result->assertRedirectTo(site_url('admin/categories'));
+
+        $this->dontSeeInDatabase('categories', [
+            'id'=>111,
+        ]);
+    }
 }
