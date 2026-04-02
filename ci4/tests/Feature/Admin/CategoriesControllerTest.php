@@ -61,4 +61,24 @@ class CategoriesControllerTest extends CIUnitTestCase
         $result->assertSee('Create Category');
         $result->assertSeeElement('input[name="name"]');
     }
+
+    public function testStoreCategory(){
+
+        $session = ['logged_in' => true, 'role_id' => 1];
+        $categoryData = [
+            'name' => 'Landscaping'
+        ];
+
+        $result = $this->withSession($session)
+            ->post('/admin/categories/store', $categoryData);
+
+        // Verify category redirection
+        $result->assertRedirectTo(site_url('admin/categories'));
+
+        // Verify data persists
+        $this->seeInDatabase('categories', [
+            'name' => 'Landscaping',
+            'is_visible' => 1,
+        ]);
+    }
 }

@@ -15,6 +15,7 @@ Bids Controller (Tests\Feature\Admin\BidsController)
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
  [ ] Create view loads
+ [x] Store category
 
 Example Database
  [x] Model find all

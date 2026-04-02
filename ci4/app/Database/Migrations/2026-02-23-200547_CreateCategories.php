@@ -25,6 +25,14 @@ class CreateCategories extends Migration
                 'constraint'     => 1,
                 'default'        => 1,
             ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
 
         ]);
 
