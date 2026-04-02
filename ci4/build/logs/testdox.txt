@@ -1,3 +1,17 @@
+Bids Controller (Tests\Feature\Admin\BidsController)
+ [x] Index loads bids with joins
+ [x] View method calculates total
+ [ ] Index filters work
+ [x] View not found redirects
+ [x] Withdraw bid not found
+ [x] Withdraw fails if already accepted
+ [x] Withdraw fails if already rejected
+ [x] Withdraw bid success
+ [x] View method handles missing task data
+ [x] Filter ignores invalid status
+ [x] Index without filters returns all
+ [x] Index with empty search string
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
@@ -22,6 +36,9 @@ Project Model (Database\ProjectModel)
  [x] Status defaults to open
  [x] Project is created with timestamps
  [x] Project status value is valid
+
+Reports Controller (Tests\Feature\Admin\ReportsController)
+ [ ] Index returns success and correct data
 
 User Auth (Feature\UserAuth)
  [x] Login success redirects to dashboard

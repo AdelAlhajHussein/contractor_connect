@@ -51,6 +51,21 @@
         </style>
     </head>
     <body>
+        <h2>Bids Controller (Tests\Feature\Admin\BidsController)</h2>
+        <ul>
+            <li class="success">Index loads bids with joins</li>
+            <li class="success">View method calculates total</li>
+            <li class="defect">Index filters work</li>
+            <li class="success">View not found redirects</li>
+            <li class="success">Withdraw bid not found</li>
+            <li class="success">Withdraw fails if already accepted</li>
+            <li class="success">Withdraw fails if already rejected</li>
+            <li class="success">Withdraw bid success</li>
+            <li class="success">View method handles missing task data</li>
+            <li class="success">Filter ignores invalid status</li>
+            <li class="success">Index without filters returns all</li>
+            <li class="success">Index with empty search string</li>
+        </ul>
         <h2>Example Database</h2>
         <ul>
             <li class="success">Model find all</li>
@@ -79,6 +94,10 @@
             <li class="success">Status defaults to open</li>
             <li class="success">Project is created with timestamps</li>
             <li class="success">Project status value is valid</li>
+        </ul>
+        <h2>Reports Controller (Tests\Feature\Admin\ReportsController)</h2>
+        <ul>
+            <li class="defect">Index returns success and correct data</li>
         </ul>
         <h2>User Auth (Feature\UserAuth)</h2>
         <ul>
