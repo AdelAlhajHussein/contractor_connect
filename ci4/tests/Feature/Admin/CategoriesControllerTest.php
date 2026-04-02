@@ -61,7 +61,6 @@ class CategoriesControllerTest extends CIUnitTestCase
         $result->assertSee('Create Category');
         $result->assertSeeElement('input[name="name"]');
     }
-
     public function testStoreCategory(){
 
         $session = ['logged_in' => true, 'role_id' => 1];
@@ -80,5 +79,23 @@ class CategoriesControllerTest extends CIUnitTestCase
             'name' => 'Landscaping',
             'is_visible' => 1,
         ]);
+    }
+    public function testEditViewLoadsData(){
+        // Create category
+        $this->db->table('categories')->insert([
+            'id'=>123,
+            'name'=>'Carpentry',
+            'is_visible'=>1,
+        ]);
+
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Attempt to get edit page that matches id
+        $result = $this->withSession($session)
+            ->get('/admin/categories/edit/123');
+
+        $result->assertStatus(200);
+        $result->assertSee('Carpentry');
+        $result->assertSeeElement('input[name="name"]');
     }
 }
