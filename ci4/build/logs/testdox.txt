@@ -51,6 +51,8 @@ Ratings Controller (Tests\Feature\Admin\RatingsController)
  [x] Index search filters by text
  [x] View returns view for valid id
  [x] View redirects invalid ids
+ [x] Remove deletes rating and redirects
+ [x] Remove does not delete related project
 
 Reports Controller (Tests\Feature\Admin\ReportsController)
  [ ] Index returns success and correct data

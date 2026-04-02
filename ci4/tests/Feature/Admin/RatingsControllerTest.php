@@ -115,4 +115,29 @@ final class RatingsControllerTest extends CIUnitTestCase
         $result = $this->withSession($session)->get('/admin/ratings/view/999');
         $result->assertRedirectTo(site_url('admin/ratings'));
     }
+    public function testRemoveDeletesRatingAndRedirects(){
+        $this->setupRatingData();
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)->get('/admin/ratings/remove/1');
+
+        $result->assertRedirectTo(site_url('admin/ratings'));
+
+        $this->dontSeeInDatabase('contractor_ratings', [
+            'id' => 1
+        ]);
+    }
+    public function testRemoveDoesNotDeleteRelatedProject(){
+        $this->setupRatingData();
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Attempt to delete rating
+        $this->withSession($session)->get('/admin/ratings/remove/1');
+
+        // Verify rating is deleted
+        $this->dontSeeInDatabase('contractor_ratings', ['id' => 1]);
+
+        // Verify project has not been deleted
+        $this->seeInDatabase('projects', ['id'=> 1]);
+    }
 }
