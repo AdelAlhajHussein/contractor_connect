@@ -12,6 +12,9 @@ Bids Controller (Tests\Feature\Admin\BidsController)
  [x] Index without filters returns all
  [x] Index with empty search string
 
+Categories Controller (Tests\Feature\Admin\CategoriesController)
+ [ ] Index shows categories and filters
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
@@ -47,8 +50,8 @@ User Auth (Feature\UserAuth)
  [x] Guest cannot access admin
 
 User Controller (Tests\Feature\Admin\UserController)
- [x] Index loads successfully for admin
- [x] Index filters search and role
+ [ ] Index loads successfully for admin
+ [ ] Index filters search and role
  [ ] Index filters by status
  [x] Toggle redirects if user not found
  [x] Toggle change user status
