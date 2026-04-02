@@ -1,19 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Tests\Feature\Admin\RatingsControllerTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/RatingsControllerTest.php" tests="1" assertions="3" errors="1" failures="0" skipped="0" time="0.709160">
-    <testcase name="testIndexShowsRatingsWithFilters" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/RatingsControllerTest.php" line="17" class="Tests\Feature\Admin\RatingsControllerTest" classname="Tests.Feature.Admin.RatingsControllerTest" assertions="3" time="0.709160">
-      <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Feature\Admin\RatingsControllerTest::testIndexShowsRatingsWithFilters
-CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: HAVING clause on a non-aggregate query
+  <testsuite name="/Users/ericlaudrum/Projects/contractor_connect/ci4/phpunit.xml.dist" tests="55" assertions="134" errors="1" failures="5" skipped="0" time="8.450929">
+    <testsuite name="App" tests="55" assertions="134" errors="1" failures="5" skipped="0" time="8.450929">
+      <testsuite name="ExampleDatabaseTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ExampleDatabaseTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.115740">
+        <testcase name="testModelFindAll" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ExampleDatabaseTest.php" line="17" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" assertions="1" time="0.097568"/>
+        <testcase name="testSoftDeleteLeavesRow" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ExampleDatabaseTest.php" line="28" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" assertions="2" time="0.018172"/>
+      </testsuite>
+      <testsuite name="Database\ProjectModelTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" tests="12" assertions="21" errors="0" failures="1" skipped="0" time="2.990691">
+        <testcase name="testSuccessfullyCreateProject" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="68" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.313268"/>
+        <testcase name="testSuccessfullyCreateProjectWithoutEndDate" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="99" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.259178"/>
+        <testcase name="testTitleExceedsCharacterLimit" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="129" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="1" time="0.320517">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Database\ProjectModelTest::testTitleExceedsCharacterLimit
+The title exceeds the 255 character limit
+Failed asserting that 1 is false.
 
-/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseConnection.php:684
-/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Database/BaseBuilder.php:1649
-/Users/ericlaudrum/Projects/contractor_connect/ci4/app/Controllers/Admin/RatingsController.php:51
-/Users/ericlaudrum/Projects/contractor_connect/ci4/system/CodeIgniter.php:933
-/Users/ericlaudrum/Projects/contractor_connect/ci4/system/CodeIgniter.php:507
-/Users/ericlaudrum/Projects/contractor_connect/ci4/system/CodeIgniter.php:354
-/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/FeatureTestTrait.php:228
-/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/FeatureTestTrait.php:248
-/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/RatingsControllerTest.php:78</error>
-    </testcase>
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php:149</failure>
+        </testcase>
+        <testcase name="testInsertFailsWithoutTitle" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="160" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.262331"/>
+        <testcase name="testDeadlineHasNotExpired" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="187" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.261047"/>
+        <testcase name="testBudgetMinCannotExceedMax" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="215" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.258417"/>
+        <testcase name="testBudgetCannotBeNegative" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="245" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.260237"/>
+        <testcase name="testBudgetIsNotText" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="268" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.258138"/>
+        <testcase name="testCannotCreateProjectWithoutValidUserId" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="290" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="1" time="0.019764"/>
+        <testcase name="testStatusDefaultsToOpen" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="313" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="1" time="0.259802"/>
+        <testcase name="testProjectIsCreatedWithTimestamps" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="340" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.260451"/>
+        <testcase name="testProjectStatusValueIsValid" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/ProjectModelTest.php" line="367" class="Database\ProjectModelTest" classname="Database.ProjectModelTest" assertions="2" time="0.257541"/>
+      </testsuite>
+      <testsuite name="Database\UserModelTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" tests="4" assertions="8" errors="0" failures="0" skipped="0" time="1.254926">
+        <testcase name="testInsertUser" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="36" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="2" time="0.254117"/>
+        <testcase name="testSoftDeleteWorks" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="66" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="3" time="0.256293"/>
+        <testcase name="testFindUserByEmail" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="112" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="2" time="0.254355"/>
+        <testcase name="testCannotCreateUserWithExistingEmail" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Database/UserModelTest.php" line="141" class="Database\UserModelTest" classname="Database.UserModelTest" assertions="1" time="0.490161"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Admin\BidsControllerTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" tests="12" assertions="24" errors="0" failures="1" skipped="0" time="0.384073">
+        <testcase name="testIndexLoadsBidsWithJoins" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="19" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.068724"/>
+        <testcase name="testViewMethodCalculatesTotal" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="83" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.036084"/>
+        <testcase name="testIndexFiltersWork" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="138" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.032998">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Admin\BidsControllerTest::testIndexFiltersWork
+Text 'Fix the roof' is not seen in response.
+Failed asserting that false is true.
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/TestResponse.php:421
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php:146</failure>
+        </testcase>
+        <testcase name="testViewNotFoundRedirects" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="149" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.026350"/>
+        <testcase name="testWithdrawBidNotFound" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="159" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.025024"/>
+        <testcase name="testWithdrawFailsIfAlreadyAccepted" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="166" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.025490"/>
+        <testcase name="testWithdrawFailsIfAlreadyRejected" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="209" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.025674"/>
+        <testcase name="testWithdrawBidSuccess" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="223" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="3" time="0.026760"/>
+        <testcase name="testViewMethodHandlesMissingTaskData" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="267" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="2" time="0.030019"/>
+        <testcase name="testFilterIgnoresInvalidStatus" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="320" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="1" time="0.029451"/>
+        <testcase name="testIndexWithoutFiltersReturnsAll" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="328" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="3" time="0.029195"/>
+        <testcase name="testIndexWithEmptySearchString" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/BidsControllerTest.php" line="373" class="Tests\Feature\Admin\BidsControllerTest" classname="Tests.Feature.Admin.BidsControllerTest" assertions="1" time="0.028302"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Admin\CategoriesControllerTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" tests="7" assertions="26" errors="1" failures="1" skipped="0" time="0.222816">
+        <testcase name="testIndexShowsCategoriesAndFilters" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" line="19" class="Tests\Feature\Admin\CategoriesControllerTest" classname="Tests.Feature.Admin.CategoriesControllerTest" assertions="9" time="0.054510"/>
+        <testcase name="testCreateViewLoads" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" line="50" class="Tests\Feature\Admin\CategoriesControllerTest" classname="Tests.Feature.Admin.CategoriesControllerTest" assertions="2" time="0.034430">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Admin\CategoriesControllerTest::testCreateViewLoads
+Text 'Create Category' is not seen in response.
+Failed asserting that false is true.
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/TestResponse.php:421
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php:61</failure>
+        </testcase>
+        <testcase name="testStoreCategory" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" line="64" class="Tests\Feature\Admin\CategoriesControllerTest" classname="Tests.Feature.Admin.CategoriesControllerTest" assertions="3" time="0.025728"/>
+        <testcase name="testEditViewLoadsData" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" line="83" class="Tests\Feature\Admin\CategoriesControllerTest" classname="Tests.Feature.Admin.CategoriesControllerTest" assertions="2" time="0.030748">
+          <error type="ErrorException">Tests\Feature\Admin\CategoriesControllerTest::testEditViewLoadsData
+ErrorException: Attempt to read property "length" on false
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/DOMParser.php:120
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/DOMParser.php:137
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/TestResponse.php:444
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php:99</error>
+        </testcase>
+        <testcase name="testUpdateCategory" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" line="101" class="Tests\Feature\Admin\CategoriesControllerTest" classname="Tests.Feature.Admin.CategoriesControllerTest" assertions="4" time="0.026495"/>
+        <testcase name="testDeleteCategory" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" line="134" class="Tests\Feature\Admin\CategoriesControllerTest" classname="Tests.Feature.Admin.CategoriesControllerTest" assertions="3" time="0.025596"/>
+        <testcase name="testToggleCategoryVisibility" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/CategoriesControllerTest.php" line="155" class="Tests\Feature\Admin\CategoriesControllerTest" classname="Tests.Feature.Admin.CategoriesControllerTest" assertions="3" time="0.025309"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Admin\RatingsControllerTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/RatingsControllerTest.php" tests="2" assertions="7" errors="0" failures="0" skipped="0" time="0.080584">
+        <testcase name="testIndexShowsRatingsWithFilters" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/RatingsControllerTest.php" line="69" class="Tests\Feature\Admin\RatingsControllerTest" classname="Tests.Feature.Admin.RatingsControllerTest" assertions="3" time="0.043777"/>
+        <testcase name="testIndexSearchFiltersByText" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/RatingsControllerTest.php" line="85" class="Tests\Feature\Admin\RatingsControllerTest" classname="Tests.Feature.Admin.RatingsControllerTest" assertions="4" time="0.036807"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Admin\ReportsControllerTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/ReportsControllerTest.php" tests="1" assertions="2" errors="0" failures="1" skipped="0" time="0.730756">
+        <testcase name="testIndexReturnsSuccessAndCorrectData" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/ReportsControllerTest.php" line="16" class="Tests\Feature\Admin\ReportsControllerTest" classname="Tests.Feature.Admin.ReportsControllerTest" assertions="2" time="0.730756">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Admin\ReportsControllerTest::testIndexReturnsSuccessAndCorrectData
+Text 'Project 1' is not seen in response.
+Failed asserting that false is true.
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/TestResponse.php:421
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/ReportsControllerTest.php:86</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Feature\Admin\UserControllerTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" tests="8" assertions="23" errors="0" failures="1" skipped="0" time="1.843805">
+        <testcase name="testIndexLoadsSuccessfullyForAdmin" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="16" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="2" time="0.263811"/>
+        <testcase name="testIndexFiltersSearchAndRole" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="42" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="3" time="0.494016"/>
+        <testcase name="testIndexFiltersByStatus" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="76" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="3" time="0.493296">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Admin\UserControllerTest::testIndexFiltersByStatus
+Text 'active_user' is unexpectedly seen in response.
+Failed asserting that false is true.
+
+/Users/ericlaudrum/Projects/contractor_connect/ci4/system/Test/TestResponse.php:432
+/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php:108</failure>
+        </testcase>
+        <testcase name="testToggleRedirectsIfUserNotFound" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="114" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="3" time="0.024887"/>
+        <testcase name="testToggleChangeUserStatus" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="124" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="3" time="0.258901"/>
+        <testcase name="testUpdateRoleFailsWithInvalidRoleId" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="159" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="3" time="0.024423"/>
+        <testcase name="testUpdateRoleRedirectsIfUserNotFound" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="168" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="3" time="0.026040"/>
+        <testcase name="testUpdateRoleChangesUserRole" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/Admin/UserControllerTest.php" line="178" class="Tests\Feature\Admin\UserControllerTest" classname="Tests.Feature.Admin.UserControllerTest" assertions="3" time="0.258432"/>
+      </testsuite>
+      <testsuite name="Feature\UserAuthTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" tests="4" assertions="16" errors="0" failures="0" skipped="0" time="0.805890">
+        <testcase name="testLoginSuccessRedirectsToDashboard" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="30" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="5" time="0.495923"/>
+        <testcase name="testLoginFailsWithWrongPassword" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="74" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="5" time="0.259414"/>
+        <testcase name="testLoginFailsWithWrongUsername" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="114" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="4" time="0.025135"/>
+        <testcase name="testGuestCannotAccessAdmin" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Feature/UserAuthTest.php" line="136" class="Feature\UserAuthTest" classname="Feature.UserAuthTest" assertions="2" time="0.025418"/>
+      </testsuite>
+      <testsuite name="ExampleSessionTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Session/ExampleSessionTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.006892">
+        <testcase name="testSessionSimple" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Session/ExampleSessionTest.php" line="10" class="ExampleSessionTest" classname="ExampleSessionTest" assertions="1" time="0.006892"/>
+      </testsuite>
+      <testsuite name="HealthTest" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Unit/HealthTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.014756">
+        <testcase name="testIsDefinedAppPath" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Unit/HealthTest.php" line="12" class="HealthTest" classname="HealthTest" assertions="1" time="0.006495"/>
+        <testcase name="testBaseUrlHasBeenSet" file="/Users/ericlaudrum/Projects/contractor_connect/ci4/tests/Unit/HealthTest.php" line="17" class="HealthTest" classname="HealthTest" assertions="2" time="0.008261"/>
+      </testsuite>
+    </testsuite>
   </testsuite>
 </testsuites>

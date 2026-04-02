@@ -13,75 +13,89 @@ final class RatingsControllerTest extends CIUnitTestCase
     protected $refresh = true;
     protected $namespace = 'App';
 
-
-    public function testIndexShowsRatingsWithFilters(){
-
-        $session = ['logged_in' => true, 'role_id' => 1];
-
-        // Create category
+    // Helper
+    private function setupRatingData(){
         $this->db->table('categories')->insert([
-            'id'=> 1,
-            'name' => 'General',
+            'id' => 1,
+            'name' => 'General'
         ]);
 
-
-        // Create users
         $this->db->table('users')->insertBatch([
             [
                 'id' => 10,
-                'username' => 'Contessa',
+                'username' => 'contractor89',
                 'email' => 'contractor@mail.com',
-                'first_name'=>'Contractor',
-                'last_name'=>'User',
-                'role_id'=> 2,
-                'password_hash' => password_hash('1234', PASSWORD_DEFAULT),
+                'first_name' => 'Contractor',
+                'last_name' => 'User',
+                'role_id' => 2,
+                'password_hash'=>'fake_hash',
             ],
             [
                 'id' => 20,
-                'username' => 'Homer',
+                'username' => 'homeowner99',
                 'email' => 'homeowner@mail.com',
-                'first_name'=>'Home',
-                'last_name'=>'User',
+                'first_name' => 'Homeowner',
+                'last_name' => 'User',
                 'role_id' => 3,
-                'password_hash'=> password_hash('4321', PASSWORD_DEFAULT),
-            ],
+                'password_hash'=>'fake_hash',
+            ]
         ]);
 
-        // Create a project
         $this->db->table('projects')->insert([
             'id' => 1,
             'title' => 'Kitchen Remodel',
-            'home_owner_id'=> 20,
+            'home_owner_id' => 20,
             'category_id' => 1,
-            'address' => '123 Test St.',
+            'address' => '100 Example Ave.'
         ]);
 
-        // Create a rating
         $this->db->table('contractor_ratings')->insert([
+            'id' => 1,
             'project_id' => 1,
             'contractor_id' => 10,
             'home_owner_id' => 20,
+
             'quality' => 5,
             'timeliness' => 5,
             'communication' => 5,
-            'pricing'=> 5,
-            'created_at' => date('Y-m-d H:i:s'),
-        ]);
+            'pricing' => 5,
 
-        // Test basic load
-        $result = $this->withSession($session)->get('/admin/ratings');
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+
+    // Tests
+    public function testIndexShowsRatingsWithFilters(){
+
+        // Set up the rating data and start the session
+        $this->setupRatingData();
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Test filter by score (5)
+        $result = $this->withSession($session)->get('/admin/ratings?score=5');
         $result->assertStatus(200);
         $result->assertSee('contractor@mail.com');
-        $result->assertSee('Kitchen Remodel');
-
-        // Find 5* ratings
-        $resultFilter = $this->withSession($session)->get('/admin/ratings?score=5');
-        $resultFilter->assertSee('contractor@mail.com');
 
         // Verify other ratings are not shown
         $resultFilteredOut = $this->withSession($session)->get('/admin/ratings?score=1');
         $resultFilteredOut->assertDontSee('contractor@mail.com');
 
     }
+    public function testIndexSearchFiltersByText(){
 
+        $this->setupRatingData();
+
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Verify search by contractor email
+        $resultEmail = $this->withSession($session)->get('/admin/ratings?q=contractor@mail.com');
+        $resultEmail->assertStatus(200);
+        $resultEmail->assertSee('contractor@mail.com');
+        $resultEmail->assertSee('Kitchen Remodel');
+
+        // Test search with no results
+        $resultEmpty = $this->withSession($session)->get('/admin/ratings?q=NonExistentEntity');
+        $resultEmpty->assertDontSee('contractor@mail.com');
+    }
 }
