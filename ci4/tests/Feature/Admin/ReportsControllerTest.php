@@ -79,7 +79,7 @@ final class ReportsControllerTest extends CIUnitTestCase{
         $result = $this->withSession([
             'logged_in' => true,
             'role_id' => 1,
-        ])->get('/admin/admin/reports');
+        ])->get('/admin/reports');
 
         // Assertions
         $result->assertStatus(200);
