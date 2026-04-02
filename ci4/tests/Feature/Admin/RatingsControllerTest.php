@@ -98,4 +98,21 @@ final class RatingsControllerTest extends CIUnitTestCase
         $resultEmpty = $this->withSession($session)->get('/admin/ratings?q=NonExistentEntity');
         $resultEmpty->assertDontSee('contractor@mail.com');
     }
+    public function testViewReturnsViewForValidId(){
+        $this->setupRatingData();
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)->get('/admin/ratings/view/1');
+        $result->assertStatus(200);
+
+        $result->assertSee('contractor@mail.com');
+        $result->assertSee('Kitchen Remodel');
+    }
+    public function testViewRedirectsInvalidIds(){
+        $this->setupRatingData();
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)->get('/admin/ratings/view/999');
+        $result->assertRedirectTo(site_url('admin/ratings'));
+    }
 }
