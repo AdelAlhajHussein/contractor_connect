@@ -14,6 +14,7 @@ Bids Controller (Tests\Feature\Admin\BidsController)
 
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
+ [ ] Create view loads
 
 Example Database
  [x] Model find all
@@ -29,7 +30,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [ ] Title exceeds character limit
+ [x] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
