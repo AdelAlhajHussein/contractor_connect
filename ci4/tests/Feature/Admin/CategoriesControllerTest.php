@@ -98,4 +98,37 @@ class CategoriesControllerTest extends CIUnitTestCase
         $result->assertSee('Carpentry');
         $result->assertSeeElement('input[name="name"]');
     }
+    public function testUpdateCategory(){
+        // Create category
+        $this->db->table('categories')->insert([
+            'id'=>321,
+            'name'=>'Wood working',
+            'is_visible'=>1,
+        ]);
+
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Set what we want updated
+        $updateData = [
+            'name' => 'Carpentry'
+        ];
+
+        // Attempt to update the category
+        $result = $this->withSession($session)
+            ->post('/admin/categories/update/321', $updateData);
+
+        // Verify redirection and correct data return
+        $result->assertRedirectTo(site_url('admin/categories'));
+        $this->seeInDatabase('categories', [
+            'id'=>321,
+            'name' => 'Carpentry',
+            'is_visible' => 1,
+        ]);
+        $this->dontSeeInDatabase('categories', [
+            'id'=>321,
+            'name' => 'Wood working',
+            'is_visible' => 1,
+        ]);
+
+    }
 }
