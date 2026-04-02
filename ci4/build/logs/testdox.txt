@@ -13,7 +13,7 @@ Bids Controller (Tests\Feature\Admin\BidsController)
  [x] Index with empty search string
 
 Categories Controller (Tests\Feature\Admin\CategoriesController)
- [ ] Index shows categories and filters
+ [x] Index shows categories and filters
 
 Example Database
  [x] Model find all
@@ -29,7 +29,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [x] Title exceeds character limit
+ [ ] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
@@ -50,8 +50,8 @@ User Auth (Feature\UserAuth)
  [x] Guest cannot access admin
 
 User Controller (Tests\Feature\Admin\UserController)
- [ ] Index loads successfully for admin
- [ ] Index filters search and role
+ [x] Index loads successfully for admin
+ [x] Index filters search and role
  [ ] Index filters by status
  [x] Toggle redirects if user not found
  [x] Toggle change user status
