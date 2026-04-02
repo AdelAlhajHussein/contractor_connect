@@ -140,4 +140,48 @@ final class RatingsControllerTest extends CIUnitTestCase
         // Verify project has not been deleted
         $this->seeInDatabase('projects', ['id'=> 1]);
     }
+    public function testSuspiciousShowsFlaggedRatings(){
+        $this->setupRatingData();
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $this->db->table('contractor_ratings')->insert([
+            'project_id' => 1,
+            'contractor_id' => 10,
+            'home_owner_id' => 20,
+            'quality' => 1,
+            'timeliness' => 1,
+            'communication' => 1,
+            'pricing' => 1,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        $this->db->table('users')->insert([
+            'id' => 30,
+            'username' => 'test',
+            'email' => 'testuser@mail.com',
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'role_id' => 3,
+            'password_hash'=>'fake_hash',
+        ]);
+
+        $this->db->table('contractor_ratings')->insert([
+            'project_id' => 1,
+            'contractor_id' => 10,
+            'home_owner_id' => 30,
+            'quality' => 5,
+            'timeliness' => 5,
+            'communication' => 5,
+            'pricing' => 5,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        $result = $this->withSession($session)->get('/admin/ratings/suspicious');
+        $result->assertStatus(200);
+
+        $result->assertSee('contractor@mail.com');
+        $result->assertSee('2');
+        $result->assertSee('3');
+
+    }
 }

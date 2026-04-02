@@ -53,6 +53,7 @@ Ratings Controller (Tests\Feature\Admin\RatingsController)
  [x] View redirects invalid ids
  [x] Remove deletes rating and redirects
  [x] Remove does not delete related project
+ [x] Suspicious shows flagged ratings
 
 Reports Controller (Tests\Feature\Admin\ReportsController)
  [ ] Index returns success and correct data
