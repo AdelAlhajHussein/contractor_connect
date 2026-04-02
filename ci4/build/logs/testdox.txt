@@ -12,6 +12,15 @@ Bids Controller (Tests\Feature\Admin\BidsController)
  [x] Index without filters returns all
  [x] Index with empty search string
 
+Categories Controller (Tests\Feature\Admin\CategoriesController)
+ [x] Index shows categories and filters
+ [ ] Create view loads
+ [x] Store category
+ [ ] Edit view loads data
+ [x] Update category
+ [x] Delete category
+ [x] Toggle category visibility
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
@@ -26,7 +35,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [x] Title exceeds character limit
+ [ ] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
