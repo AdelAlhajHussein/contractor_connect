@@ -152,4 +152,25 @@ class CategoriesControllerTest extends CIUnitTestCase
             'id'=>111,
         ]);
     }
+    public function testToggleCategoryVisibility(){
+        // Create a category to hide
+        $this->db->table('categories')->insert([
+            'id'=>222,
+            'name'=>'Snow Removal',
+            'is_visible'=>1,
+        ]);
+        // Start a session
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Attempt to view category
+        $result = $this->withSession($session)
+            ->get('/admin/categories/toggle/222');
+
+        $result->assertRedirectTo(site_url('admin/categories'));
+
+        $this->seeInDatabase('categories', [
+            'id'=> 222,
+            'is_visible'=> 0,
+        ]);
+    }
 }
