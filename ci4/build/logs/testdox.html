@@ -94,7 +94,7 @@
         <ul>
             <li class="success">Successfully create project</li>
             <li class="success">Successfully create project without end date</li>
-            <li class="defect">Title exceeds character limit</li>
+            <li class="success">Title exceeds character limit</li>
             <li class="success">Insert fails without title</li>
             <li class="success">Deadline has not expired</li>
             <li class="success">Budget min cannot exceed max</li>
@@ -104,6 +104,16 @@
             <li class="success">Status defaults to open</li>
             <li class="success">Project is created with timestamps</li>
             <li class="success">Project status value is valid</li>
+        </ul>
+        <h2>Ratings Controller (Tests\Feature\Admin\RatingsController)</h2>
+        <ul>
+            <li class="success">Index shows ratings with filters</li>
+            <li class="success">Index search filters by text</li>
+            <li class="success">View returns view for valid id</li>
+            <li class="success">View redirects invalid ids</li>
+            <li class="success">Remove deletes rating and redirects</li>
+            <li class="success">Remove does not delete related project</li>
+            <li class="success">Suspicious shows flagged ratings</li>
         </ul>
         <h2>Reports Controller (Tests\Feature\Admin\ReportsController)</h2>
         <ul>

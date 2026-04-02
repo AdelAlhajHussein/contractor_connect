@@ -25,6 +25,7 @@ class RatingsController extends BaseController
             ->join('projects', 'projects.id = contractor_ratings.project_id', 'left')
             ->join('users c', 'c.id = contractor_ratings.contractor_id', 'left')
             ->join('users h', 'h.id = contractor_ratings.home_owner_id', 'left')
+            ->groupBy('contractor_ratings.id')
             ->orderBy('contractor_ratings.created_at', 'DESC');
 
         // text search

@@ -35,7 +35,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [ ] Title exceeds character limit
+ [x] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
@@ -45,6 +45,15 @@ Project Model (Database\ProjectModel)
  [x] Status defaults to open
  [x] Project is created with timestamps
  [x] Project status value is valid
+
+Ratings Controller (Tests\Feature\Admin\RatingsController)
+ [x] Index shows ratings with filters
+ [x] Index search filters by text
+ [x] View returns view for valid id
+ [x] View redirects invalid ids
+ [x] Remove deletes rating and redirects
+ [x] Remove does not delete related project
+ [x] Suspicious shows flagged ratings
 
 Reports Controller (Tests\Feature\Admin\ReportsController)
  [ ] Index returns success and correct data
