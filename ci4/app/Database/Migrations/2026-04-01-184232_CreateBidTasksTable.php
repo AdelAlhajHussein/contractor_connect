@@ -40,6 +40,11 @@ class CreateBidTasksTable extends Migration
                 'type' => 'INT',
                 'constraint' => 11
             ],
+            'description' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'null'       => true,
+            ],
         ]);
 
         $this->forge->addKey('id', true);

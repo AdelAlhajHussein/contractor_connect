@@ -54,12 +54,17 @@
         <h2>Bids Controller (Tests\Feature\Admin\BidsController)</h2>
         <ul>
             <li class="success">Index loads bids with joins</li>
-            <li class="defect">View method calculates total</li>
-            <li class="success">Index filters work</li>
+            <li class="success">View method calculates total</li>
+            <li class="defect">Index filters work</li>
             <li class="success">View not found redirects</li>
             <li class="success">Withdraw bid not found</li>
-            <li class="defect">Withdraw fails if already accepted</li>
+            <li class="success">Withdraw fails if already accepted</li>
+            <li class="success">Withdraw fails if already rejected</li>
             <li class="success">Withdraw bid success</li>
+            <li class="success">View method handles missing task data</li>
+            <li class="success">Filter ignores invalid status</li>
+            <li class="success">Index without filters returns all</li>
+            <li class="success">Index with empty search string</li>
         </ul>
         <h2>Example Database</h2>
         <ul>
@@ -103,8 +108,8 @@
         </ul>
         <h2>User Controller (Tests\Feature\Admin\UserController)</h2>
         <ul>
-            <li class="defect">Index loads successfully for admin</li>
-            <li class="defect">Index filters search and role</li>
+            <li class="success">Index loads successfully for admin</li>
+            <li class="success">Index filters search and role</li>
             <li class="defect">Index filters by status</li>
             <li class="success">Toggle redirects if user not found</li>
             <li class="success">Toggle change user status</li>

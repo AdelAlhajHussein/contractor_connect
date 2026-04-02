@@ -1,11 +1,16 @@
 Bids Controller (Tests\Feature\Admin\BidsController)
  [x] Index loads bids with joins
- [ ] View method calculates total
- [x] Index filters work
+ [x] View method calculates total
+ [ ] Index filters work
  [x] View not found redirects
  [x] Withdraw bid not found
- [ ] Withdraw fails if already accepted
+ [x] Withdraw fails if already accepted
+ [x] Withdraw fails if already rejected
  [x] Withdraw bid success
+ [x] View method handles missing task data
+ [x] Filter ignores invalid status
+ [x] Index without filters returns all
+ [x] Index with empty search string
 
 Example Database
  [x] Model find all
@@ -42,8 +47,8 @@ User Auth (Feature\UserAuth)
  [x] Guest cannot access admin
 
 User Controller (Tests\Feature\Admin\UserController)
- [ ] Index loads successfully for admin
- [ ] Index filters search and role
+ [x] Index loads successfully for admin
+ [x] Index filters search and role
  [ ] Index filters by status
  [x] Toggle redirects if user not found
  [x] Toggle change user status
