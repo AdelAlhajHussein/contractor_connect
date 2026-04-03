@@ -21,6 +21,10 @@ Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Delete category
  [x] Toggle category visibility
 
+Contractors Controller (Tests\Feature\Admin\ContractorsController)
+ [x] Index shows contractors
+ [x] Toggle switches user status
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row

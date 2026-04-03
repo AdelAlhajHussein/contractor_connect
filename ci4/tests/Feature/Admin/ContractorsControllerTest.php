@@ -16,7 +16,7 @@ class ContractorsControllerTest extends CIUnitTestCase
     protected $migrate = true;
 
     // Helper
-    private function createContractor(array $userData = [], array $profileData = []){
+    private function setUpContractors(array $userData = [], array $profileData = []){
         $userDefaults = [
             'username'=>'test_contractor',
             'email'=>'contractor@test.com',
@@ -42,6 +42,39 @@ class ContractorsControllerTest extends CIUnitTestCase
     }
 
     // Tests
+    public function testIndexShowsContractors(){
+
+        $this->setUpContractors([
+            'username' => 'user1',
+            'email' => 'user1@test.com',
+        ]);
+        $this->setUpContractors([
+            'username' => 'user2',
+            'email' => 'user2@test.com',
+        ]);
+
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->get('/admin/contractors');
+
+        $result->assertStatus(200);
+        $result->assertSee('user1');
+        $result->assertSee('user2');
+    }
+    public function testToggleSwitchesUserStatus(){
+        // Create active contractor
+        $userId = $this->setUpContractors(['is_active' => 1]);
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)
+            ->get("/admin/contractors/toggle/$userId");
+
+        $result->assertRedirectTo(site_url('admin/contractors'));
+
+        $this->seeInDatabase('users', [
+            'id'=>$userId,
+            'is_active'=>0,
+        ]);
+    }
 
 
 }

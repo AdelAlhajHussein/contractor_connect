@@ -26,6 +26,11 @@ class CreateContractorProfiles extends Migration
                 'constraint'=>255,
                 'null'=>true,
             ],
+            'city' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
+                'null' => false
+            ],
             'province'=>[
                 'type'=>'VARCHAR',
                 'constraint'=>100,

@@ -36,6 +36,11 @@ class CreateUsersTable extends Migration
                 'constraint' => 255,
                 'null' => false,
             ],
+            'phone' => [
+                'type' => 'VARCHAR',
+                'constraint' => 30,
+                'null' => true,
+            ],
             'password_hash' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -44,12 +49,12 @@ class CreateUsersTable extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
                 'null' => false,
-                'default' => '1', // default to admin?
+                'default' => '1',
             ],
             'is_active' =>[
                 'type' => 'INT',
                 'constraint' => 11,
-                'default' => '1', // default active
+                'default' => '1',
             ],
 
             // timestamps
