@@ -204,7 +204,6 @@ class ContractorsControllerTest extends CIUnitTestCase
         ]);
     }
 
-
 }
 
 

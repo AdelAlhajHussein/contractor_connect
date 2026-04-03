@@ -32,6 +32,9 @@ Contractors Controller (Tests\Feature\Admin\ContractorsController)
  [x] Reject pending contractor
  [x] Reject missing profile
 
+Dashboard Controller (Tests\Feature\Admin\DashboardController)
+ [ ] Index loads dashboard with users
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
