@@ -21,6 +21,20 @@ Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Delete category
  [x] Toggle category visibility
 
+Contractors Controller (Tests\Feature\Admin\ContractorsController)
+ [x] Index shows contractors
+ [x] Index filters by status
+ [x] Index search filters by multiple fields
+ [x] Toggle switches user status
+ [x] Toggle redirects when user not found
+ [x] Approve pending contractor
+ [x] Approve inserts profile when none exists
+ [x] Reject pending contractor
+ [x] Reject missing profile
+
+Dashboard Controller (Tests\Feature\Admin\DashboardController)
+ [ ] Index loads dashboard with users
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
