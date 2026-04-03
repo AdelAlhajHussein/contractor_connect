@@ -34,6 +34,7 @@ Contractors Controller (Tests\Feature\Admin\ContractorsController)
 
 Dashboard Controller (Tests\Feature\Admin\DashboardController)
  [ ] Index loads dashboard with users
+ [ ] Get table users
 
 Example Database
  [x] Model find all
