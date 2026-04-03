@@ -23,9 +23,13 @@ Categories Controller (Tests\Feature\Admin\CategoriesController)
 
 Contractors Controller (Tests\Feature\Admin\ContractorsController)
  [x] Index shows contractors
- [ ] Index filters by status
+ [x] Index filters by status
  [x] Index search filters by multiple fields
  [x] Toggle switches user status
+ [x] Approve pending contractor
+ [ ] Approve inserts profile when none exists
+ [x] Reject pending contractor
+ [ ] Reject missing profile
 
 Example Database
  [x] Model find all

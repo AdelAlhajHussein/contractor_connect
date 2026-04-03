@@ -62,20 +62,22 @@ class ContractorsControllerTest extends CIUnitTestCase
         $result->assertSee('user2');
     }
     public function testIndexFiltersByStatus(){
-        $this->setUpContractors(['username'=>'active_user', 'is_active'=>1 ]);
-        $this->setUpContractors(['username'=>'inactive_user', 'is_active'=>0 ]);
+        $this->setUpContractors(['username'=>'unique_active_user', 'is_active'=>1 ]);
+        $this->setUpContractors(['username'=>'unique_inactive_user', 'is_active'=>0 ]);
 
         $session = ['logged_in' => true, 'role_id' => 1];
 
+        // Check active user
         $resultActive = $this->withSession($session)
             ->get('/admin/contractors?status=1');
-        $resultActive->assertSee('active_user');
-        $resultActive->assertDontSee('inactive_user');
+        $resultActive->assertSee('unique_active_user');
+        $resultActive->assertDontSee('unique_inactive_user');
 
+        // Check inactive user
         $resultInactive = $this->withSession($session)
             ->get('/admin/contractors?status=0');
-        $resultInactive->assertSee('inactive_user');
-        $resultInactive->assertDontSee('active_user');
+        $resultInactive->assertSee('unique_inactive_user');
+        $resultInactive->assertDontSee('unique_active_user');
     }
     public function testIndexSearchFiltersByMultipleFields(){
 
@@ -112,8 +114,86 @@ class ContractorsControllerTest extends CIUnitTestCase
     }
 
     // Approve
+    public function testApprovePendingContractor(){
+        $userId = $this->setUpContractors([], ['approval_status'=>'pending']);
+
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)
+            ->get("/admin/contractors/approve/$userId");
+
+
+        $result->assertRedirectTo(site_url('admin/contractors'));
+
+        $this->seeInDatabase('contractor_profiles', [
+            'contractor_id'=>$userId,
+            'approval_status'=>'approved',
+        ]);
+    }
+    public function testApproveInsertsProfileWhenNoneExists()
+    {
+        // Manually insert the user
+        $userId = $this->db->table('users')->insert([
+            'username' => 'new_contractor_no_profile',
+            'email' => 'new@test.com',
+            'first_name' => 'New',
+            'last_name'  => 'Contractor',
+            'role_id' => 2,
+            'is_active' => 1,
+            'password_hash' => 'hash'
+        ]);
+
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)
+            ->get("/admin/contractors/approve/$userId");
+
+        $result->assertRedirectTo(site_url('admin/contractors'));
+
+        // Verify the record was actually inserted into the profile table
+        $this->seeInDatabase('contractor_profiles', [
+            'contractor_id'   => $userId,
+            'approval_status' => 'approved'
+        ]);
+    }
 
     // Reject
+    public function testRejectPendingContractor(){
+
+        $userId = $this->setUpContractors([], ['approval_status' => 'pending']);
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)->get("/admin/contractors/reject/$userId");
+
+        $result->assertRedirectTo(site_url('admin/contractors'));
+        $this->seeInDatabase('contractor_profiles', [
+            'contractor_id' => $userId,
+            'approval_status' => 'rejected',
+        ]);
+    }
+    public function testRejectMissingProfile()
+    {
+        // Manually insert new user
+        $userId = $this->db->table('users')->insert([
+            'username' => 'to_be_rejected',
+            'email' => 'rejected@test.com',
+            'role_id' => 2,
+            'first_name' => 'Bad',
+            'last_name' => 'Contractor',
+            'password_hash' => 'fake'
+        ]);
+
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)->get("/admin/contractors/reject/$userId");
+
+        $this->seeInDatabase('contractor_profiles', [
+            'contractor_id'   => $userId,
+            'approval_status' => 'rejected',
+        ]);
+    }
+
+
 }
 
 
