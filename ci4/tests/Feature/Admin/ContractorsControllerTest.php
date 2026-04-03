@@ -112,6 +112,17 @@ class ContractorsControllerTest extends CIUnitTestCase
             'is_active'=>0,
         ]);
     }
+    public function testToggleRedirectsWhenUserNotFound()
+    {
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        $nonExistentId = 9999;
+
+        $result = $this->withSession($session)
+            ->get("/admin/contractors/toggle/$nonExistentId");
+
+        $result->assertRedirectTo(site_url('admin/contractors'));
+    }
 
     // Approve
     public function testApprovePendingContractor(){

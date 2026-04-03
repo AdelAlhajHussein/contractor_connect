@@ -26,10 +26,11 @@ Contractors Controller (Tests\Feature\Admin\ContractorsController)
  [x] Index filters by status
  [x] Index search filters by multiple fields
  [x] Toggle switches user status
+ [x] Toggle redirects when user not found
  [x] Approve pending contractor
- [ ] Approve inserts profile when none exists
+ [x] Approve inserts profile when none exists
  [x] Reject pending contractor
- [ ] Reject missing profile
+ [x] Reject missing profile
 
 Example Database
  [x] Model find all
