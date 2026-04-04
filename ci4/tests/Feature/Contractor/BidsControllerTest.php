@@ -18,6 +18,8 @@ class BidsControllerTest extends ProjectTestCase
     protected $migrate   = true;
 
     // Tests
+
+    // Index
     public function testIndexShowsOnlyContractorsBids()
     {
         // Create contractors and project
@@ -39,4 +41,30 @@ class BidsControllerTest extends ProjectTestCase
         $result->assertStatus(200);
         $result->assertSee('Fix Roof');
     }
+
+    // Create
+    public function testCreateShowsValidBidForm(){
+        $projectId = $this->setUpProject(['title' => 'Fix Leaky Faucet']);
+        $contractorId = $this->setUpUser();
+
+        $result = $this->withSession(['logged_in' => true, 'user_id' => $contractorId])
+            ->get("contractor/bids/create/$projectId");
+
+        $result->assertStatus(200);
+        $result->assertSee('Fix Leaky Faucet');
+    }
+    public function testCreateRedirectsWhenProjectDoesNotExist()
+    {
+        $contractorId = $this->setUpUser();
+
+        $result = $this->withSession(['logged_in' => true, 'user_id' => $contractorId])
+            ->get("contractor/bids/create/9999");
+
+        // Assertions
+        $result->assertRedirectTo(site_url('contractor/browse'));
+        $result->assertSessionHas('error', 'Project not found');
+    }
+
+    // Store
+
 }

@@ -14,6 +14,8 @@ Bids Controller (Tests\Feature\Admin\BidsController)
 
 Bids Controller (Tests\Feature\Contractor\BidsController)
  [x] Index shows only contractors bids
+ [x] Create shows valid bid form
+ [x] Create redirects when project does not exist
 
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
@@ -53,7 +55,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [ ] Title exceeds character limit
+ [x] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
