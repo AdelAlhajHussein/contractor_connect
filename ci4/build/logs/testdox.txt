@@ -19,6 +19,11 @@ Bids Controller (Tests\Feature\Contractor\BidsController)
  [x] Store successfully inserts bid
  [x] Store prevents duplicates
 
+Browse Controller (Tests\Feature\Contractor\BrowseController)
+ [ ] Index shows only available projects
+ [x] Details method coverage direct
+ [x] Details redirects for invalid project
+
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
  [ ] Create view loads
@@ -43,6 +48,9 @@ Dashboard Controller (Tests\Feature\Admin\DashboardController)
  [ ] Index loads dashboard with users
  [ ] Get table users
 
+Dashboard Controller (Tests\Feature\Contractor\DashboardController)
+ [ ] Index shows contractor dashboard
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
@@ -64,9 +72,12 @@ Project Model (Database\ProjectModel)
  [x] Budget cannot be negative
  [x] Budget is not text
  [x] Cannot create project without valid user id
- [x] Status defaults to open
+ [ ] Status defaults to open
  [x] Project is created with timestamps
  [x] Project status value is valid
+
+Projects Controller (Tests\Feature\Contractor\ProjectsController)
+ [ ] Index shows contractor projects
 
 Ratings Controller (Tests\Feature\Admin\RatingsController)
  [x] Index shows ratings with filters

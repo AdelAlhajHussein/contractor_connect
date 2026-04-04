@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Contractor;
 
-use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
 
