@@ -48,6 +48,9 @@ Dashboard Controller (Tests\Feature\Admin\DashboardController)
  [ ] Index loads dashboard with users
  [ ] Get table users
 
+Dashboard Controller (Tests\Feature\Contractor\DashboardController)
+ [ ] Index shows contractor dashboard
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
