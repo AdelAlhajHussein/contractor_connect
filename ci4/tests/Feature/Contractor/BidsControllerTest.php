@@ -90,4 +90,36 @@ class BidsControllerTest extends ProjectTestCase
             'total_cost' => 1250.50
         ]);
     }
+    public function testStorePreventsDuplicates(){
+
+        // Create project with bid
+        $contractorId = $this->setUpUser();
+        $projectId    = $this->setUpProject();
+        $this->db->table('bids')->insert([
+            'project_id' => $projectId,
+            'contractor_id' => $contractorId,
+            'bid_amount' => 500.00,
+            'details' => 'Original bid',
+            'total_cost' => 500.00,
+        ]);
+
+        // Attempt to place a second bid
+        $result = $this->withSession([
+            'logged_in' => true,
+            'user_id'   => $contractorId
+        ])->post("contractor/bids/store/$projectId", [
+            'bid_amount' => 1000.00,
+            'details'    => 'Trying to bid again'
+        ]);
+
+        $result->assertRedirectTo(site_url('contractor/browse/' . $projectId));
+
+        $result->assertSessionHas('error', 'You already placed a bid for this project.');
+
+        $this->assertEquals(1, $this->db->table('bids')
+            ->where('project_id', $projectId)
+            ->where('contractor_id', $contractorId)
+            ->countAllResults()
+        );
+    }
 }
