@@ -50,7 +50,6 @@ class DashboardControllerTest extends CIUnitTestCase
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
             ->get('admin/dashboard/get_table/users');
 
-
         $result->assertStatus(200);
         $result->assertSee('Role ID');
         $result->assertSee('test_user');
