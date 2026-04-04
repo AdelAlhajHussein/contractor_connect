@@ -31,15 +31,23 @@ class CreateProjectsTable extends Migration{
                 'type' => 'VARCHAR',
                 'constraint' => 255
             ],
+            'start_date' => [
+                'type' => 'DATE',
+                'null' => true,
+            ],
+            'end_date' => [
+                'type' => 'DATE',
+                'null' => true,
+            ],
             'budget_min' =>[
                 'type' => 'DECIMAL',
-                'constraint' => 10,2,
+                'constraint' => '10,2',
                 'default' => 0.00,
             ],
             'budget_max' =>[
                 'type' => 'DECIMAL',
                 'constraint' => 10,2,
-                'default' => 0.00,
+                'default' => '0.00',
             ],
             'status' => [
                 'type' => 'VARCHAR',
