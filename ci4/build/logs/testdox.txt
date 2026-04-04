@@ -13,7 +13,7 @@ Bids Controller (Tests\Feature\Admin\BidsController)
  [x] Index with empty search string
 
 Bids Controller (Tests\Feature\Contractor\BidsController)
- [ ] Index shows only contractors bids
+ [x] Index shows only contractors bids
 
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
