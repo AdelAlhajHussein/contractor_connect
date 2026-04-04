@@ -21,15 +21,24 @@ $routes->get('contractor/dashboard', 'Contractor\Dashboard::index');
 
 $routes->get('register', 'Auth::register');
 
+// ------ Contractor Routes ------
+$routes->group('contractor', ['filter' => 'auth'], function ($routes) {
 
-// Admin Routes
+    $routes->get('bids', 'Contractor\BidsController::index');
+    $routes->get('bids/create/(:num)', 'Contractor\BidsController::create/$1');
+    $routes->post('bids/store/(:num)', 'Contractor\BidsController::store/$1');
+
+    $routes->get('browse', 'Contractor\BrowseController::index');
+    $routes->get('browse/(:num)', 'Contractor\BrowseController::view/$1');
+});
+
+// ------ Admin Routes ------
 $routes->group('admin', ['filter' => 'auth'], function( $routes){
     // Dashboard
     $routes->get('/', 'Admin\DashboardController::index');
     $routes->get('dashboard', 'Admin\DashboardController::index');
     $routes->get('settings', 'Admin\DashboardController::settings');
     $routes->get('dashboard/get_table/(:any)', 'Admin\DashboardController::get_table/$1');
-
 
     // Users
     $routes->get('users', 'Admin\UsersController::index');
@@ -42,18 +51,15 @@ $routes->group('admin', ['filter' => 'auth'], function( $routes){
     $routes->get('contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1');
     $routes->get('contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1');
 
-
     // Homeowners
     $routes->get('homeowners', 'Admin\HomeownersController::index');
     $routes->get('homeowners/toggle/(:num)', 'Admin\HomeownersController::toggle/$1');
-
 
     // Projects
     $routes->get('projects', 'Admin\ProjectsController::index');
     $routes->get('projects/view/(:num)', 'Admin\ProjectsController::view/$1');
     $routes->get('projects/cancel/(:num)', 'Admin\ProjectsController::cancel/$1');
     $routes->get('projects/close-bidding/(:num)', 'Admin\ProjectsController::closeBidding/$1');
-
 
     // Bids
     $routes->get('bids', 'Admin\BidsController::index');

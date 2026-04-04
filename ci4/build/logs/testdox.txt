@@ -12,6 +12,13 @@ Bids Controller (Tests\Feature\Admin\BidsController)
  [x] Index without filters returns all
  [x] Index with empty search string
 
+Bids Controller (Tests\Feature\Contractor\BidsController)
+ [x] Index shows only contractors bids
+ [x] Create shows valid bid form
+ [x] Create redirects when project does not exist
+ [x] Store successfully inserts bid
+ [x] Store prevents duplicates
+
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
  [ ] Create view loads
