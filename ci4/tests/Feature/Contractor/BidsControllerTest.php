@@ -66,5 +66,28 @@ class BidsControllerTest extends ProjectTestCase
     }
 
     // Store
+    public function testStoreSuccessfullyInsertsBid()
+    {
+        $contractorId = $this->setUpUser();
+        $projectId    = $this->setUpProject();
 
+        $postData = [
+            'bid_amount' => 1250.50,
+            'details' => 'I have 10 years of experience with this type of work.'
+        ];
+
+        $result = $this->withSession(['logged_in' => true, 'user_id' => $contractorId])
+            ->post("contractor/bids/store/$projectId", $postData);
+
+        $result->assertRedirectTo(site_url('contractor/bids'));
+        $result->assertSessionHas('success', 'Bid submitted successfully.');
+
+        $this->seeInDatabase('bids', [
+            'project_id' => $projectId,
+            'contractor_id' => $contractorId,
+            'bid_amount' => 1250.50,
+            'details' => 'I have 10 years of experience with this type of work.',
+            'total_cost' => 1250.50
+        ]);
+    }
 }

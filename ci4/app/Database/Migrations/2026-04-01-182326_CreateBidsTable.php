@@ -26,6 +26,10 @@ class CreateBidsTable extends Migration
                 'constraint' => 11,
                 'unsigned'   => true,
             ],
+            'details' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
             'bid_amount' => [
                 'type'       => 'DECIMAL',
                 'constraint' => '10,2',
