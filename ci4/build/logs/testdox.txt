@@ -69,9 +69,12 @@ Project Model (Database\ProjectModel)
  [x] Budget cannot be negative
  [x] Budget is not text
  [x] Cannot create project without valid user id
- [x] Status defaults to open
+ [ ] Status defaults to open
  [x] Project is created with timestamps
  [x] Project status value is valid
+
+Projects Controller (Tests\Feature\Contractor\ProjectsController)
+ [ ] Index shows contractor projects
 
 Ratings Controller (Tests\Feature\Admin\RatingsController)
  [x] Index shows ratings with filters
