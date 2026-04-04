@@ -84,6 +84,10 @@
             <li class="success">Details method coverage direct</li>
             <li class="success">Details redirects for invalid project</li>
         </ul>
+        <h2>Browse Controller (Tests\Feature\Homeowner\BrowseController)</h2>
+        <ul>
+            <li class="success">Index shows contractors with filters</li>
+        </ul>
         <h2>Categories Controller (Tests\Feature\Admin\CategoriesController)</h2>
         <ul>
             <li class="success">Index shows categories and filters</li>
@@ -133,7 +137,7 @@
         <ul>
             <li class="success">Successfully create project</li>
             <li class="success">Successfully create project without end date</li>
-            <li class="defect">Title exceeds character limit</li>
+            <li class="success">Title exceeds character limit</li>
             <li class="success">Insert fails without title</li>
             <li class="success">Deadline has not expired</li>
             <li class="success">Budget min cannot exceed max</li>
@@ -164,10 +168,10 @@
         </ul>
         <h2>User Auth (Feature\UserAuth)</h2>
         <ul>
-            <li class="success">Login success redirects to dashboard</li>
-            <li class="success">Login fails with wrong password</li>
-            <li class="success">Login fails with wrong username</li>
-            <li class="success">Guest cannot access admin</li>
+            <li class="defect">Login success redirects to dashboard</li>
+            <li class="defect">Login fails with wrong password</li>
+            <li class="defect">Login fails with wrong username</li>
+            <li class="defect">Guest cannot access admin</li>
         </ul>
         <h2>User Controller (Tests\Feature\Admin\UserController)</h2>
         <ul>

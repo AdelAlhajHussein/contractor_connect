@@ -27,6 +27,9 @@ Browse Controller (Tests\Feature\Contractor\BrowseController)
  [x] Details method coverage direct
  [x] Details redirects for invalid project
 
+Browse Controller (Tests\Feature\Homeowner\BrowseController)
+ [x] Index shows contractors with filters
+
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
  [ ] Create view loads
@@ -68,7 +71,7 @@ Health
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date
- [ ] Title exceeds character limit
+ [x] Title exceeds character limit
  [x] Insert fails without title
  [x] Deadline has not expired
  [x] Budget min cannot exceed max
@@ -95,10 +98,10 @@ Reports Controller (Tests\Feature\Admin\ReportsController)
  [ ] Index returns success and correct data
 
 User Auth (Feature\UserAuth)
- [x] Login success redirects to dashboard
- [x] Login fails with wrong password
- [x] Login fails with wrong username
- [x] Guest cannot access admin
+ [ ] Login success redirects to dashboard
+ [ ] Login fails with wrong password
+ [ ] Login fails with wrong username
+ [ ] Guest cannot access admin
 
 User Controller (Tests\Feature\Admin\UserController)
  [x] Index loads successfully for admin
