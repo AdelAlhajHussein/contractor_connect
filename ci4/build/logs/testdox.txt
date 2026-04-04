@@ -21,6 +21,8 @@ Bids Controller (Tests\Feature\Contractor\BidsController)
 
 Browse Controller (Tests\Feature\Contractor\BrowseController)
  [ ] Index shows only available projects
+ [x] Details method coverage direct
+ [x] Details redirects for invalid project
 
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters

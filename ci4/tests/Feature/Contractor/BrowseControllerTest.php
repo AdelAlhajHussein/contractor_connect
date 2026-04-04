@@ -9,13 +9,13 @@ use Tests\Support\ProjectTestCase;
 
 class BrowseControllerTest extends ProjectTestCase
 {
-    use FeatureTestTrait;
     use DatabaseTestTrait;
 
     protected $namespace = 'App';
     protected $refresh = true;
     protected $migrate = true;
 
+    // Index
     public function testIndexShowsOnlyAvailableProjects(){
         $contractorId = $this->setUpUser();
 
@@ -39,6 +39,49 @@ class BrowseControllerTest extends ProjectTestCase
         $result->assertSee('Available Project');
         $result->assertDontSee('Closed Project');
         $result->assertDontSee('Already Bid');
+    }
+
+    // Details
+    public function testDetailsMethodCoverageDirect()
+    {
+        $contractorId = $this->setUpUser();
+        $projectId = $this->setUpProject(['title' => 'Direct Test']);
+
+        // Instantiate the controller
+        $controller = new \App\Controllers\Contractor\BrowseController();
+        $controller->initController(
+            \Config\Services::request(),
+            \Config\Services::response(),
+            \Config\Services::logger()
+        );
+
+        session()->set(['user_id' => $contractorId, 'logged_in' => true]);
+
+        $response = $controller->details($projectId);
+
+        // Assertions
+        $this->assertNotNull($response);
+        $this->assertStringContainsString('Direct Test', (string)$response);
+    }
+    public function testDetailsRedirectsForInvalidProject()
+    {
+        $contractorId = $this->setUpUser();
+
+        $controller = new \App\Controllers\Contractor\BrowseController();
+        $controller->initController(
+            \Config\Services::request(),
+            \Config\Services::response(),
+            \Config\Services::logger()
+        );
+
+        session()->set(['user_id' => $contractorId, 'logged_in' => true]);
+
+        $result = $controller->details(9999);
+
+        $this->assertInstanceOf(\CodeIgniter\HTTP\RedirectResponse::class, $result);
+
+        $this->assertTrue(session()->has('error'));
+        $this->assertEquals('Project not found', session('error'));
     }
 }
 ?>
