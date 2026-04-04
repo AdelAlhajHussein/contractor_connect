@@ -19,6 +19,9 @@ Bids Controller (Tests\Feature\Contractor\BidsController)
  [x] Store successfully inserts bid
  [x] Store prevents duplicates
 
+Browse Controller (Tests\Feature\Contractor\BrowseController)
+ [ ] Index shows only available projects
+
 Categories Controller (Tests\Feature\Admin\CategoriesController)
  [x] Index shows categories and filters
  [ ] Create view loads
