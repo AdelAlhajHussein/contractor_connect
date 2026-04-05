@@ -51,9 +51,149 @@
         </style>
     </head>
     <body>
+        <h2>Bids Controller (Tests\Feature\Admin\BidsController)</h2>
+        <ul>
+            <li class="success">Index loads bids with joins</li>
+            <li class="success">View method calculates total</li>
+            <li class="defect">Index filters work</li>
+            <li class="success">View not found redirects</li>
+            <li class="success">Withdraw bid not found</li>
+            <li class="success">Withdraw fails if already accepted</li>
+            <li class="success">Withdraw fails if already rejected</li>
+            <li class="success">Withdraw bid success</li>
+            <li class="success">View method handles missing task data</li>
+            <li class="success">Filter ignores invalid status</li>
+            <li class="success">Index without filters returns all</li>
+            <li class="success">Index with empty search string</li>
+        </ul>
+        <h2>Bids Controller (Tests\Feature\Contractor\BidsController)</h2>
+        <ul>
+            <li class="success">Index shows only contractors bids</li>
+            <li class="success">Create shows valid bid form</li>
+            <li class="success">Create redirects when project does not exist</li>
+            <li class="success">Store successfully inserts bid</li>
+            <li class="success">Store prevents duplicates</li>
+        </ul>
+        <h2>Bids Controller (Tests\Feature\Homeowner\BidsController)</h2>
+        <ul>
+            <li class="defect">Index shows bids for homeowner project</li>
+        </ul>
+        <h2>Browse Controller (Tests\Feature\Contractor\BrowseController)</h2>
+        <ul>
+            <li class="defect">Index shows only available projects</li>
+            <li class="success">Details method coverage direct</li>
+            <li class="success">Details redirects for invalid project</li>
+        </ul>
+        <h2>Browse Controller (Tests\Feature\Homeowner\BrowseController)</h2>
+        <ul>
+            <li class="success">Index shows contractors with filters</li>
+        </ul>
+        <h2>Categories Controller (Tests\Feature\Admin\CategoriesController)</h2>
+        <ul>
+            <li class="success">Index shows categories and filters</li>
+            <li class="defect">Create view loads</li>
+            <li class="success">Store category</li>
+            <li class="defect">Edit view loads data</li>
+            <li class="success">Update category</li>
+            <li class="success">Delete category</li>
+            <li class="success">Toggle category visibility</li>
+        </ul>
+        <h2>Contractors Controller (Tests\Feature\Admin\ContractorsController)</h2>
+        <ul>
+            <li class="success">Index shows contractors</li>
+            <li class="success">Index filters by status</li>
+            <li class="success">Index search filters by multiple fields</li>
+            <li class="success">Toggle switches user status</li>
+            <li class="success">Toggle redirects when user not found</li>
+            <li class="success">Approve pending contractor</li>
+            <li class="success">Approve inserts profile when none exists</li>
+            <li class="success">Reject pending contractor</li>
+            <li class="success">Reject missing profile</li>
+        </ul>
+        <h2>Dashboard Controller (Tests\Feature\Admin\DashboardController)</h2>
+        <ul>
+            <li class="defect">Index loads dashboard with users</li>
+            <li class="defect">Get table users</li>
+        </ul>
+        <h2>Dashboard Controller (Tests\Feature\Contractor\DashboardController)</h2>
+        <ul>
+            <li class="defect">Index shows contractor dashboard</li>
+        </ul>
+        <h2>Example Database</h2>
+        <ul>
+            <li class="success">Model find all</li>
+            <li class="success">Soft delete leaves row</li>
+        </ul>
+        <h2>Example Session</h2>
+        <ul>
+            <li class="success">Session simple</li>
+        </ul>
+        <h2>Health</h2>
+        <ul>
+            <li class="success">Is defined app path</li>
+            <li class="success">Base url has been set</li>
+        </ul>
+        <h2>Project Model (Database\ProjectModel)</h2>
+        <ul>
+            <li class="success">Successfully create project</li>
+            <li class="success">Successfully create project without end date</li>
+            <li class="success">Title exceeds character limit</li>
+            <li class="success">Insert fails without title</li>
+            <li class="success">Deadline has not expired</li>
+            <li class="success">Budget min cannot exceed max</li>
+            <li class="success">Budget cannot be negative</li>
+            <li class="success">Budget is not text</li>
+            <li class="success">Cannot create project without valid user id</li>
+            <li class="success">Status defaults to open</li>
+            <li class="success">Project is created with timestamps</li>
+            <li class="success">Project status value is valid</li>
+        </ul>
+        <h2>Projects Controller (Tests\Feature\Contractor\ProjectsController)</h2>
+        <ul>
+            <li class="defect">Index shows contractor projects</li>
+        </ul>
         <h2>Projects Controller (Tests\Feature\Homeowner\ProjectsController)</h2>
         <ul>
-            <li class="success">Index shows homeowner projects</li>
+            <li class="defect">Index shows homeowner projects</li>
+        </ul>
+        <h2>Ratings Controller (Tests\Feature\Admin\RatingsController)</h2>
+        <ul>
+            <li class="success">Index shows ratings with filters</li>
+            <li class="success">Index search filters by text</li>
+            <li class="success">View returns view for valid id</li>
+            <li class="success">View redirects invalid ids</li>
+            <li class="success">Remove deletes rating and redirects</li>
+            <li class="success">Remove does not delete related project</li>
+            <li class="success">Suspicious shows flagged ratings</li>
+        </ul>
+        <h2>Reports Controller (Tests\Feature\Admin\ReportsController)</h2>
+        <ul>
+            <li class="defect">Index returns success and correct data</li>
+        </ul>
+        <h2>User Auth (Feature\UserAuth)</h2>
+        <ul>
+            <li class="defect">Login success redirects to dashboard</li>
+            <li class="defect">Login fails with wrong password</li>
+            <li class="defect">Login fails with wrong username</li>
+            <li class="defect">Guest cannot access admin</li>
+        </ul>
+        <h2>User Controller (Tests\Feature\Admin\UserController)</h2>
+        <ul>
+            <li class="success">Index loads successfully for admin</li>
+            <li class="success">Index filters search and role</li>
+            <li class="defect">Index filters by status</li>
+            <li class="success">Toggle redirects if user not found</li>
+            <li class="success">Toggle change user status</li>
+            <li class="success">Update role fails with invalid role id</li>
+            <li class="success">Update role redirects if user not found</li>
+            <li class="success">Update role changes user role</li>
+        </ul>
+        <h2>User Model (Database\UserModel)</h2>
+        <ul>
+            <li class="success">Insert user</li>
+            <li class="success">Soft delete works</li>
+            <li class="success">Find user by email</li>
+            <li class="success">Cannot create user with existing email</li>
         </ul>
     </body>
 </html>
