@@ -17,6 +17,7 @@ class ProjectsControllerTest extends ProjectTestCase{
            'category_id' => 1,
            'title' => 'Homeowner Project',
            'description' => 'This project should be visible',
+           'address' => '123 Address St.',
            'status'=> 'bidding_open'
        ]);
 
@@ -26,10 +27,12 @@ class ProjectsControllerTest extends ProjectTestCase{
            'category_id' => 2,
            'title' => 'Other User\'s Project',
            'description' => 'This is a project from another user',
+           'address' => '321 Address Ave.',
            'status'=> 'bidding_open'
        ]);
 
-       $controller = $this->getInitializedController();
+       $controller = $this->getInitializedController(ProjectsController::class);
+
        session()->set(['user_id' => $homeownerId, 'logged_in' => true]);
 
        $response = $controller->index();

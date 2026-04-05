@@ -14,28 +14,25 @@ abstract class ProjectTestCase extends CIUnitTestCase{
     protected $refresh = true;
     protected $migrate = true;
 
-
-    protected function setUpCategory(array $data = []){
-        $defaults = ['name' => 'General'];
-        return $this->db->table('categories')
-            ->insert(array_merge($defaults, $data));
-    }
-
     protected function setUpUser(array $data = []){
         $defaults = [
-        'username' => 'user_' . uniqid(),
-        'email' => uniqid() . '@test.com',
-        'first_name' => 'First',
-        'last_name' => 'Last',
-        'role_id' => 3,
-        'is_active' => 1,
-        'password_hash' => 'fake_hash'
+            'username' => 'user_' . uniqid(),
+            'email' => uniqid() . '@test.com',
+            'first_name' => 'First',
+            'last_name' => 'Last',
+            'role_id' => 3,
+            'is_active' => 1,
+            'password_hash' => 'fake_hash'
         ];
 
         return $this->db->table('users')
             ->insert(array_merge($defaults, $data));
     }
-
+    protected function setUpCategory(array $data = []){
+        $defaults = ['name' => 'General'];
+        return $this->db->table('categories')
+            ->insert(array_merge($defaults, $data));
+    }
     protected function setUpProject(array $data = []){
         // Resolve dependencies
         $categoryId  = $data['category_id'] ?? $this->setUpCategory();
@@ -52,5 +49,15 @@ abstract class ProjectTestCase extends CIUnitTestCase{
 
         return $this->db->table('projects')
             ->insert(array_merge($defaults, $data));
+    }
+    protected function getInitializedController(string $controllerClass, $request = null)
+    {
+        $controller = new $controllerClass();
+        $controller->initController(
+            $request ?? \Config\Services::request(),
+            \Config\Services::response(),
+            \Config\Services::logger()
+        );
+        return $controller;
     }
 }
