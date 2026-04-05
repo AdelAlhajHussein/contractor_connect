@@ -85,6 +85,9 @@ Project Model (Database\ProjectModel)
 Projects Controller (Tests\Feature\Contractor\ProjectsController)
  [ ] Index shows contractor projects
 
+Projects Controller (Tests\Feature\Homeowner\ProjectsController)
+ [ ] Index shows homeowner projects
+
 Ratings Controller (Tests\Feature\Admin\RatingsController)
  [x] Index shows ratings with filters
  [x] Index search filters by text

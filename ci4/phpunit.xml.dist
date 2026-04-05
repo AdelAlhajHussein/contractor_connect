@@ -43,6 +43,11 @@
     </source>
     <php>
         <server name="app.baseURL" value="http://example.com/"/>
+
+        <env name="database.tests.DBDriver" value="SQLite3"/>
+        <env name="database.tests.database" value=":memory:"/>
+        <env name="database.tests.DBPrefix" value=""/>
+
         <server name="CODEIGNITER_SCREAM_DEPRECATIONS" value="0"/>
         <!-- Directory containing phpunit.xml -->
         <const name="HOMEPATH" value="./"/>
@@ -59,5 +64,7 @@
             <env name="database.tests.DBDriver" value="MySQLi"/>
             <env name="database.tests.DBPrefix" value="tests_"/>
             -->
+
+
     </php>
 </phpunit>
