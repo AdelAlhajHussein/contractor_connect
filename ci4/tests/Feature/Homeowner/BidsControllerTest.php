@@ -54,3 +54,4 @@ class BidsControllerTest extends ProjectTestCase
         $this->assertStringContainsString('1500.00', $output);
     }
 }
+
