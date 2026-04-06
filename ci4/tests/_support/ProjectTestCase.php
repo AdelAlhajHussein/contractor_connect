@@ -14,6 +14,30 @@ abstract class ProjectTestCase extends CIUnitTestCase{
     protected $refresh = true;
     protected $migrate = true;
 
+
+    protected function setUp(): void
+    {
+        \Config\Services::reset();
+
+        $_ENV['database.tests.DBDriver'] = 'SQLite3';
+        $_SERVER['database.tests.DBDriver'] = 'SQLite3';
+
+        parent::setUp();
+
+        $config = new \Config\Database();
+        $db = \CodeIgniter\Database\Config::connect($config->tests);
+        \Config\Services::injectMock('database', $db);
+
+        $this->faker = \Faker\Factory::create();
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        \Config\Services::reset();
+    }
+
+
     protected function setUpUser(array $data = []){
         $defaults = [
             'username' => 'user_' . uniqid(),

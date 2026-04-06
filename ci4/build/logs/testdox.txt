@@ -68,6 +68,9 @@ Health
  [x] Is defined app path
  [x] Base url has been set
 
+Profile Controller (Tests\Feature\Homeowner\ProfileController)
+ [ ] Index loads homeowner profile
+
 Project Model (Database\ProjectModel)
  [x] Successfully create project
  [x] Successfully create project without end date

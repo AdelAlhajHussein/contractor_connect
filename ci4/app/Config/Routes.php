@@ -82,6 +82,7 @@ $routes->group('homeowner', ['namespace' => 'App\Controllers\Homeowner', 'filter
     $routes->post('bids/reject/(:num)', 'BidsController::reject/$1');
     $routes->get('browse', 'BrowseController::index');
     $routes->get('contractors/view/(:num)', 'BrowseController::view/$1');
+    $routes->get('profile', 'ProfileController::index');
 });
 
 // ------ 3 Contractor Routes ------

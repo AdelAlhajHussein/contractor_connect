@@ -21,7 +21,12 @@ class BidsControllerTest extends ProjectTestCase
         $projectId = $this->db->insertID();
 
         // Setup Contractor and a Bid
-        $contractorId = $this->setUpUser(['username' => 'pro_builder']);
+        $contractorId = $this->setUpUser([
+            'username' => 'pro_builder',
+            'first_name' => 'Pro',
+            'last_name' => 'Builder'
+        ]);
+
         $this->db->table('bids')->insert([
             'project_id' => $projectId,
             'contractor_id' => $contractorId,
