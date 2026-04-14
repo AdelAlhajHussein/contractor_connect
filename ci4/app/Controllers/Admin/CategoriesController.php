@@ -72,10 +72,17 @@ class CategoriesController extends BaseController
 
     public function delete($id)
     {
-        $model = new CategoryModel();
-        $model->delete((int)$id);
+        $categoryModel = new \App\Models\CategoryModel();
 
-        return redirect()->to(site_url('admin/categories'));
+        try {
+            $categoryModel->delete($id);
+
+            return redirect()->to('/admin/categories')
+                ->with('success', 'Category deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->to('/admin/categories')
+                ->with('error', 'This category cannot be deleted because it is linked to existing projects.');
+        }
     }
 
     public function toggle($id)

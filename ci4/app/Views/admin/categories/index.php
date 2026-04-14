@@ -1,4 +1,5 @@
 
+
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('page_css') ?>
@@ -6,6 +7,18 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
+<?php if (session()->getFlashdata('success')): ?>
+    <div style="padding:10px; margin-bottom:15px; background:#d4edda; color:#155724; border:1px solid #c3e6cb; border-radius:5px;">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div style="padding:10px; margin-bottom:15px; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; border-radius:5px;">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
 <div class="users-container">
 
     <h1 class="users-title">Categories</h1>
