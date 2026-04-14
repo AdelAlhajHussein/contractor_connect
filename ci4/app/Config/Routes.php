@@ -72,7 +72,7 @@ $routes->group('admin', ['filter' => 'auth'], function( $routes){
     $routes->post('admin/categories/store', 'Admin\CategoriesController::store');
     $routes->get('admin/categories/edit/(:num)', 'Admin\CategoriesController::edit/$1');
     $routes->post('admin/categories/update/(:num)', 'Admin\CategoriesController::update/$1');
-    $routes->get('admin/categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
+    $routes->post('admin/categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
     $routes->get('admin/categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1');
 
     // Reports
