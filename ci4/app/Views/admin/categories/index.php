@@ -113,10 +113,12 @@
 
                         |
 
-                        <a class="action-link"
-                           href="<?= site_url('admin/categories/delete/' . $c['id']) ?>">
-                            Delete
-                        </a>
+                        <form action="<?= site_url('admin/categories/delete/' . $c['id']) ?>" method="post" style="display:inline;">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="action-link" style="background:none;border:none;color:inherit;cursor:pointer;">
+                                Delete
+                            </button>
+                        </form>
 
                     </td>
 
