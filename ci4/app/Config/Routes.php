@@ -37,10 +37,10 @@ $routes->group('admin', ['filter' => 'auth'], function( $routes){
     $routes->post('users/role/(:num)', 'Admin\UsersController::updateRole/$1');
 
     // Contractors
-    $routes->get('admin/contractors', 'Admin\ContractorsController::index');
-    $routes->get('admin/contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1');
-    $routes->get('admin/contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1');
-    $routes->get('admin/contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1');
+    $routes->get('contractors', 'Admin\ContractorsController::index');
+    $routes->get('contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1');
+    $routes->get('contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1');
+    $routes->get('contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1');
 
 
     // Homeowners
@@ -67,19 +67,19 @@ $routes->group('admin', ['filter' => 'auth'], function( $routes){
     $routes->get('ratings/suspicious', 'Admin\RatingsController::suspicious');
 
     // Categories
-    $routes->get('admin/categories', 'Admin\CategoriesController::index');
-    $routes->get('admin/categories/create', 'Admin\CategoriesController::create');
-    $routes->post('admin/categories/store', 'Admin\CategoriesController::store');
-    $routes->get('admin/categories/edit/(:num)', 'Admin\CategoriesController::edit/$1');
-    $routes->post('admin/categories/update/(:num)', 'Admin\CategoriesController::update/$1');
-    $routes->post('admin/categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
-    $routes->get('admin/categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1');
+    $routes->get('categories', 'Admin\CategoriesController::index');
+    $routes->get('categories/create', 'Admin\CategoriesController::create');
+    $routes->post('categories/store', 'Admin\CategoriesController::store');
+    $routes->get('categories/edit/(:num)', 'Admin\CategoriesController::edit/$1');
+    $routes->post('categories/update/(:num)', 'Admin\CategoriesController::update/$1');
+    $routes->post('categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
+    $routes->get('categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1');
 
     // Reports
-    $routes->get('admin/reports', 'Admin\ReportsController::index');
+    $routes->get('reports', 'Admin\ReportsController::index');
 
     // Payments (out of scope)
-    $routes->get('admin/payments', 'Admin\PaymentsController::index');
+    $routes->get('payments', 'Admin\PaymentsController::index');
 
 
 
