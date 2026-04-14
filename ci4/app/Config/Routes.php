@@ -28,6 +28,8 @@ $routes->group('homeowner', ['filter' => 'auth'], function($routes) {
     $routes->get('browse', 'Homeowner\BrowseController::index');
     $routes->get('bids', 'Homeowner\BidsController::index');
     $routes->get('profile', 'Homeowner\ProfileController::index');
+    $routes->get('projects/new', 'Homeowner\ProjectsController::new');
+    $routes->post('projects/create', 'Homeowner\ProjectsController::create');
 });
 
 
