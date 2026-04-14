@@ -16,10 +16,19 @@ $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
 
 
-$routes->get('homeowner/dashboard', 'Homeowner\Dashboard::index');
-$routes->get('contractor/dashboard', 'Contractor\Dashboard::index');
+$routes->get('homeowner/dashboard', 'Homeowner\DashboardController::index');
+$routes->get('contractor/dashboard', 'Contractor\DashboardController::index');
 
 $routes->get('register', 'Auth::register');
+
+// Homeowner Routes
+$routes->group('homeowner', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'Homeowner\DashboardController::index');
+    $routes->get('projects', 'Homeowner\ProjectsController::index');
+    $routes->get('browse', 'Homeowner\BrowseController::index');
+    $routes->get('bids', 'Homeowner\BidsController::index');
+    $routes->get('profile', 'Homeowner\ProfileController::index');
+});
 
 
 // Admin Routes
