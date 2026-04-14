@@ -19,7 +19,8 @@ $routes->get('logout', 'AuthController::logout');
 $routes->get('homeowner/dashboard', 'Homeowner\DashboardController::index');
 $routes->get('contractor/dashboard', 'Contractor\DashboardController::index');
 
-$routes->get('register', 'Auth::register');
+$routes->get('register', 'AuthController::registerForm');
+$routes->post('register', 'AuthController::register');
 
 // Homeowner Routes
 $routes->group('homeowner', ['filter' => 'auth'], function($routes) {
@@ -32,6 +33,19 @@ $routes->group('homeowner', ['filter' => 'auth'], function($routes) {
     $routes->post('projects/create', 'Homeowner\ProjectsController::create');
 });
 
+// Contractor Routes
+$routes->group('contractor', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'Contractor\DashboardController::index');
+
+    $routes->get('projects', 'Contractor\ProjectsController::index');
+
+    $routes->get('browse', 'Contractor\BrowseController::index');
+    $routes->get('browse/details/(:num)', 'Contractor\BrowseController::details/$1');
+
+    $routes->get('bids', 'Contractor\BidsController::index');
+    $routes->get('bids/create/(:num)', 'Contractor\BidsController::create/$1');
+    $routes->get('profile', 'Contractor\ProfileController::index');
+});
 
 // Admin Routes
 $routes->group('admin', ['filter' => 'auth'], function( $routes){
