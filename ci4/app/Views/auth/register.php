@@ -1,7 +1,8 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<link rel="stylesheet" href="<?= base_url('css/auth.css') ?>">
+<div style="max-width: 520px; margin: 40px auto;">
+    <h1>Create a new account</h1>
 
 <div class="auth-container">
 
@@ -73,6 +74,9 @@
 
             </div>
 
+        <div style="margin: 12px 0;">
+            <label for="confirm_password">Confirm password</label><br>
+            <input id="confirm_password" name="confirm_password" type="password" style="width:100%; padding:10px;">
         </div>
     </div>
 

@@ -25,6 +25,7 @@ class RatingsController extends BaseController
             ->join('projects', 'projects.id = contractor_ratings.project_id', 'left')
             ->join('users c', 'c.id = contractor_ratings.contractor_id', 'left')
             ->join('users h', 'h.id = contractor_ratings.home_owner_id', 'left')
+            ->groupBy('contractor_ratings.id')
             ->orderBy('contractor_ratings.created_at', 'DESC');
 
         // text search
@@ -94,7 +95,7 @@ class RatingsController extends BaseController
     {
         $db = db_connect();
 
-        // 1) Same homeowner rating same contractor multiple times
+        // 1) Same Homeowner rating same contractor multiple times
         $repeatPairs = $db->table('contractor_ratings cr')
             ->select('cr.contractor_id, c.email AS contractor_email, cr.home_owner_id, h.email AS homeowner_email, COUNT(*) AS rating_count')
             ->join('users c', 'c.id = cr.contractor_id', 'left')

@@ -1,3 +1,56 @@
+Bids Controller (Tests\Feature\Admin\BidsController)
+ [x] Index loads bids with joins
+ [x] View method calculates total
+ [ ] Index filters work
+ [x] View not found redirects
+ [x] Withdraw bid not found
+ [x] Withdraw fails if already accepted
+ [x] Withdraw fails if already rejected
+ [x] Withdraw bid success
+ [x] View method handles missing task data
+ [x] Filter ignores invalid status
+ [x] Index without filters returns all
+ [x] Index with empty search string
+
+Bids Controller (Tests\Feature\Contractor\BidsController)
+ [x] Index shows only contractors bids
+ [x] Create shows valid bid form
+ [x] Create redirects when project does not exist
+ [x] Store successfully inserts bid
+ [x] Store prevents duplicates
+
+Browse Controller (Tests\Feature\Contractor\BrowseController)
+ [ ] Index shows only available projects
+ [x] Details method coverage direct
+ [x] Details redirects for invalid project
+
+Categories Controller (Tests\Feature\Admin\CategoriesController)
+ [x] Index shows categories and filters
+ [ ] Create view loads
+ [x] Store category
+ [ ] Edit view loads data
+ [x] Update category
+ [x] Delete category
+ [x] Toggle category visibility
+
+Contractors Controller (Tests\Feature\Admin\ContractorsController)
+ [x] Index shows contractors
+ [x] Index filters by status
+ [x] Index search filters by multiple fields
+ [x] Toggle switches user status
+ [x] Toggle redirects when user not found
+ [x] Approve pending contractor
+ [x] Approve inserts profile when none exists
+ [x] Reject pending contractor
+ [x] Reject missing profile
+
+Dashboard Controller (Tests\Feature\Admin\DashboardController)
+ [ ] Index loads dashboard with users
+ [ ] Get table users
+
+Dashboard Controller (Tests\Feature\Contractor\DashboardController)
+ [ ] Index shows contractor dashboard
+
 Example Database
  [x] Model find all
  [x] Soft delete leaves row
@@ -19,15 +72,40 @@ Project Model (Database\ProjectModel)
  [x] Budget cannot be negative
  [x] Budget is not text
  [x] Cannot create project without valid user id
- [x] Status defaults to open
+ [ ] Status defaults to open
  [x] Project is created with timestamps
  [x] Project status value is valid
 
+Projects Controller (Tests\Feature\Contractor\ProjectsController)
+ [ ] Index shows contractor projects
+
+Ratings Controller (Tests\Feature\Admin\RatingsController)
+ [x] Index shows ratings with filters
+ [x] Index search filters by text
+ [x] View returns view for valid id
+ [x] View redirects invalid ids
+ [x] Remove deletes rating and redirects
+ [x] Remove does not delete related project
+ [x] Suspicious shows flagged ratings
+
+Reports Controller (Tests\Feature\Admin\ReportsController)
+ [ ] Index returns success and correct data
+
 User Auth (Feature\UserAuth)
- [ ] Login success redirects to dashboard
+ [x] Login success redirects to dashboard
  [x] Login fails with wrong password
  [x] Login fails with wrong username
  [x] Guest cannot access admin
+
+User Controller (Tests\Feature\Admin\UserController)
+ [x] Index loads successfully for admin
+ [x] Index filters search and role
+ [ ] Index filters by status
+ [x] Toggle redirects if user not found
+ [x] Toggle change user status
+ [x] Update role fails with invalid role id
+ [x] Update role redirects if user not found
+ [x] Update role changes user role
 
 User Model (Database\UserModel)
  [x] Insert user

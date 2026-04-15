@@ -1,18 +1,25 @@
 # Project Name: Contractor Connect
 A digital marketplace for home improvement jobs. 
 
-## Tech Stack
+### Tech Stack
 - Linux
 - Apache
 - MySQL/MariaDB managed via CI4 Migrations
 - Language: PHP 8.4
 
-## Testing
-This project uses PHPUnit for quality assurance testing.
+### Testing
+- This project uses PHPUnit for quality assurance testing.
 - Set CI_ENVIRONMENT to Testing in .env
 - To run PHPUnit, navigate to /ci4
     bash
     vendor/bin/phpunit
+
+## The Team:
+**Member 1** Adel Alhaj Hussein - Back-end
+**Member 2** Mehdi Jazi - Database
+**Member 3** Eric Laudrum - Quality Assurance & Testing
+**Member 4** Sana Karnelia - Front-end
+**Member 5** Shifa Karnelia - Front-end
 
 ## Getting Started
 
@@ -33,7 +40,7 @@ This project uses PHPUnit for quality assurance testing.
     Then open in browser
     "http://localhost:8000"
 
-### 4. Update code
+### 4. Develop / Update code
     - To pull latest version of the code
     bash
     "git pull origin main"
@@ -64,20 +71,13 @@ This project uses PHPUnit for quality assurance testing.
     Navigate to github and create a pull request
     Resolve any conflicts and merge with main branch
 
-## Run Tests
-  - Navigate to root directory and run
+### Run Tests
+  - Navigate to root directory (ci4) and run
   bash
   vendor/bin/phpunit
 
 
-## The Team: 
-**Member 1** Adel Alhaj Hussein - Back-end
-**Member 2** Mehdi Jazi - Database
-**Member 3** Eric Laudrum - Quality Assurance & Testing
-**Member 4** Sana Karnelia - Front-end
-**Member 5** Shifa Karnelia - Front-end
-
-## Progress:
+### Progress:
 - [X] Initial project file setup
 - [X] Create initial file layout
 - [] Account creation and authentication
@@ -100,3 +100,22 @@ This project uses PHPUnit for quality assurance testing.
     - [] Back-end functions and routing
     - [] Front-end html
     - [] Front-end styling
+
+## Unit Testing
+### Checklist
+  - [] Config
+  - [] Controllers
+    - [] Admin
+    - [] Contractor
+    - [] Homeowner
+    - [] Auth.php
+    - [] AuthController.php
+    - [x] Base Controller
+    - [] Home.php
+  - [x] Database
+  - [x] Filters
+  - [] Helpers
+  - [x] Language
+  - [x] Models
+  - [] Routes.php
+  - [] Common.php
