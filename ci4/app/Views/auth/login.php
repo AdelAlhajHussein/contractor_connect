@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/main') ?>
-<?= $this->section('content') ?>
 
+<?= $this->section('content') ?>
 <link rel="stylesheet" href="<?= base_url('css/auth.css') ?>">
 
 <div class="auth-container">
@@ -8,10 +8,15 @@
     <div class="auth-card">
 
         <!-- Left side form -->
+
         <div class="auth-form">
 
             <div class="auth-title">Login</div>
-
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="auth-success">
+                    <?= esc(session()->getFlashdata('success')) ?>
+                </div>
+            <?php endif; ?>
             <?php if (session()->getFlashdata('error')): ?>
                 <div class="auth-error">
                     <?= esc(session()->getFlashdata('error')) ?>
@@ -24,10 +29,10 @@
 
                 <div class="auth-group">
 
-                    <label>Username</label>
+                    <label>Email</label>
 
-                    <input type="text"
-                           name="username"
+                    <input type="email"
+                           name="email"
                            required>
 
                 </div>

@@ -29,8 +29,9 @@
                 ?>
 
                 <span class="username">
-        Welcome, <?= esc(session()->get('username')) ?>
-    </span>
+          ╰┈➤ˎWelcome!
+                </span>
+
 
                 <a class="nav-link " href="<?= $dashboardUrl ?>">
                     Dashboard
