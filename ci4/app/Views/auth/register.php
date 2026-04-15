@@ -10,90 +10,70 @@
         <!-- Left side form -->
         <div class="auth-form">
 
-            <h1 class="auth-title">Create an account</h1>
+            <div class="auth-title">Create a new account</div>
 
-            <section class="registration-section">
 
-                <?php if (session()->getFlashdata('error')): ?>
-                    <div class="auth-error">
-                        <?= esc(session()->getFlashdata('error')) ?>
-                    </div>
-                <?php endif; ?>
+            <?php $errors = session()->getFlashdata('errors') ?? []; ?>
 
-                <form method="post" action="<?= site_url('register') ?>">
-
-                    <?= csrf_field() ?>
-
-                    <div class="auth-group">
-                        <label>Username</label>
-                        <input type="text"
-                               name="username"
-                               value="<?= old('username') ?>"
-                               required>
-                    </div>
-
-                    <div class="auth-group">
-                        <label>Password</label>
-                        <input type="password"
-                               name="password"
-                               required>
-                    </div>
-
-                    <div class="auth-group">
-                        <label>Confirm Password</label>
-                        <input type="password"
-                               name="confirm_password"
-                               required>
-                    </div>
-
-                    <div class="auth-group">
-                        <label>I am a:</label>
-
-                        <select name="role_id"
-                                required
-                                class="auth-group input">
-
-                            <option value="">-- Select Role --</option>
-
-                            <option value="2"
-                                <?= old('role_id') == '2' ? 'selected' : '' ?>>
-                                Homeowner
-                            </option>
-
-                            <option value="3"
-                                <?= old('role_id') == '3' ? 'selected' : '' ?>>
-                                Contractor
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <button class="auth-btn" type="submit">
-                        Create Account
-                    </button>
-
-                </form>
-
-                <div class="auth-footer">
-                    Already have an account?
-                    <a href="<?= site_url('login') ?>">Login here</a>
+            <?php if (session()->getFlashdata('error')): ?>
+                <div style="...">
+                    <?= esc(session()->getFlashdata('error')) ?>
                 </div>
+            <?php endif; ?>
 
-            </section>
+            <?php if (!empty($errors)): ?>
+                <div style="...">
+                    <ul style="...">
+                        <?php foreach ($errors as $e): ?>
+                            <li><?= esc($e) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
+    <form method="post" action="<?= site_url('register') ?>">
+        <?= csrf_field() ?>
+
+        <div class="auth-group">
+            <label >Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="<?= old('email') ?>" required>
         </div>
 
-
-        <!-- Right side image -->
-        <div class="auth-image">
-
-            <img src="<?= base_url('img/auth-image.png') ?>" alt="Register Image">
-
+        <div class="auth-group">
+            <label for="role_id">Account type</label><br>
+            <select id="role_id" name="role_id" style="width:100%; padding:10px;">
+                <option value="">Select...</option>
+                <option value="2" <?= old('role_id') == '2' ? 'selected' : '' ?>>Homeowner</option>
+                <option value="3" <?= old('role_id') == '3' ? 'selected' : '' ?>>Contractor</option>
+            </select>
         </div>
 
+        <div class="auth-group">
+            <label for="password">Password</label><br>
+            <input id="password" name="password" type="password" style="width:100%; padding:10px;">
+        </div>
+
+        <div class="auth-group">
+            <label for="confirm_password">Confirm password</label><br>
+            <input id="confirm_password" name="confirm_password" type="password" style="width:100%; padding:10px;">
+        </div>
+
+        <button type="submit"  class="auth-btn">Create Account</button>
+
+        <div class="auth-footer">
+            Already have an account? <a href="<?= site_url('login') ?>">Sign in</a>
+        </div>
+    </form>
+        </div>
+            <!-- Right side image -->
+            <div class="auth-image">
+
+                <!-- Put image inside public/img -->
+                <img src="<?= base_url('img/auth-image.png') ?>" alt="Login Image">
+
+            </div>
+
+        </div>
     </div>
-
-</div>
 
 <?= $this->endSection() ?>

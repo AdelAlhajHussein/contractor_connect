@@ -40,6 +40,12 @@ body{
     margin-bottom:10px;
 }
 
+.auth-success{
+    color:green !important;
+    margin-bottom:10px;
+    font-weight: bold;
+
+}
 
 /* Form groups */
 .auth-group{
