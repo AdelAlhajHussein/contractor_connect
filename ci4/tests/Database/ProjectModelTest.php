@@ -329,7 +329,7 @@ class ProjectModelTest extends CIUnitTestCase {
 
         $savedProject = $this->model->find($projectId);
 
-        $this->assertEquals('open',$savedProject['status']);
+        $this->assertEquals('bidding_open',$savedProject['status']);
     }
 
     /**

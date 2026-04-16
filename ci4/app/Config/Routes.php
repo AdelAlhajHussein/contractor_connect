@@ -73,27 +73,43 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
 });
 
 // ------- 2 Homeowner Routes -----
-$routes->group('homeowner', ['filter' => 'auth'], function ($routes) {
+$routes->group('(?i)homeowner', ['filter' => 'auth'], function ($routes) {
     $routes->get('dashboard', 'Homeowner\DashboardController::index');
+
+    // project
     $routes->get('projects', 'Homeowner\ProjectsController::index');
-    $routes->get('projects/create', 'Homeowner\ProjectsController::create');
-    $routes->post('projects/store', 'Homeowner\ProjectsController::store');
-    $routes->get('projects/view/(:num)', 'Homeowner\ProjectsController::view/$1');
-    $routes->get('bids/(:num)', 'Homeowner\BidsController::index/$1');
+    $routes->get('projects/new', 'Homeowner\ProjectsController::new');
+    $routes->get('projects/create', 'Homeowner\ProjectsController::new');
+    $routes->post('projects/create', 'Homeowner\ProjectsController::create');
+    $routes->get('projects/(:num)', 'Homeowner\ProjectsController::details/$1');
+    $routes->get('projects/view/(:num)', 'Homeowner\ProjectsController::details/$1');
+    // bids
+    $routes->get('bids', 'Homeowner\BidsController::index'); // all bids
+    $routes->get('bids/(:num)', 'Homeowner\BidsController::index/$1'); // specific bid
     $routes->post('bids/accept/(:num)', 'Homeowner\BidsController::accept/$1');
     $routes->post('bids/reject/(:num)', 'Homeowner\BidsController::reject/$1');
+
     $routes->get('browse', 'Homeowner\BrowseController::index');
     $routes->get('contractors/view/(:num)', 'Homeowner\BrowseController::view/$1');
+    // profile
     $routes->get('profile', 'Homeowner\ProfileController::index');
+    $routes->get('profile/edit', 'Homeowner\ProfileController::index');
+    $routes->post('profile/update', 'Homeowner\ProfileController::update');
 });
 
 // ------ 3 Contractor Routes ------
 $routes->group('contractor', ['filter' => 'auth'], function ($routes) {
     $routes->get('dashboard', 'Contractor\DashboardController::index');
+    // project
+    $routes->get('projects', 'Contractor\ProjectsController::index');
+    // bid
     $routes->get('bids', 'Contractor\BidsController::index');
     $routes->get('bids/create/(:num)', 'Contractor\BidsController::create/$1');
     $routes->post('bids/store/(:num)', 'Contractor\BidsController::store/$1');
+    // browse
     $routes->get('browse', 'Contractor\BrowseController::index');
-    $routes->get('browse/(:num)', 'Contractor\BrowseController::view/$1');
+    $routes->get('browse/details/(:num)', 'Contractor\BrowseController::details/$1');
+    $routes->get('browse/(:num)', 'Contractor\BrowseController::details/$1');
+    // account
     $routes->get('profile', 'Contractor\ProfileController::index');
 });

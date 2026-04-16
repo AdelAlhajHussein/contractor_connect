@@ -143,6 +143,11 @@ class BidsControllerTest extends CIUnitTestCase
 
         // Assertions
         $result->assertStatus(200);
+
+        // Debugging
+        echo $result->getBody();
+
+
         $result->assertSee('Fix the roof');
         $result->assertDontSee('Other Project');
     }
