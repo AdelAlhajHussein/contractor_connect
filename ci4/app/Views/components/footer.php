@@ -18,10 +18,10 @@
                 <h5 class="follow-title">Follow Us</h5>
 
                 <div class="social-links d-flex flex-column align-items-md-end mt-3">
-                    <a href="#"><i class="bi bi-facebook me-2"></i>Facebook</a>
-                    <a href="#"><i class="bi bi-twitter me-2"></i>Twitter</a>
-                    <a href="#"><i class="bi bi-instagram me-2"></i>Instagram</a>
-                    <a href="#"><i class="bi bi-linkedin me-2"></i>LinkedIn</a>
+                    <a href="<?= site_url('media') ?>"><i class="bi bi-facebook me-2"></i>Facebook</a>
+                    <a href="<?= site_url('media') ?>"><i class="bi bi-twitter me-2"></i>Twitter</a>
+                    <a href="<?= site_url('media') ?>"><i class="bi bi-instagram me-2"></i>Instagram</a>
+                    <a href="<?= site_url('media') ?>"><i class="bi bi-linkedin me-2"></i>LinkedIn</a>
                 </div>
             </div>
 

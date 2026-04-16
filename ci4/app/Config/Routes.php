@@ -15,12 +15,39 @@ $routes->get('login', 'AuthController::loginForm');
 $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
 
+//for social media icon (footer)
+$routes->get('/media', 'MediaController::index');
 
-$routes->get('homeowner/dashboard', 'Homeowner\Dashboard::index');
-$routes->get('contractor/dashboard', 'Contractor\Dashboard::index');
+$routes->get('homeowner/dashboard', 'Homeowner\DashboardController::index');
+$routes->get('contractor/dashboard', 'Contractor\DashboardController::index');
 
-$routes->get('register', 'Auth::register');
+$routes->get('register', 'AuthController::registerForm');
+$routes->post('register', 'AuthController::register');
 
+// Homeowner Routes
+$routes->group('homeowner', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'Homeowner\DashboardController::index');
+    $routes->get('projects', 'Homeowner\ProjectsController::index');
+    $routes->get('browse', 'Homeowner\BrowseController::index');
+    $routes->get('bids', 'Homeowner\BidsController::index');
+    $routes->get('profile', 'Homeowner\ProfileController::index');
+    $routes->get('projects/new', 'Homeowner\ProjectsController::new');
+    $routes->post('projects/create', 'Homeowner\ProjectsController::create');
+});
+
+// Contractor Routes
+$routes->group('contractor', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'Contractor\DashboardController::index');
+
+    $routes->get('projects', 'Contractor\ProjectsController::index');
+
+    $routes->get('browse', 'Contractor\BrowseController::index');
+    $routes->get('browse/details/(:num)', 'Contractor\BrowseController::details/$1');
+
+    $routes->get('bids', 'Contractor\BidsController::index');
+    $routes->get('bids/create/(:num)', 'Contractor\BidsController::create/$1');
+    $routes->get('profile', 'Contractor\ProfileController::index');
+});
 
 // Admin Routes
 $routes->group('admin', ['filter' => 'auth'], function( $routes){
@@ -37,10 +64,10 @@ $routes->group('admin', ['filter' => 'auth'], function( $routes){
     $routes->post('users/role/(:num)', 'Admin\UsersController::updateRole/$1');
 
     // Contractors
-    $routes->get('admin/contractors', 'Admin\ContractorsController::index');
-    $routes->get('admin/contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1');
-    $routes->get('admin/contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1');
-    $routes->get('admin/contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1');
+    $routes->get('contractors', 'Admin\ContractorsController::index');
+    $routes->get('contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1');
+    $routes->get('contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1');
+    $routes->get('contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1');
 
 
     // Homeowners
@@ -67,19 +94,19 @@ $routes->group('admin', ['filter' => 'auth'], function( $routes){
     $routes->get('ratings/suspicious', 'Admin\RatingsController::suspicious');
 
     // Categories
-    $routes->get('admin/categories', 'Admin\CategoriesController::index');
-    $routes->get('admin/categories/create', 'Admin\CategoriesController::create');
-    $routes->post('admin/categories/store', 'Admin\CategoriesController::store');
-    $routes->get('admin/categories/edit/(:num)', 'Admin\CategoriesController::edit/$1');
-    $routes->post('admin/categories/update/(:num)', 'Admin\CategoriesController::update/$1');
-    $routes->get('admin/categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
-    $routes->get('admin/categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1');
+    $routes->get('categories', 'Admin\CategoriesController::index');
+    $routes->get('categories/create', 'Admin\CategoriesController::create');
+    $routes->post('categories/store', 'Admin\CategoriesController::store');
+    $routes->get('categories/edit/(:num)', 'Admin\CategoriesController::edit/$1');
+    $routes->post('categories/update/(:num)', 'Admin\CategoriesController::update/$1');
+    $routes->post('categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
+    $routes->get('categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1');
 
     // Reports
-    $routes->get('admin/reports', 'Admin\ReportsController::index');
+    $routes->get('reports', 'Admin\ReportsController::index');
 
     // Payments (out of scope)
-    $routes->get('admin/payments', 'Admin\PaymentsController::index');
+    $routes->get('payments', 'Admin\PaymentsController::index');
 
 
 
