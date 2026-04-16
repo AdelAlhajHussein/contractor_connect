@@ -76,12 +76,16 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
 $routes->group('homeowner', ['filter' => 'auth'], function ($routes) {
     $routes->get('dashboard', 'Homeowner\DashboardController::index');
     $routes->get('projects', 'Homeowner\ProjectsController::index');
+    // project
     $routes->get('projects/create', 'Homeowner\ProjectsController::create');
     $routes->post('projects/store', 'Homeowner\ProjectsController::store');
     $routes->get('projects/view/(:num)', 'Homeowner\ProjectsController::view/$1');
-    $routes->get('bids/(:num)', 'Homeowner\BidsController::index/$1');
+    // bids
+    $routes->get('bids', 'Homeowner\BidsController::index'); // all bids
+    $routes->get('bids/(:num)', 'Homeowner\BidsController::index/$1'); // specific bid
     $routes->post('bids/accept/(:num)', 'Homeowner\BidsController::accept/$1');
     $routes->post('bids/reject/(:num)', 'Homeowner\BidsController::reject/$1');
+
     $routes->get('browse', 'Homeowner\BrowseController::index');
     $routes->get('contractors/view/(:num)', 'Homeowner\BrowseController::view/$1');
     $routes->get('profile', 'Homeowner\ProfileController::index');
@@ -90,10 +94,16 @@ $routes->group('homeowner', ['filter' => 'auth'], function ($routes) {
 // ------ 3 Contractor Routes ------
 $routes->group('contractor', ['filter' => 'auth'], function ($routes) {
     $routes->get('dashboard', 'Contractor\DashboardController::index');
+    // project
+    $routes->get('projects', 'Contractor\ProjectsController::index');
+    // bid
     $routes->get('bids', 'Contractor\BidsController::index');
     $routes->get('bids/create/(:num)', 'Contractor\BidsController::create/$1');
     $routes->post('bids/store/(:num)', 'Contractor\BidsController::store/$1');
+    // browse
     $routes->get('browse', 'Contractor\BrowseController::index');
-    $routes->get('browse/(:num)', 'Contractor\BrowseController::view/$1');
+    $routes->get('browse/details/(:num)', 'Contractor\BrowseController::details/$1');
+    $routes->get('browse/(:num)', 'Contractor\BrowseController::details/$1');
+    // account
     $routes->get('profile', 'Contractor\ProfileController::index');
 });
