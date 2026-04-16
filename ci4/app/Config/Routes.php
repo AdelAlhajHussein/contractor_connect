@@ -95,4 +95,5 @@ $routes->group('contractor', ['filter' => 'auth'], function ($routes) {
     $routes->post('bids/store/(:num)', 'Contractor\BidsController::store/$1');
     $routes->get('browse', 'Contractor\BrowseController::index');
     $routes->get('browse/(:num)', 'Contractor\BrowseController::view/$1');
+    $routes->get('profile', 'Contractor\ProfileController::index');
 });
