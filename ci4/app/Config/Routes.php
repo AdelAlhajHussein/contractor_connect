@@ -81,7 +81,8 @@ $routes->group('homeowner', ['filter' => 'auth'], function ($routes) {
     $routes->get('projects/new', 'Homeowner\ProjectsController::new');
     $routes->get('projects/create', 'Homeowner\ProjectsController::new');
     $routes->post('projects/create', 'Homeowner\ProjectsController::create');
-    $routes->get('projects/view/(:num)', 'Homeowner\ProjectsController::view/$1');
+    $routes->get('projects/(:num)', 'Homeowner\ProjectsController::details/$1');
+    $routes->get('projects/view/(:num)', 'Homeowner\ProjectsController::details/$1');
     // bids
     $routes->get('bids', 'Homeowner\BidsController::index'); // all bids
     $routes->get('bids/(:num)', 'Homeowner\BidsController::index/$1'); // specific bid
