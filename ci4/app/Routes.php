@@ -1,10 +1,11 @@
-<?php
+//<?php
 
-use CodeIgniter\Router\RouteCollection;
+//use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
  */
+/*
 $routes->get('/', 'Home::index');
 
 $routes->get('admin/settings', '\App\Controllers\Admin\Dashboard::settings');
@@ -55,3 +56,5 @@ $routes->get('admin/homeowners', 'Admin\HomeownersController::index');
 
 // The Homeowner viewing their own dashboard
 $routes->get('homeowner/dashboard', 'Homeowner\Dashboard::index');
+
+*/

@@ -74,6 +74,11 @@
       <excludeFolder url="file://$MODULE_DIR$/ci4/vendor/symfony/stopwatch" />
       <excludeFolder url="file://$MODULE_DIR$/ci4/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/ci4/vendor/symfony/string" />
+      <excludeFolder url="file://$MODULE_DIR$/ci4/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ci4/writable/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/ci4/writable/debugbar" />
+      <excludeFolder url="file://$MODULE_DIR$/ci4/writable/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/ci4/writable/session" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
