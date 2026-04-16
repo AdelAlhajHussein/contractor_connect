@@ -4,32 +4,43 @@
 <div style="max-width: 520px; margin: 40px auto;">
     <h1>Create a new account</h1>
 
-    <?php $errors = session('errors') ?? []; ?>
-    <?php if (session('error')): ?>
-        <div style="padding:10px; margin: 12px 0; border:1px solid #f5c2c7; background:#f8d7da;">
-            <?= esc(session('error')) ?>
-        </div>
-    <?php endif; ?>
+<div class="auth-container">
 
-    <?php if (!empty($errors)): ?>
-        <div style="padding:10px; margin: 12px 0; border:1px solid #f5c2c7; background:#f8d7da;">
-            <ul style="margin:0; padding-left: 18px;">
-                <?php foreach ($errors as $e): ?>
-                    <li><?= esc($e) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <div class="auth-card">
+
+        <!-- Left side form -->
+        <div class="auth-form">
+
+            <div class="auth-title">Create a new account</div>
+
+
+            <?php $errors = session()->getFlashdata('errors') ?? []; ?>
+
+            <?php if (session()->getFlashdata('error')): ?>
+                <div style="...">
+                    <?= esc(session()->getFlashdata('error')) ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors)): ?>
+                <div style="...">
+                    <ul style="...">
+                        <?php foreach ($errors as $e): ?>
+                            <li><?= esc($e) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
     <form method="post" action="<?= site_url('register') ?>">
         <?= csrf_field() ?>
 
-        <div style="margin: 12px 0;">
-            <label for="username">Username</label><br>
-            <input id="username" name="username" type="text" value="<?= esc(old('username')) ?>" style="width:100%; padding:10px;">
+        <div class="auth-group">
+            <label >Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="<?= old('email') ?>" required>
         </div>
 
-        <div style="margin: 12px 0;">
+        <div class="auth-group">
             <label for="role_id">Account type</label><br>
             <select id="role_id" name="role_id" style="width:100%; padding:10px;">
                 <option value="">Select...</option>
@@ -38,22 +49,35 @@
             </select>
         </div>
 
-        <div style="margin: 12px 0;">
+        <div class="auth-group">
             <label for="password">Password</label><br>
             <input id="password" name="password" type="password" style="width:100%; padding:10px;">
         </div>
+
+        <div class="auth-group">
+            <label for="confirm_password">Confirm password</label><br>
+            <input id="confirm_password" name="confirm_password" type="password" style="width:100%; padding:10px;">
+        </div>
+
+        <button type="submit"  class="auth-btn">Create Account</button>
+
+        <div class="auth-footer">
+            Already have an account? <a href="<?= site_url('login') ?>">Sign in</a>
+        </div>
+    </form>
+        </div>
+            <!-- Right side image -->
+            <div class="auth-image">
+
+                <!-- Put image inside public/img -->
+                <img src="<?= base_url('img/auth-image.png') ?>" alt="Login Image">
+
+            </div>
 
         <div style="margin: 12px 0;">
             <label for="confirm_password">Confirm password</label><br>
             <input id="confirm_password" name="confirm_password" type="password" style="width:100%; padding:10px;">
         </div>
-
-        <button type="submit" style="padding:10px 14px;">Create Account</button>
-    </form>
-
-    <p style="margin-top: 14px;">
-        Already have an account? <a href="<?= site_url('login') ?>">Sign in</a>
-    </p>
-</div>
+    </div>
 
 <?= $this->endSection() ?>

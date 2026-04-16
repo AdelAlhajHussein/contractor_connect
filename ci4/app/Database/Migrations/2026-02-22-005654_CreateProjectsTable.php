@@ -4,32 +4,39 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateProjectsTable extends Migration{
+class CreateProjectsTable extends Migration
+{
     public function up()
     {
         $this->forge->addField([
-            'id' =>[
+            'id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'category_id' =>[
+            'home_owner_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
             ],
-            'title' =>[
-                'type' => 'VARCHAR',
+            'category_id' => [
+                'type'  => 'INT',
+                'constraint' => 11,
+                'unsigned'=> true,
+            ],
+            'title' => [
+                'type'=> 'VARCHAR',
                 'constraint' => '255',
             ],
-            'description' =>[
+            'description' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            'address'=>[
-                'type' => 'VARCHAR',
-                'constraint' => 255
+            'address' => [
+                'type'=> 'VARCHAR',
+                'constraint'=> '255',
+                'null'=> true,
             ],
             'start_date' => [
                 'type' => 'DATE',
@@ -39,12 +46,16 @@ class CreateProjectsTable extends Migration{
                 'type' => 'DATE',
                 'null' => true,
             ],
-            'budget_min' =>[
+            'deadline_date' => [
+                'type' => 'DATE',
+                'null' => true,
+            ],
+            'budget_min' => [
                 'type' => 'DECIMAL',
                 'constraint' => '10,2',
                 'default' => 0.00,
             ],
-            'budget_max' =>[
+            'budget_max' => [
                 'type' => 'DECIMAL',
                 'constraint' => '10,2',
                 'default' => '0.00',
@@ -52,26 +63,19 @@ class CreateProjectsTable extends Migration{
             'status' => [
                 'type' => 'VARCHAR',
                 'constraint' => '50',
-                'default' => 'open',
-            ],
-            'home_owner_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
-            ],
-            'deadline_date' => [
-                'type' => 'DATE',
-                'null' => true,
+                'default' => 'bidding_open',
             ],
             'created_at' => ['type' => 'DATETIME', 'null' => true],
             'updated_at' => ['type' => 'DATETIME', 'null' => true],
             'deleted_at' => ['type' => 'DATETIME', 'null' => true],
         ]);
+
         $this->forge->addKey('id', true);
         $this->forge->createTable('projects');
     }
 
-    public function down(){
+    public function down()
+    {
         $this->forge->dropTable('projects');
     }
 }
