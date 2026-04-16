@@ -73,7 +73,7 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
 });
 
 // ------- 2 Homeowner Routes -----
-$routes->group('homeowner', ['filter' => 'auth'], function ($routes) {
+$routes->group('(?i)homeowner', ['filter' => 'auth'], function ($routes) {
     $routes->get('dashboard', 'Homeowner\DashboardController::index');
 
     // project
@@ -91,7 +91,10 @@ $routes->group('homeowner', ['filter' => 'auth'], function ($routes) {
 
     $routes->get('browse', 'Homeowner\BrowseController::index');
     $routes->get('contractors/view/(:num)', 'Homeowner\BrowseController::view/$1');
+    // profile
     $routes->get('profile', 'Homeowner\ProfileController::index');
+    $routes->get('profile/edit', 'Homeowner\ProfileController::index');
+    $routes->post('profile/update', 'Homeowner\ProfileController::update');
 });
 
 // ------ 3 Contractor Routes ------
