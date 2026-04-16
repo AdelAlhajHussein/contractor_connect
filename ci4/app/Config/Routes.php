@@ -15,78 +15,82 @@ $routes->get('login', 'AuthController::loginForm');
 $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
 
-
-$routes->get('homeowner/dashboard', 'Homeowner\Dashboard::index');
-$routes->get('contractor/dashboard', 'Contractor\Dashboard::index');
-
 $routes->get('register', 'Auth::register');
 
-// ------ Contractor Routes ------
-$routes->group('contractor', ['filter' => 'auth'], function ($routes) {
-
-    $routes->get('bids', 'Contractor\BidsController::index');
-    $routes->get('bids/create/(:num)', 'Contractor\BidsController::create/$1');
-    $routes->post('bids/store/(:num)', 'Contractor\BidsController::store/$1');
-
-    $routes->get('browse', 'Contractor\BrowseController::index');
-    $routes->get('browse/(:num)', 'Contractor\BrowseController::view/$1');
-});
-
-// ------ Admin Routes ------
-$routes->group('admin', ['filter' => 'auth'], function( $routes){
-    // Dashboard
-    $routes->get('/', 'Admin\DashboardController::index');
-    $routes->get('dashboard', 'Admin\DashboardController::index');
-    $routes->get('settings', 'Admin\DashboardController::settings');
-    $routes->get('dashboard/get_table/(:any)', 'Admin\DashboardController::get_table/$1');
+// ------ 1 Admin Routes ------
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'auth'], function($routes) {
+    $routes->get('/', 'DashboardController::index');
+    $routes->get('dashboard', 'DashboardController::index');
+    $routes->get('settings', 'DashboardController::settings');
+    $routes->get('dashboard/get_table/(:any)', 'DashboardController::get_table/$1');
 
     // Users
-    $routes->get('users', 'Admin\UsersController::index');
-    $routes->get('users/toggle/(:num)', 'Admin\UsersController::toggle/$1');
-    $routes->post('users/role/(:num)', 'Admin\UsersController::updateRole/$1');
+    $routes->get('users', 'UsersController::index');
+    $routes->get('users/toggle/(:num)', 'UsersController::toggle/$1');
+    $routes->post('users/role/(:num)', 'UsersController::updateRole/$1');
 
     // Contractors
-    $routes->get('contractors', 'Admin\ContractorsController::index');
-    $routes->get('contractors/toggle/(:num)', 'Admin\ContractorsController::toggle/$1');
-    $routes->get('contractors/approve/(:num)', 'Admin\ContractorsController::approve/$1');
-    $routes->get('contractors/reject/(:num)', 'Admin\ContractorsController::reject/$1');
+    $routes->get('contractors', 'ContractorsController::index');
+    $routes->get('contractors/toggle/(:num)', 'ContractorsController::toggle/$1');
+    $routes->get('contractors/approve/(:num)', 'ContractorsController::approve/$1');
+    $routes->get('contractors/reject/(:num)', 'ContractorsController::reject/$1');
 
     // Homeowners
-    $routes->get('homeowners', 'Admin\HomeownersController::index');
-    $routes->get('homeowners/toggle/(:num)', 'Admin\HomeownersController::toggle/$1');
+    $routes->get('homeowners', 'HomeownersController::index');
+    $routes->get('homeowners/toggle/(:num)', 'HomeownersController::toggle/$1');
 
     // Projects
-    $routes->get('projects', 'Admin\ProjectsController::index');
-    $routes->get('projects/view/(:num)', 'Admin\ProjectsController::view/$1');
-    $routes->get('projects/cancel/(:num)', 'Admin\ProjectsController::cancel/$1');
-    $routes->get('projects/close-bidding/(:num)', 'Admin\ProjectsController::closeBidding/$1');
+    $routes->get('projects', 'ProjectsController::index');
+    $routes->get('projects/view/(:num)', 'ProjectsController::view/$1');
+    $routes->get('projects/cancel/(:num)', 'ProjectsController::cancel/$1');
+    $routes->get('projects/close-bidding/(:num)', 'ProjectsController::closeBidding/$1');
 
     // Bids
-    $routes->get('bids', 'Admin\BidsController::index');
-    $routes->get('bids/view/(:num)', 'Admin\BidsController::view/$1');
-    $routes->get('bids/withdraw/(:num)', 'Admin\BidsController::withdraw/$1');
+    $routes->get('bids', 'BidsController::index');
+    $routes->get('bids/view/(:num)', 'BidsController::view/$1');
+    $routes->get('bids/withdraw/(:num)', 'BidsController::withdraw/$1');
 
     // Ratings
-    $routes->get('ratings', 'Admin\RatingsController::index');
-    $routes->get('ratings/view/(:num)', 'Admin\RatingsController::view/$1');
-    $routes->get('ratings/remove/(:num)', 'Admin\RatingsController::remove/$1');
-    $routes->get('ratings/suspicious', 'Admin\RatingsController::suspicious');
+    $routes->get('ratings', 'RatingsController::index');
+    $routes->get('ratings/view/(:num)', 'RatingsController::view/$1');
+    $routes->get('ratings/remove/(:num)', 'RatingsController::remove/$1');
+    $routes->get('ratings/suspicious', 'RatingsController::suspicious');
 
     // Categories
-    $routes->get('categories', 'Admin\CategoriesController::index');
-    $routes->get('categories/create', 'Admin\CategoriesController::create');
-    $routes->post('categories/store', 'Admin\CategoriesController::store');
-    $routes->get('categories/edit/(:num)', 'Admin\CategoriesController::edit/$1');
-    $routes->post('categories/update/(:num)', 'Admin\CategoriesController::update/$1');
-    $routes->get('categories/delete/(:num)', 'Admin\CategoriesController::delete/$1');
-    $routes->get('categories/toggle/(:num)', 'Admin\CategoriesController::toggle/$1');
+    $routes->get('categories', 'CategoriesController::index');
+    $routes->get('categories/create', 'CategoriesController::create');
+    $routes->post('categories/store', 'CategoriesController::store');
+    $routes->get('categories/edit/(:num)', 'CategoriesController::edit/$1');
+    $routes->post('categories/update/(:num)', 'CategoriesController::update/$1');
+    $routes->get('categories/delete/(:num)', 'CategoriesController::delete/$1');
+    $routes->get('categories/toggle/(:num)', 'CategoriesController::toggle/$1');
 
     // Reports
-    $routes->get('reports', 'Admin\ReportsController::index');
+    $routes->get('reports', 'ReportsController::index');
+    $routes->get('payments', 'PaymentsController::index');
+});
 
-    // Payments (out of scope)
-    $routes->get('payments', 'Admin\PaymentsController::index');
+// ------- 2 Homeowner Routes -----
+$routes->group('homeowner', ['namespace' => 'App\Controllers\Homeowner', 'filter' => 'auth'], function ($routes) {
+    $routes->get('dashboard', 'Dashboard::index');
+    $routes->get('projects', 'ProjectsController::index');
+    $routes->get('projects/create', 'ProjectsController::create');
+    $routes->post('projects/store', 'ProjectsController::store');
+    $routes->get('projects/view/(:num)', 'ProjectsController::view/$1');
+    $routes->get('bids/(:num)', 'BidsController::index/$1');
+    $routes->post('bids/accept/(:num)', 'BidsController::accept/$1');
+    $routes->post('bids/reject/(:num)', 'BidsController::reject/$1');
+    $routes->get('browse', 'BrowseController::index');
+    $routes->get('contractors/view/(:num)', 'BrowseController::view/$1');
+    $routes->get('profile', 'ProfileController::index');
+});
 
-
-
+// ------ 3 Contractor Routes ------
+$routes->group('contractor', ['namespace' => 'App\Controllers\Contractor', 'filter' => 'auth'], function ($routes) {
+    $routes->get('dashboard', 'Dashboard::index');
+    $routes->get('bids', 'BidsController::index');
+    $routes->get('bids/create/(:num)', 'BidsController::create/$1');
+    $routes->post('bids/store/(:num)', 'BidsController::store/$1');
+    $routes->get('browse', 'BrowseController::index');
+    $routes->get('browse/(:num)', 'BrowseController::view/$1');
 });

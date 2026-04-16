@@ -11,18 +11,25 @@ class ProjectsControllerTest extends ProjectTestCase
     {
         // Set up data
         $contractorId = $this->setUpUser();
-        $projectId = $this->setUpProject([
+
+        $this->db->table('projects')->insert([
+            'home_owner_id' => 1,
+            'category_id' => 1,
             'title' => 'My Bid Project',
+            'description'   => 'Test description',
+            'address'=>'123 Test Street',
             'start_date' => '2026-05-01',
-            'end_date' => '2026-06-01'
+            'end_date' => '2026-06-01',
+            'status' => 'bidding_open'
         ]);
+        $projectId = $this->db->insertID();
 
         // Place bid
         $this->db->table('bids')->insert([
             'project_id' => $projectId,
             'contractor_id' => $contractorId,
             'bid_amount' => 500.00,
-            'total_cost' => 500.00
+            'total_cost' => 500.00,
         ]);
 
         // Initialize Controller

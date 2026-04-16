@@ -58,7 +58,7 @@ class CreateProjectsTable extends Migration
             'budget_max' => [
                 'type' => 'DECIMAL',
                 'constraint' => '10,2',
-                'default' => 0.00,
+                'default' => '0.00',
             ],
             'status' => [
                 'type' => 'VARCHAR',
