@@ -75,10 +75,11 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
 // ------- 2 Homeowner Routes -----
 $routes->group('homeowner', ['filter' => 'auth'], function ($routes) {
     $routes->get('dashboard', 'Homeowner\DashboardController::index');
-    $routes->get('projects', 'Homeowner\ProjectsController::index');
+
     // project
+    $routes->get('projects', 'Homeowner\ProjectsController::index');
+    $routes->get('projects/new', 'Homeowner\ProjectsController::new');
     $routes->get('projects/create', 'Homeowner\ProjectsController::create');
-    $routes->post('projects/store', 'Homeowner\ProjectsController::store');
     $routes->get('projects/view/(:num)', 'Homeowner\ProjectsController::view/$1');
     // bids
     $routes->get('bids', 'Homeowner\BidsController::index'); // all bids
