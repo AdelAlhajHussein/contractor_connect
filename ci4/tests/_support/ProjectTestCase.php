@@ -20,9 +20,7 @@ abstract class ProjectTestCase extends CIUnitTestCase{
 
     protected function setUp(): void
     {
-
         parent::setUp();
-
         $this->faker = \Faker\Factory::create();
     }
 
@@ -43,10 +41,29 @@ abstract class ProjectTestCase extends CIUnitTestCase{
 
         return $this->db->insertID();
     }
+
+    protected function setUpHomeownerProfile(array $overrides = []): int {
+        $data = array_merge([
+            'home_owner_id' => null,
+            'address' => $this->faker->streetAddress,
+            'city' => $this->faker->city,
+            'province' => $this->faker->stateAbbr,
+            'postal_code' => substr($this->faker->postcode, 0, 7),
+            'created_at' => date('Y-m-d H:i:s'),
+        ], $overrides);
+
+        $this->db->table('home_owner_profiles')->insert($data);
+
+        return $this->db->insertID();
+    }
+
+
     protected function setUpCategory(array $overrides = []): int{
         $data = array_merge([
             'name' => $this->faker->jobTitle,
-            'description' => $this->faker->sentence,
+            'is_visible' => 1,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ], $overrides);
 
         $this->db->table('categories')->insert($data);
