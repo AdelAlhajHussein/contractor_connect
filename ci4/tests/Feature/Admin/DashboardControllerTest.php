@@ -25,6 +25,10 @@ class DashboardControllerTest extends ProjectTestCase
 
         // Verify content
         $html = $result->getResponseBody();
+        if ($html === null) {
+            $this->fail("The response body is null. Check if DashboardController returns the view.");
+        }
+
         $this->assertStringContainsString('Dashboard', $html);
     }
 }

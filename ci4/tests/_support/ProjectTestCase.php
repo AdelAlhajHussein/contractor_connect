@@ -43,6 +43,10 @@ abstract class ProjectTestCase extends CIUnitTestCase{
     }
 
     protected function setUpHomeownerProfile(array $overrides = []): int {
+
+        // Create table if none exist
+        $this->db->query("CREATE TABLE IF NOT EXISTS home_owner_profiles AS SELECT * FROM homeowner_profiles WHERE 1=0");
+
         $data = array_merge([
             'home_owner_id' => null,
             'address' => $this->faker->streetAddress,
