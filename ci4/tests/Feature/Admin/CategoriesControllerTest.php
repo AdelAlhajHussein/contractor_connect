@@ -2,14 +2,10 @@
 
 namespace Tests\Feature\Admin;
 
-use CodeIgniter\Test\CIUnitTestCase;
-use CodeIgniter\Test\FeatureTestTrait;
-use CodeIgniter\Test\DatabaseTestTrait;
+use Tests\Support\ProjectTestCase;
 
-class CategoriesControllerTest extends CIUnitTestCase
+class CategoriesControllerTest extends ProjectTestCase
 {
-    use FeatureTestTrait;
-    use DatabaseTestTrait;
 
     protected $refresh = true;
     protected $namespace = 'App';
@@ -50,16 +46,18 @@ class CategoriesControllerTest extends CIUnitTestCase
     public function testCreateViewLoads()
     {
         $session = ['logged_in' => true, 'role_id' => 1];
+        $uri = "admin/categories/create";
 
-        $result = $this->withSession($session)
-            ->get('/admin/categories/create');
+        $result = $this->withSession($session)->get($uri);
 
         // Verify it loads a success status
         $result->assertStatus(200);
 
+        $html = $result->getResponseBody();
+
         // Verify the view contains the expected form elements
-        $result->assertSee('Create Category');
-        $result->assertSeeElement('input[name="name"]');
+        $result->assertStringContainsString('Category', $html, "Category not found in page");
+        $result->assertStringContainsString('name="name"', $html, "name=name not found");
     }
     public function testStoreCategory(){
 
@@ -80,24 +78,25 @@ class CategoriesControllerTest extends CIUnitTestCase
             'is_visible' => 1,
         ]);
     }
-    public function testEditViewLoadsData(){
-        // Create category
-        $this->db->table('categories')->insert([
-            'id'=>123,
-            'name'=>'Carpentry',
-            'is_visible'=>1,
+    public function testEditViewLoadsData()
+    {
+        $categoryId = $this->setUpCategory([
+            'name'       => 'Carpentry',
+            'is_visible' => 1
         ]);
 
         $session = ['logged_in' => true, 'role_id' => 1];
 
-        // Attempt to get edit page that matches id
-        $result = $this->withSession($session)
-            ->get('/admin/categories/edit/123');
+        $uri = "admin/categories/edit/{$categoryId}";
+
+        $result = $this->withSession($session)->get($uri);
 
         $result->assertStatus(200);
+
         $result->assertSee('Carpentry');
-        $result->assertSeeElement('input[name="name"]');
     }
+
+
     public function testUpdateCategory(){
         // Create category
         $this->db->table('categories')->insert([

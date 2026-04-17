@@ -5,6 +5,8 @@ namespace Tests\Support;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
+use Faker\Factory;
+use Faker\Generator;
 
 abstract class ProjectTestCase extends CIUnitTestCase{
     use FeatureTestTrait, DatabaseTestTrait;
@@ -13,67 +15,86 @@ abstract class ProjectTestCase extends CIUnitTestCase{
     protected $namespace = 'App';
     protected $refresh = true;
     protected $migrate = true;
+    protected $faker;
 
 
     protected function setUp(): void
     {
-        \Config\Services::reset();
-
-        $_ENV['database.tests.DBDriver'] = 'SQLite3';
-        $_SERVER['database.tests.DBDriver'] = 'SQLite3';
-
         parent::setUp();
-
-        $config = new \Config\Database();
-        $db = \CodeIgniter\Database\Config::connect($config->tests);
-        \Config\Services::injectMock('database', $db);
-
         $this->faker = \Faker\Factory::create();
     }
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        \Config\Services::reset();
-    }
 
-
-    protected function setUpUser(array $data = []){
-        $defaults = [
-            'username' => 'user_' . uniqid(),
-            'email' => uniqid() . '@test.com',
-            'first_name' => 'First',
-            'last_name' => 'Last',
-            'role_id' => 3,
+    protected function setUpUser(array $overrides = []): int {
+        $data = array_merge([
+            'username' => $this->faker->userName,
+            'email' => $this->faker->email,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'role_id' => 2, // Default homeowner
             'is_active' => 1,
-            'password_hash' => 'fake_hash'
-        ];
+            'password_hash' => password_hash('secret123', PASSWORD_BCRYPT),
+            'created_at' => date('Y-m-d H:i:s'),
+        ], $overrides);
 
-        return $this->db->table('users')
-            ->insert(array_merge($defaults, $data));
+        $this->db->table('users')->insert($data);
+
+        return $this->db->insertID();
     }
-    protected function setUpCategory(array $data = []){
-        $defaults = ['name' => 'General'];
-        return $this->db->table('categories')
-            ->insert(array_merge($defaults, $data));
+
+    protected function setUpHomeownerProfile(array $overrides = []): int {
+
+        // Create table if none exist
+        $this->db->query("CREATE TABLE IF NOT EXISTS home_owner_profiles AS SELECT * FROM homeowner_profiles WHERE 1=0");
+
+        $data = array_merge([
+            'home_owner_id' => null,
+            'address' => $this->faker->streetAddress,
+            'city' => $this->faker->city,
+            'province' => $this->faker->stateAbbr,
+            'postal_code' => substr($this->faker->postcode, 0, 7),
+            'created_at' => date('Y-m-d H:i:s'),
+        ], $overrides);
+
+        $this->db->table('home_owner_profiles')->insert($data);
+
+        return $this->db->insertID();
     }
-    protected function setUpProject(array $data = []){
+
+
+    protected function setUpCategory(array $overrides = []): int{
+        $data = array_merge([
+            'name' => $this->faker->jobTitle,
+            'is_visible' => 1,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ], $overrides);
+
+        $this->db->table('categories')->insert($data);
+
+        return $this->db->insertID();
+    }
+    protected function setUpProject(array $overrides = []): int{
         // Resolve dependencies
-        $categoryId  = $data['category_id'] ?? $this->setUpCategory();
-        $homeownerId = $data['home_owner_id'] ?? $this->setUpUser(['role_id' => 2]);
+        $categoryId  = $overrides['category_id']  ?? $this->setUpCategory();
+        $homeownerId = $overrides['home_owner_id'] ?? $this->setUpUser(['role_id' => 2]);
 
-        $defaults = [
-            'title' => 'Test Project',
-            'description' => 'Test description',
-            'address' => '123 Project St.',
+        $data = array_merge([
+            'title' => $this->faker->sentence(3),
+            'description' => $this->faker->paragraph,
+            'address' => $this->faker->address,
             'status' => 'open',
             'category_id' => $categoryId,
             'home_owner_id' => $homeownerId,
-        ];
+            'created_at' => date('Y-m-d H:i:s'),
+        ], $overrides);
 
-        return $this->db->table('projects')
-            ->insert(array_merge($defaults, $data));
+        $this->db->table('projects')->insert($data);
+
+        return $this->db->insertID();
     }
+
+
     protected function getInitializedController(string $controllerClass, $request = null)
     {
         $controller = new $controllerClass();
@@ -83,5 +104,12 @@ abstract class ProjectTestCase extends CIUnitTestCase{
             \Config\Services::logger()
         );
         return $controller;
+    }
+
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+       // \Config\Services::reset();
     }
 }
