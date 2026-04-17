@@ -20,7 +20,9 @@ abstract class ProjectTestCase extends CIUnitTestCase{
 
     protected function setUp(): void
     {
+
         parent::setUp();
+
         $this->faker = \Faker\Factory::create();
     }
 
@@ -39,7 +41,7 @@ abstract class ProjectTestCase extends CIUnitTestCase{
 
         $this->db->table('users')->insert($data);
 
-        return $this->db->insertId();
+        return $this->db->insertID();
     }
     protected function setUpCategory(array $overrides = []): int{
         $data = array_merge([
@@ -87,6 +89,6 @@ abstract class ProjectTestCase extends CIUnitTestCase{
     protected function tearDown(): void
     {
         parent::tearDown();
-        \Config\Services::reset();
+       // \Config\Services::reset();
     }
 }
