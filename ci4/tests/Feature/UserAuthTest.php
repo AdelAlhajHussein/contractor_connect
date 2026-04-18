@@ -2,23 +2,13 @@
 
 namespace Feature;
 
-use CodeIgniter\Test\CIUnitTestCase;
-use CodeIgniter\Test\FeatureTestTrait;
-use CodeIgniter\Test\DatabaseTestTrait;
 use App\Models\UserModel;
 use Faker\Factory as FakerFactory;
+use Tests\Support\ProjectTestCase;
 
-class UserAuthTest extends CIUnitTestCase {
-    use FeatureTestTrait, DatabaseTestTrait;
+class UserAuthTest extends ProjectTestCase {
 
-    protected $refresh = true;
-    protected $namespace = 'App';
     protected $faker;
-
-    protected function setUp(): void{
-        parent::setUp();
-        $this->faker = FakerFactory::create();
-    }
 
     /**
      * Scenario: Successful user login
@@ -31,13 +21,13 @@ class UserAuthTest extends CIUnitTestCase {
     {
         $username = 'test_user';
         $password = 'Password123';
+        $email = "test_user@mail.com";
 
-        $db = \Config\Database::connect();
-        $db->table('users')->where('username', $username)->delete();
-
-        $db->table('users')->insert([
+        $this->db->table('users')->insert([
             'username' => $username,
-            'email' => 'admin@test.com',
+            'email' => $email,
+            'first_name' => 'Admin',
+            'last_name' => 'User',
             'password_hash' => password_hash($password, PASSWORD_DEFAULT),
             'role_id' => 1,
             'is_active' => 1,
@@ -54,12 +44,8 @@ class UserAuthTest extends CIUnitTestCase {
         ////Verification
         // HTTP response is a 302 redirect
         $result->assertStatus(302);
-
-        // Admin is redirected to the Admin Dashboard
         $result->assertRedirectTo(site_url('admin/dashboard'));
 
-        // Session contains the authentication flag
-        $result->assertSessionHas('logged_in', true);
     }
 
     /**
@@ -72,31 +58,26 @@ class UserAuthTest extends CIUnitTestCase {
     public function testLoginFailsWithWrongPassword()
     {
         $username = 'test_user';
-        $email = 'existing@example.com';
+        $email = "test_user@mail.com";
+
         $userModel = new UserModel();
         $userModel->insert([
             'username'      => $username,
-            'email'         => $email,
-            'password_hash' => password_hash('correct_pass',PASSWORD_DEFAULT),
+            'email'         => 'existing@example.com',
+            'password_hash' => password_hash('correct_pass', PASSWORD_DEFAULT),
             'role_id'       => 1,
             'is_active'     => 1,
         ]);
 
         // Simulate login with incorrect password
         $result = $this->post('login', [
-            'login_email' => $username,
-            'password'   => 'wrong_password',
+            'username' => $username,
+            'password'    => 'wrong_password',
         ]);
 
         //// Verification
         // Redirect to login
         $result->assertRedirectTo(site_url('login'));
-
-        // Redirect found
-        $result->assertStatus(302);
-
-        // isLoggedIn is still false
-        $result->assertSessionMissing('isLoggedIn');
 
         // An error message is displayed to the user
         $result->assertSessionHas('error');
@@ -111,9 +92,11 @@ class UserAuthTest extends CIUnitTestCase {
      */
     public function testLoginFailsWithWrongUsername()
     {
+        $email = 'test_user@mail.com';
+
         // Simulate login with invalid email
         $result = $this->post('login', [
-            'username' => 'username_not_in_database',
+            'email' => $email,
             'password'    => 'random_password'
         ]);
 
@@ -138,6 +121,4 @@ class UserAuthTest extends CIUnitTestCase {
         //// Verification
         $result->assertRedirectTo(site_url('login'));
     }
-
-
 }

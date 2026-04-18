@@ -66,7 +66,6 @@ class BidsController extends BaseController
             ->orderBy('task_order', 'ASC')
             ->findAll();
 
-        // Totals from tasks (calculated, not trusting stored totals)
         $sumMinutes = 0;
         $sumMaterials = 0.0;
         $sumLabour = 0.0;

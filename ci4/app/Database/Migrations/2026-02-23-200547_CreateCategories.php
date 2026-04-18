@@ -19,7 +19,19 @@ class CreateCategories extends Migration
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
-
+            ],
+            'is_visible' => [
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 1,
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
             ],
 
         ]);
