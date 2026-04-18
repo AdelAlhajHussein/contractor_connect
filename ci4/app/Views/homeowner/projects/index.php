@@ -7,9 +7,6 @@
 <?= $this->section('content') ?>
 
     <div class="users-container">
-        <p>
-            <a href="<?= site_url('homeowner/projects/new') ?>" class="btn btn-primary">Add New Project</a>
-        </p>
 
         <h1 class="users-title">My Projects</h1>
 
@@ -17,9 +14,12 @@
             <p>No projects found.</p>
         <?php else: ?>
             <p>
-                <a class="action-link" href="<?= site_url('homeowner/projects/new') ?>">Add Project</a>
+                <a href="<?= site_url('homeowner/projects/new') ?>" class="btn btn-primary">Add New Project</a>
             </p>
 
+            <a href="<?= site_url('Homeowner/dashboard') ?>" class="btn btn-outline-danger">
+                ← Back to Dashboard
+            </a>
             <table class="users-table" border="1" cellpadding="8" cellspacing="0">
                 <thead>
                 <tr>
