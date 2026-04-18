@@ -81,19 +81,28 @@ class CategoriesControllerTest extends ProjectTestCase
     public function testEditViewLoadsData()
     {
         $categoryId = $this->setUpCategory([
-            'name'       => 'Carpentry',
+            'name' => 'Carpentry',
             'is_visible' => 1
         ]);
 
+        // Create session
         $session = ['logged_in' => true, 'role_id' => 1];
-
         $uri = "admin/categories/edit/{$categoryId}";
 
+        // Attempt to load data
         $result = $this->withSession($session)->get($uri);
 
-        $result->assertStatus(200);
+        // Capture the body safely
+        $body = $result->response()->getBody() ?? '';
 
-        $result->assertSee('Carpentry');
+        // Verify
+        $result->assertStatus(200); // loads successfully
+
+        $this->assertStringContainsString(
+            'Carpentry',
+            $body,
+            "Carpentry not found in the HTML response."
+        );
     }
 
 
