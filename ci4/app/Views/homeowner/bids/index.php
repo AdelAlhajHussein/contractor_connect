@@ -10,6 +10,11 @@
 
         <h1 class="users-title">Homeowner - Bids</h1>
 
+
+        <a href="<?= site_url('Homeowner/dashboard') ?>" class="btn btn-outline-danger">
+            ← Back to Dashboard
+        </a>
+
         <?php if (empty($bids)): ?>
             <p>No bids yet for your projects.</p>
         <?php else: ?>

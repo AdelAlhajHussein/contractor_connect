@@ -45,9 +45,10 @@
             </tr>
         </table>
 
-        <p style="margin-top:16px;">
-            <a class="action-link" href="<?= site_url('homeowner/dashboard') ?>">← Back to Dashboard</a>
-        </p>
+
+        <a href="<?= site_url('Homeowner/dashboard') ?>" class="btn btn-outline-danger">
+            ← Back to Dashboard
+        </a>
 
     </div>
 
