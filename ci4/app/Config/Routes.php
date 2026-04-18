@@ -9,6 +9,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 //$routes->get('admin/users', 'Admin\UsersController::index');
 
+$routes->get('/media', 'MediaController::index');
+
 //$routes->get('about', 'Home::about');
 $routes->get('about', 'Home::about');
 $routes->get('login', 'AuthController::loginForm');
