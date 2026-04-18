@@ -14,7 +14,7 @@ class AuthController extends BaseController
     public function register()
     {
         $rules = [
-            'username'          => 'required|min_length[3]|is_unique[users.username]',
+            'email'             => 'required|valid_email|is_unique[users.email]',
             'password'          => 'required|min_length[8]',
             'confirm_password'  => 'required|matches[password]',
             'role_id'           => 'required|in_list[2,3]',
@@ -28,7 +28,8 @@ class AuthController extends BaseController
             $userModel = new UserModel();
 
             $data = [
-                'username'      => trim((string) $this->request->getPost('username')),
+                'username'      => trim((string) $this->request->getPost('email')),
+                'email'         => trim((string) $this->request->getPost('email')),
                 'password_hash' => password_hash((string) $this->request->getPost('password'), PASSWORD_DEFAULT),
                 'role_id'       => (int) $this->request->getPost('role_id'),
                 'is_active'     => 1,
@@ -41,7 +42,7 @@ class AuthController extends BaseController
             return redirect()->to('/login')->with('success', 'Account created. Please login.');
         } catch (\Throwable $e) {
             log_message('error', 'Registration error: ' . $e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Something went wrong.');
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
     }
 
@@ -52,17 +53,17 @@ class AuthController extends BaseController
 
     public function login()
     {
-        $username = trim((string) $this->request->getPost('username'));
+        $email = trim((string) $this->request->getPost('email'));
         $password = (string) $this->request->getPost('password');
 
-        if ($username === '' || $password === '') {
-            return redirect()->to('/login')->with('error', 'Username and password are required.');
+        if ($email === '' || $password === '') {
+            return redirect()->to('/login')->with('error', 'Email and password are required.');
         }
 
         $userModel = new UserModel();
 
         $user = $userModel
-            ->where('username', $username)
+            ->where('email', $email)
             ->where('deleted_at', null)
             ->first();
 
@@ -82,7 +83,7 @@ class AuthController extends BaseController
 
         session()->set([
             'user_id'   => (int) $user['id'],
-            'username'  => $user['username'],
+            'email'     => $user['email'],
             'role_id'   => (int) $user['role_id'],
             'logged_in' => true,
         ]);

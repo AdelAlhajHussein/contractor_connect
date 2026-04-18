@@ -1,4 +1,5 @@
 
+
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('page_css') ?>
@@ -6,6 +7,18 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
+<?php if (session()->getFlashdata('success')): ?>
+    <div style="padding:10px; margin-bottom:15px; background:#d4edda; color:#155724; border:1px solid #c3e6cb; border-radius:5px;">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div style="padding:10px; margin-bottom:15px; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; border-radius:5px;">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
 <div class="users-container">
 
     <h1 class="users-title">Categories</h1>
@@ -113,10 +126,12 @@
 
                         |
 
-                        <a class="action-link"
-                           href="<?= site_url('admin/categories/delete/' . $c['id']) ?>">
-                            Delete
-                        </a>
+                        <form action="<?= site_url('admin/categories/delete/' . $c['id']) ?>" method="post" style="display:inline;">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="action-link" style="background:none;border:none;color:inherit;cursor:pointer;">
+                                Delete
+                            </button>
+                        </form>
 
                     </td>
 
