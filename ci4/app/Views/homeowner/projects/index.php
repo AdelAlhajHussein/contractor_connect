@@ -7,6 +7,9 @@
 <?= $this->section('content') ?>
 
     <div class="users-container">
+        <p>
+            <a href="<?= site_url('homeowner/projects/new') ?>" class="btn btn-primary">Add New Project</a>
+        </p>
 
         <h1 class="users-title">My Projects</h1>
 

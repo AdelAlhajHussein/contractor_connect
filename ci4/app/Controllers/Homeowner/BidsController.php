@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 
 class BidsController extends BaseController
 {
-    public function index($projectId)
+    public function index()
     {
         $userId = (int) session()->get('user_id');
 
@@ -17,7 +17,6 @@ class BidsController extends BaseController
             ->join('projects p', 'p.id = b.project_id')
             ->join('users u', 'u.id = b.contractor_id')
             ->where('p.home_owner_id', $userId)
-            ->where('b.project_id', (int) $projectId)
             ->orderBy('b.created_at', 'DESC')
             ->get()
             ->getResultArray();
