@@ -42,6 +42,10 @@
             <a class="reset-link" href="<?= site_url('homeowner/browse') ?>">Reset</a>
         </form>
 
+        <a href="<?= site_url('Homeowner/dashboard') ?>" class="btn btn-outline-danger">
+            ← Back to Dashboard
+        </a>
+
         <hr>
 
         <?php if (empty($contractors)): ?>
