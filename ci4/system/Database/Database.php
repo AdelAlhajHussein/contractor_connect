@@ -44,6 +44,17 @@ class Database
      */
     public function load(array $params = [], string $alias = '')
     {
+
+        // Debugging
+        if (empty($params['DBDriver'])) {
+            echo "\n\n------ !!! CRASH DETECTED !!! -------- \n\n";
+            echo "Alias being loaded: " . ($alias ?: 'EMPTY ALIAS') . "\n";
+            echo "Params count: " . count($params) . "\n";
+            // This will show us what exactly called the empty driver
+            debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+        }
+
+
         if ($alias === '') {
             throw new InvalidArgumentException('You must supply the parameter: alias.');
         }
