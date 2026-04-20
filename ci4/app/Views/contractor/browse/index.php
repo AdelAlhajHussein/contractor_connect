@@ -1,29 +1,52 @@
-<h1>Browse Projects</h1>
+<?= $this->extend('layouts/main') ?>
 
-<?php if (empty($projects)): ?>
-    <p>No available projects to bid on right now.</p>
-<?php else: ?>
-    <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
-        <tr>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Budget</th>
-            <th>Description</th>
-        </tr>
+<?= $this->section('page_css') ?>
+<link rel="stylesheet" href="<?= base_url('css/admin-index.css') ?>">
+<?= $this->endSection() ?>
 
-        <?php foreach ($projects as $p): ?>
+<?= $this->section('content') ?>
+<div class="users-container">
+
+    <h1 class="users-title">Browse Projects</h1>
+
+    <a href="<?= site_url('contractor/dashboard') ?>" class="btn btn-outline-danger">
+        ← Back to Dashboard
+    </a>
+
+
+    <?php if (empty($projects)): ?>
+
+        <div class="users-table" style="padding:20px;">
+            <p>No available projects to bid on right now.</p>
+        </div>
+
+    <?php else: ?>
+
+        <table class="users-table">
             <tr>
-                <td>
-                    <a href="<?= site_url('contractor/browse/' . $p['project_id']) ?>">
-                        <?= esc($p['title']) ?>
-                    </a>
-                </td>
-                <td><?= esc($p['status']) ?></td>
-                <td>
-                    <?= esc($p['budget_min'] ?? '') ?> - <?= esc($p['budget_max'] ?? '') ?>
-                </td>
-                <td><?= esc($p['description']) ?></td>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Budget</th>
+                <th>Description</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
-<?php endif; ?>
+
+            <?php foreach ($projects as $p): ?>
+                <tr>
+                    <td>
+                        <a class="action-link" href="<?= site_url('contractor/browse/' . $p['project_id']) ?>">
+                            <?= esc($p['title']) ?>
+                        </a>
+                    </td>
+                    <td><?= esc($p['status']) ?></td>
+                    <td>
+                        <?= esc($p['budget_min'] ?? '') ?> - <?= esc($p['budget_max'] ?? '') ?>
+                    </td>
+                    <td><?= esc($p['description']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+    <?php endif; ?>
+
+</div>
+<?= $this->endSection() ?>
