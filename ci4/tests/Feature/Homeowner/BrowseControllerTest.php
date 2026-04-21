@@ -17,65 +17,74 @@ class BrowseControllerTest extends CIUnitTestCase
 
     public function testIndexShowsContractorsWithFilters()
     {
-        // Reset the Database service for a clean slate
-        Services::resetSingle('database');
+        // Create homeowner user
+        $homeOwnerId = $this->db->table('users')->insert([
+            'username' => 'homeowner_test', 'email' => 'home@test.com',
+            'first_name' => 'Eric', 'last_name' => 'Laudrum',
+            'role_id' => 2, 'is_active' => 1, 'password_hash' => 'hash'
+        ]);
 
-        // Define the data
-        $mockContractors = [[
-            'id'               => 10,
-            'first_name'       => 'John',
-            'last_name'        => 'Contractor',
-            'email'            => 'john@example.com',
-            'city'             => 'Toronto',
-            'province'         => 'ON',
-            'approval_status'  => 'approved',
-            'specialties'      => 'Plumbing, Electrical',
-            'avg_rating'       => '4.50',
-            'rating_count'     => 1
-        ]];
+        // Create specialty
+        $this->db->table('specialties')->insert(['name' => 'Plumbing']);
+        $specId = $this->db->insertID();
 
-        $mockSpecialties = [['id' => 1, 'name' => 'Plumbing']];
+        // Create contractor user
+        $c1 = $this->db->table('users')->insert([
+            'username' => 'toronto_pro',
+            'email' => 't@test.com',
+            'role_id' => 3,
+            'is_active' => 1,
+            'first_name' => 'T',
+            'last_name' => 'C',
+            'password_hash' => 'h'
+        ]);
+        $this->db->table('contractor_profiles')->insert([
+            'contractor_id' => $c1,
+            'city' => 'Toronto',
+            'province' => 'ON',
+            'approval_status' => 'approved'
+        ]);
+        $this->db->table('contractor_specialties')->insert([
+            'contractor_id' => $c1,
+            'specialty_id' => $specId
+        ]);
 
-        // Create a mock result
-        $mockResult = $this->createMock(\CodeIgniter\Database\BaseResult::class);
-        $mockResult->method('getResultArray')
-            ->willReturnOnConsecutiveCalls($mockContractors, $mockSpecialties);
+        // Contractor B: Vancouver, BC, no specialty
+        $c2 = $this->db->table('users')->insert([
+            'username' => 'vancouver_pro',
+            'email' => 'v@test.com',
+            'role_id' => 3,
+            'is_active' => 1,
+            'first_name' => 'V',
+            'last_name' => 'C',
+            'password_hash' => 'h'
+        ]);
+        $this->db->table('contractor_profiles')->insert([
+            'contractor_id' => $c2, 'city' => 'Vancouver', 'province' => 'BC',
+            'approval_status' => 'approved'
+        ]);
 
-        // Create a mock build
-        $mockBuilder = $this->getMockBuilder(\CodeIgniter\Database\BaseBuilder::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        // Add a rating for Contractor A
+        $this->db->table('contractor_ratings')->insert([
+            'contractor_id' => $c1, 'home_owner_id' => $homeOwnerId, 'project_id' => 1,
+            'quality' => 5, 'timeliness' => 5, 'communication' => 5, 'pricing' => 5
+        ]);
 
-        $mockBuilder->method('select')->willReturnSelf();
-        $mockBuilder->method('join')->willReturnSelf();
-        $mockBuilder->method('where')->willReturnSelf();
-        $mockBuilder->method('groupBy')->willReturnSelf();
-        $mockBuilder->method('having')->willReturnSelf();
-        $mockBuilder->method('orderBy')->willReturnSelf();
-        $mockBuilder->method('get')->willReturn($mockResult);
+        $session = ['user_id' => (int)$homeOwnerId, 'logged_in' => true, 'role_id' => 2];
 
-        // Mock the database connection
-        $mockDb = $this->getMockBuilder(\CodeIgniter\Database\BaseConnection::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockDb->method('table')->willReturn($mockBuilder);
+        // Test city & province filter
+        $resLoc = $this->withSession($session)->get('homeowner/browse?city=Vancouver&province=BC');
+        $resLoc->assertSee('vancouver_pro');
+        $resLoc->assertDontSee('toronto_pro');
 
-        // Inject mock data into the Service layer
-        Services::injectMock('database', $mockDb);
+        // Test specialty filter
+        $resSpec = $this->withSession($session)->get("homeowner/browse?specialty_id=$specId");
+        $resSpec->assertSee('toronto_pro');
+        $resSpec->assertDontSee('vancouver_pro');
 
-        // Attempt the request
-        $result = $this->withSession([
-            'user_id'   => 1,
-            'logged_in' => true,
-            'role_id'   => 1
-        ])->get("homeowner/browse?city=Toronto&province=ON");
-
-        // Assertions
-        $result->assertStatus(200);
-        $result->assertSee('John');
-        $result->assertSee('Plumbing');
-
-        // Reset again for clean slate
-        Services::reset();
+        // Test min rating filter
+        $resRate = $this->withSession($session)->get('homeowner/browse?min_rating=4');
+        $resRate->assertSee('toronto_pro');
+        $resRate->assertDontSee('vancouver_pro');
     }
 }
