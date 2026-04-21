@@ -36,7 +36,12 @@
                         <td><?= esc($row['title']) ?></td>
                         <td>$<?= esc(number_format((float)$row['bid_amount'], 2)) ?></td>
                         <td><?= esc($row['bid_id']) ?></td>
-                        <td><?= esc(trim(($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? ''))) ?></td>
+                        <td>
+                            <a class="action-link" href="<?= site_url('homeowner/contractor/view/' . $row['contractor_id']) ?>" >
+
+                                <?= esc($row['contractor_name']) ?>
+
+                            </a></td>
                         <td><?= esc($row['status']) ?></td>
                     </tr>
                 <?php endforeach; ?>

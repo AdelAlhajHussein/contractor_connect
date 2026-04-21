@@ -13,7 +13,18 @@ class BidsController extends BaseController
         $db = \Config\Database::connect();
 
         $bids = $db->table('bids b')
-            ->select('b.project_id, p.title, b.bid_amount, b.id AS bid_id, u.username AS contractor_name, b.status')
+            ->select('
+            b.project_id,
+            p.title,
+            b.bid_amount,
+            b.id AS bid_id,
+            b.contractor_id,
+
+            u.username AS contractor_name,
+            u.email,
+
+            b.status
+        ')
             ->join('projects p', 'p.id = b.project_id')
             ->join('users u', 'u.id = b.contractor_id')
             ->where('p.home_owner_id', $userId)
@@ -21,8 +32,9 @@ class BidsController extends BaseController
             ->get()
             ->getResultArray();
 
-        return view('homeowner/bids/index', ['bids' => $bids]);
+        return view(
+            'homeowner/bids/index',
+            ['bids' => $bids]
+        );
     }
-
-
 }
