@@ -42,11 +42,11 @@ class CreateHomeownerProfiles extends Migration
 
         // Setting home_owner_id as the Primary Key
         $this->forge->addKey('home_owner_id', true);
-        $this->forge->createTable('homeowner_profiles');
+        $this->forge->createTable('home_owner_profiles');
     }
 
     public function down()
     {
-        $this->forge->dropTable('homeowner_profiles');
+        $this->forge->dropTable('home_owner_profiles');
     }
 }
