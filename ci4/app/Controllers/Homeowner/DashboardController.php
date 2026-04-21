@@ -11,7 +11,7 @@ class DashboardController extends BaseController
     {
         $userId = session('user_id');
 
-        $userModel = new UserModel();
+        $userModel = model(UserModel::class);
         $user = $userModel->find((int) $userId);
 
         $data = [

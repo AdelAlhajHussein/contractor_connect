@@ -167,7 +167,7 @@ class Database extends Config
         'hostname'    => '127.0.0.1',
         'username'    => '',
         'password'    => '',
-        'database'    => ':memory:',
+        'database'    => WRITEPATH . 'test_db.sqlite',
         'DBDriver'    => 'SQLite3',
         'DBPrefix'    => '',
         'pConnect'    => false,
@@ -194,13 +194,14 @@ class Database extends Config
     {
         parent::__construct();
 
-        // Debugging
-        // echo "Current Env: " . ENVIRONMENT . " | Group: " . $this->defaultGroup . "\n";
+        if (defined('ENVIRONMENT') && ENVIRONMENT === 'testing') {
+            // Force the group to tests
+            $this->defaultGroup = 'tests';
 
-        $this->defaultGroup = 'tests';
-
-        if (ENVIRONMENT === 'testing') {
-            $this->tests['DBPrefix'] = '';
+            // CRITICAL FIX: Ensure the driver is never null
+            if (empty($this->tests['DBDriver'])) {
+                $this->tests['DBDriver'] = 'SQLite3';
+            }
         }
     }
 }
