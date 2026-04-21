@@ -1,124 +1,221 @@
 <?php
 
-namespace Feature;
+namespace Tests\Feature;
 
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
 use App\Models\UserModel;
-use Faker\Factory as FakerFactory;
-use Tests\Support\ProjectTestCase;
 
-class UserAuthTest extends ProjectTestCase {
+class UserAuthTest extends CIUnitTestCase {
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
 
-    protected $faker;
+    protected $refresh   = true;
+    protected $namespace = 'App';
 
-    /**
-     * Scenario: Successful user login
-     * Expect:
-     * - User credentials are validated from the DB
-     * - isLoggedIn is set to true
-     * - User is redirected to the dashboard
-     */
-    public function testLoginSuccessRedirectsToDashboard()
+    public function testRegisterFormLoads()
     {
-        $username = 'test_user';
-        $password = 'Password123';
-        $email = "test_user@mail.com";
+        $result = $this->get('register');
+        $result->assertStatus(200);
+    }
 
-        $this->db->table('users')->insert([
-            'username' => $username,
-            'email' => $email,
-            'first_name' => 'Admin',
-            'last_name' => 'User',
+    public function testLoginFormLoads()
+    {
+        $result = $this->get('login');
+        $result->assertStatus(200);
+    }
+
+    public function testLoginRedirectsToHomeownerDashboard()
+    {
+        $email = 'homeowner@example.com';
+        $password = 'Password123';
+
+        $model = model(UserModel::class);
+        $model->insert([
+            'username'      => 'homeowner_user',
+            'email'         => $email,
+            'first_name'    => 'Home',
+            'last_name'     => 'Owner',
             'password_hash' => password_hash($password, PASSWORD_DEFAULT),
-            'role_id' => 1,
-            'is_active' => 1,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'role_id'       => 2,
+            'is_active'     => 1,
         ]);
 
-        // Simulate successful login
         $result = $this->post('login', [
-            'username' => $username,
+            'email'    => $email,
             'password' => $password,
         ]);
 
-        ////Verification
-        // HTTP response is a 302 redirect
-        $result->assertStatus(302);
-        $result->assertRedirectTo(site_url('admin/dashboard'));
-
+        $result->assertRedirectTo(site_url('homeowner/dashboard'));
     }
 
-    /**
-     * Scenario: Password is incorrect
-     * Expect:
-     * - Authentication fails
-     * - The request redirected to the user login page
-     * -
-     */
+    public function testLoginRedirectsToContractorDashboard()
+    {
+        $email = 'contractor@example.com';
+        $password = 'Password123';
+
+        $model = model(UserModel::class);
+        $model->insert([
+            'username'      => 'contractor_user',
+            'email'         => $email,
+            'first_name'    => 'Contract',
+            'last_name'     => 'Or',
+            'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+            'role_id'       => 3,
+            'is_active'     => 1,
+        ]);
+
+        $result = $this->post('login', [
+            'email'    => $email,
+            'password' => $password,
+        ]);
+
+        $result->assertRedirectTo(site_url('contractor/dashboard'));
+    }
+
     public function testLoginFailsWithWrongPassword()
     {
-        $username = 'test_user';
-        $email = "test_user@mail.com";
+        $email = 'existing@example.com';
+        $model = model(UserModel::class);
 
-        $userModel = new UserModel();
-        $userModel->insert([
-            'username'      => $username,
-            'email'         => 'existing@example.com',
+        $model->insert([
+            'username'      => 'test_user',
+            'email'         => $email,
+            'first_name'    => 'Test',
+            'last_name'     => 'User',
             'password_hash' => password_hash('correct_pass', PASSWORD_DEFAULT),
             'role_id'       => 1,
             'is_active'     => 1,
         ]);
 
-        // Simulate login with incorrect password
         $result = $this->post('login', [
-            'username' => $username,
-            'password'    => 'wrong_password',
+            'email'    => $email,
+            'password' => 'wrong_password',
         ]);
 
-        //// Verification
-        // Redirect to login
         $result->assertRedirectTo(site_url('login'));
-
-        // An error message is displayed to the user
-        $result->assertSessionHas('error');
+        $result->assertSessionHas('error', 'Password incorrect.');
     }
 
-    /**
-     * Scenario: Login with invalid email
-     * Expect:
-     * - Authentication fails
-     * - The request redirected to the user login page
-     * - An error message is displayed to the user
-     */
-    public function testLoginFailsWithWrongUsername()
+    public function testLoginFailsEmptyFields()
     {
-        $email = 'test_user@mail.com';
-
-        // Simulate login with invalid email
         $result = $this->post('login', [
-            'email' => $email,
-            'password'    => 'random_password'
+            'email'    => '',
+            'password' => ''
         ]);
 
-        //// Verification
-        // Request redirected to the login page
         $result->assertRedirectTo(site_url('login'));
+        $result->assertSessionHas('error', 'Email and password are required.');
+    }
 
-        // Error message displayed
+    public function testLoginFailsUserNotFound()
+    {
+        $result = $this->post('login', [
+            'email'    => 'nonexistent@example.com',
+            'password' => 'somepassword'
+        ]);
+
+        $result->assertRedirectTo(site_url('login'));
         $result->assertSessionHas('error', 'User not found.');
     }
 
-    /**
-     * Scenario: Accessing admin URL without authentication
-     * Expect:
-     * - The Auth filter detects that there isn't a Session
-     * - The request redirected to the user login page
-     */
+    public function testLoginFailsInactiveAccount()
+    {
+        $email = 'inactive@example.com';
+        $model = model(UserModel::class);
+        $model->insert([
+            'username'      => 'inactive_user',
+            'email'         => $email,
+            'first_name'    => 'Inactive',
+            'last_name'     => 'User',
+            'password_hash' => password_hash('password123', PASSWORD_DEFAULT),
+            'role_id'       => 2,
+            'is_active'     => 0,
+        ]);
+
+        $result = $this->post('login', [
+            'email'    => $email,
+            'password' => 'password123'
+        ]);
+
+        $result->assertRedirectTo(site_url('login'));
+        $result->assertSessionHas('error', 'Account is inactive.');
+    }
+
+    public function testRegisterSuccess()
+    {
+        $result = $this->post('register', [
+            'email'            => 'new_success@example.com',
+            'password'         => 'Password123!',
+            'confirm_password' => 'Password123!',
+            'role_id'          => 2
+        ]);
+
+        $result->assertRedirectTo(site_url('login'));
+        $result->assertSessionHas('success', 'Account created. Please login.');
+    }
+
+    public function testRegisterFailsValidation()
+    {
+        $result = $this->post('register', [
+            'email'            => '',
+            'password'         => '123',
+            'confirm_password' => '456'
+        ]);
+
+        $result->assertRedirect();
+        $result->assertSessionHas('errors');
+    }
+
+    public function testRegisterSuccessRedirectsToLogin()
+    {
+        $result = $this->post('register', [
+            'email'            => 'success_reg@example.com',
+            'password'         => 'Password123!',
+            'confirm_password' => 'Password123!',
+            'role_id'          => 2
+        ]);
+
+        $result->assertRedirectTo(site_url('login'));
+        $result->assertSessionHas('success', 'Account created. Please login.');
+    }
+
+    public function testLogoutRedirectsToLogin()
+    {
+        $result = $this->get('logout');
+        $result->assertRedirectTo(site_url('login'));
+    }
+
     public function testGuestCannotAccessAdmin()
     {
-        $result = $this->get('admin/settings');
-
-        //// Verification
+        $result = $this->get('admin/dashboard');
         $result->assertRedirectTo(site_url('login'));
+    }
+
+    public function testRegisterTriggersCatchBlock()
+    {
+        $result = $this->post('register', [
+            'email'            => 'catch@example.com',
+            'password'         => 'Password123!',
+            'confirm_password' => 'Password123!',
+            'role_id'          => 'not-an-integer'
+        ]);
+
+        $result->assertRedirect();
+        $result->assertSessionHas('error');
+    }
+
+    public function testRegisterCatchBlockOnDatabaseError()
+    {
+        $result = $this->post('register', [
+            'email'            => 'catch_me@example.com',
+            'password'         => 'Password123!',
+            'confirm_password' => 'Password123!',
+            'role_id'          => 'not-an-integer-forcing-error'
+        ]);
+
+        $result->assertRedirect();
+        $result->assertSessionHas('error');
     }
 }
