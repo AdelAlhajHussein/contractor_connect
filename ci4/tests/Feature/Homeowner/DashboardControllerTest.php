@@ -2,10 +2,19 @@
 
 namespace Tests\Feature\Homeowner;
 
-use Tests\Support\ProjectTestCase;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
+use Config\Services;
 
-class HomeownerDashboardControllerTest extends ProjectTestCase
+class DashboardControllerTest extends CIUnitTestCase
 {
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
+
+    protected $refresh = true;
+    protected $namespace = 'App';
+
     public function testIndexShowsDashboard()
     {
         // Define the fake data
@@ -17,16 +26,14 @@ class HomeownerDashboardControllerTest extends ProjectTestCase
             'role_id'    => 2
         ];
 
-        // Create a Mock UserModel
+        // Create the Mock
         $userModel = $this->createMock(\App\Models\UserModel::class);
-
-        // When the controller calls find(1), return fake user
         $userModel->method('find')->willReturn($fakeUser);
 
-        // Inject this mock into the framework services
-        \Config\Services::injectMock('userModel', $userModel);
+        // Inject the mock into Services
+        Services::injectMock('userModel', $userModel);
 
-        // Run the request with the session keys
+        // Attempt the request
         $result = $this->withSession([
             'user_id'   => 1,
             'logged_in' => true,
