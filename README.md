@@ -80,26 +80,26 @@ A digital marketplace for home improvement jobs.
 ### Progress:
 - [X] Initial project file setup
 - [X] Create initial file layout
-- [] Account creation and authentication
+- [X] Account creation and authentication
     - [X] Back-end functions and routing
     - [X] Front-end html
-    - [] Front-end styling
+    - [X] Front-end styling
 - [] User login
     - [X] Back-end functions and routing
     - [X] Front-end html
-    - [] Front-end styling
-- [] Admin Dashboard
+    - [X] Front-end styling
+- [X] Admin Dashboard
   - [X] Back-end functions and routing
-  - [] Front-end html
-  - [] Front-end styling
-- [] Homeowner Dashboard
-  - [] Back-end functions and routing
-  - [] Front-end html
-  - [] Front-end styling
-- [] Contractor Dashboard
-    - [] Back-end functions and routing
-    - [] Front-end html
-    - [] Front-end styling
+  - [X] Front-end html
+  - [X] Front-end styling
+- [X] Homeowner Dashboard
+  - [X] Back-end functions and routing
+  - [X] Front-end html
+  - [X] Front-end styling
+- [X] Contractor Dashboard
+    - [X] Back-end functions and routing
+    - [X] Front-end html
+    - [X] Front-end styling
 
 ## Unit Testing
 ### Checklist
