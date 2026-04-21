@@ -79,7 +79,11 @@ class Seeder
     public function __construct(Database $config, ?BaseConnection $db = null)
     {
         $this->seedPath = $config->filesPath ?? APPPATH . 'Database/';
-
+/*
+        echo "\n[DEBUG] Seeder Group: " . ($this->DBGroup ?: 'NULL') . "\n";
+        echo "[DEBUG] Config Default: " . $config->defaultGroup . "\n";
+        echo "[DEBUG] Test Driver: " . ($config->tests['DBDriver'] ?? 'NOT FOUND') . "\n";
+*/
         if ($this->seedPath === '') {
             throw new InvalidArgumentException('Invalid filesPath set in the Config\Database.');
         }

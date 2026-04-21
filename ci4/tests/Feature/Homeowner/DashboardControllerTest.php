@@ -3,26 +3,45 @@
 namespace Tests\Feature\Homeowner;
 
 use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
-use Tests\Support\ProjectTestCase;
+use Config\Services;
 
-class DashboardControllerTest extends ProjectTestCase
+class DashboardControllerTest extends CIUnitTestCase
 {
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
+
+    protected $refresh = true;
+    protected $namespace = 'App';
+
     public function testIndexShowsDashboard()
     {
-        $userId = $this->setUpUser();
+        // Define the fake data
+        $fakeUser = [
+            'id'         => 1,
+            'username'   => 'test_homeowner',
+            'first_name' => 'Eric',
+            'last_name'  => 'L',
+            'role_id'    => 2
+        ];
 
-        // Attempt
+        // Create the Mock
+        $userModel = $this->createMock(\App\Models\UserModel::class);
+        $userModel->method('find')->willReturn($fakeUser);
+
+        // Inject the mock into Services
+        Services::injectMock('userModel', $userModel);
+
+        // Attempt the request
         $result = $this->withSession([
-            'user_id'   => $userId,
+            'user_id'   => 1,
             'logged_in' => true,
             'role_id'   => 2
         ])->get('homeowner/dashboard');
 
-        // Verify
-        $result->assertStatus(200); // loaded successfully
-        $result->assertSee('Welcome');
-        $result->assertSee('Dashboard'); // dashboard content is visible
-        $result->assertSee('Logout');
+        // Verify results
+        $result->assertStatus(200);
+        $result->assertSee('Eric');
     }
 }

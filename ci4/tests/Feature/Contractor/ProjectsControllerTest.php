@@ -2,54 +2,87 @@
 
 namespace Tests\Feature\Contractor;
 
-use Tests\Support\ProjectTestCase;
-use App\Controllers\Contractor\ProjectsController;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
+use App\Models\UserModel;
 
-class ProjectsControllerTest extends ProjectTestCase
+class ProjectsControllerTest extends CIUnitTestCase
 {
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
+
+    protected $refresh   = true;
+    protected $namespace = 'App';
+
+
     public function testIndexShowsContractorProjects()
     {
-        // Set up data
-        $contractorId = $this->setUpUser();
+        $userModel = model(UserModel::class);
 
+        // Create a homeowner user
+        $homeOwnerId = $userModel->insert([
+            'username'   => 'homeowner_test',
+            'email'      => 'home@test.com',
+            'first_name' => 'Jane',
+            'last_name'  => 'Doe',
+            'role_id'    => 2,
+            'is_active'  => 1,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
+        ]);
+
+        // Create a category
+        $this->db->table('categories')->insert([
+            'name' => 'Roofing'
+        ]);
+        $categoryId = $this->db->insertID();
+
+        // Create a contractor user
+        $contractorId = $userModel->insert([
+            'username'   => 'contractor_pro',
+            'email'      => 'pro@test.com',
+            'first_name' => 'John',
+            'last_name'  => 'Contractor',
+            'role_id'    => 3,
+            'is_active'  => 1,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
+        ]);
+
+        // Create a project
         $this->db->table('projects')->insert([
-            'home_owner_id' => 1,
-            'category_id' => 1,
-            'title' => 'My Bid Project',
-            'description'   => 'Test description',
-            'address'=>'123 Test Street',
-            'start_date' => '2026-05-01',
-            'end_date' => '2026-06-01',
-            'status' => 'bidding_open'
+            'home_owner_id' => $homeOwnerId,
+            'category_id'   => $categoryId,
+            'title'         => 'Fix My Roof',
+            'description'   => 'Leaking roof needs repair',
+            'address'       => '123 Test St',
+            'budget_min'    => 500.00,
+            'budget_max'    => 1000.00,
+            'status'        => 'open',
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'    => date('Y-m-d H:i:s'),
         ]);
         $projectId = $this->db->insertID();
 
-        // Place bid
+        // Link contractor to a bid
         $this->db->table('bids')->insert([
-            'project_id' => $projectId,
+            'project_id'    => $projectId,
             'contractor_id' => $contractorId,
-            'bid_amount' => 500.00,
-            'total_cost' => 500.00,
+            'bid_amount'    => 500.00,
+            'status'        => 'pending',
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'    => date('Y-m-d H:i:s'),
         ]);
 
-        // Initialize Controller
-        $controller = new ProjectsController();
-        $controller->initController(
-            \Config\Services::request(),
-            \Config\Services::response(),
-            \Config\Services::logger()
-        );
-
-        // Set the session context the controller expects
-        session()->set(['user_id' => $contractorId, 'logged_in' => true]);
-
-        $response = $controller->index();
+        // Attempt the request
+        $result = $this->withSession([
+            'user_id'   => (int)$contractorId,
+            'logged_in' => true,
+            'role_id'   => 3
+        ])->get('contractor/projects');
 
         // Assertions
-        $this->assertNotNull($response);
-        $output = (string)$response;
-
-        $this->assertStringContainsString('My Bid Project', $output);
-        $this->assertStringContainsString('500.00', $output);
+        $result->assertStatus(200);
+        $result->assertSee('Fix My Roof');
+        $result->assertSee('500.00');
     }
 }

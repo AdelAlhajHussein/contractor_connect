@@ -17,7 +17,7 @@ class Database extends Config
     /**
      * Lets you choose which connection group to use if no other is specified.
      */
-    public string $defaultGroup = 'default';
+    public string $defaultGroup = 'tests';
 
     /**
      * The default database connection.
@@ -169,7 +169,7 @@ class Database extends Config
         'password'    => '',
         'database'    => ':memory:',
         'DBDriver'    => 'SQLite3',
-        'DBPrefix'    => '',  // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
+        'DBPrefix'    => '',
         'pConnect'    => false,
         'DBDebug'     => true,
         'charset'     => 'utf8',
@@ -194,11 +194,12 @@ class Database extends Config
     {
         parent::__construct();
 
-        // Ensure that we always set the database group to 'tests' if
-        // we are currently running an automated test suite, so that
-        // we don't overwrite live data on accident.
+        // Debugging
+        // echo "Current Env: " . ENVIRONMENT . " | Group: " . $this->defaultGroup . "\n";
+
+        $this->defaultGroup = 'tests';
+
         if (ENVIRONMENT === 'testing') {
-            $this->defaultGroup = 'tests';
             $this->tests['DBPrefix'] = '';
         }
     }

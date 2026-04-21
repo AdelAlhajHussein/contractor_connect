@@ -2,12 +2,17 @@
 
 namespace Tests\Feature\Admin;
 
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
-use Tests\Support\ProjectTestCase;
 
-class DashboardControllerTest extends ProjectTestCase
-{
+class DashboardControllerTest extends CIUnitTestCase {
     use FeatureTestTrait;
+    use DatabaseTestTrait;
+
+    protected $refresh = true;
+    protected $namespace = 'App';
+
     public function testIndexLoadsSuccessfully()
     {
         // Set up admin session

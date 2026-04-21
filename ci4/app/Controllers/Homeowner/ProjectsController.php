@@ -34,12 +34,7 @@ class ProjectsController extends BaseController
             ->first();
 
         if (!$project) {
-            dd([
-                'message' => 'PROJECT NOT FOUND for this homeowner',
-                'id' => (int)$id,
-                'session_user_id' => $userId,
-                'sample_query_check' => 'SELECT * FROM projects WHERE id = ? AND home_owner_id = ?',
-            ]);
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Project #$id not found.");
         }
 
         return view('homeowner/projects/details', [

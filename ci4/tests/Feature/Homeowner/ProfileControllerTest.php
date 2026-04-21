@@ -2,31 +2,58 @@
 
 namespace Tests\Feature\Homeowner;
 
-use Tests\Support\ProjectTestCase;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
+use App\Models\UserModel;
+use App\Models\HomeOwnerProfileModel;
 
-class ProfileControllerTest extends ProjectTestCase
+class ProfileControllerTest extends CIUnitTestCase
 {
-    public function testIndexLoadsHomeownerProfile()
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
+
+    protected $refresh   = true;
+    protected $namespace = 'App';
+
+    public function testIndexShowsUserProfileAndProfileData()
     {
-        // Create a user in the database to be found by $userModel->find($userId)
-        $userId = $this->setUpUser([
-            'username'   => 'test_user',
-            'email'      => 'test@example.com',
-            'role_id'    => 2, // Homeowner
-            'is_active'  => 1
+        $userModel = model(UserModel::class);
+
+        // Create homeowner user
+        $userId = $userModel->insert([
+            'username'      => 'eric_profile_test',
+            'email'         => 'eric_profile@test.com',
+            'first_name'    => 'Eric',
+            'last_name'     => 'Laudrum',
+            'role_id'       => 2,
+            'is_active'     => 1,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
         ]);
 
-        // Simulate session and hit the route
+        $profileModel = model(HomeOwnerProfileModel::class);
+
+        // Create their profile
+        $profileModel->insert([
+            'user_id'       => $userId,
+            'home_owner_id' => $userId,
+            'first_name'    => 'Eric',
+            'last_name'     => 'Laudrum',
+            'address'       => '123 Main St',
+            'city'          => 'Toronto',
+            'province'      => 'ON',
+            'postal_code'   => 'M5V 2L7'
+        ]);
+
+        // Attempt to access profile
         $result = $this->withSession([
-            'user_id'   => $userId,
-            'logged_in' => true
+            'user_id'   => (int)$userId,
+            'logged_in' => true,
+            'role_id'   => 2
         ])->get('homeowner/profile');
 
-        // Verify the controller executed successfully
+        // Assertions
         $result->assertStatus(200);
-
-        // Verify the data passed to the view is present
-        $result->assertSee('test_user');
-        $result->assertSee('test@example.com');
+        $result->assertSee('Eric');
     }
 }

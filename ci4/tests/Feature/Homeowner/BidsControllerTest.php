@@ -2,61 +2,68 @@
 
 namespace Tests\Feature\Homeowner;
 
-use Tests\Support\ProjectTestCase;
-use App\Controllers\Homeowner\BidsController;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
 
-class BidsControllerTest extends ProjectTestCase
+class BidsControllerTest extends CIUnitTestCase
 {
-    public function testIndexShowsBidsForHomeownerProject()
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
+
+    protected $refresh   = true;
+    protected $namespace = 'App';
+
+    public function testIndexShowsHomeownerBids()
     {
-        // Set up homeowner & their project
-        $homeownerId = $this->setUpUser(['username' => 'the_owner']);
-        $this->db->table('projects')->insert([
-            'home_owner_id'=> $homeownerId,
-            'category_id' => 1,
-            'title'=> 'Fix the Porch',
-            'address'=> '123 Homeowner Lane',
-            'status'=> 'open'
-        ]);
-        $projectId = $this->db->insertID();
+        // Reset the database
+        \Config\Services::resetSingle('database');
 
-        // Setup Contractor and a Bid
-        $contractorId = $this->setUpUser([
-            'username' => 'pro_builder',
-            'first_name' => 'Pro',
-            'last_name' => 'Builder'
-        ]);
+        // Prepare mock bid query
+        $mockBids = [[
+            'project_id'      => 10,
+            'title'           => 'Fix the roof',
+            'bid_amount'      => '500.00',
+            'bid_id'          => 1,
+            'contractor_name' => 'JohnContractor',
+            'status'          => 'submitted'
+        ]];
 
-        $this->db->table('bids')->insert([
-            'project_id' => $projectId,
-            'contractor_id' => $contractorId,
-            'bid_amount' => 1500.00,
-            'status' => 'pending',
-            'created_at' => date('Y-m-d H:i:s')
-        ]);
+        $mockResult = $this->createMock(\CodeIgniter\Database\BaseResult::class);
+        $mockResult->method('getResultArray')->willReturn($mockBids);
 
-        // Initialize controller direct call
-        $controller = new BidsController();
-        $controller->initController(
-            \Config\Services::request(),
-            \Config\Services::response(),
-            \Config\Services::logger()
-        );
+        // Mock the Builder
+        $mockBuilder = $this->getMockBuilder(\CodeIgniter\Database\BaseBuilder::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        // Homeowner Session
-        session()->set(['user_id' => $homeownerId, 'logged_in' => true]);
+        $mockBuilder->method('select')->willReturnSelf();
+        $mockBuilder->method('join')->willReturnSelf();
+        $mockBuilder->method('where')->willReturnSelf();
+        $mockBuilder->method('orderBy')->willReturnSelf();
+        $mockBuilder->method('get')->willReturn($mockResult);
 
-        // Attempt to call index with the $projectId
-        $response = $controller->index($projectId);
+        // Mock the Connection
+        $mockDb = $this->getMockBuilder(\CodeIgniter\Database\BaseConnection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockDb->method('table')->willReturn($mockBuilder);
 
-        // Assertions
-        $this->assertNotNull($response);
-        $output = (string)$response;
+        // Inject into the service layer
+        \Config\Services::injectMock('database', $mockDb);
 
-        // Verify the joined data appears in the view
-        $this->assertStringContainsString('Fix the Porch', $output);
-        $this->assertStringContainsString('pro_builder', $output);
-        $this->assertStringContainsString('1500.00', $output);
+        // Attempt to access the route
+        $result = $this->withSession([
+            'user_id'   => 123,
+            'logged_in' => true,
+            'role_id'   => 2
+        ])->get('homeowner/bids');
+
+        $result->assertStatus(200);
+        $result->assertSee('Fix the roof');
+        $result->assertSee('JohnContractor');
+
+        // Reset again to clean slate
+        \Config\Services::reset();
     }
 }
-

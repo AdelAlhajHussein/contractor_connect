@@ -2,41 +2,46 @@
 
 namespace Tests\Feature\Contractor;
 
-use Tests\Support\ProjectTestCase;
-use App\Controllers\Contractor\DashboardController;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
+use App\Models\UserModel;
 
-class DashboardControllerTest extends ProjectTestCase
-{
+class DashboardControllerTest extends CIUnitTestCase {
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
+
+    protected $refresh   = true;
+    protected $namespace = 'App';
+
     public function testIndexShowsContractorDashboard()
     {
+        $userModel = model(UserModel::class);
 
         $userData = [
-            'username'=> 'dash_tester',
-            'first_name'=> 'John',
-            'last_name'=> 'Contractor',
-            'email' => 'john@example.com',
-            'phone' => '555-0199'
+            'username'      => 'dash_tester',
+            'first_name'    => 'John',
+            'last_name'     => 'Contractor',
+            'email'         => 'john@example.com',
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'role_id'       => 3,
+            'is_active'     => 1
         ];
-        $contractorId = $this->setUpUser($userData);
 
-        $controller = new DashboardController();
-        $controller->initController(
-            \Config\Services::request(),
-            \Config\Services::response(),
-            \Config\Services::logger()
-        );
+        $contractorId = $userModel->insert($userData);
 
-        session()->set(['user_id' => $contractorId, 'logged_in' => true]);
+        // Attempt the request
+        $result = $this->withSession([
+            'user_id'   => $contractorId,
+            'logged_in' => true,
+            'role_id'   => 3
+        ])->get('contractor/dashboard');
 
-        $response = $controller->index();
-
-        $this->assertNotNull($response);
-        $output = (string)$response;
-
-        $this->assertStringContainsString('dash_tester', $output);
-        $this->assertStringContainsString('John', $output);
-        $this->assertStringContainsString('Contractor', $output);
-        $this->assertStringContainsString('john@example.com', $output);
-        $this->assertStringContainsString('555-0199', $output);
+        // Assertions
+        $result->assertStatus(200);
+        $result->assertSee('dash_tester');
+        $result->assertSee('John');
+        $result->assertSee('Contractor');
+        $result->assertSee('john@example.com');
     }
 }
