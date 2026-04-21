@@ -20,6 +20,11 @@ $routes->get('logout', 'AuthController::logout');
 $routes->post('register', 'AuthController::register');
 $routes->get('register', 'AuthController::registerForm');
 
+// bids --contractor
+$routes->get(
+    'homeowner/contractor/view/(:num)',
+    'Homeowner\ContractorController::view/$1'
+);
 
 // ------ 1 Admin Routes ------
 $routes->group('admin', ['filter' => 'auth'], function($routes) {
@@ -97,6 +102,9 @@ $routes->group('(?i)homeowner', ['filter' => 'auth'], function ($routes) {
     $routes->get('profile', 'Homeowner\ProfileController::index');
     $routes->get('profile/edit', 'Homeowner\ProfileController::index');
     $routes->post('profile/update', 'Homeowner\ProfileController::update');
+
+
+
 });
 
 // ------ 3 Contractor Routes ------
