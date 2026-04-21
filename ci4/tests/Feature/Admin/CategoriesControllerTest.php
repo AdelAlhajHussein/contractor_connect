@@ -2,14 +2,17 @@
 
 namespace Tests\Feature\Admin;
 
-use Tests\Support\ProjectTestCase;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
 
-class CategoriesControllerTest extends ProjectTestCase
-{
+class CategoriesControllerTest extends CIUnitTestCase {
+
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
 
     protected $refresh = true;
     protected $namespace = 'App';
-    protected $migrate = true;
 
     // Tests
     public function testIndexShowsCategoriesAndFilters(){
@@ -33,12 +36,12 @@ class CategoriesControllerTest extends ProjectTestCase
         $res2->assertSee('Plumbing');
         $res2->assertDontSee('Electrical');
 
-        // Verify Visibility (1)
+        // Verify visibility - 1
         $res3 = $this->withSession($session)->get('/admin/categories?visibility=1');
         $res3->assertSee('Plumbing');
         $res3->assertDontSee('Electrical');
 
-        // Verify Hidden Visibility (0)
+        // Verify hidden visibility - 0
         $res4 = $this->withSession($session)->get('/admin/categories?visibility=0');
         $res4->assertSee('Electrical');
         $res4->assertDontSee('Plumbing');
@@ -80,8 +83,9 @@ class CategoriesControllerTest extends ProjectTestCase
     }
     public function testEditViewLoadsData()
     {
-        $categoryId = $this->setUpCategory([
-            'name' => 'Carpentry',
+        $categoryModel = model(\App\Models\CategoryModel::class);
+        $categoryId = $categoryModel->insert([
+            'name'       => 'Test Category',
             'is_visible' => 1
         ]);
 
@@ -116,7 +120,7 @@ class CategoriesControllerTest extends ProjectTestCase
 
         $session = ['logged_in' => true, 'role_id' => 1];
 
-        // Set what we want updated
+        // Value to update
         $updateData = [
             'name' => 'Carpentry'
         ];
@@ -152,7 +156,7 @@ class CategoriesControllerTest extends ProjectTestCase
 
         // Attempt to delete the category
         $result = $this->withSession($session)
-            ->get('/admin/categories/delete/111'); // TODO: switch the route to a post request for better security / practice
+            ->get('/admin/categories/delete/111');
 
         $result->assertRedirectTo(site_url('admin/categories'));
 
