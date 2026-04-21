@@ -103,19 +103,15 @@ A digital marketplace for home improvement jobs.
 
 ## Unit Testing
 ### Checklist
-  - [] Config
   - [] Controllers
-    - [] Admin
-    - [] Contractor
-    - [] Homeowner
-    - [] Auth.php
-    - [] AuthController.php
+    - [] Admin (83%)
+    - [] Contractor (83%)
+    - [] Homeowner (66%)
+    - [] AuthController.php (85%)
     - [x] Base Controller
-    - [] Home.php
+    - [x] Home.php
   - [x] Database
   - [x] Filters
-  - [] Helpers
+  - [] Helpers (25%)
   - [x] Language
   - [x] Models
-  - [] Routes.php
-  - [] Common.php
