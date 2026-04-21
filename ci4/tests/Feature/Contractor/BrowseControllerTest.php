@@ -2,38 +2,72 @@
 
 namespace Tests\Feature\Contractor;
 
-use CodeIgniter\Test\FeatureTestTrait;
+use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
+use App\Models\UserModel;
+use App\Models\ProjectModel;
 
-use Tests\Support\ProjectTestCase;
-
-class BrowseControllerTest extends ProjectTestCase
+class BrowseControllerTest extends CIUnitTestCase
 {
     use DatabaseTestTrait;
+    use FeatureTestTrait;
 
     protected $namespace = 'App';
-    protected $refresh = true;
-    protected $migrate = true;
+    protected $refresh   = true;
 
-    // Index
-    public function testIndexShowsOnlyAvailableProjects(){
-        $contractorId = $this->setUpUser();
+    // Helper methods
+    private function createContractor(): int
+    {
+        $model = model(UserModel::class);
+        return $model->insert([
+            'username'      => 'contractor_eric',
+            'email'         => 'eric@contractor.com',
+            'first_name'    => 'Eric',
+            'last_name'     => 'L',
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'role_id'       => 3,
+            'is_active'     => 1
+        ]);
+    }
 
-        $this->setUpProject(['title'=>'Available Projects', 'status'=> 'closed']);
+    private function createProject(array $overrides = []): int
+    {
+        $model = model(ProjectModel::class);
+        return $model->insert(array_merge([
+            'home_owner_id' => 1,
+            'category_id'   => 1,
+            'title'         => 'Default Project',
+            'description'   => 'Test description',
+            'address'       => '123 Street',
+            'status'        => 'bidding_open'
+        ], $overrides));
+    }
 
-        $alreadyBidId = $this->setUpProject([
-            'title' => 'Already Bid',
+    public function testIndexShowsOnlyAvailableProjects()
+    {
+        $contractorId = $this->createContractor();
+
+        $this->createProject(['title' => 'Available Project', 'status' => 'bidding_open']);
+        $this->createProject(['title' => 'Closed Project', 'status' => 'closed']);
+
+        $alreadyBidId = $this->createProject([
+            'title'  => 'Already Bid',
             'status' => 'bidding_open'
         ]);
 
         $this->db->table('bids')->insert([
-            'project_id' => $alreadyBidId,
+            'project_id'    => $alreadyBidId,
             'contractor_id' => $contractorId,
-            'bid_amount' => 100
+            'bid_amount'    => 100,
+            'details' => 'Test bid'
         ]);
 
-        $result = $this->withSession(['logged_in' => true, 'user_id' => $contractorId])
-            ->get('contractor/browse');
+        $result = $this->withSession([
+            'logged_in' => true,
+            'user_id'   => $contractorId,
+            'role_id'   => 3
+        ])->get('contractor/browse');
 
         $result->assertStatus(200);
         $result->assertSee('Available Project');
@@ -41,47 +75,36 @@ class BrowseControllerTest extends ProjectTestCase
         $result->assertDontSee('Already Bid');
     }
 
-    // Details
     public function testDetailsMethodCoverageDirect()
     {
-        $contractorId = $this->setUpUser();
-        $projectId = $this->setUpProject(['title' => 'Direct Test']);
+        $contractorId = $this->createContractor();
+        $projectId    = $this->createProject(['title' => 'Direct Test']);
 
-        // Instantiate the controller
-        $controller = new \App\Controllers\Contractor\BrowseController();
-        $controller->initController(
-            \Config\Services::request(),
-            \Config\Services::response(),
-            \Config\Services::logger()
-        );
+        // Attempt request
+        $result = $this->withSession([
+            'user_id'   => $contractorId,
+            'logged_in' => true,
+            'role_id'   => 3
+        ])->get("contractor/browse/$projectId");
 
-        session()->set(['user_id' => $contractorId, 'logged_in' => true]);
-
-        $response = $controller->details($projectId);
 
         // Assertions
-        $this->assertNotNull($response);
-        $this->assertStringContainsString('Direct Test', (string)$response);
+        $result->assertStatus(200);
+        $result->assertSee('Direct Test');
     }
+
     public function testDetailsRedirectsForInvalidProject()
     {
-        $contractorId = $this->setUpUser();
+        $contractorId = $this->createContractor();
 
-        $controller = new \App\Controllers\Contractor\BrowseController();
-        $controller->initController(
-            \Config\Services::request(),
-            \Config\Services::response(),
-            \Config\Services::logger()
-        );
+        $result = $this->withSession([
+            'user_id'   => $contractorId,
+            'logged_in' => true,
+            'role_id'   => 3
+        ])->get("contractor/browse/9999");
 
-        session()->set(['user_id' => $contractorId, 'logged_in' => true]);
-
-        $result = $controller->details(9999);
-
-        $this->assertInstanceOf(\CodeIgniter\HTTP\RedirectResponse::class, $result);
-
+        $result->assertRedirectTo(site_url('contractor/browse'));
         $this->assertTrue(session()->has('error'));
         $this->assertEquals('Project not found', session('error'));
     }
 }
-?>
