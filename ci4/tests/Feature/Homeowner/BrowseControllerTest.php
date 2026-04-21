@@ -2,44 +2,47 @@
 
 namespace Tests\Feature\Homeowner;
 
-use Tests\Support\ProjectTestCase;
-use CodeIgniter\Test\ControllerTestTrait;
-use Config\Database;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\FeatureTestTrait;
 use Config\Services;
-use ReflectionClass;
 
-class BrowseControllerTest extends ProjectTestCase
+class BrowseControllerTest extends CIUnitTestCase
 {
-    use ControllerTestTrait;
+    use DatabaseTestTrait;
+    use FeatureTestTrait;
+
+    protected $refresh   = true;
+    protected $namespace = 'App';
 
     public function testIndexShowsContractorsWithFilters()
     {
-        $mockContractor = [
-            'id' => 1,
-            'first_name' => 'John',
-            'last_name' => 'Contractor',
-            'email' => 'john@example.com',
-            'city' => 'Toronto',
-            'province' => 'ON',
-            'approval_status' => 'approved',
-            'specialties' => 'Plumbing, Roofing',
-            'avg_rating' => '4.50',
-            'rating_count' => 10
-        ];
+        // Reset the Database service for a clean slate
+        Services::resetSingle('database');
 
-        $mockSpecialty = [
-            'id' => 1,
-            'name' => 'Plumbing'
-        ];
+        // Define the data
+        $mockContractors = [[
+            'id'               => 10,
+            'first_name'       => 'John',
+            'last_name'        => 'Contractor',
+            'email'            => 'john@example.com',
+            'city'             => 'Toronto',
+            'province'         => 'ON',
+            'approval_status'  => 'approved',
+            'specialties'      => 'Plumbing, Electrical',
+            'avg_rating'       => '4.50',
+            'rating_count'     => 1
+        ]];
 
-        $mockResult = $this->getMockBuilder('CodeIgniter\Database\MySQLi\Result')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mockSpecialties = [['id' => 1, 'name' => 'Plumbing']];
 
+        // Create a mock result
+        $mockResult = $this->createMock(\CodeIgniter\Database\BaseResult::class);
         $mockResult->method('getResultArray')
-            ->willReturnOnConsecutiveCalls([$mockContractor], [$mockSpecialty]);
+            ->willReturnOnConsecutiveCalls($mockContractors, $mockSpecialties);
 
-        $mockBuilder = $this->getMockBuilder('CodeIgniter\Database\BaseBuilder')
+        // Create a mock build
+        $mockBuilder = $this->getMockBuilder(\CodeIgniter\Database\BaseBuilder::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -51,37 +54,28 @@ class BrowseControllerTest extends ProjectTestCase
         $mockBuilder->method('orderBy')->willReturnSelf();
         $mockBuilder->method('get')->willReturn($mockResult);
 
-        $mockDb = $this->getMockBuilder('CodeIgniter\Database\BaseConnection')
+        // Mock the database connection
+        $mockDb = $this->getMockBuilder(\CodeIgniter\Database\BaseConnection::class)
             ->disableOriginalConstructor()
             ->getMock();
-
         $mockDb->method('table')->willReturn($mockBuilder);
 
-        $reflection = new ReflectionClass(Database::class);
-        $instances = $reflection->getProperty('instances');
-        $instances->setAccessible(true);
-        $instances->setValue(['tests' => $mockDb, 'default' => $mockDb]);
-
+        // Inject mock data into the Service layer
         Services::injectMock('database', $mockDb);
 
-        session()->set([
-            'user_id' => 123,
+        // Attempt the request
+        $result = $this->withSession([
+            'user_id'   => 1,
             'logged_in' => true,
-            'role_id' => 2
-        ]);
+            'role_id'   => 1
+        ])->get("homeowner/browse?city=Toronto&province=ON");
 
-        $_GET['city'] = 'Toronto';
-        $_GET['min_rating'] = '4';
+        // Assertions
+        $result->assertStatus(200);
+        $result->assertSee('John');
+        $result->assertSee('Plumbing');
 
-        $result = $this->controller(\App\Controllers\Homeowner\BrowseController::class)
-            ->execute('index');
-
-        $this->assertTrue($result->isOK());
-
-        $output = $result->response()->getBody();
-        $this->assertStringContainsString('John', $output);
-        $this->assertStringContainsString('Contractor', $output);
-        $this->assertStringContainsString('Toronto', $output);
-        $this->assertStringContainsString('Plumbing, Roofing', $output);
+        // Reset again for clean slate
+        Services::reset();
     }
 }
