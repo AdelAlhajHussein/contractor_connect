@@ -112,13 +112,13 @@ class ProjectsControllerTest extends CIUnitTestCase
         $session = ['user_id' => 999, 'logged_in' => true, 'role_id' => 1];
 
         // Attempt to close bidding
-        $result = $this->withSession($session)->get("admin/projects/closeBidding/$projectId");
+        $result = $this->withSession($session)->get("admin/projects/close-bidding/$projectId");
         $result->assertRedirectTo(site_url('admin/projects'));
         $this->seeInDatabase('projects', ['id' => $projectId, 'status' => 'in_progress']);
 
         // Verify only projects with open bidding can have bidding closed
         $otherProjectId = $this->createProject(['status' => 'open']);
-        $this->withSession($session)->get("admin/projects/closeBidding/$otherProjectId");
+        $this->withSession($session)->get("admin/projects/close-bidding/$otherProjectId");
         $this->seeInDatabase('projects', ['id' => $otherProjectId, 'status' => 'open']);
     }
 }
