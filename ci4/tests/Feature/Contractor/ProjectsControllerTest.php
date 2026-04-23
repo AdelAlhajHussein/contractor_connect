@@ -6,6 +6,7 @@ use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use App\Models\UserModel;
+use Faker\Factory;
 
 class ProjectsControllerTest extends CIUnitTestCase
 {
@@ -14,6 +15,13 @@ class ProjectsControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
 
     public function testIndexShowsContractorProjects()
@@ -22,39 +30,41 @@ class ProjectsControllerTest extends CIUnitTestCase
 
         // Create a homeowner user
         $homeOwnerId = $userModel->insert([
-            'username'   => 'homeowner_test',
-            'email'      => 'home@test.com',
-            'first_name' => 'Jane',
-            'last_name'  => 'Doe',
+            'username'   => $this->faker->userName,
+            'email'      => $this->faker->safeEmail,
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
             'role_id'    => 2,
             'is_active'  => 1,
             'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
         ]);
 
         // Create a category
+        $categoryName = $this->faker->word;
         $this->db->table('categories')->insert([
-            'name' => 'Roofing'
+            'name' => $categoryName
         ]);
         $categoryId = $this->db->insertID();
 
         // Create a contractor user
         $contractorId = $userModel->insert([
-            'username'   => 'contractor_pro',
-            'email'      => 'pro@test.com',
-            'first_name' => 'John',
-            'last_name'  => 'Contractor',
+            'username'   => $this->faker->userName,
+            'email'      => $this->faker->safeEmail,
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
             'role_id'    => 3,
             'is_active'  => 1,
             'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
         ]);
 
         // Create a project
+        $projectTitle = $this->faker->sentence(3);
         $this->db->table('projects')->insert([
             'home_owner_id' => $homeOwnerId,
             'category_id'   => $categoryId,
-            'title'         => 'Fix My Roof',
-            'description'   => 'Leaking roof needs repair',
-            'address'       => '123 Test St',
+            'title'         => $projectTitle,
+            'description'   => $this->faker->paragraph,
+            'address'       => $this->faker->address,
             'budget_min'    => 500.00,
             'budget_max'    => 1000.00,
             'status'        => 'open',
@@ -64,10 +74,11 @@ class ProjectsControllerTest extends CIUnitTestCase
         $projectId = $this->db->insertID();
 
         // Link contractor to a bid
+        $bidAmount = 500.00;
         $this->db->table('bids')->insert([
             'project_id'    => $projectId,
             'contractor_id' => $contractorId,
-            'bid_amount'    => 500.00,
+            'bid_amount'    => $bidAmount,
             'status'        => 'pending',
             'created_at'    => date('Y-m-d H:i:s'),
             'updated_at'    => date('Y-m-d H:i:s'),
@@ -82,7 +93,7 @@ class ProjectsControllerTest extends CIUnitTestCase
 
         // Assertions
         $result->assertStatus(200);
-        $result->assertSee('Fix My Roof');
-        $result->assertSee('500.00');
+        $result->assertSee($projectTitle);
+        $result->assertSee((string)$bidAmount);
     }
 }
