@@ -1,18 +1,9 @@
-# Project Name: Contractor Connect
-A digital marketplace for home improvement jobs. 
+# Contractor Connect
+Contractor Connect is a high-performance web platform built with CodeIgniter 4, 
+designed to streamline the connection between homeowners and trade professionals. 
 
-### Tech Stack
-- Linux
-- Apache
-- MySQL/MariaDB managed via CI4 Migrations
-- Language: PHP 8.4
-
-### Testing
-- This project uses PHPUnit for quality assurance testing.
-- Set CI_ENVIRONMENT to Testing in .env
-- To run PHPUnit, navigate to /ci4
-    bash
-    vendor/bin/phpunit
+The application facilitates project bidding, contractor discovery, 
+and administrative oversight within a secure, role-based ecosystem.
 
 ## The Team:
 **Member 1** Adel Alhaj Hussein - Back-end
@@ -21,97 +12,110 @@ A digital marketplace for home improvement jobs.
 **Member 4** Sana Karnelia - Front-end
 **Member 5** Shifa Karnelia - Front-end
 
+## Core Features
+- **Role-Based Access Control:** Dedicated, secure workflows and dashboards for Admin, Homeowners, and Contractors
+- **Project Management Lifecycle:** Full support for job postings, bidding, project status tracking, and project cancellation
+- **Bid & Rating System:** Bidding system allowing contractors to submit detailed estimates and homeowners to provide post-completion ratings
+- **Admin Oversight:** A centralized dashboard for managing user accounts, verifying contractor approvals, and auditing project listings
+
+### Tech Stack
+- **Framework:** CodeIgniter 4.5
+- **Language:** PHP 8.4+
+- **Database:** SQLite/MySQL
+- **QA & Testing:** PHPUnit 11, Xdebug 3.5.1
+- **Data Simulation:** Faker Library
+
+### Quality Assurance
+- **Comprehensive Feature Tests:** A full suite of automated tests covering authentication, session persistence, and data integrity
+- **Code Coverage:** Achieved **92% line coverage** across the core application logic, as verified via Xdebug
+- **Data Simulation:** Leveraged the **Faker** library to generate unique test datasets, ensuring robust validation of unique constraints and edge cases
+- **Regression Safety:** Full execution of migrations and database refreshing (`DatabaseTestTrait`) before every test run to ensure a consistent testing state
+
+### Running the Test Suite
+To execute the full test suite and generate a report:
+
+```bash
+# Execute tests
+vendor/bin/phpunit
+
+# Generate HTML Coverage Report (requires Xdebug)
+XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html build/coverage
+```
+
+## Configuration & Setup
+
+1. **Environment:** Copy configure database credentials in .env
+2. **Database:** Run migrations to establish the schema and seed the initial data
+   ```bash
+   php spark migrate
+   php spark db:seed RoleSeeder
+
+3. **Validation:** Ensure server meets PHP 8.4 requirements for full compatibility
+
+
+
+
 ## Getting Started
 
-## Installation/Setup: 
-### 1. Clone the repository
-    "git clone https://github.com/AdelAlhajHussein/contractor_connect.git"
-### 2. Install dependencies
-    bash
+## Prerequisites
+- **PHP 8.4+**
+- **Composer**
+- **SQLite3** or **MySQL**
+
+### Installation & Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/AdelAlhajHussein/contractor_connect.git](https://github.com/AdelAlhajHussein/contractor_connect.git)
+   cd contractor_connect/ci4
+   ```
+
+2. **Install dependencies:**
+    ```bash
     composer install
-### 3. Run the App
+    ```
+3. **Initialize the environment:**
+4. ```bash
+    cp env .env
+    ```
+5. **Run the App:**
     Navigate to ci4 directory and run
-    bash
-    "php spark serve --port 8000"
-    
-    Cpanel requires css in /public_html/css, but ci4 expects it in /ci4/public/css
-    "php spark serve --public ../public_html --port 8000"
+    ```bash
+    php spark serve --port 8000
+    ```
+    For environments mimicking Cpanel structure (with public_html):
+    ```bash
+     php spark serve --public ../public_html --port 8000
+   ```
 
-    Then open in browser
-    "http://localhost:8000"
+## 🛠 Development Workflow
 
-### 4. Develop / Update code
-    - To pull latest version of the code
-    bash
-    "git pull origin main"
+To maintain code quality and branch integrity, please follow these conventions:
 
-    - Switch to local branch
-    bash
-    "git checkout -b <branch-name>"
+### Branch Naming Convention
+- **Features:** `feature/short-description` 
+  - (ex: `feature/add-login-form`)
+- **Bugfixes:** `bugfix/short-description` 
+  - (ex: `bugfix/fix-login-error`)
 
-    - Add file change to staging
-    "git add <filename>"
-    
-    - Or stage all files with changes
-    Navigate to root directory
-    bash
-    "git add ."
-    
-    - Push changes on branch
-    bash
-    "git push origin <branch-name>
+### Standard Git Process
 
-    - Branch naming convention
-    Begin with type ( feature / bugfix )
-    Lowercase lettering with hyphens
-    ex: "feature/add-login-form"
-    ex: "bugfix/fix-login-error"
+1. **Pull latest changes:**
+   ```bash
+   git pull origin main
 
-    - Merge with main
-    Navigate to github and create a pull request
-    Resolve any conflicts and merge with main branch
+2. **Create a local branch:**
+   ```bash
+   git checkout -b <branch-name>
 
-### Run Tests
-  - Navigate to root directory (ci4) and run
-  bash
-  vendor/bin/phpunit
+3. **Stage and commit changes:**
+   ```bash
+   git add .
+   git commit -m "Brief description of changes"
 
+4. **Push to GitHub:**
+   ```bash
+   git push origin <branch-name>
 
-### Progress:
-- [X] Initial project file setup
-- [X] Create initial file layout
-- [X] Account creation and authentication
-    - [X] Back-end functions and routing
-    - [X] Front-end html
-    - [X] Front-end styling
-- [] User login
-    - [X] Back-end functions and routing
-    - [X] Front-end html
-    - [X] Front-end styling
-- [X] Admin Dashboard
-  - [X] Back-end functions and routing
-  - [X] Front-end html
-  - [X] Front-end styling
-- [X] Homeowner Dashboard
-  - [X] Back-end functions and routing
-  - [X] Front-end html
-  - [X] Front-end styling
-- [X] Contractor Dashboard
-    - [X] Back-end functions and routing
-    - [X] Front-end html
-    - [X] Front-end styling
-
-## Unit Testing
-### Checklist
-  - [] Controllers
-    - [] Admin (83%)
-    - [] Contractor (83%)
-    - [] Homeowner (66%)
-    - [] AuthController.php (85%)
-    - [x] Base Controller
-    - [x] Home.php
-  - [x] Database
-  - [x] Filters
-  - [] Helpers (25%)
-  - [x] Language
-  - [x] Models
+5. **Merge:**
+   Create a pull request on GitHub. Resolve any conflicts before merging into the 'main' branch.
