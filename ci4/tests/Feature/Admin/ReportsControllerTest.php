@@ -5,75 +5,84 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\CIUnitTestCase;
+use Faker\Factory;
 
-
-final class ReportsControllerTest extends CIUnitTestCase{
+final class ReportsControllerTest extends CIUnitTestCase
+{
     use DatabaseTestTrait, FeatureTestTrait;
 
     protected $refresh = true;
     protected $namespace = 'App';
+    private $faker;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     public function testIndexReturnsSuccessAndCorrectData()
     {
         $db = db_connect();
-        $faker = \Faker\Factory::create();
 
         // Create admin user
         $db->table('users')->insert([
-            'email'         => $faker->email,
-            'username'      => 'admin_' . $faker->userName,
-            'first_name'    => 'Admin',
-            'last_name'     => 'User',
+            'email'         => $this->faker->safeEmail,
+            'username'      => $this->faker->userName,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'role_id'       => 1,
             'is_active'     => 1,
-            'password_hash' => password_hash($faker->password, PASSWORD_DEFAULT),
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
         ]);
 
         // Create homeowner user
         $db->table('users')->insert([
-            'email'         => $faker->email,
-            'username'      => 'owner_' . $faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'username'      => $this->faker->userName,
             'role_id'       => 2,
             'is_active'     => 1,
-            'password_hash' => password_hash($faker->password, PASSWORD_DEFAULT),
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
         ]);
         $homeOwnerId = $db->insertID();
 
         // Create homeowner profile
         $db->table('home_owner_profiles')->insert([
             'home_owner_id' => $homeOwnerId,
-            'address'       => $faker->streetAddress,
-            'city'          => $faker->city,
+            'address'       => $this->faker->streetAddress,
+            'city'          => $this->faker->city,
             'province'      => 'ON',
-            'postal_code'   => 'M1M 1M1'
+            'postal_code'   => $this->faker->postcode
         ]);
 
         // Create category
-        $db->table('categories')->insert(['name' => 'Plumbing']);
+        $db->table('categories')->insert(['name' => $this->faker->word]);
         $categoryId = $db->insertID();
 
         // Create projects
+        $project1 = 'Project ' . $this->faker->word;
+        $project2 = 'Project ' . $this->faker->word;
+
         $db->table('projects')->insertBatch([
             [
-                'title'         => 'Project 1',
-                'description'   => $faker->paragraph,
+                'title'         => $project1,
+                'description'   => $this->faker->paragraph,
                 'status'        => 'open',
-                'address'       => $faker->address,
+                'address'       => $this->faker->address,
                 'category_id'   => $categoryId,
                 'home_owner_id' => $homeOwnerId,
                 'created_at'    => date('Y-m-d H:i:s'),
                 'updated_at'    => date('Y-m-d H:i:s')
             ],
             [
-                'title'         => 'Project 2',
-                'description'   => $faker->paragraph,
+                'title'         => $project2,
+                'description'   => $this->faker->paragraph,
                 'status'        => 'open',
-                'address'       => $faker->address,
+                'address'       => $this->faker->address,
                 'category_id'   => $categoryId,
                 'home_owner_id' => $homeOwnerId,
                 'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s')
+                'updated_at'    => date('Y-m-d H:i:s'),
             ],
         ]);
 
@@ -86,7 +95,7 @@ final class ReportsControllerTest extends CIUnitTestCase{
 
         // Assertions
         $result->assertStatus(200);
-        $result->assertSee('Project 1');
-        $result->assertSee('Project 2');
+        $result->assertSee($project1);
+        $result->assertSee($project2);
     }
 }

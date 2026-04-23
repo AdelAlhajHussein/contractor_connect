@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Faker\Factory;
 
 class HomeownersControllerTest extends CIUnitTestCase
 {
@@ -13,6 +14,13 @@ class HomeownersControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     // Helper
     private function createHomeowner(array $userOverrides = [], array $profileOverrides = [])
@@ -21,11 +29,11 @@ class HomeownersControllerTest extends CIUnitTestCase
 
         // Create a user
         $db->table('users')->insert(array_merge([
-            'username'      => 'user_' . uniqid(),
-            'email'         => uniqid() . '@test.com',
-            'first_name'    => 'Test',
-            'last_name'     => 'User',
-            'password_hash' => 'hash',
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
             'role_id'       => 3,
             'is_active'     => 1
         ], $userOverrides));
@@ -35,10 +43,10 @@ class HomeownersControllerTest extends CIUnitTestCase
         // Create user profile
         $db->table('home_owner_profiles')->insert(array_merge([
             'home_owner_id' => $userId,
-            'address'       => '123 Main St',
-            'city'          => 'Toronto',
+            'address'       => $this->faker->address,
+            'city'          => $this->faker->city,
             'province'      => 'ON',
-            'postal_code'   => 'M1M 1M1'
+            'postal_code'   => $this->faker->postcode
         ], $profileOverrides));
 
         return $userId;
@@ -46,31 +54,35 @@ class HomeownersControllerTest extends CIUnitTestCase
 
     public function testIndexFiltersAndSearch()
     {
-        // Create active and inactive users
-        $this->createHomeowner([
-            'username' => 'active_eric',
-            'is_active' => 1
-        ], [
-            'city' => 'Toronto'
-        ]);
-        $this->createHomeowner([
-            'username' => 'inactive_adel',
-            'is_active' => 0],
-        [
-            'city' => 'Vancouver']);
+        $city = $this->faker->city;
+        $activeUser = 'active_' . $this->faker->userName;
+        $inactiveUser = 'inactive_' . $this->faker->userName;
 
-        $session = ['user_id' => 999, 'logged_in' => true, 'role_id' => 1];
+        // Create active and inactive users
+        $this->createHomeowner(
+            [ 'username' => $activeUser, 'is_active' => 1],
+            [ 'city' => $city]
+        );
+        $this->createHomeowner(
+            [ 'username' => $inactiveUser, 'is_active' => 0 ],
+            [ 'city' => 'Vancouver' ]);
+
+        $session = [
+            'user_id' => 999,
+            'logged_in' => true,
+            'role_id' => 1
+        ];
 
         // Attempt city filter
-        $resSearch = $this->withSession($session)->get('admin/homeowners?q=Toronto');
+        $resSearch = $this->withSession($session)->get('admin/homeowners?q=' . urlencode($city));
         $resSearch->assertStatus(200);
-        $resSearch->assertSee('active_eric');
-        $resSearch->assertDontSee('inactive_adel');
+        $resSearch->assertSee($activeUser);
+        $resSearch->assertDontSee($inactiveUser);
 
         // Attempt status filter
         $resStatus = $this->withSession($session)->get('admin/homeowners?status=0');
-        $resStatus->assertSee('inactive_adel');
-        $resStatus->assertDontSee('active_eric');
+        $resStatus->assertSee($inactiveUser);
+        $resStatus->assertDontSee($activeUser);
     }
 
     public function testToggleChangesStatus()

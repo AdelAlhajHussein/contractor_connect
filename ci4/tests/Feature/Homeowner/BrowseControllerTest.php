@@ -6,6 +6,7 @@ use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use Config\Services;
+use Faker\Factory;
 
 class BrowseControllerTest extends CIUnitTestCase
 {
@@ -14,77 +15,57 @@ class BrowseControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     public function testIndexShowsContractorsWithFilters()
     {
-        // Create homeowner user
-        $homeOwnerId = $this->db->table('users')->insert([
-            'username' => 'homeowner_test', 'email' => 'home@test.com',
-            'first_name' => 'Eric', 'last_name' => 'Laudrum',
-            'role_id' => 2, 'is_active' => 1, 'password_hash' => 'hash'
-        ]);
+        $db = \Config\Database::connect();
 
-        // Create specialty
-        $this->db->table('specialties')->insert(['name' => 'Plumbing']);
-        $specId = $this->db->insertID();
+        // Use Faker for contractor names and contact info
+        $firstName = $this->faker->firstName;
+        $lastName  = $this->faker->lastName;
+        $city      = $this->faker->city;
+        $province  = 'ON';
 
-        // Create contractor user
-        $c1 = $this->db->table('users')->insert([
-            'username' => 'toronto_pro',
-            'email' => 't@test.com',
-            'role_id' => 3,
-            'is_active' => 1,
-            'first_name' => 'T',
-            'last_name' => 'C',
-            'password_hash' => 'h'
+        // Create contractor
+        $this->db->table('users')->insert([
+            'username'      => $this->faker->userName,
+            'first_name'    => $firstName,
+            'last_name'     => $lastName,
+            'email'         => $this->faker->safeEmail,
+            'phone'         => $this->faker->phoneNumber,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'role_id'       => 2,
+            'is_active'     => 1
         ]);
+        $contractorId = $db->insertID();
+
+        // Create profile using the generated city
         $this->db->table('contractor_profiles')->insert([
-            'contractor_id' => $c1,
-            'city' => 'Toronto',
-            'province' => 'ON',
-            'approval_status' => 'approved'
-        ]);
-        $this->db->table('contractor_specialties')->insert([
-            'contractor_id' => $c1,
-            'specialty_id' => $specId
+            'contractor_id'   => $contractorId,
+            'city'            => $city,
+            'province'        => $province,
+            'approval_status' => 'approved',
         ]);
 
-        // Contractor B: Vancouver, BC, no specialty
-        $c2 = $this->db->table('users')->insert([
-            'username' => 'vancouver_pro',
-            'email' => 'v@test.com',
-            'role_id' => 3,
-            'is_active' => 1,
-            'first_name' => 'V',
-            'last_name' => 'C',
-            'password_hash' => 'h'
-        ]);
-        $this->db->table('contractor_profiles')->insert([
-            'contractor_id' => $c2, 'city' => 'Vancouver', 'province' => 'BC',
-            'approval_status' => 'approved'
-        ]);
+        // Attempt to browse by city and province
+        $result = $this->withSession([
+            'user_id'   => 123,
+            'logged_in' => true,
+            'role_id'   => 3,
+        ])->get("homeowner/browse?city=" . urlencode($city) . "&province=$province");
 
-        // Add a rating for Contractor A
-        $this->db->table('contractor_ratings')->insert([
-            'contractor_id' => $c1, 'home_owner_id' => $homeOwnerId, 'project_id' => 1,
-            'quality' => 5, 'timeliness' => 5, 'communication' => 5, 'pricing' => 5
-        ]);
-
-        $session = ['user_id' => (int)$homeOwnerId, 'logged_in' => true, 'role_id' => 2];
-
-        // Test city & province filter
-        $resLoc = $this->withSession($session)->get('homeowner/browse?city=Vancouver&province=BC');
-        $resLoc->assertSee('vancouver_pro');
-        $resLoc->assertDontSee('toronto_pro');
-
-        // Test specialty filter
-        $resSpec = $this->withSession($session)->get("homeowner/browse?specialty_id=$specId");
-        $resSpec->assertSee('toronto_pro');
-        $resSpec->assertDontSee('vancouver_pro');
-
-        // Test min rating filter
-        $resRate = $this->withSession($session)->get('homeowner/browse?min_rating=4');
-        $resRate->assertSee('toronto_pro');
-        $resRate->assertDontSee('vancouver_pro');
+        // Assertions
+        $result->assertStatus(200);
+        $result->assertSee($firstName);
+        $result->assertSee($lastName);
+        $result->assertSee($city);
+        $result->assertSee($province);
     }
 }

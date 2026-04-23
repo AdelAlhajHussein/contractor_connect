@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
+use Faker\Factory;
 
 class BidsControllerTest extends CIUnitTestCase
 {
@@ -14,6 +15,13 @@ class BidsControllerTest extends CIUnitTestCase
     protected $refresh = true;
     protected $namespace = 'App';
     protected $migrate = true;
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     // Tests
     public function testIndexLoadsBidsWithJoins()
@@ -21,17 +29,17 @@ class BidsControllerTest extends CIUnitTestCase
         $db = \Config\Database::connect();
 
         $db->table('categories')->insert([
-            'name' => 'Roofing',
+            'name' => $this->faker->word,
         ]);
         $categoryId = $db->insertId();
 
         // Homeowner
         $db->table('users')->insert([
-            'email' => 'ownerIndexJoins@example.com',
-            'username' => 'ownerIndexJoins',
-            'password_hash' => 'fake_hash',
-            'first_name' => 'Homeowner',
-            'last_name' => 'Index Joins',
+            'email' => $this->faker->safeEmail,
+            'username' => $this->faker->userName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
             'role_id' => 2,
             'is_active' => 1,
         ]);
@@ -40,24 +48,25 @@ class BidsControllerTest extends CIUnitTestCase
 
         // Contractor
         $db->table('users')->insert([
-            'email' => 'contractor@example.com',
-            'username' => 'contractor1',
-            'password_hash' => 'fake_hash',
+            'email' => $this->faker->safeEmail,
+            'username' => $this->faker->userName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
             'role_id' => 3,
-            'first_name' => 'Contractor',
-            'last_name' => 'User',
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
             'is_active' => 1,
         ]);
         $contractorId = $db->insertID();
 
         // Project
+        $projectTitle = 'Fix the ' . $this->faker->word;
         $db->table('projects')->insert([
-            'title' => 'Fix the roof',
-            'description' => 'Description of the roof project',
+            'title' => $projectTitle,
+            'description' => $this->faker->sentence,
             'home_owner_id' => $ownerId,
             'category_id' => $categoryId,
             'status' => 'open',
-            'address' => '123 Test St.',
+            'address' => $this->faker->address,
         ]);
 
         $projectId = $db->insertID();
@@ -78,50 +87,51 @@ class BidsControllerTest extends CIUnitTestCase
 
         // Verify status
         $result->assertStatus(200);
-        $result->assertSee('Fix the roof');
+        $result->assertSee($projectTitle);
     }
+
     public function testViewMethodCalculatesTotal()
     {
         $db = \Config\Database::connect();
 
         $db->table('users')->insert([
-            'id' => 100,
-            'email' => 'v@t.com',
-            'username' => 'v',
-            'password_hash' => 'fake_hash',
-            'first_name' => 'Contractor',
-            'last_name' => 'User',
+            'email' => $this->faker->safeEmail,
+            'username' => $this->faker->userName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
             'role_id' => 3,
             'is_active' => 1
         ]);
+        $userId = $db->insertID();
 
         $db->table('categories')->insert([
-            'id'   => 100,
-            'name' => 'General'
+            'name' => $this->faker->word
         ]);
+        $catId = $db->insertID();
 
         $db->table('projects')->insert([
-            'id' => 100,
-            'title' => 'Test Project',
-            'description' => 'Project Description',
-            'home_owner_id' => 100,
-            'category_id' => 100,
+            'title' => $this->faker->sentence(3),
+            'description' => $this->faker->paragraph,
+            'home_owner_id' => $userId,
+            'category_id' => $catId,
             'status' => 'open',
-            'address' => '123 Test St.'
+            'address' => $this->faker->address
         ]);
+        $projectId = $db->insertID();
 
         $db->table('bids')->insert([
-            'id' => 100,
-            'project_id' => 100,
-            'contractor_id'=> 100,
+            'project_id' => $projectId,
+            'contractor_id'=> $userId,
             'status' => 'submitted',
             'bid_amount' => 500.00,
             'total_cost' => 500.00
         ]);
+        $bidId = $db->insertID();
 
         $db->table('bid_tasks')->insert([
-            'bid_id'  => 100,
-            'description' => 'Test Task',
+            'bid_id'  => $bidId,
+            'description' => $this->faker->word,
             'est_minutes' => 60,
             'materials_cost' => 50.00,
             'labour_cost' => 100.00,
@@ -130,35 +140,40 @@ class BidsControllerTest extends CIUnitTestCase
         ]);
 
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->get('/admin/bids/view/100');
+            ->get("/admin/bids/view/$bidId");
 
         $result->assertStatus(200);
         $result->assertSee('170.00');
     }
+
     public function testIndexFiltersWork()
     {
         $db = \Config\Database::connect();
 
         // Create category
-        $db->table('categories')->insert(['name' => 'Roofing']);
+        $categoryName = $this->faker->word;
+        $db->table('categories')->insert(['name' => $categoryName]);
         $catId = $db->insertID();
 
         // Create contractor user
         $db->table('users')->insert([
-            'username' => 'contractor_1',
-            'email'    => 'c1@test.com',
+            'username' => $this->faker->userName,
+            'email'    => $this->faker->safeEmail,
             'role_id'  => 3,
-            'first_name' => 'C', 'last_name' => '1', 'password_hash' => 'h'
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
         ]);
         $conId = $db->insertID();
 
         // Create a project
+        $projectTitle = 'Fix the ' . $categoryName;
         $db->table('projects')->insert([
-            'title'         => 'Fix the roofing',
+            'title'         => $projectTitle,
             'category_id'   => $catId,
             'home_owner_id' => $conId,
             'status'        => 'open',
-            'address'       => '123 test'
+            'address'       => $this->faker->address
         ]);
         $pId = $db->insertID();
 
@@ -172,23 +187,25 @@ class BidsControllerTest extends CIUnitTestCase
         ]);
 
         // Create a project that should not be seen
+        $otherTitle = 'Other ' . $this->faker->word;
         $db->table('projects')->insert([
-            'title'         => 'Other Project',
+            'title'         => $otherTitle,
             'category_id'   => $catId,
             'home_owner_id' => $conId,
             'status'        => 'open',
-            'address'       => '456 test'
+            'address'       => $this->faker->address
         ]);
 
         // Attempt to get index with filters
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->get('/admin/bids?status=submitted&q=Roofing');
+            ->get("/admin/bids?status=submitted&q=" . urlencode($categoryName));
 
         // Assertions
         $result->assertStatus(200);
-        $result->assertSee('Fix the roofing');
-        $result->assertDontSee('Other Project');
+        $result->assertSee($projectTitle);
+        $result->assertDontSee($otherTitle);
     }
+
     public function testViewNotFoundRedirects()
     {
         // Attempt to get bid with non-existent id
@@ -199,6 +216,7 @@ class BidsControllerTest extends CIUnitTestCase
         $result->assertRedirectTo(site_url('admin/bids'));
 
     }
+
     public function testWithdrawBidNotFound()
     {
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
@@ -206,147 +224,153 @@ class BidsControllerTest extends CIUnitTestCase
 
         $result->assertRedirectTo(site_url('admin/bids'));
     }
+
     public function testWithdrawFailsIfAlreadyAccepted()
     {
         $db = \Config\Database::connect();
 
         $db->table('users')->insert([
-            'id' => 1,
-            'email'=> 'owner_accepted@example.com',
-            'username' => 'owner_acc',
-            'password_hash'=> 'fake_hash',
-            'first_name' => 'Test',
-            'last_name'=> 'Owner',
+            'email'=> $this->faker->safeEmail,
+            'username' => $this->faker->userName,
+            'password_hash'=> password_hash('secret', PASSWORD_DEFAULT),
+            'first_name' => $this->faker->firstName,
+            'last_name'=> $this->faker->lastName,
             'role_id' => 2,
             'is_active' => 1,
         ]);
+        $userId = $db->insertID();
 
         $db->table('categories')->insert([
-            'id' => 2,
-            'name' => 'T2'
+            'name' => $this->faker->word
         ]);
+        $catId = $db->insertID();
 
         $db->table('projects')->insert([
-            'id' => 2,
-            'title' => 'T2',
-            'home_owner_id' => 1,
-            'category_id' => 2,
+            'title' => $this->faker->word,
+            'home_owner_id' => $userId,
+            'category_id' => $catId,
             'status' => 'open',
-            'address' => '789 Test Rd.'
+            'address' => $this->faker->address
         ]);
+        $projectId = $db->insertID();
 
         $db->table('bids')->insert([
-            'id' => 66,
-            'project_id' => 2,
-            'contractor_id' => 1,
+            'project_id' => $projectId,
+            'contractor_id' => $userId,
             'status' => 'accepted',
             'bid_amount' => 100.00,
             'total_cost' => 100.00,
         ]);
+        $bidId = $db->insertID();
 
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->get('/admin/bids/withdraw/66');
+            ->get("/admin/bids/withdraw/$bidId");
 
-        $result->assertRedirectTo(site_url('admin/bids/66'));
+        $result->assertRedirectTo(site_url("admin/bids/$bidId"));
     }
+
     public function testWithdrawFailsIfAlreadyRejected()
     {
-        $this->db->table('bids')->insert([
-            'id' => 77,
+        $db = \Config\Database::connect();
+
+        $db->table('bids')->insert([
             'project_id' => 1,
             'contractor_id' => 1,
             'status' => 'rejected',
         ]);
+        $bidId = $db->insertID();
 
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->get('/admin/bids/withdraw/77');
+            ->get("/admin/bids/withdraw/$bidId");
 
-        $result->assertRedirectTo(site_url('admin/bids/77'));
+        $result->assertRedirectTo(site_url("admin/bids/$bidId"));
     }
+
     public function testWithdrawBidSuccess(){
         $db = \Config\Database::connect();
 
         $db->table('users')->insert([
-            'id' => 10,
-            'email' => 'c10@t.com',
-            'username' => 'u10',
-            'password_hash' => 'fake_hash',
-            'first_name' => 'Contractor',
-            'last_name' => 'Ten',
+            'email' => $this->faker->safeEmail,
+            'username' => $this->faker->userName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
             'role_id' => 3,
             'is_active' => 1,
         ]);
+        $userId = $db->insertID();
 
         $db->table('categories')->insert([
-            'id' => 10,
-            'name' => 'T10'
+            'name' => $this->faker->word
         ]);
+        $catId = $db->insertID();
 
         $db->table('projects')->insert([
-            'id' => 10,
-            'title' => 'Test Project',
-            'home_owner_id' => 10,
-            'category_id'=> 10,
+            'title' => $this->faker->sentence(3),
+            'home_owner_id' => $userId,
+            'category_id'=> $catId,
             'status' => 'open',
-            'description' => 'Project Description',
-            'address' => '123 Test St.',
+            'description' => $this->faker->paragraph,
+            'address' => $this->faker->address,
         ]);
+        $projectId = $db->insertID();
 
         $db->table('bids')->insert([
-            'id' => 55,
-            'project_id' => 10,
-            'contractor_id' => 10,
+            'project_id' => $projectId,
+            'contractor_id' => $userId,
             'status' => 'submitted',
             'bid_amount' => 100.00,
             'total_cost' => 100.00,
         ]);
+        $bidId = $db->insertID();
 
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->get('/admin/bids/withdraw/55');
+            ->get("/admin/bids/withdraw/$bidId");
 
-        $result->assertRedirectTo(site_url('admin/bids/55'));
-        $this->seeInDatabase('bids', ['id' => 55, 'status' => 'withdrawn']);
+        $result->assertRedirectTo(site_url("admin/bids/$bidId"));
+        $this->seeInDatabase('bids', ['id' => $bidId, 'status' => 'withdrawn']);
     }
+
     public function testViewMethodHandlesMissingTaskData()
     {
         $db = \Config\Database::connect();
 
         $db->table('users')->insert([
-            'id' => 20,
-            'email' => 'c20@t.com',
-            'username' => 'u20',
-            'password_hash' => 'fake_hash',
-            'first_name' => 'Contractor',
-            'last_name'=> 'Twenty',
+            'email' => $this->faker->safeEmail,
+            'username' => $this->faker->userName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'first_name' => $this->faker->firstName,
+            'last_name'=> $this->faker->lastName,
             'role_id'=> 3,
             'is_active'=> 1,
         ]);
+        $userId = $db->insertID();
 
         $db->table('categories')->insert([
-            'id' => 20,
-            'name' => 'T20'
+            'name' => $this->faker->word
         ]);
+        $catId = $db->insertID();
 
         $db->table('projects')->insert([
-            'id' => 20,
-            'title' => 'T',
-            'home_owner_id' => 20,
-            'category_id' => 20,
+            'title' => $this->faker->word,
+            'home_owner_id' => $userId,
+            'category_id' => $catId,
             'status' => 'open',
-            'address' => '456 Test Ave.'
+            'address' => $this->faker->address
         ]);
+        $projectId = $db->insertID();
 
         $db->table('bids')->insert([
-            'id' => 20,
-            'project_id' => 20,
-            'contractor_id' => 20,
+            'project_id' => $projectId,
+            'contractor_id' => $userId,
             'status' => 'submitted',
             'bid_amount' => 100,
             'total_cost' => 100
         ]);
+        $bidId = $db->insertID();
 
         $db->table('bid_tasks')->insert([
-            'bid_id' => 20,
+            'bid_id' => $bidId,
             'est_minutes' => 0,
             'materials_cost' => 0.00,
             'labour_cost' => 0.00,
@@ -355,11 +379,12 @@ class BidsControllerTest extends CIUnitTestCase
         ]);
 
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->get('/admin/bids/view/20');
+            ->get("/admin/bids/view/$bidId");
 
         $result->assertStatus(200);
         $result->assertSee('0.00');
     }
+
     public function testFilterIgnoresInvalidStatus(){
         // Attempt to filter an invalid status
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
@@ -368,30 +393,33 @@ class BidsControllerTest extends CIUnitTestCase
         // Verify function still works even if filter doesn't filter
         $result->assertStatus(200);
     }
+
     public function testIndexWithoutFiltersReturnsAll()
     {
         // Create a category
         $this->db->table('categories')->insert([
-            'name' => 'General'
+            'name' => $this->faker->word
         ]);
         $categoryId = $this->db->insertID();
 
 
         // Create contractor
+        $email = $this->faker->safeEmail;
         $this->db->table('users')->insert([
-            'email' => 'test@example.com',
-            'username' => 'testuser',
-            'password_hash' => 'fake_hash',
-            'first_name' => 'Test',
-            'last_name' => 'User',
+            'email' => $email,
+            'username' => $this->faker->userName,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
         ]);
         $userId = $this->db->insertID();
 
         // Create a project
+        $projectTitle = 'Fix the ' . $this->faker->word;
         $this->db->table('projects')->insert([
-            'title' => 'Fix the roof',
-            'description' => 'Project description',
-            'address' => '123 Address St.',
+            'title' => $projectTitle,
+            'description' => $this->faker->sentence,
+            'address' => $this->faker->address,
             'category_id'=>$categoryId,
             'home_owner_id' => $userId,
         ]);
@@ -402,7 +430,7 @@ class BidsControllerTest extends CIUnitTestCase
             'project_id'    => $projectId,
             'contractor_id' => $userId,
             'status'        => 'submitted',
-            'created_at'    => date('Y-m-d H:i:s')
+            'created_at'    => date('Y-m-d H:i:s'),
         ]);
 
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
@@ -410,9 +438,10 @@ class BidsControllerTest extends CIUnitTestCase
 
         // Assertions
         $result->assertStatus(200);
-        $result->assertSee('Fix the roof');
-        $result->assertSee('test@example.com');
+        $result->assertSee($projectTitle);
+        $result->assertSee($email);
     }
+
     public function testIndexWithEmptySearchString()
     {
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])

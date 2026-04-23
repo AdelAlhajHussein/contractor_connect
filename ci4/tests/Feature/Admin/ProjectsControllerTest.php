@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Faker\Factory;
 
 class ProjectsControllerTest extends CIUnitTestCase
 {
@@ -13,36 +14,45 @@ class ProjectsControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     // Helper function
     private function createProject(array $projectOverrides = [])
     {
         // Create a category
-        $categoryId = $this->db->table('categories')->insert([
-            'name' => 'Renovation'
+        $this->db->table('categories')->insert([
+            'name' => $this->faker->word . ' Renovation'
         ]);
+        $categoryId = $this->db->insertID();
 
         // Create a homeowner user
         $homeOwnerId = $this->db->table('users')->insert([
-            'username'      => 'owner_' . uniqid(),
-            'email'         => uniqid() . '@test.com',
-            'first_name'    => 'Project',
-            'last_name'     => 'Owner',
-            'role_id'       => 2,
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'is_active'     => 1,
-            'password_hash' => 'hash'
+            'role_id'       => 2,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
         ]);
 
         // Create a project
-        $projectId = $this->db->table('projects')->insert(array_merge([
-            'title'         => 'Test Project',
+        $this->db->table('projects')->insert(array_merge([
+            'title'         => $this->faker->sentence(3),
             'category_id'   => $categoryId,
             'home_owner_id' => $homeOwnerId,
             'status'        => 'bidding_open',
             'budget_min'    => 1000,
             'budget_max'    => 5000,
             'deadline_date' => date('Y-m-d', strtotime('+1 month')),
-            'description'   => 'Test description'
+            'description'   => $this->faker->paragraph,
+            'address'       => $this->faker->address
         ], $projectOverrides));
 
         return $this->db->insertID();
@@ -51,12 +61,15 @@ class ProjectsControllerTest extends CIUnitTestCase
     // Tests
     public function testIndexFiltersAndSearch()
     {
+        $roofTitle = 'Fix the ' . $this->faker->word . ' Roof';
+        $wallTitle = 'Paint the ' . $this->faker->word . ' Wall';
+
         $this->createProject([
-            'title' => 'Fix the Roof',
+            'title' => $roofTitle,
             'status' => 'open'
         ]);
         $this->createProject([
-            'title' => 'Paint the Wall',
+            'title' => $wallTitle,
             'status' => 'completed'
         ]);
 
@@ -65,24 +78,25 @@ class ProjectsControllerTest extends CIUnitTestCase
         // Attempt filter by title
         $resSearch = $this->withSession($session)->get('admin/projects?q=Roof');
         $resSearch->assertStatus(200);
-        $resSearch->assertSee('Fix the Roof');
-        $resSearch->assertDontSee('Paint the Wall');
+        $resSearch->assertSee($roofTitle);
+        $resSearch->assertDontSee($wallTitle);
 
         // Attempt filter by status
         $resStatus = $this->withSession($session)->get('admin/projects?status=completed');
-        $resStatus->assertSee('Paint the Wall');
-        $resStatus->assertDontSee('Fix the Roof');
+        $resStatus->assertSee($wallTitle);
+        $resStatus->assertDontSee($roofTitle);
     }
 
     public function testViewMethodLoadsDetails()
     {
-        $projectId = $this->createProject(['title' => 'Specific Project']);
+        $projectTitle = 'Specific Project ' . $this->faker->word;
+        $projectId = $this->createProject(['title' => $projectTitle]);
         $session = ['user_id' => 999, 'logged_in' => true, 'role_id' => 1];
 
         // Attempt to view details
         $result = $this->withSession($session)->get("admin/projects/view/$projectId");
         $result->assertStatus(200);
-        $result->assertSee('Specific Project');
+        $result->assertSee($projectTitle);
         $result->assertSee('Renovation');
 
         // Attempt to view invalid id
@@ -93,7 +107,11 @@ class ProjectsControllerTest extends CIUnitTestCase
     public function testCancelMethodTransitionsStatus()
     {
         $projectId = $this->createProject(['status' => 'open']);
-        $session = ['user_id' => 999, 'logged_in' => true, 'role_id' => 1];
+        $session = [
+            'user_id' => 999,
+            'logged_in' => true,
+            'role_id' => 1
+        ];
 
         // Attempt to cancel project
         $result = $this->withSession($session)->get("admin/projects/cancel/$projectId");
@@ -109,7 +127,11 @@ class ProjectsControllerTest extends CIUnitTestCase
     public function testCloseBiddingTransitionsStatus()
     {
         $projectId = $this->createProject(['status' => 'bidding_open']);
-        $session = ['user_id' => 999, 'logged_in' => true, 'role_id' => 1];
+        $session = [
+            'user_id' => 999,
+            'logged_in' => true,
+            'role_id' => 1,
+            ];
 
         // Attempt to close bidding
         $result = $this->withSession($session)->get("admin/projects/close-bidding/$projectId");

@@ -25,7 +25,7 @@ class BrowseController extends BaseController
                 cp.city,
                 cp.province,
                 cp.approval_status,
-                GROUP_CONCAT(DISTINCT s.name ORDER BY s.name SEPARATOR ', ') AS specialties,
+                GROUP_CONCAT(DISTINCT s.name) AS specialties,
                 ROUND(AVG((cr.quality + cr.timeliness + cr.communication + cr.pricing) / 4), 2) AS avg_rating,
                 COUNT(cr.id) AS rating_count
             ")

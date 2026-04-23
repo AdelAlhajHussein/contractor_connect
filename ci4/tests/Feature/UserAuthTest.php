@@ -6,6 +6,7 @@ use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use App\Models\UserModel;
+use Faker\Factory;
 
 class UserAuthTest extends CIUnitTestCase {
     use DatabaseTestTrait;
@@ -13,6 +14,13 @@ class UserAuthTest extends CIUnitTestCase {
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     public function testRegisterFormLoads()
     {
@@ -28,15 +36,15 @@ class UserAuthTest extends CIUnitTestCase {
 
     public function testLoginRedirectsToHomeownerDashboard()
     {
-        $email = 'homeowner@example.com';
+        $email = $this->faker->safeEmail;
         $password = 'Password123';
 
         $model = model(UserModel::class);
         $model->insert([
-            'username'      => 'homeowner_user',
+            'username'      => $this->faker->userName,
             'email'         => $email,
-            'first_name'    => 'Home',
-            'last_name'     => 'Owner',
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'password_hash' => password_hash($password, PASSWORD_DEFAULT),
             'role_id'       => 2,
             'is_active'     => 1,
@@ -52,15 +60,15 @@ class UserAuthTest extends CIUnitTestCase {
 
     public function testLoginRedirectsToContractorDashboard()
     {
-        $email = 'contractor@example.com';
+        $email = $this->faker->safeEmail;
         $password = 'Password123';
 
         $model = model(UserModel::class);
         $model->insert([
-            'username'      => 'contractor_user',
+            'username'      => $this->faker->userName,
             'email'         => $email,
-            'first_name'    => 'Contract',
-            'last_name'     => 'Or',
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'password_hash' => password_hash($password, PASSWORD_DEFAULT),
             'role_id'       => 3,
             'is_active'     => 1,
@@ -76,14 +84,14 @@ class UserAuthTest extends CIUnitTestCase {
 
     public function testLoginFailsWithWrongPassword()
     {
-        $email = 'existing@example.com';
+        $email = $this->faker->safeEmail;
         $model = model(UserModel::class);
 
         $model->insert([
-            'username'      => 'test_user',
+            'username'      => $this->faker->userName,
             'email'         => $email,
-            'first_name'    => 'Test',
-            'last_name'     => 'User',
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'password_hash' => password_hash('correct_pass', PASSWORD_DEFAULT),
             'role_id'       => 1,
             'is_active'     => 1,
@@ -112,7 +120,7 @@ class UserAuthTest extends CIUnitTestCase {
     public function testLoginFailsUserNotFound()
     {
         $result = $this->post('login', [
-            'email'    => 'nonexistent@example.com',
+            'email'    => $this->faker->unique()->safeEmail,
             'password' => 'somepassword'
         ]);
 
@@ -122,21 +130,22 @@ class UserAuthTest extends CIUnitTestCase {
 
     public function testLoginFailsInactiveAccount()
     {
-        $email = 'inactive@example.com';
+        $email = $this->faker->safeEmail;
+        $password = 'password123';
         $model = model(UserModel::class);
         $model->insert([
-            'username'      => 'inactive_user',
+            'username'      => $this->faker->userName,
             'email'         => $email,
-            'first_name'    => 'Inactive',
-            'last_name'     => 'User',
-            'password_hash' => password_hash('password123', PASSWORD_DEFAULT),
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
+            'password_hash' => password_hash($password, PASSWORD_DEFAULT),
             'role_id'       => 2,
             'is_active'     => 0,
         ]);
 
         $result = $this->post('login', [
             'email'    => $email,
-            'password' => 'password123'
+            'password' => $password
         ]);
 
         $result->assertRedirectTo(site_url('login'));
@@ -146,7 +155,7 @@ class UserAuthTest extends CIUnitTestCase {
     public function testRegisterSuccess()
     {
         $result = $this->post('register', [
-            'email'            => 'new_success@example.com',
+            'email'            => $this->faker->safeEmail,
             'password'         => 'Password123!',
             'confirm_password' => 'Password123!',
             'role_id'          => 2
@@ -171,7 +180,7 @@ class UserAuthTest extends CIUnitTestCase {
     public function testRegisterSuccessRedirectsToLogin()
     {
         $result = $this->post('register', [
-            'email'            => 'success_reg@example.com',
+            'email'            => $this->faker->safeEmail,
             'password'         => 'Password123!',
             'confirm_password' => 'Password123!',
             'role_id'          => 2
@@ -196,7 +205,7 @@ class UserAuthTest extends CIUnitTestCase {
     public function testRegisterTriggersCatchBlock()
     {
         $result = $this->post('register', [
-            'email'            => 'catch@example.com',
+            'email'            => $this->faker->safeEmail,
             'password'         => 'Password123!',
             'confirm_password' => 'Password123!',
             'role_id'          => 'not-an-integer'
@@ -209,7 +218,7 @@ class UserAuthTest extends CIUnitTestCase {
     public function testRegisterCatchBlockOnDatabaseError()
     {
         $result = $this->post('register', [
-            'email'            => 'catch_me@example.com',
+            'email'            => $this->faker->safeEmail,
             'password'         => 'Password123!',
             'confirm_password' => 'Password123!',
             'role_id'          => 'not-an-integer-forcing-error'

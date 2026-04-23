@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Faker\Factory;
 
 class CategoriesControllerTest extends CIUnitTestCase {
 
@@ -13,14 +14,24 @@ class CategoriesControllerTest extends CIUnitTestCase {
 
     protected $refresh = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     // Tests
     public function testIndexShowsCategoriesAndFilters(){
 
+        $visibleName = $this->faker->unique()->word . ' Plumbing';
+        $hiddenName  = $this->faker->unique()->word . ' Electrical';
+
         // Create categories
         $this->db->table('categories')->insertBatch([
-            [ 'name'=>'Plumbing', 'is_visible' => 1],
-            [ 'name' => 'Electrical', 'is_visible' => 0 ],
+            [ 'name' => $visibleName, 'is_visible' => 1],
+            [ 'name' => $hiddenName,  'is_visible' => 0 ],
         ]);
 
         $session = ['logged_in' => true, 'role_id' => 1];
@@ -28,24 +39,25 @@ class CategoriesControllerTest extends CIUnitTestCase {
         // Basic Load
         $res1 = $this->withSession($session)->get('/admin/categories');
         $res1->assertStatus(200);
-        $res1->assertSee('Plumbing');
-        $res1->assertSee('Electrical');
+        $res1->assertSee($visibleName);
+        $res1->assertSee($hiddenName);
 
         // Search Filter
-        $res2 = $this->withSession($session)->get('/admin/categories?q=Plumb');
-        $res2->assertSee('Plumbing');
-        $res2->assertDontSee('Electrical');
+        $res2 = $this->withSession($session)->get('/admin/categories?q=' . substr($visibleName, 0, 5));
+        $res2->assertSee($visibleName);
+        $res2->assertDontSee($hiddenName);
 
         // Verify visibility - 1
         $res3 = $this->withSession($session)->get('/admin/categories?visibility=1');
-        $res3->assertSee('Plumbing');
-        $res3->assertDontSee('Electrical');
+        $res3->assertSee($visibleName);
+        $res3->assertDontSee($hiddenName);
 
         // Verify hidden visibility - 0
         $res4 = $this->withSession($session)->get('/admin/categories?visibility=0');
-        $res4->assertSee('Electrical');
-        $res4->assertDontSee('Plumbing');
+        $res4->assertSee($hiddenName);
+        $res4->assertDontSee($visibleName);
     }
+
     public function testCreateViewLoads()
     {
         $session = ['logged_in' => true, 'role_id' => 1];
@@ -58,15 +70,17 @@ class CategoriesControllerTest extends CIUnitTestCase {
 
         $html = $result->getResponseBody();
 
-        // Verify the view contains the expected form elements
+        // Verify view contains the expected form elements
         $result->assertStringContainsString('Category', $html, "Category not found in page");
         $result->assertStringContainsString('name="name"', $html, "name=name not found");
     }
+
     public function testStoreCategory(){
 
         $session = ['logged_in' => true, 'role_id' => 1];
+        $name = $this->faker->word . 'ing';
         $categoryData = [
-            'name' => 'Landscaping'
+            'name' => $name
         ];
 
         $result = $this->withSession($session)
@@ -77,16 +91,18 @@ class CategoriesControllerTest extends CIUnitTestCase {
 
         // Verify data persists
         $this->seeInDatabase('categories', [
-            'name' => 'Landscaping',
+            'name' => $name,
             'is_visible' => 1,
         ]);
     }
+
     public function testEditViewLoadsData()
     {
+        $name = $this->faker->word . ' Carpentry';
         $categoryModel = model(\App\Models\CategoryModel::class);
         $categoryId = $categoryModel->insert([
-            'name'       => 'Carpentry',
-            'is_visible' => 1
+            'name'       => $name,
+            'is_visible' => 1,
         ]);
 
         // Create session
@@ -103,86 +119,87 @@ class CategoriesControllerTest extends CIUnitTestCase {
         $result->assertStatus(200); // loads successfully
 
         $this->assertStringContainsString(
-            'Carpentry',
+            $name,
             $body,
-            "Carpentry not found in the HTML response."
+            "$name not found in the HTML response."
         );
     }
 
-
     public function testUpdateCategory(){
+        $oldName = 'Old ' . $this->faker->word;
+        $newName = 'New ' . $this->faker->word;
+
         // Create category
         $this->db->table('categories')->insert([
-            'id'=>321,
-            'name'=>'Wood working',
-            'is_visible'=>1,
+            'name' => $oldName,
+            'is_visible' => 1,
         ]);
+        $id = $this->db->insertID();
 
         $session = ['logged_in' => true, 'role_id' => 1];
 
         // Value to update
-        $updateData = [
-            'name' => 'Carpentry'
-        ];
+        $updateData = [ 'name' => $newName ];
 
         // Attempt to update the category
         $result = $this->withSession($session)
-            ->post('/admin/categories/update/321', $updateData);
+            ->post("/admin/categories/update/{$id}", $updateData);
 
         // Verify redirection and correct data return
         $result->assertRedirectTo(site_url('admin/categories'));
         $this->seeInDatabase('categories', [
-            'id'=>321,
-            'name' => 'Carpentry',
+            'id' => $id,
+            'name' => $newName,
             'is_visible' => 1,
         ]);
         $this->dontSeeInDatabase('categories', [
-            'id'=>321,
-            'name' => 'Wood working',
+            'id' => $id,
+            'name' => $oldName,
             'is_visible' => 1,
         ]);
 
     }
+
     public function testDeleteCategory(){
         // Create category to delete
         $this->db->table('categories')->insert([
-            'id'=>111,
-            'name'=>'Wood working',
-            'is_visible'=>1,
+            'name' => 'Delete ' . $this->faker->word,
+            'is_visible' => 1,
         ]);
+        $id = $this->db->insertID();
 
         // Start the session
         $session = ['logged_in' => true, 'role_id' => 1];
 
         // Attempt to delete the category
         $result = $this->withSession($session)
-            ->get('/admin/categories/delete/111');
+            ->get("/admin/categories/delete/{$id}");
 
         $result->assertRedirectTo(site_url('admin/categories'));
 
-        $this->dontSeeInDatabase('categories', [
-            'id'=>111,
-        ]);
+        $this->dontSeeInDatabase('categories', [ 'id' => $id ]);
     }
+
     public function testToggleCategoryVisibility(){
         // Create a category to hide
         $this->db->table('categories')->insert([
-            'id'=>222,
-            'name'=>'Snow Removal',
-            'is_visible'=>1,
+            'name' => 'Toggle ' . $this->faker->word,
+            'is_visible' => 1,
         ]);
+        $id = $this->db->insertID();
+
         // Start a session
         $session = ['logged_in' => true, 'role_id' => 1];
 
         // Attempt to view category
         $result = $this->withSession($session)
-            ->get('/admin/categories/toggle/222');
+            ->get("/admin/categories/toggle/{$id}");
 
         $result->assertRedirectTo(site_url('admin/categories'));
 
         $this->seeInDatabase('categories', [
-            'id'=> 222,
-            'is_visible'=> 0,
+            'id' => $id,
+            'is_visible' => 0,
         ]);
     }
 }

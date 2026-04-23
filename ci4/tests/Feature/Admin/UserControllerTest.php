@@ -5,12 +5,20 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
+use Faker\Factory;
 
 class UserControllerTest extends CIUnitTestCase{
     use FeatureTestTrait, DatabaseTestTrait;
 
     protected $refresh = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     // ----- Index Tests -----
     public function testIndexLoadsSuccessfullyForAdmin(){
@@ -18,49 +26,53 @@ class UserControllerTest extends CIUnitTestCase{
         // Create an admin account to test:
         $db = \Config\Database::connect();
         $db->table('users')->insert([
-            'username' => 'admin_user',
-            'email' => 'admin@example.com',
-            'password_hash' => password_hash('Admin123', PASSWORD_DEFAULT),
+            'username' => $this->faker->userName,
+            'email' => $this->faker->safeEmail,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
             'role_id' => 1,
             'is_active' => 1,
-            'first_name' => 'Admin',
-            'last_name' => 'User',
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
         ]);
+        $adminId = $db->insertID();
 
         // Attempt login
         $result = $this->withSession([
             'logged_in' => true,
             'role_id' => 1,
-            'user_id' => 1,
-
+            'user_id' => (int)$adminId,
         ])->get('/admin/users');
 
         // Check if it worked
         $result->assertStatus(200);
-        $result->assertSee('admin_user');
+        $result->assertSee((string)$this->db->table('users')->getWhere(['id' => $adminId])->getRow()->username);
     }
+
     public function testIndexFiltersSearchAndRole(){
         $db = \Config\Database::connect();
+
+        $adminName = 'admin_' . $this->faker->word;
+        $homeownerName = 'homeowner_' . $this->faker->word;
 
         // Create two users accounts to test
         $db->table('users')->insertBatch([
             [
-                'username' => 'admin_user',
-                'email' => 'user_one@example.com',
-                'password_hash' => password_hash('user_one', PASSWORD_DEFAULT),
+                'username' => $adminName,
+                'email' => $this->faker->unique()->safeEmail,
+                'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
                 'role_id' => 1,
                 'is_active' => 1,
-                'first_name' => 'User',
-                'last_name' => 'One',
+                'first_name' => $this->faker->firstName,
+                'last_name' => $this->faker->lastName,
             ],
             [
-                'username' => 'homeowner_user',
-                'email' => 'user_two@example.com',
-                'password_hash' => password_hash('user_two', PASSWORD_DEFAULT),
+                'username' => $homeownerName,
+                'email' => $this->faker->unique()->safeEmail,
+                'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => 1,
-                'first_name' => 'User',
-                'last_name' => 'Two',
+                'first_name' => $this->faker->firstName,
+                'last_name' => $this->faker->lastName,
             ]
         ]);
 
@@ -70,34 +82,37 @@ class UserControllerTest extends CIUnitTestCase{
 
         // Assertions
         $result->assertStatus(200);
-        $result->assertSee('homeowner_user');
-        $result->assertDontSee('admin_user');
+        $result->assertSee($homeownerName);
+        $result->assertDontSee($adminName);
     }
+
     public function testIndexFiltersByStatus()
     {
         $db = db_connect();
-        $faker = \Faker\Factory::create();
+
+        $activeName = 'Active_' . $this->faker->userName;
+        $inactiveName = 'Inactive_' . $this->faker->userName;
 
         // Create active user
         $db->table('users')->insert([
-            'username'      => 'JohnDoe',
-            'email'         => 'john@example.com',
-            'first_name'    => 'John',
-            'last_name'     => 'Doe',
+            'username'      => $activeName,
+            'email'         => $this->faker->unique()->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'role_id'       => 2,
             'is_active'     => 1,
-            'password_hash' => 'hash'
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
         ]);
 
         // Create inactive user
         $db->table('users')->insert([
-            'username'      => 'JaneDoe',
-            'email'         => 'jane@example.com',
-            'first_name'    => 'Jane',
-            'last_name'     => 'Doe',
+            'username'      => $inactiveName,
+            'email'         => $this->faker->unique()->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'role_id'       => 2,
             'is_active'     => 0,
-            'password_hash' => 'hash'
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
         ]);
 
         $session = ['logged_in' => true, 'role_id' => 1];
@@ -106,8 +121,8 @@ class UserControllerTest extends CIUnitTestCase{
         $result = $this->withSession($session)->get('admin/users?status=0');
 
         $result->assertStatus(200);
-        $result->assertSee('JaneDoe');
-        $result->assertDontSee('JohnDoe');
+        $result->assertSee($inactiveName);
+        $result->assertDontSee($activeName);
     }
 
 
@@ -122,37 +137,35 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertStatus(302);
         $result->assertRedirectTo(site_url('admin/users'));
     }
+
     public function testToggleChangeUserStatus(){
-    $db = \Config\Database::connect();
+        $db = \Config\Database::connect();
 
-    // Create an account to test changing active status
-    $db->table('users')->insert([
-        'username' => 'toggle_user',
-        'email' => 'toggle_user@example.com',
-        'password_hash' => password_hash('toggle_user', PASSWORD_DEFAULT),
-        'role_id' => 2,
-        'is_active' => 1,
-        'first_name' => 'Toggle',
-        'last_name' => 'User',
-    ]);
+        // Create an account to test changing active status
+        $db->table('users')->insert([
+            'username' => $this->faker->userName,
+            'email' => $this->faker->safeEmail,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'role_id' => 2,
+            'is_active' => 1,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+        ]);
 
-    $userId = $db->insertID();
+        $userId = $db->insertID();
 
-    // Attempt to toggle status
-    $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-        ->get('/admin/users/toggle/'.$userId);
+        // Attempt to toggle status
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
+            ->get('/admin/users/toggle/'.$userId);
 
-    // Assertions
-    $result->assertRedirectTo(site_url(
-        'admin/users'
-    ));
+        // Assertions
+        $result->assertRedirectTo(site_url('admin/users'));
 
-    // Verify status changed to 0
-    $this->seeInDatabase('users', [
-        'id' => $userId,
-        'is_active' => 0,
-    ]);
-
+        // Verify status changed to 0
+        $this->seeInDatabase('users', [
+            'id' => $userId,
+            'is_active' => 0,
+        ]);
     }
 
 
@@ -166,6 +179,7 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertStatus(302);
         $result->assertRedirectTo(site_url('admin/users'));
     }
+
     public function testUpdateRoleRedirectsIfUserNotFound(){
 
         // Attempt to add an invalid user with a valid role
@@ -176,18 +190,19 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertStatus(302);
         $result->assertRedirectTo(site_url('admin/users'));
     }
+
     public function testUpdateRoleChangesUserRole(){
         $db = \Config\Database::connect();
 
         // Create Homeowner to test conversion to Contractor
         $db->table('users')->insert([
-            'username' => 'change_user_role',
-            'email' => 'change_user_role@example.com',
-            'password_hash' => password_hash('change_user_role', PASSWORD_DEFAULT),
+            'username' => $this->faker->userName,
+            'email' => $this->faker->safeEmail,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
             'role_id' => 2,
             'is_active' => 1,
-            'first_name' => 'Change',
-            'last_name' => 'User',
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
 
         ]);
         $userId = $db->insertID();
