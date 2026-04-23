@@ -137,18 +137,56 @@ class BidsControllerTest extends CIUnitTestCase
     }
     public function testIndexFiltersWork()
     {
-        // Attempt to get index by category
+        $db = \Config\Database::connect();
+
+        // Create category
+        $db->table('categories')->insert(['name' => 'Roofing']);
+        $catId = $db->insertID();
+
+        // Create contractor user
+        $db->table('users')->insert([
+            'username' => 'contractor_1',
+            'email'    => 'c1@test.com',
+            'role_id'  => 3,
+            'first_name' => 'C', 'last_name' => '1', 'password_hash' => 'h'
+        ]);
+        $conId = $db->insertID();
+
+        // Create a project
+        $db->table('projects')->insert([
+            'title'         => 'Fix the roofing',
+            'category_id'   => $catId,
+            'home_owner_id' => $conId,
+            'status'        => 'open',
+            'address'       => '123 test'
+        ]);
+        $pId = $db->insertID();
+
+        // Create the bid
+        $db->table('bids')->insert([
+            'project_id'    => $pId,
+            'contractor_id' => $conId,
+            'status'        => 'submitted',
+            'bid_amount'    => 500,
+            'total_cost'    => 500
+        ]);
+
+        // Create a project that should not be seen
+        $db->table('projects')->insert([
+            'title'         => 'Other Project',
+            'category_id'   => $catId,
+            'home_owner_id' => $conId,
+            'status'        => 'open',
+            'address'       => '456 test'
+        ]);
+
+        // Attempt to get index with filters
         $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
             ->get('/admin/bids?status=submitted&q=Roofing');
 
         // Assertions
         $result->assertStatus(200);
-
-        // Debugging
-        echo $result->getBody();
-
-
-        $result->assertSee('Fix the roof');
+        $result->assertSee('Fix the roofing');
         $result->assertDontSee('Other Project');
     }
     public function testViewNotFoundRedirects()
@@ -351,7 +389,7 @@ class BidsControllerTest extends CIUnitTestCase
 
         // Create a project
         $this->db->table('projects')->insert([
-            'title' => 'Fix the Roof',
+            'title' => 'Fix the roof',
             'description' => 'Project description',
             'address' => '123 Address St.',
             'category_id'=>$categoryId,
@@ -372,7 +410,7 @@ class BidsControllerTest extends CIUnitTestCase
 
         // Assertions
         $result->assertStatus(200);
-        $result->assertSee('Fix the Roof');
+        $result->assertSee('Fix the roof');
         $result->assertSee('test@example.com');
     }
     public function testIndexWithEmptySearchString()

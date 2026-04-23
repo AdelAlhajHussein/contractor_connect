@@ -6,6 +6,7 @@ use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\CIUnitTestCase;
 
+
 final class ReportsControllerTest extends CIUnitTestCase{
     use DatabaseTestTrait, FeatureTestTrait;
 
@@ -13,77 +14,79 @@ final class ReportsControllerTest extends CIUnitTestCase{
     protected $namespace = 'App';
 
 
-    public function testIndexReturnsSuccessAndCorrectData(){
+    public function testIndexReturnsSuccessAndCorrectData()
+    {
         $db = db_connect();
+        $faker = \Faker\Factory::create();
 
-        // Create users to test
-        $db->table('users')->insertBatch([
-            [
-                'email' => 'admin@test.com',
-                'username' => 'admin',
-                'first_name' => 'Admin',
-                'last_name' => 'User',
-                'role_id' => 1,
-                'is_active' => 1,
-                'password_hash' => password_hash('admin', PASSWORD_DEFAULT),
-            ],
-            [
-                'email' => 'user1@test.com',
-                'username' => 'user1',
-                'first_name' => 'First',
-                'last_name' => 'User',
-                'role_id' => 2,
-                'is_active' => 1,
-                'password_hash' => password_hash('user1password', PASSWORD_DEFAULT),
-            ],
-            [
-                'email' => 'user2@test.com',
-                'username' => 'user2',
-                'first_name' => 'Second',
-                'last_name' => 'User',
-                'role_id' => 2,
-                'is_active' => 1,
-                'password_hash' => password_hash('user2password', PASSWORD_DEFAULT),
-            ],
+        // Create admin user
+        $db->table('users')->insert([
+            'email'         => $faker->email,
+            'username'      => 'admin_' . $faker->userName,
+            'first_name'    => 'Admin',
+            'last_name'     => 'User',
+            'role_id'       => 1,
+            'is_active'     => 1,
+            'password_hash' => password_hash($faker->password, PASSWORD_DEFAULT),
         ]);
 
-        // Project category
-        $db->table('categories')->insert([
-            'name'=>'Plumbing',
-
+        // Create homeowner user
+        $db->table('users')->insert([
+            'email'         => $faker->email,
+            'username'      => 'owner_' . $faker->userName,
+            'role_id'       => 2,
+            'is_active'     => 1,
+            'password_hash' => password_hash($faker->password, PASSWORD_DEFAULT),
         ]);
-        $categoryId = $db->insertId();
+        $homeOwnerId = $db->insertID();
 
-        // Create projects for testing
+        // Create homeowner profile
+        $db->table('home_owner_profiles')->insert([
+            'home_owner_id' => $homeOwnerId,
+            'address'       => $faker->streetAddress,
+            'city'          => $faker->city,
+            'province'      => 'ON',
+            'postal_code'   => 'M1M 1M1'
+        ]);
+
+        // Create category
+        $db->table('categories')->insert(['name' => 'Plumbing']);
+        $categoryId = $db->insertID();
+
+        // Create projects
         $db->table('projects')->insertBatch([
             [
-                'title' => 'Project 1',
-                'description' => 'Project 1 description',
-                'status'=> 'open',
-                'address' => '111 Example St.',
-                'category_id' => $categoryId,
-                'home_owner_id' => 2,
+                'title'         => 'Project 1',
+                'description'   => $faker->paragraph,
+                'status'        => 'open',
+                'address'       => $faker->address,
+                'category_id'   => $categoryId,
+                'home_owner_id' => $homeOwnerId,
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s')
             ],
             [
-                'title' => 'Project 2',
-                'description' => 'Project 2 description',
-                'status'=> 'open',
-                'address' => '222 Example Dr.',
-                'category_id' => $categoryId,
-                'home_owner_id' => 2,
+                'title'         => 'Project 2',
+                'description'   => $faker->paragraph,
+                'status'        => 'open',
+                'address'       => $faker->address,
+                'category_id'   => $categoryId,
+                'home_owner_id' => $homeOwnerId,
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s')
             ],
         ]);
 
-
-        // Create report
+        // Attempt to run report
         $result = $this->withSession([
             'logged_in' => true,
-            'role_id' => 1,
-        ])->get('/admin/reports');
+            'role_id'   => 1,
+            'user_id'   => 1,
+        ])->get('admin/reports');
 
         // Assertions
         $result->assertStatus(200);
         $result->assertSee('Project 1');
-
+        $result->assertSee('Project 2');
     }
 }

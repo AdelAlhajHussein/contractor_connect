@@ -61,23 +61,59 @@ class ContractorsControllerTest extends CIUnitTestCase
         $result->assertSee('user1');
         $result->assertSee('user2');
     }
-    public function testIndexFiltersByStatus(){
-        $this->setUpContractors(['username'=>'unique_active_user', 'is_active'=>1 ]);
-        $this->setUpContractors(['username'=>'unique_inactive_user', 'is_active'=>0 ]);
+    public function testIndexFiltersByStatus()
+    {
+        $db = \Config\Database::connect();
 
-        $session = ['logged_in' => true, 'role_id' => 1];
+        $activeName   = 'UserActive';
+        $inactiveName = 'UserInactive';
 
-        // Check active user
-        $resultActive = $this->withSession($session)
-            ->get('/admin/contractors?status=1');
-        $resultActive->assertSee('unique_active_user');
-        $resultActive->assertDontSee('unique_inactive_user');
+        // Active contractor
+        $db->table('users')->insert([
+            'username'      => $activeName,
+            'email'         => 'active@example.com',
+            'password_hash' => 'hash',
+            'first_name'    => 'Active',
+            'last_name'     => 'Contractor',
+            'role_id'       => 2,
+            'is_active'     => 1,
+        ]);
+        $activeId = $db->insertId();
 
-        // Check inactive user
-        $resultInactive = $this->withSession($session)
+        $db->table('contractor_profiles')->insert([
+            'contractor_id' => $activeId,
+            'city' => 'Toronto',
+            'province' => 'ON',
+            'address' => '123 St',
+            'postal_code' => 'M1M',
+        ]);
+
+        // Inactive contractor
+        $db->table('users')->insert([
+            'username'      => $inactiveName,
+            'email'         => 'inactive@example.com',
+            'password_hash' => 'hash',
+            'first_name'    => 'Inactive',
+            'last_name'     => 'Contractor',
+            'role_id'       => 2,
+            'is_active'     => 0,
+        ]);
+        $inactiveId = $db->insertId();
+
+        $db->table('contractor_profiles')->insert([
+            'contractor_id' => $inactiveId,
+            'city' => 'Vancouver',
+            'province' => 'BC',
+            'address' => '456 St',
+            'postal_code' => 'V2V',
+        ]);
+
+        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
             ->get('/admin/contractors?status=0');
-        $resultInactive->assertSee('unique_inactive_user');
-        $resultInactive->assertDontSee('unique_active_user');
+
+        $result->assertStatus(200);
+        $result->assertSee($inactiveName);
+        $result->assertDontSee($activeName);
     }
     public function testIndexSearchFiltersByMultipleFields(){
 

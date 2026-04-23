@@ -73,40 +73,41 @@ class UserControllerTest extends CIUnitTestCase{
         $result->assertSee('homeowner_user');
         $result->assertDontSee('admin_user');
     }
-    public function testIndexFiltersByStatus(){
-        $db = \Config\Database::connect();
+    public function testIndexFiltersByStatus()
+    {
+        $db = db_connect();
+        $faker = \Faker\Factory::create();
 
-        // Create an active and inactive account to test
-        $db->table('users')->insertBatch([
-            [
-                'username' => 'active_user',
-                'email' => 'user_one@example.com',
-                'password_hash' => password_hash('Admin123', PASSWORD_DEFAULT),
-                'role_id' => 2,
-                'is_active' => 1,
-                'first_name' => 'Active',
-                'last_name' => 'User',
-            ],
-            [
-                'username' => 'inactive_user',
-                'email' => 'user_two@example.com',
-                'password_hash' => password_hash('user_two', PASSWORD_DEFAULT),
-                'role_id' => 2,
-                'is_active' => 0,
-                'first_name' => 'Inactive',
-                'last_name' => 'User',
-            ]
+        // Create active user
+        $db->table('users')->insert([
+            'username'      => 'JohnDoe',
+            'email'         => 'john@example.com',
+            'first_name'    => 'John',
+            'last_name'     => 'Doe',
+            'role_id'       => 2,
+            'is_active'     => 1,
+            'password_hash' => 'hash'
         ]);
 
-        // Filter inactive accounts
-        $result = $this->withSession(['logged_in' => true, 'role_id' => 1])
-            ->get('/admin/users?status=0');
+        // Create inactive user
+        $db->table('users')->insert([
+            'username'      => 'JaneDoe',
+            'email'         => 'jane@example.com',
+            'first_name'    => 'Jane',
+            'last_name'     => 'Doe',
+            'role_id'       => 2,
+            'is_active'     => 0,
+            'password_hash' => 'hash'
+        ]);
 
-        // Assertions
+        $session = ['logged_in' => true, 'role_id' => 1];
+
+        // Attempt to filter inactive users
+        $result = $this->withSession($session)->get('admin/users?status=0');
+
         $result->assertStatus(200);
-        $result->assertSee('inactive_user');
-        $result->assertDontSee('active_user');
-
+        $result->assertSee('JaneDoe');
+        $result->assertDontSee('JohnDoe');
     }
 
 

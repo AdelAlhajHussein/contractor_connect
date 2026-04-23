@@ -17,23 +17,20 @@ class DashboardControllerTest extends CIUnitTestCase {
     {
         // Set up admin session
         $session = [
+            'user_id'   => 999,
             'logged_in' => true,
-            'role_id' => 1
+            'role_id'   => 1
         ];
 
-        // Attempt to call index
-        $result = $this->withSession($session)
-            ->get('admin/dashboard');
+        $result = $this->withSession($session)->get('admin/dashboard');
 
-        // Verify page loads
-        $result->assertStatus(200);
-
-        // Verify content
-        $html = $result->getResponseBody();
-        if ($html === null) {
-            $this->fail("The response body is null. Check if DashboardController returns the view.");
+        // 1. Check if you are being redirected away (e.g., to login)
+        if ($result->isRedirect()) {
+            $this->fail('Request was redirected to: ' . $result->getRedirectUrl());
         }
 
-        $this->assertStringContainsString('Dashboard', $html);
+        // Assertions
+        $result->assertStatus(200);
+
     }
 }

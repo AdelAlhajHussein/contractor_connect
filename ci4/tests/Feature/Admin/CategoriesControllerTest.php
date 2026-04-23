@@ -85,7 +85,7 @@ class CategoriesControllerTest extends CIUnitTestCase {
     {
         $categoryModel = model(\App\Models\CategoryModel::class);
         $categoryId = $categoryModel->insert([
-            'name'       => 'Test Category',
+            'name'       => 'Carpentry',
             'is_visible' => 1
         ]);
 
