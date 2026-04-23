@@ -40,6 +40,8 @@ final class ReportsControllerTest extends CIUnitTestCase
         $db->table('users')->insert([
             'email'         => $this->faker->safeEmail,
             'username'      => $this->faker->userName,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'role_id'       => 2,
             'is_active'     => 1,
             'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
