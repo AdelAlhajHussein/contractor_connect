@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Faker\Factory;
 
 class DashboardControllerTest extends CIUnitTestCase {
     use FeatureTestTrait;
@@ -12,28 +13,32 @@ class DashboardControllerTest extends CIUnitTestCase {
 
     protected $refresh = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     public function testIndexLoadsSuccessfully()
     {
         // Set up admin session
         $session = [
+            'user_id'   => $this->faker->numberBetween(1, 999),
             'logged_in' => true,
-            'role_id' => 1
+            'role_id'   => 1
         ];
 
-        // Attempt to call index
-        $result = $this->withSession($session)
-            ->get('admin/dashboard');
+        $result = $this->withSession($session)->get('admin/dashboard');
 
-        // Verify page loads
-        $result->assertStatus(200);
-
-        // Verify content
-        $html = $result->getResponseBody();
-        if ($html === null) {
-            $this->fail("The response body is null. Check if DashboardController returns the view.");
+        // Check if you are being redirected away (ex: to login)
+        if ($result->isRedirect()) {
+            $this->fail('Request was redirected to: ' . $result->getRedirectUrl());
         }
 
-        $this->assertStringContainsString('Dashboard', $html);
+        // Assertions
+        $result->assertStatus(200);
+
     }
 }

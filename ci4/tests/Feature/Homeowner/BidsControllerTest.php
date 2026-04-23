@@ -5,6 +5,7 @@ namespace Tests\Feature\Homeowner;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Faker\Factory;
 
 class BidsControllerTest extends CIUnitTestCase
 {
@@ -13,57 +14,80 @@ class BidsControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     public function testIndexShowsHomeownerBids()
     {
-        // Reset the database
-        \Config\Services::resetSingle('database');
+        $db = \Config\Database::connect();
 
-        // Prepare mock bid query
-        $mockBids = [[
-            'project_id'      => 10,
-            'title'           => 'Fix the roof',
-            'bid_amount'      => '500.00',
-            'bid_id'          => 1,
-            'contractor_name' => 'JohnContractor',
-            'status'          => 'submitted'
-        ]];
+        // Use Faker for homeowner data
+        $homeownerUsername = $this->faker->userName;
+        $homeownerEmail = $this->faker->safeEmail;
 
-        $mockResult = $this->createMock(\CodeIgniter\Database\BaseResult::class);
-        $mockResult->method('getResultArray')->willReturn($mockBids);
+        $this->db->table('users')->insert([
+            'username'      => $homeownerUsername,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
+            'email'         => $homeownerEmail,
+            'phone'         => $this->faker->phoneNumber,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'role_id'       => 3,
+            'is_active'     => 1,
+        ]);
+        $homeownerId = $db->insertID();
 
-        // Mock the Builder
-        $mockBuilder = $this->getMockBuilder(\CodeIgniter\Database\BaseBuilder::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        // Use Faker for contractor data
+        $this->db->table('users')->insert([
+            'username'      => $this->faker->userName,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
+            'email'         => $this->faker->safeEmail,
+            'phone'         => $this->faker->phoneNumber,
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+            'role_id'       => 2,
+            'is_active'     => 1,
+        ]);
+        $contractorId = $db->insertID();
 
-        $mockBuilder->method('select')->willReturnSelf();
-        $mockBuilder->method('join')->willReturnSelf();
-        $mockBuilder->method('where')->willReturnSelf();
-        $mockBuilder->method('orderBy')->willReturnSelf();
-        $mockBuilder->method('get')->willReturn($mockResult);
+        $this->db->table('categories')->insert(['name' => $this->faker->word]);
+        $catId = $db->insertID();
 
-        // Mock the Connection
-        $mockDb = $this->getMockBuilder(\CodeIgniter\Database\BaseConnection::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockDb->method('table')->willReturn($mockBuilder);
+        $projectTitle = 'Fix ' . $this->faker->word;
+        $this->db->table('projects')->insert([
+            'home_owner_id' => $homeownerId,
+            'category_id'   => $catId,
+            'title'         => $projectTitle,
+            'description'   => $this->faker->sentence,
+            'address'       => $this->faker->address,
+            'status'        => 'bidding_open',
+        ]);
+        $projectId = $db->insertID();
 
-        // Inject into the service layer
-        \Config\Services::injectMock('database', $mockDb);
+        $bidAmount = 500.00;
+        $this->db->table('bids')->insert([
+            'project_id'   => $projectId,
+            'contractor_id'=> $contractorId,
+            'bid_amount'   => $bidAmount,
+            'total_cost'   => $bidAmount,
+            'status'       => 'submitted',
+            'created_at'   => date('Y-m-d H:i:s'),
+        ]);
 
-        // Attempt to access the route
         $result = $this->withSession([
-            'user_id'   => 123,
+            'user_id'   => (int)$homeownerId,
             'logged_in' => true,
-            'role_id'   => 2
+            'role_id'   => 3
         ])->get('homeowner/bids');
 
+        // Assertions
         $result->assertStatus(200);
-        $result->assertSee('Fix the roof');
-        $result->assertSee('JohnContractor');
-
-        // Reset again to clean slate
-        \Config\Services::reset();
+        $result->assertSee($projectTitle);
+        $result->assertSee(number_format($bidAmount, 2));
     }
 }

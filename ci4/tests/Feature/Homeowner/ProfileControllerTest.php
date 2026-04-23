@@ -7,6 +7,7 @@ use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use App\Models\UserModel;
 use App\Models\HomeOwnerProfileModel;
+use Faker\Factory;
 
 class ProfileControllerTest extends CIUnitTestCase
 {
@@ -15,20 +16,28 @@ class ProfileControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     public function testIndexShowsUserProfileAndProfileData()
     {
         $userModel = model(UserModel::class);
 
         // Create homeowner user
+        $firstName = $this->faker->firstName;
         $userId = $userModel->insert([
-            'username'      => 'eric_profile_test',
-            'email'         => 'eric_profile@test.com',
-            'first_name'    => 'Eric',
-            'last_name'     => 'Laudrum',
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'first_name'    => $firstName,
+            'last_name'     => $this->faker->lastName,
             'role_id'       => 2,
             'is_active'     => 1,
-            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
         ]);
 
         $profileModel = model(HomeOwnerProfileModel::class);
@@ -37,12 +46,12 @@ class ProfileControllerTest extends CIUnitTestCase
         $profileModel->insert([
             'user_id'       => $userId,
             'home_owner_id' => $userId,
-            'first_name'    => 'Eric',
-            'last_name'     => 'Laudrum',
-            'address'       => '123 Main St',
-            'city'          => 'Toronto',
+            'first_name'    => $firstName,
+            'last_name'     => $this->faker->lastName,
+            'address'       => $this->faker->address,
+            'city'          => $this->faker->city,
             'province'      => 'ON',
-            'postal_code'   => 'M5V 2L7'
+            'postal_code'   => $this->faker->postcode,
         ]);
 
         // Attempt to access profile
@@ -54,6 +63,6 @@ class ProfileControllerTest extends CIUnitTestCase
 
         // Assertions
         $result->assertStatus(200);
-        $result->assertSee('Eric');
+        $result->assertSee($firstName);
     }
 }

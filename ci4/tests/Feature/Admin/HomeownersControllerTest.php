@@ -5,8 +5,7 @@ namespace Tests\Feature\Admin;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
-use App\Models\UserModel;
-use App\Models\HomeOwnerProfileModel;
+use Faker\Factory;
 
 class HomeownersControllerTest extends CIUnitTestCase
 {
@@ -15,47 +14,98 @@ class HomeownersControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
 
-    public function testIndexShowsHomeowners(){
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
-        // Create a homeowner user
-        $userModel = model(UserModel::class);
-        $userData = [
-            'username'      => 'homeowner_eric',
-            'email'         => 'eric@homeowner.com',
-            'first_name'    => 'Eric',
-            'last_name'     => 'L',
+    // Helper
+    private function createHomeowner(array $userOverrides = [], array $profileOverrides = [])
+    {
+        $db = \Config\Database::connect();
+
+        // Create a user
+        $db->table('users')->insert(array_merge([
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
-            'role_id'       => 2,
+            'role_id'       => 3,
             'is_active'     => 1
-        ];
-        $userId = $userModel->insert($userData);
+        ], $userOverrides));
 
-        // Create their profile
-        $profileModel = model(HomeOwnerProfileModel::class);
-        $profileModel->insert([
+        $userId = $db->insertID();
+
+        // Create user profile
+        $db->table('home_owner_profiles')->insert(array_merge([
             'home_owner_id' => $userId,
-            'address'       => '123 Test St',
-            'city'          => 'Toronto',
+            'address'       => $this->faker->address,
+            'city'          => $this->faker->city,
             'province'      => 'ON',
-            'postal_code'   => 'M5V 2L7'
-        ]);
+            'postal_code'   => $this->faker->postcode
+        ], $profileOverrides));
 
-        // Setup Admin session to access the Admin panel
+        return $userId;
+    }
+
+    public function testIndexFiltersAndSearch()
+    {
+        $city = $this->faker->city;
+        $activeUser = 'active_' . $this->faker->userName;
+        $inactiveUser = 'inactive_' . $this->faker->userName;
+
+        // Create active and inactive users
+        $this->createHomeowner(
+            [ 'username' => $activeUser, 'is_active' => 1],
+            [ 'city' => $city]
+        );
+        $this->createHomeowner(
+            [ 'username' => $inactiveUser, 'is_active' => 0 ],
+            [ 'city' => 'Vancouver' ]);
+
         $session = [
-            'user_id'   => 999,
+            'user_id' => 999,
             'logged_in' => true,
-            'role_id'   => 1
+            'role_id' => 1
         ];
 
-        // Attempt route
-        $result = $this->withSession($session)->get('admin/homeowners');
+        // Attempt city filter
+        $resSearch = $this->withSession($session)->get('admin/homeowners?q=' . urlencode($city));
+        $resSearch->assertStatus(200);
+        $resSearch->assertSee($activeUser);
+        $resSearch->assertDontSee($inactiveUser);
 
-        // Assertions
-        $result->assertStatus(200);
+        // Attempt status filter
+        $resStatus = $this->withSession($session)->get('admin/homeowners?status=0');
+        $resStatus->assertSee($inactiveUser);
+        $resStatus->assertDontSee($activeUser);
+    }
 
-        // Check the HTML for the user we just created
-        $result->assertSee('homeowner_eric');
-        $result->assertSee('eric@homeowner.com');
+    public function testToggleChangesStatus()
+    {
+        $userId = $this->createHomeowner(['is_active' => 1]);
+        $session = ['user_id' => 999, 'logged_in' => true, 'role_id' => 1];
+
+        // Attempt to change status
+        $result = $this->withSession($session)->get("admin/homeowners/toggle/{$userId}");
+        $result->assertRedirectTo(site_url('admin/homeowners'));
+
+        // Verify change
+        $this->seeInDatabase('users', [
+            'id' => $userId,
+            'is_active' => 0
+        ]);
+    }
+
+    public function testToggleRedirectsWhenNotFound()
+    {
+        $session = ['user_id' => 999, 'logged_in' => true, 'role_id' => 1];
+
+        $result = $this->withSession($session)->get("admin/homeowners/toggle/99999");
+        $result->assertRedirectTo(site_url('admin/homeowners'));
     }
 }

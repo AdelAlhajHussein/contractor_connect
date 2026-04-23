@@ -7,6 +7,7 @@ use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use App\Models\UserModel;
 use App\Models\ProjectModel;
+use Faker\Factory;
 
 class ProjectsControllerTest extends CIUnitTestCase
 {
@@ -15,38 +16,53 @@ class ProjectsControllerTest extends CIUnitTestCase
 
     protected $refresh   = true;
     protected $namespace = 'App';
+    private $faker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->faker = Factory::create();
+    }
 
     public function testIndexShowsHomeownerProjects()
     {
-        $userModel = model(UserModel::class);
-        $homeownerId = $userModel->insert([
-            'username'      => 'project_owner',
-            'email'         => 'owner@example.com',
-            'first_name'    => 'Eric',
-            'last_name'     => 'L',
+        $db = \Config\Database::connect();
+
+        // Setup Category
+        $db->table('categories')->insert(['name' => $this->faker->word . ' Services']);
+        $categoryId = $db->insertId();
+
+        // Setup User manually
+        $db->table('users')->insert([
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
             'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
-            'role_id'       => 2,
+            'role_id'       => 3,
             'is_active'     => 1
         ]);
+        $homeownerId = $db->insertID();
 
-        $projectModel = model(ProjectModel::class);
-        $projectModel->insert([
+        // Setup Project linked to this user
+        $projectTitle = 'Homeowner Project ' . $this->faker->word;
+        $db->table('projects')->insert([
             'home_owner_id' => $homeownerId,
-            'category_id'   => 1,
-            'title'         => 'Homeowner Project',
-            'description'   => 'Visible',
-            'address'       => '123 St',
-            'status'        => 'bidding_open'
+            'category_id'   => $categoryId,
+            'title'         => $projectTitle,
+            'description'   => $this->faker->paragraph,
+            'address'       => $this->faker->address,
+            'status'        => 'open'
         ]);
 
         $result = $this->withSession([
-            'user_id'   => $homeownerId,
+            'user_id'   => (int)$homeownerId,
             'logged_in' => true,
-            'role_id'   => 2
+            'role_id'   => 3
         ])->get('homeowner/projects');
 
         $result->assertStatus(200);
-        $result->assertSee('Homeowner Project');
+        $result->assertSee($projectTitle);
     }
 
     public function testDetailsShowsSpecificProject()
@@ -56,24 +72,26 @@ class ProjectsControllerTest extends CIUnitTestCase
 
         $userModel = model(UserModel::class);
         $homeownerId = $userModel->insert([
-            'username'      => 'eric_details_final',
-            'email'         => 'eric_details_final@test.com',
-            'first_name'    => 'Eric',
-            'last_name'     => 'Laudrum',
-            'role_id'       => 2,
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
+            'role_id'       => 3,
             'is_active'     => 1,
             'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
         ]);
 
-        $this->db->table('categories')->insert(['id' => 1, 'name' => 'General']);
+        $this->db->table('categories')->insert(['name' => $this->faker->word]);
+        $catId = $this->db->insertID();
 
+        $projectTitle = 'Unique Detail ' . $this->faker->word;
         $projectModel = model(ProjectModel::class);
         $projectId = $projectModel->insert([
             'home_owner_id' => $homeownerId,
-            'category_id'   => 1,
-            'title'         => 'Unique Detail Project',
-            'description'   => 'Details',
-            'address'       => '123 St',
+            'category_id'   => $catId,
+            'title'         => $projectTitle,
+            'description'   => $this->faker->sentence,
+            'address'       => $this->faker->address,
             'budget_min'    => 100,
             'budget_max'    => 500,
             'status'        => 'open'
@@ -87,81 +105,80 @@ class ProjectsControllerTest extends CIUnitTestCase
         $result = $this->withSession([
             'user_id'   => (int)$homeownerId,
             'logged_in' => true,
-            'role_id'   => 2
+            'role_id'   => 3
         ])->get("homeowner/projects/$projectId");
 
         $result->assertStatus(200);
-        $result->assertSee('Unique Detail Project');
+        $result->assertSee($projectTitle);
     }
 
     public function testNewProjectPageLoadsCategories()
     {
+        $categoryName = $this->faker->word . 'ing';
         $this->db->table('categories')->insert([
-            'name' => 'Plumbing'
+            'name' => $categoryName
         ]);
 
         $result = $this->withSession([
             'user_id'   => 123,
             'logged_in' => true,
-            'role_id'   => 2
+            'role_id'   => 3
         ])->get('homeowner/projects/new');
 
         $result->assertStatus(200);
-        $result->assertSee('Plumbing');
+        $result->assertSee($categoryName);
     }
 
     public function testCreateSavesNewProject()
     {
-        $config = config('Validation');
-        $config->ruleSets[] = \App\Validation\ProjectRules::class;
+        $db = \Config\Database::connect();
 
-        $userModel = model(UserModel::class);
-        $userData = [
-            'username'      => 'eric_test_final',
-            'email'         => 'eric_final@test.com',
-            'first_name'    => 'Eric',
-            'last_name'     => 'Laudrum', // Changed from "L" to satisfy min_length[3]
-            'role_id'       => 2,
+        // Setup Dependencies
+        $db->table('categories')->insert(['name' => $this->faker->word]);
+        $categoryId = $db->insertId();
+
+        $db->table('users')->insert([
+            'username'      => $this->faker->userName,
+            'email'         => $this->faker->safeEmail,
+            'first_name'    => $this->faker->firstName,
+            'last_name'     => $this->faker->lastName,
+            'role_id'       => 3,
             'is_active'     => 1,
-            'password_hash' => password_hash('secret', PASSWORD_DEFAULT)
-        ];
+            'password_hash' => password_hash('secret', PASSWORD_DEFAULT),
+        ]);
+        $homeownerId = (int)$db->insertID();
 
-        $homeownerId = $userModel->insert($userData);
+        $projectTitle = 'Project ' . $this->faker->word;
 
-        // This check will now pass
-        if ($homeownerId === false) {
-            fwrite(STDERR, "\nUSER MODEL ERRORS: " . print_r($userModel->errors(), true));
-            $this->fail("User creation failed. See errors above.");
-        }
-
-        $this->db->table('categories')->insert(['id' => 1, 'name' => 'General']);
-
+        // The Data Payload
         $projectData = [
-            'category_id'   => 1,
-            'title'         => 'New Form Project',
-            'description'   => 'Test Desc',
-            'address'       => '123 Test St',
-            'contact_phone' => '555-555-5555',
-            'budget_min'    => 100,
-            'budget_max'    => 500,
-            'status'        => 'open'
+            'category_id' => $categoryId,
+            'title'       => $projectTitle,
+            'description' => $this->faker->sentence,
+            'address'     => $this->faker->address,
+            'budget_min'  => 1000,
+            'budget_max'  => 5000,
+             'status'      => 'open',
         ];
 
+        // Execution
         $result = $this->withSession([
-            'user_id'   => (int)$homeownerId,
+            'user_id'   => $homeownerId,
             'logged_in' => true,
-            'role_id'   => 2
+            'role_id'   => 3,
         ])->post('homeowner/projects/create', $projectData);
 
+        // Assertions
         $result->assertRedirect();
 
         $this->seeInDatabase('projects', [
-            'title'         => 'New Form Project',
+            'title'         => $projectTitle,
             'home_owner_id' => $homeownerId
         ]);
     }
 }
 
+// ------------------------------
 // Additional validation rules
 namespace App\Validation;
 
@@ -170,4 +187,3 @@ class ProjectRules {
         return true;
     }
 }
-
